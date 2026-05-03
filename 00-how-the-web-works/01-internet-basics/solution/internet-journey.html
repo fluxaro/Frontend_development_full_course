@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Internet Journey — Explained</title>
+</head>
+<body>
+
+  <h1>The Internet Journey</h1>
+  <p>This page explains how data travels across the internet from your computer to a web server and back.</p>
+
+  <hr>
+
+  <h2>Step-by-Step: What Happens When You Visit a Website</h2>
+
+  <h3>Step 1 — You Type a URL</h3>
+  <p>You open your browser and type <code>https://www.example.com</code> and press Enter.</p>
+
+  <h3>Step 2 — Browser Checks the Cache</h3>
+  <p>The browser first checks if it already has a saved copy of the page. If yes, it shows that. If no, it continues.</p>
+
+  <h3>Step 3 — DNS Lookup</h3>
+  <p>The browser asks a DNS server: "What is the IP address for example.com?" The DNS server replies with something like <code>93.184.216.34</code>.</p>
+
+  <h3>Step 4 — TCP Connection</h3>
+  <p>Your browser opens a connection to the server at that IP address using the TCP protocol. This is called a "handshake."</p>
+
+  <h3>Step 5 — HTTP Request Sent</h3>
+  <p>Your browser sends an HTTP GET request asking for the page content.</p>
+
+  <h3>Step 6 — Server Responds</h3>
+  <p>The web server receives the request, finds the page, and sends back an HTTP response with the HTML content.</p>
+
+  <h3>Step 7 — Browser Renders the Page</h3>
+  <p>Your browser reads the HTML, loads any CSS and JavaScript files, and displays the finished page.</p>
+
+  <hr>
+
+  <h2>Key Terms Glossary</h2>
+
+  <dl>
+    <dt>Internet</dt>
+    <dd>A global network of computers connected together, able to communicate using shared protocols.</dd>
+
+    <dt>Protocol</dt>
+    <dd>A set of agreed-upon rules for how computers communicate. Examples: HTTP, TCP/IP, DNS.</dd>
+
+    <dt>Packet</dt>
+    <dd>A small chunk of data. Large files are split into many packets, sent separately, and reassembled.</dd>
+
+    <dt>IP Address</dt>
+    <dd>A unique identifier for a device on a network. Example: 192.168.1.1 (IPv4) or 2001:db8::1 (IPv6).</dd>
+
+    <dt>ISP</dt>
+    <dd>Internet Service Provider. The company that gives you access to the internet (e.g. Comcast, AT&amp;T).</dd>
+
+    <dt>DNS</dt>
+    <dd>Domain Name System. Converts domain names to IP addresses.</dd>
+
+    <dt>HTTP</dt>
+    <dd>HyperText Transfer Protocol. The rules for sending web pages between browsers and servers.</dd>
+
+    <dt>HTTPS</dt>
+    <dd>HTTP Secure. Same as HTTP but with encryption to protect your data.</dd>
+
+    <dt>Bandwidth</dt>
+    <dd>The maximum amount of data that can be transferred per second.</dd>
+
+    <dt>Latency</dt>
+    <dd>The time delay between sending a request and receiving a response.</dd>
+  </dl>
+
+  <hr>
+
+  <h2>The Postal System Analogy</h2>
+
+  <table border="1">
+    <caption>Internet vs Postal System Comparison</caption>
+    <thead>
+      <tr>
+        <th>Internet Concept</th>
+        <th>Postal Analogy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Your computer</td>
+        <td>You, the sender</td>
+      </tr>
+      <tr>
+        <td>HTTP Request</td>
+        <td>A letter you write</td>
+      </tr>
+      <tr>
+        <td>Data Packet</td>
+        <td>An envelope</td>
+      </tr>
+      <tr>
+        <td>ISP</td>
+        <td>The post office</td>
+      </tr>
+      <tr>
+        <td>DNS</td>
+        <td>The address book</td>
+      </tr>
+      <tr>
+        <td>IP Address</td>
+        <td>A street address</td>
+      </tr>
+      <tr>
+        <td>Web Server</td>
+        <td>The recipient</td>
+      </tr>
+      <tr>
+        <td>HTTP Response</td>
+        <td>The reply letter</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

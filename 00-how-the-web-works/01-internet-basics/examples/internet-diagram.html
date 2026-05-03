@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How the Internet Works</title>
+</head>
+<body>
+
+  <h1>How the Internet Works</h1>
+  <p>When you visit a website, your data travels through several steps before the page appears on your screen.</p>
+
+  <h2>The Journey of a Request</h2>
+
+  <ol>
+    <li>
+      <strong>You (the User)</strong>
+      <p>You type a web address into your browser.</p>
+    </li>
+    <li>
+      <strong>Your Browser</strong>
+      <p>The browser prepares an HTTP request to send to the server.</p>
+    </li>
+    <li>
+      <strong>Your ISP (Internet Service Provider)</strong>
+      <p>Your internet provider routes your request toward the destination.</p>
+    </li>
+    <li>
+      <strong>DNS Server</strong>
+      <p>The DNS server translates the domain name (e.g. google.com) into an IP address.</p>
+    </li>
+    <li>
+      <strong>The Web Server</strong>
+      <p>The server receives your request and prepares a response (the HTML page).</p>
+    </li>
+    <li>
+      <strong>Response Travels Back</strong>
+      <p>The server sends the HTML, CSS, and JavaScript files back to your browser.</p>
+    </li>
+    <li>
+      <strong>Your Browser Renders the Page</strong>
+      <p>The browser reads the files and displays the finished webpage on your screen.</p>
+    </li>
+  </ol>
+
+  <h2>Key Concepts</h2>
+
+  <dl>
+    <dt>Packets</dt>
+    <dd>Data is broken into small chunks called packets. Each packet travels independently and is reassembled at the destination.</dd>
+
+    <dt>Protocol</dt>
+    <dd>A set of rules computers agree on to communicate. HTTP, TCP/IP, and DNS are all protocols.</dd>
+
+    <dt>IP Address</dt>
+    <dd>A unique number assigned to every device on the internet. Like a home address for your computer.</dd>
+
+    <dt>DNS</dt>
+    <dd>Domain Name System. Translates human-readable names like "google.com" into IP addresses like 142.250.80.46.</dd>
+
+    <dt>Bandwidth</dt>
+    <dd>How much data can travel at once. More bandwidth means faster downloads.</dd>
+
+    <dt>Latency</dt>
+    <dd>How long it takes for a packet to travel from sender to receiver. Lower latency means a faster connection.</dd>
+  </dl>
+
+  <h2>Analogy: The Postal System</h2>
+  <p>Think of the internet like a postal system:</p>
+  <ul>
+    <li>Your message is the <strong>request</strong></li>
+    <li>The envelope is a <strong>packet</strong></li>
+    <li>The post office is the <strong>ISP</strong></li>
+    <li>The address book is <strong>DNS</strong></li>
+    <li>The recipient is the <strong>web server</strong></li>
+    <li>The reply letter is the <strong>HTTP response</strong></li>
+  </ul>
+
+</body>
+</html>

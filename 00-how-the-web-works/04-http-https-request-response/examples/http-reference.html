@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTTP Methods and Status Codes Reference</title>
+</head>
+<body>
+
+  <h1>HTTP Reference Guide</h1>
+  <p>HTTP (HyperText Transfer Protocol) is the foundation of data communication on the web. This page covers the most important concepts.</p>
+
+  <hr>
+
+  <h2>HTTP Methods</h2>
+  <p>HTTP methods tell the server what action to perform on a resource.</p>
+
+  <table border="1">
+    <caption>Common HTTP Methods</caption>
+    <thead>
+      <tr>
+        <th>Method</th>
+        <th>Purpose</th>
+        <th>Has Body?</th>
+        <th>Example Use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>GET</code></td>
+        <td>Retrieve data from the server</td>
+        <td>No</td>
+        <td>Load a webpage, fetch a list of users</td>
+      </tr>
+      <tr>
+        <td><code>POST</code></td>
+        <td>Send data to create a new resource</td>
+        <td>Yes</td>
+        <td>Submit a form, create a new account</td>
+      </tr>
+      <tr>
+        <td><code>PUT</code></td>
+        <td>Replace an entire resource</td>
+        <td>Yes</td>
+        <td>Update a user's full profile</td>
+      </tr>
+      <tr>
+        <td><code>PATCH</code></td>
+        <td>Partially update a resource</td>
+        <td>Yes</td>
+        <td>Change only a user's email address</td>
+      </tr>
+      <tr>
+        <td><code>DELETE</code></td>
+        <td>Remove a resource</td>
+        <td>No</td>
+        <td>Delete a post, remove an account</td>
+      </tr>
+      <tr>
+        <td><code>HEAD</code></td>
+        <td>Like GET but returns headers only</td>
+        <td>No</td>
+        <td>Check if a resource exists</td>
+      </tr>
+      <tr>
+        <td><code>OPTIONS</code></td>
+        <td>Ask what methods are allowed</td>
+        <td>No</td>
+        <td>CORS preflight requests</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>HTTP Status Codes</h2>
+  <p>Every HTTP response includes a status code that tells you what happened.</p>
+
+  <h3>2xx — Success</h3>
+  <table border="1">
+    <thead>
+      <tr><th>Code</th><th>Name</th><th>Meaning</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>200</td><td>OK</td><td>Request succeeded. Response body contains the result.</td></tr>
+      <tr><td>201</td><td>Created</td><td>New resource was created successfully.</td></tr>
+      <tr><td>204</td><td>No Content</td><td>Success but no response body (common after DELETE).</td></tr>
+    </tbody>
+  </table>
+
+  <h3>3xx — Redirection</h3>
+  <table border="1">
+    <thead>
+      <tr><th>Code</th><th>Name</th><th>Meaning</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>301</td><td>Moved Permanently</td><td>Resource has a new permanent URL.</td></tr>
+      <tr><td>302</td><td>Found</td><td>Temporary redirect to another URL.</td></tr>
+      <tr><td>304</td><td>Not Modified</td><td>Use your cached version — nothing has changed.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>4xx — Client Errors</h3>
+  <table border="1">
+    <thead>
+      <tr><th>Code</th><th>Name</th><th>Meaning</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>400</td><td>Bad Request</td><td>The request was malformed or invalid.</td></tr>
+      <tr><td>401</td><td>Unauthorized</td><td>Authentication is required.</td></tr>
+      <tr><td>403</td><td>Forbidden</td><td>Authenticated but not allowed to access this.</td></tr>
+      <tr><td>404</td><td>Not Found</td><td>The resource does not exist at this URL.</td></tr>
+      <tr><td>429</td><td>Too Many Requests</td><td>Rate limit exceeded.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>5xx — Server Errors</h3>
+  <table border="1">
+    <thead>
+      <tr><th>Code</th><th>Name</th><th>Meaning</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>500</td><td>Internal Server Error</td><td>Something went wrong on the server.</td></tr>
+      <tr><td>502</td><td>Bad Gateway</td><td>Server received an invalid response from upstream.</td></tr>
+      <tr><td>503</td><td>Service Unavailable</td><td>Server is down or overloaded.</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>HTTP vs HTTPS</h2>
+
+  <table border="1">
+    <caption>HTTP vs HTTPS Comparison</caption>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>HTTP</th>
+        <th>HTTPS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Encryption</td>
+        <td>None — data is plain text</td>
+        <td>TLS encryption — data is scrambled</td>
+      </tr>
+      <tr>
+        <td>Default Port</td>
+        <td>80</td>
+        <td>443</td>
+      </tr>
+      <tr>
+        <td>Security</td>
+        <td>Anyone on the network can read data</td>
+        <td>Data is private between browser and server</td>
+      </tr>
+      <tr>
+        <td>Use for passwords?</td>
+        <td>Never</td>
+        <td>Yes, safe</td>
+      </tr>
+      <tr>
+        <td>URL prefix</td>
+        <td>http://</td>
+        <td>https://</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

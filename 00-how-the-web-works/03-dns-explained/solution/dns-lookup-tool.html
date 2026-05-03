@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DNS Lookup Reference Tool</title>
+</head>
+<body>
+
+  <h1>DNS Lookup Reference</h1>
+  <p>This page shows example DNS records for well-known domains. In a real tool, these would be fetched live from a DNS server.</p>
+
+  <hr>
+
+  <h2>Example DNS Records</h2>
+
+  <h3>github.com</h3>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Value</th>
+        <th>TTL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>A</td>
+        <td>github.com</td>
+        <td>140.82.121.4</td>
+        <td>60</td>
+      </tr>
+      <tr>
+        <td>CNAME</td>
+        <td>www.github.com</td>
+        <td>github.com</td>
+        <td>3600</td>
+      </tr>
+      <tr>
+        <td>MX</td>
+        <td>github.com</td>
+        <td>aspmx.l.google.com</td>
+        <td>3600</td>
+      </tr>
+      <tr>
+        <td>NS</td>
+        <td>github.com</td>
+        <td>ns1.p16.dynect.net</td>
+        <td>3600</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>google.com</h3>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Value</th>
+        <th>TTL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>A</td>
+        <td>google.com</td>
+        <td>142.250.80.46</td>
+        <td>300</td>
+      </tr>
+      <tr>
+        <td>AAAA</td>
+        <td>google.com</td>
+        <td>2607:f8b0:4004:c09::64</td>
+        <td>300</td>
+      </tr>
+      <tr>
+        <td>MX</td>
+        <td>google.com</td>
+        <td>smtp.google.com</td>
+        <td>600</td>
+      </tr>
+      <tr>
+        <td>NS</td>
+        <td>google.com</td>
+        <td>ns1.google.com</td>
+        <td>21600</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>How to Run a Real DNS Lookup</h2>
+  <p>Open your terminal and try these commands:</p>
+
+  <h3>Using nslookup</h3>
+  <pre>nslookup github.com
+nslookup google.com
+nslookup -type=MX gmail.com</pre>
+
+  <h3>Using dig (Mac/Linux)</h3>
+  <pre>dig github.com
+dig github.com A
+dig github.com MX
+dig github.com NS</pre>
+
+  <hr>
+
+  <h2>DNS Record Types Reference</h2>
+
+  <dl>
+    <dt>A Record</dt>
+    <dd>Maps a domain name to an IPv4 address. The most common record type.</dd>
+
+    <dt>AAAA Record</dt>
+    <dd>Maps a domain name to an IPv6 address.</dd>
+
+    <dt>CNAME Record</dt>
+    <dd>Creates an alias from one domain to another. Cannot be used on the root domain.</dd>
+
+    <dt>MX Record</dt>
+    <dd>Specifies the mail server responsible for accepting email for the domain.</dd>
+
+    <dt>TXT Record</dt>
+    <dd>Stores arbitrary text. Used for domain verification, SPF, DKIM, and DMARC email security.</dd>
+
+    <dt>NS Record</dt>
+    <dd>Lists the authoritative name servers for the domain.</dd>
+
+    <dt>TTL (Time To Live)</dt>
+    <dd>How many seconds a DNS answer can be cached before it must be looked up again.</dd>
+  </dl>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Links and Navigation Demo</title>
+</head>
+<body>
+
+  <header>
+    <h1>Links and Navigation Demo</h1>
+    <nav>
+      <ul>
+        <li><a href="#external-links">External Links</a></li>
+        <li><a href="#internal-links">Internal Links</a></li>
+        <li><a href="#anchor-links">Anchor Links</a></li>
+        <li><a href="#special-links">Special Links</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="external-links">
+      <h2>External Links</h2>
+      <p>External links point to other websites. Use <code>target="_blank"</code> to open in a new tab.</p>
+
+      <ul>
+        <li><a href="https://www.google.com">Google (same tab)</a></li>
+        <li><a href="https://www.github.com" target="_blank" rel="noopener noreferrer">GitHub (new tab)</a></li>
+        <li><a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer">MDN Web Docs (new tab)</a></li>
+      </ul>
+
+      <p><strong>Note:</strong> Always add <code>rel="noopener noreferrer"</code> when using <code>target="_blank"</code> for security.</p>
+    </section>
+
+    <section id="internal-links">
+      <h2>Internal Links (Relative Paths)</h2>
+      <p>Internal links point to other pages within the same website.</p>
+
+      <ul>
+        <li><a href="index.html">Home Page</a></li>
+        <li><a href="about.html">About Page</a></li>
+        <li><a href="contact.html">Contact Page</a></li>
+        <li><a href="blog/post-1.html">Blog Post (in subfolder)</a></li>
+        <li><a href="../index.html">Parent folder index</a></li>
+      </ul>
+    </section>
+
+    <section id="anchor-links">
+      <h2>Anchor Links (Jump to Section)</h2>
+      <p>Anchor links jump to a specific section on the same page using the element's <code>id</code>.</p>
+
+      <ul>
+        <li><a href="#external-links">Jump to External Links section</a></li>
+        <li><a href="#special-links">Jump to Special Links section</a></li>
+        <li><a href="#top">Back to top</a></li>
+      </ul>
+    </section>
+
+    <section id="special-links">
+      <h2>Special Links</h2>
+
+      <h3>Email Link</h3>
+      <p>Opens the user's email client with a new message:</p>
+      <p><a href="mailto:contact@example.com">Send me an email</a></p>
+      <p>With subject and body pre-filled:</p>
+      <p><a href="mailto:contact@example.com?subject=Hello&body=I%20wanted%20to%20reach%20out">Email with subject</a></p>
+
+      <h3>Phone Link</h3>
+      <p>On mobile, this opens the phone dialer:</p>
+      <p><a href="tel:+15551234567">Call +1 (555) 123-4567</a></p>
+
+      <h3>Download Link</h3>
+      <p>The <code>download</code> attribute makes the browser download the file instead of opening it:</p>
+      <p><a href="resume.pdf" download>Download My Resume (PDF)</a></p>
+      <p>You can also specify a filename:</p>
+      <p><a href="resume.pdf" download="alex-johnson-resume.pdf">Download Resume with custom filename</a></p>
+    </section>
+
+    <section>
+      <h2>Link Attributes Reference</h2>
+
+      <table border="1">
+        <caption>Common Link Attributes</caption>
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Value</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>href</code></td>
+            <td>URL or path</td>
+            <td>The destination of the link</td>
+          </tr>
+          <tr>
+            <td><code>target</code></td>
+            <td><code>_blank</code>, <code>_self</code></td>
+            <td>Where to open the link</td>
+          </tr>
+          <tr>
+            <td><code>rel</code></td>
+            <td><code>noopener noreferrer</code></td>
+            <td>Security for external links</td>
+          </tr>
+          <tr>
+            <td><code>download</code></td>
+            <td>filename (optional)</td>
+            <td>Download the file instead of opening it</td>
+          </tr>
+          <tr>
+            <td><code>title</code></td>
+            <td>Text</td>
+            <td>Tooltip shown on hover</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <footer>
+    <p><a href="#top">Back to top</a></p>
+  </footer>
+
+</body>
+</html>

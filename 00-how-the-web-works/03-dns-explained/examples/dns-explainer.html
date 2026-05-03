@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DNS Explained</title>
+</head>
+<body>
+
+  <h1>DNS — The Phone Book of the Internet</h1>
+  <p>DNS stands for <strong>Domain Name System</strong>. It translates human-readable domain names into IP addresses that computers use to find each other.</p>
+
+  <hr>
+
+  <h2>The Problem DNS Solves</h2>
+  <p>Computers communicate using IP addresses like <code>140.82.121.4</code>. Humans remember names like <code>github.com</code>. DNS bridges that gap.</p>
+
+  <p>Without DNS, you would have to type <code>140.82.121.4</code> instead of <code>github.com</code>.</p>
+
+  <h2>How DNS Resolution Works</h2>
+
+  <ol>
+    <li>
+      <strong>You type github.com in your browser</strong>
+      <p>The browser needs to find the IP address for this domain.</p>
+    </li>
+    <li>
+      <strong>Browser checks its own cache</strong>
+      <p>Has it looked up this domain recently? If yes, use the saved answer.</p>
+    </li>
+    <li>
+      <strong>Operating system checks its cache</strong>
+      <p>The OS keeps its own DNS cache too.</p>
+    </li>
+    <li>
+      <strong>Query sent to Recursive Resolver</strong>
+      <p>Your ISP's DNS server receives the query and starts searching.</p>
+    </li>
+    <li>
+      <strong>Root Name Server consulted</strong>
+      <p>The resolver asks a root server: "Who handles .com domains?" Root server replies with the address of the .com TLD server.</p>
+    </li>
+    <li>
+      <strong>TLD Name Server consulted</strong>
+      <p>The resolver asks the .com server: "Who handles github.com?" It replies with GitHub's authoritative name server.</p>
+    </li>
+    <li>
+      <strong>Authoritative Name Server answers</strong>
+      <p>GitHub's own DNS server replies: "github.com is at 140.82.121.4"</p>
+    </li>
+    <li>
+      <strong>IP address returned to browser</strong>
+      <p>The browser now knows where to connect. The answer is cached for next time.</p>
+    </li>
+  </ol>
+
+  <hr>
+
+  <h2>Types of DNS Records</h2>
+
+  <table border="1">
+    <caption>Common DNS Record Types</caption>
+    <thead>
+      <tr>
+        <th>Record Type</th>
+        <th>Full Name</th>
+        <th>What It Does</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>A</code></td>
+        <td>Address Record</td>
+        <td>Maps a domain to an IPv4 address</td>
+        <td>github.com → 140.82.121.4</td>
+      </tr>
+      <tr>
+        <td><code>AAAA</code></td>
+        <td>IPv6 Address Record</td>
+        <td>Maps a domain to an IPv6 address</td>
+        <td>github.com → 2606:50c0::68</td>
+      </tr>
+      <tr>
+        <td><code>CNAME</code></td>
+        <td>Canonical Name</td>
+        <td>Alias — points one domain to another domain</td>
+        <td>www.github.com → github.com</td>
+      </tr>
+      <tr>
+        <td><code>MX</code></td>
+        <td>Mail Exchange</td>
+        <td>Tells email servers where to deliver mail</td>
+        <td>github.com → aspmx.l.google.com</td>
+      </tr>
+      <tr>
+        <td><code>TXT</code></td>
+        <td>Text Record</td>
+        <td>Stores text data, used for verification and security</td>
+        <td>v=spf1 include:_spf.google.com ~all</td>
+      </tr>
+      <tr>
+        <td><code>NS</code></td>
+        <td>Name Server</td>
+        <td>Specifies which servers are authoritative for this domain</td>
+        <td>ns1.github.com</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>DNS Caching</h2>
+  <p>DNS answers are cached (saved temporarily) to speed things up. Each record has a <strong>TTL (Time To Live)</strong> value — the number of seconds the answer can be cached before it must be looked up again.</p>
+
+  <ul>
+    <li>Short TTL (e.g. 300 seconds) — changes take effect quickly</li>
+    <li>Long TTL (e.g. 86400 seconds = 1 day) — faster lookups, slower updates</li>
+  </ul>
+
+</body>
+</html>

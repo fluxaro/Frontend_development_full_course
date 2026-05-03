@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Journey — 7 Steps</title>
+</head>
+<body>
+
+  <h1>What Happens When You Type a URL — 7 Steps</h1>
+  <p>This is a complete walkthrough of every step that happens between pressing Enter and seeing a webpage.</p>
+
+  <hr>
+
+  <h2>Step 1: URL Parsing</h2>
+  <p>The browser breaks the URL into parts:</p>
+  <ul>
+    <li><strong>Protocol:</strong> <code>https</code> — how to communicate</li>
+    <li><strong>Domain:</strong> <code>www.github.com</code> — who to talk to</li>
+    <li><strong>Path:</strong> <code>/explore</code> — which page to get</li>
+    <li><strong>Query:</strong> <code>?q=react</code> — extra parameters</li>
+  </ul>
+
+  <h2>Step 2: DNS Resolution</h2>
+  <p>The browser needs to find the IP address for the domain. It checks in this order:</p>
+  <ol>
+    <li>Browser cache (did I look this up recently?)</li>
+    <li>Operating system cache</li>
+    <li>Router cache</li>
+    <li>ISP DNS server</li>
+    <li>Root DNS servers (if all else fails)</li>
+  </ol>
+  <p>Result: <code>github.com</code> → <code>140.82.121.4</code></p>
+
+  <h2>Step 3: TCP Three-Way Handshake</h2>
+  <p>Before any data is sent, a connection must be established:</p>
+  <ol>
+    <li><strong>SYN</strong> — Browser: "I want to connect"</li>
+    <li><strong>SYN-ACK</strong> — Server: "OK, I'm ready"</li>
+    <li><strong>ACK</strong> — Browser: "Great, let's go"</li>
+  </ol>
+
+  <h2>Step 4: TLS Handshake (HTTPS only)</h2>
+  <p>For secure connections, the browser and server agree on encryption:</p>
+  <ul>
+    <li>Server sends its SSL certificate</li>
+    <li>Browser verifies the certificate is valid and trusted</li>
+    <li>Both sides agree on encryption keys</li>
+    <li>All future data is encrypted</li>
+  </ul>
+
+  <h2>Step 5: HTTP Request</h2>
+  <p>The browser sends a request to the server:</p>
+  <pre>GET /explore HTTP/1.1
+Host: github.com
+Accept: text/html,application/xhtml+xml
+Accept-Language: en-US
+Connection: keep-alive</pre>
+
+  <h2>Step 6: Server Response</h2>
+  <p>The server processes the request and sends back a response:</p>
+  <pre>HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Content-Length: 45231
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  ...
+&lt;/html&gt;</pre>
+
+  <h2>Step 7: Browser Rendering</h2>
+  <p>The browser turns the raw files into a visible page:</p>
+  <ol>
+    <li>Parse HTML → build the DOM (Document Object Model)</li>
+    <li>Parse CSS → build the CSSOM (CSS Object Model)</li>
+    <li>Combine DOM + CSSOM → Render Tree</li>
+    <li>Layout — calculate where everything goes on screen</li>
+    <li>Paint — draw pixels on screen</li>
+    <li>Composite — layer everything together</li>
+  </ol>
+
+  <hr>
+
+  <h2>Summary Table</h2>
+
+  <table border="1">
+    <caption>The 7 Steps at a Glance</caption>
+    <thead>
+      <tr>
+        <th>Step</th>
+        <th>What Happens</th>
+        <th>Who Does It</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>URL is parsed into parts</td>
+        <td>Browser</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Domain name resolved to IP address</td>
+        <td>DNS Server</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>TCP connection established</td>
+        <td>Browser + Server</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>TLS encryption negotiated</td>
+        <td>Browser + Server</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>HTTP request sent</td>
+        <td>Browser</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>HTTP response received</td>
+        <td>Server</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>Page rendered and displayed</td>
+        <td>Browser</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Version Control Guide — Git and GitHub</title>
+</head>
+<body>
+
+  <h1>Version Control Guide</h1>
+  <p>A complete beginner's guide to understanding version control, Git, and GitHub.</p>
+
+  <nav>
+    <ul>
+      <li><a href="#what-is-version-control">What Is Version Control?</a></li>
+      <li><a href="#git">What Is Git?</a></li>
+      <li><a href="#github">What Is GitHub?</a></li>
+      <li><a href="#comparison">Git vs GitHub</a></li>
+      <li><a href="#glossary">Glossary</a></li>
+    </ul>
+  </nav>
+
+  <hr>
+
+  <section id="what-is-version-control">
+    <h2>What Is Version Control?</h2>
+    <p>Version control is a system that records changes to files over time so you can recall specific versions later.</p>
+
+    <h3>Without Version Control</h3>
+    <p>Imagine you are writing an essay. You save it as:</p>
+    <ul>
+      <li>essay.docx</li>
+      <li>essay-final.docx</li>
+      <li>essay-final-v2.docx</li>
+      <li>essay-ACTUALLY-final.docx</li>
+      <li>essay-FINAL-for-real.docx</li>
+    </ul>
+    <p>This is messy, confusing, and wastes space. Version control solves this problem.</p>
+
+    <h3>With Version Control</h3>
+    <p>You have one file. Git tracks every change with a timestamp and message. You can go back to any version instantly.</p>
+  </section>
+
+  <section id="git">
+    <h2>What Is Git?</h2>
+    <p>Git is a distributed version control system created by Linus Torvalds in 2005. It runs on your computer and tracks changes to your files.</p>
+
+    <h3>What Git Does</h3>
+    <ul>
+      <li>Tracks every change to every file in your project</li>
+      <li>Lets you create snapshots (commits) of your work</li>
+      <li>Lets you create branches to work on features separately</li>
+      <li>Lets you merge branches back together</li>
+      <li>Works completely offline</li>
+    </ul>
+
+    <h3>Basic Git Commands</h3>
+    <pre>git init              # Start tracking a folder with Git
+git add .             # Stage all changes
+git commit -m "msg"   # Save a snapshot with a message
+git log               # View commit history
+git status            # See what has changed</pre>
+  </section>
+
+  <section id="github">
+    <h2>What Is GitHub?</h2>
+    <p>GitHub is a web-based platform that hosts Git repositories. It is owned by Microsoft and launched in 2008.</p>
+
+    <h3>What GitHub Adds</h3>
+    <ul>
+      <li>Cloud storage for your Git repositories</li>
+      <li>A web interface to browse your code and history</li>
+      <li>Pull Requests for code review and collaboration</li>
+      <li>Issues for tracking bugs and feature requests</li>
+      <li>GitHub Actions for automated testing and deployment</li>
+      <li>GitHub Pages for free website hosting</li>
+    </ul>
+
+    <h3>GitHub Alternatives</h3>
+    <ul>
+      <li>GitLab — popular for self-hosting and CI/CD</li>
+      <li>Bitbucket — popular with Atlassian tools (Jira)</li>
+      <li>Azure DevOps — Microsoft's enterprise platform</li>
+    </ul>
+  </section>
+
+  <section id="comparison">
+    <h2>Git vs GitHub — Comparison</h2>
+
+    <table border="1">
+      <caption>Git vs GitHub — Full Comparison</caption>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Git</th>
+          <th>GitHub</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Type</td><td>Software (CLI tool)</td><td>Website / Platform</td></tr>
+        <tr><td>Location</td><td>Your computer</td><td>The internet</td></tr>
+        <tr><td>Works offline?</td><td>Yes</td><td>No</td></tr>
+        <tr><td>Created by</td><td>Linus Torvalds</td><td>Tom Preston-Werner</td></tr>
+        <tr><td>Year created</td><td>2005</td><td>2008</td></tr>
+        <tr><td>Cost</td><td>Free, open source</td><td>Free for public repos</td></tr>
+        <tr><td>Main purpose</td><td>Track changes locally</td><td>Share and collaborate</td></tr>
+        <tr><td>Requires the other?</td><td>No</td><td>Yes (needs Git)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="glossary">
+    <h2>Glossary of Key Terms</h2>
+
+    <dl>
+      <dt>Repository (repo)</dt>
+      <dd>A project folder tracked by Git. Contains all files and the complete history of changes.</dd>
+
+      <dt>Commit</dt>
+      <dd>A saved snapshot of your project at a specific moment. Has a unique ID and a message.</dd>
+
+      <dt>Branch</dt>
+      <dd>A parallel version of your code. Lets you work on features without affecting the main branch.</dd>
+
+      <dt>Main / Master</dt>
+      <dd>The default primary branch of a repository. Most teams use "main" today.</dd>
+
+      <dt>Merge</dt>
+      <dd>Combining the changes from one branch into another.</dd>
+
+      <dt>Conflict</dt>
+      <dd>When two branches change the same line of code differently. Must be resolved manually.</dd>
+
+      <dt>Remote</dt>
+      <dd>A version of your repository stored on another computer or server (like GitHub).</dd>
+
+      <dt>Push</dt>
+      <dd>Sending your local commits to the remote repository.</dd>
+
+      <dt>Pull</dt>
+      <dd>Downloading changes from the remote repository to your local machine.</dd>
+
+      <dt>Clone</dt>
+      <dd>Downloading a complete copy of a remote repository to your computer.</dd>
+
+      <dt>Fork</dt>
+      <dd>Creating your own copy of someone else's GitHub repository under your account.</dd>
+
+      <dt>Pull Request (PR)</dt>
+      <dd>A request to merge your branch into another branch. Used for code review.</dd>
+
+      <dt>Issue</dt>
+      <dd>A GitHub feature for tracking bugs, feature requests, and tasks.</dd>
+    </dl>
+  </section>
+
+</body>
+</html>

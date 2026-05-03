@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Happens When You Type a URL</title>
+</head>
+<body>
+
+  <h1>What Happens When You Type a URL?</h1>
+  <p>Typing a web address and pressing Enter triggers a complex chain of events. Here is each step explained simply.</p>
+
+  <hr>
+
+  <h2>The 7 Steps</h2>
+
+  <ol>
+    <li>
+      <h3>You Type the URL</h3>
+      <p>Example: <code>https://www.github.com</code></p>
+      <p>The browser parses the URL into parts: protocol (<code>https</code>), domain (<code>www.github.com</code>), and path (<code>/</code>).</p>
+    </li>
+
+    <li>
+      <h3>DNS Lookup</h3>
+      <p>The browser asks: "What is the IP address for github.com?"</p>
+      <p>The DNS server responds with an IP address like <code>140.82.121.4</code>.</p>
+    </li>
+
+    <li>
+      <h3>TCP Connection (Three-Way Handshake)</h3>
+      <p>Your browser and the server establish a connection:</p>
+      <ul>
+        <li>Browser sends: SYN (I want to connect)</li>
+        <li>Server replies: SYN-ACK (OK, I'm ready)</li>
+        <li>Browser confirms: ACK (Great, let's go)</li>
+      </ul>
+    </li>
+
+    <li>
+      <h3>TLS Handshake (for HTTPS)</h3>
+      <p>Because the URL uses <code>https</code>, the browser and server agree on encryption keys. This keeps your data private.</p>
+    </li>
+
+    <li>
+      <h3>HTTP Request Sent</h3>
+      <p>The browser sends a GET request to the server asking for the page.</p>
+      <pre>GET / HTTP/1.1
+Host: www.github.com
+Accept: text/html</pre>
+    </li>
+
+    <li>
+      <h3>Server Sends HTTP Response</h3>
+      <p>The server finds the page and sends it back with a status code and the HTML content.</p>
+      <pre>HTTP/1.1 200 OK
+Content-Type: text/html
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;...&lt;/html&gt;</pre>
+    </li>
+
+    <li>
+      <h3>Browser Renders the Page</h3>
+      <p>The browser reads the HTML, requests any linked CSS and JavaScript files, builds the page, and displays it on your screen.</p>
+    </li>
+  </ol>
+
+  <hr>
+
+  <h2>Key Terms</h2>
+
+  <dl>
+    <dt>URL</dt>
+    <dd>Uniform Resource Locator. The full web address including protocol, domain, and path.</dd>
+
+    <dt>DNS</dt>
+    <dd>Domain Name System. Translates domain names into IP addresses.</dd>
+
+    <dt>TCP</dt>
+    <dd>Transmission Control Protocol. Ensures data is delivered reliably and in order.</dd>
+
+    <dt>TLS</dt>
+    <dd>Transport Layer Security. Encrypts data between browser and server (used in HTTPS).</dd>
+
+    <dt>HTTP Request</dt>
+    <dd>A message from the browser asking the server for a resource.</dd>
+
+    <dt>HTTP Response</dt>
+    <dd>The server's reply, containing a status code and the requested content.</dd>
+
+    <dt>Rendering</dt>
+    <dd>The process of turning HTML, CSS, and JavaScript into a visible webpage.</dd>
+  </dl>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client-Server Model</title>
+</head>
+<body>
+
+  <h1>The Client-Server Model</h1>
+  <p>The client-server model describes how two computers communicate over a network. One computer (the client) makes requests, and another (the server) responds.</p>
+
+  <hr>
+
+  <h2>The Analogy: A Restaurant</h2>
+
+  <table border="1">
+    <caption>Restaurant vs Web Development</caption>
+    <thead>
+      <tr>
+        <th>Restaurant</th>
+        <th>Web Development</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Customer (you)</td>
+        <td>Client (browser)</td>
+      </tr>
+      <tr>
+        <td>Waiter</td>
+        <td>HTTP Request/Response</td>
+      </tr>
+      <tr>
+        <td>Kitchen</td>
+        <td>Web Server</td>
+      </tr>
+      <tr>
+        <td>Pantry / Fridge</td>
+        <td>Database</td>
+      </tr>
+      <tr>
+        <td>Menu</td>
+        <td>API</td>
+      </tr>
+      <tr>
+        <td>Your meal</td>
+        <td>HTML/CSS/JS response</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>How It Works — Step by Step</h2>
+
+  <ol>
+    <li>
+      <strong>Client sends a request</strong>
+      <p>Your browser (the client) sends an HTTP request to a server asking for a resource.</p>
+    </li>
+    <li>
+      <strong>Request travels over the internet</strong>
+      <p>The request is broken into packets and routed through the internet to the server.</p>
+    </li>
+    <li>
+      <strong>Server receives and processes the request</strong>
+      <p>The server reads the request, may query a database, and prepares a response.</p>
+    </li>
+    <li>
+      <strong>Server sends a response</strong>
+      <p>The server sends back an HTTP response with a status code and the requested content.</p>
+    </li>
+    <li>
+      <strong>Client receives and displays the response</strong>
+      <p>The browser reads the HTML, CSS, and JavaScript and renders the page.</p>
+    </li>
+  </ol>
+
+  <hr>
+
+  <h2>Types of Servers</h2>
+
+  <dl>
+    <dt>Web Server</dt>
+    <dd>Serves static files like HTML, CSS, images. Examples: Apache, Nginx.</dd>
+
+    <dt>Application Server</dt>
+    <dd>Runs business logic and dynamic code. Examples: Node.js, Django, Rails.</dd>
+
+    <dt>Database Server</dt>
+    <dd>Stores and retrieves data. Examples: PostgreSQL, MySQL, MongoDB.</dd>
+
+    <dt>File Server</dt>
+    <dd>Stores and serves files. Examples: Amazon S3, Google Cloud Storage.</dd>
+
+    <dt>CDN (Content Delivery Network)</dt>
+    <dd>Distributes static files from servers close to the user for faster delivery.</dd>
+  </dl>
+
+  <hr>
+
+  <h2>Client vs Server — Key Differences</h2>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Client</th>
+        <th>Server</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Who initiates?</td>
+        <td>Always initiates the request</td>
+        <td>Waits and responds</td>
+      </tr>
+      <tr>
+        <td>Examples</td>
+        <td>Browser, mobile app, Postman</td>
+        <td>Apache, Nginx, Node.js</td>
+      </tr>
+      <tr>
+        <td>Location</td>
+        <td>User's device</td>
+        <td>Remote data center</td>
+      </tr>
+      <tr>
+        <td>Code runs where?</td>
+        <td>On the user's machine</td>
+        <td>On the server machine</td>
+      </tr>
+      <tr>
+        <td>Can see the code?</td>
+        <td>Yes — HTML/CSS/JS is visible</td>
+        <td>No — server code is private</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>
