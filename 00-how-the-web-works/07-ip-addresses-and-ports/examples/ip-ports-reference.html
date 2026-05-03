@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IP Addresses and Ports Reference</title>
+</head>
+<body>
+
+  <h1>IP Addresses and Ports — Developer Reference</h1>
+  <p>Every device on the internet has an IP address. Every service on that device listens on a port. Together they form the complete address of any service on the internet.</p>
+
+  <hr>
+
+  <h2>IPv4 vs IPv6</h2>
+
+  <table border="1">
+    <caption>IPv4 vs IPv6 Comparison</caption>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>IPv4</th>
+        <th>IPv6</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Format</td><td>4 decimal numbers, dot-separated</td><td>8 groups of 4 hex digits, colon-separated</td></tr>
+      <tr><td>Example</td><td>192.168.1.1</td><td>2001:0db8:85a3::8a2e:0370:7334</td></tr>
+      <tr><td>Bit length</td><td>32 bits</td><td>128 bits</td></tr>
+      <tr><td>Total addresses</td><td>~4.3 billion</td><td>~340 undecillion</td></tr>
+      <tr><td>Status</td><td>Still dominant</td><td>Growing adoption</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>Special IP Addresses</h2>
+
+  <table border="1">
+    <caption>Special IP Addresses Every Developer Should Know</caption>
+    <thead>
+      <tr>
+        <th>IP Address</th>
+        <th>Name</th>
+        <th>What It Means</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>127.0.0.1</td><td>Localhost</td><td>Your own computer. Used for local development.</td></tr>
+      <tr><td>0.0.0.0</td><td>All interfaces</td><td>Bind to all available network interfaces.</td></tr>
+      <tr><td>192.168.x.x</td><td>Private network</td><td>Your home or office local network.</td></tr>
+      <tr><td>10.x.x.x</td><td>Private network</td><td>Larger private networks (corporate, cloud).</td></tr>
+      <tr><td>172.16.x.x – 172.31.x.x</td><td>Private network</td><td>Another private range, used by Docker.</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>Common Ports Reference</h2>
+
+  <table border="1">
+    <caption>Common Ports and Their Services</caption>
+    <thead>
+      <tr>
+        <th>Port</th>
+        <th>Protocol</th>
+        <th>Service</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>80</td><td>HTTP</td><td>Web traffic (unencrypted)</td><td>Default HTTP port</td></tr>
+      <tr><td>443</td><td>HTTPS</td><td>Web traffic (encrypted)</td><td>Default HTTPS port</td></tr>
+      <tr><td>22</td><td>SSH</td><td>Secure shell</td><td>Remote server access</td></tr>
+      <tr><td>21</td><td>FTP</td><td>File transfer</td><td>Legacy, avoid in new projects</td></tr>
+      <tr><td>25</td><td>SMTP</td><td>Sending email</td><td>Email servers</td></tr>
+      <tr><td>3306</td><td>MySQL</td><td>MySQL database</td><td>Common in LAMP stack</td></tr>
+      <tr><td>5432</td><td>PostgreSQL</td><td>PostgreSQL database</td><td>Popular with Node.js</td></tr>
+      <tr><td>27017</td><td>MongoDB</td><td>MongoDB database</td><td>NoSQL database</td></tr>
+      <tr><td>6379</td><td>Redis</td><td>Redis cache/database</td><td>In-memory data store</td></tr>
+      <tr><td>3000</td><td>Custom</td><td>Node.js / React dev server</td><td>Very common in development</td></tr>
+      <tr><td>5173</td><td>Custom</td><td>Vite dev server</td><td>Default Vite port</td></tr>
+      <tr><td>8080</td><td>Custom</td><td>Alternative HTTP</td><td>Used when 80 is taken</td></tr>
+      <tr><td>4200</td><td>Custom</td><td>Angular dev server</td><td>Default Angular CLI port</td></tr>
+      <tr><td>8000</td><td>Custom</td><td>Django / Python servers</td><td>Common Python dev port</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>How to Find Your IP Address</h2>
+
+  <h3>Mac / Linux</h3>
+  <pre>ifconfig
+# Look for "inet" followed by your IP address
+
+# Or use the simpler command:
+hostname -I</pre>
+
+  <h3>Windows</h3>
+  <pre>ipconfig
+# Look for "IPv4 Address"</pre>
+
+  <h3>Find a Website's IP</h3>
+  <pre>nslookup google.com
+nslookup github.com
+ping github.com</pre>
+
+</body>
+</html>

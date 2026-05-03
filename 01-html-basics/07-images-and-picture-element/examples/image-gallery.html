@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Gallery — HTML Images Demo</title>
+  <meta name="description" content="A demonstration of all HTML image techniques including picture element, lazy loading, and figure/figcaption.">
+</head>
+<body>
+
+  <header>
+    <h1>HTML Images — Complete Demo</h1>
+    <p>This page demonstrates every way to use images in HTML correctly.</p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>1. Basic Image with Alt Text</h2>
+      <p>Every image needs an <code>alt</code> attribute, <code>width</code>, and <code>height</code>.</p>
+
+      <img
+        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+        alt="Snow-capped mountain peaks reflected in a calm alpine lake at sunrise"
+        width="800"
+        height="533"
+      >
+    </section>
+
+    <section>
+      <h2>2. Lazy Loading</h2>
+      <p>Add <code>loading="lazy"</code> to images below the fold. They only download when the user scrolls to them.</p>
+
+      <img
+        src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800"
+        alt="Sunlight filtering through a dense forest of tall trees creating a golden glow"
+        width="800"
+        height="533"
+        loading="lazy"
+      >
+    </section>
+
+    <section>
+      <h2>3. Figure with Caption</h2>
+      <p>Use <code>&lt;figure&gt;</code> and <code>&lt;figcaption&gt;</code> to associate a caption with an image.</p>
+
+      <figure>
+        <img
+          src="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=800"
+          alt="A red fox sitting in a snowy field looking directly at the camera"
+          width="800"
+          height="533"
+          loading="lazy"
+        >
+        <figcaption>
+          A red fox (<em>Vulpes vulpes</em>) photographed in Yellowstone National Park.
+          Photo courtesy of <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a>.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>4. Picture Element — Format Fallback</h2>
+      <p>Serve WebP to modern browsers, JPEG to older ones. The browser picks the first format it supports.</p>
+
+      <picture>
+        <source
+          srcset="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&fm=webp"
+          type="image/webp"
+        >
+        <img
+          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800"
+          alt="A humpback whale breaching the ocean surface at sunset with spray around it"
+          width="800"
+          height="533"
+          loading="lazy"
+        >
+      </picture>
+    </section>
+
+    <section>
+      <h2>5. Picture Element — Responsive (Art Direction)</h2>
+      <p>Show a different crop of the image on mobile vs desktop. Resize your browser to see the difference.</p>
+
+      <picture>
+        <source
+          media="(max-width: 600px)"
+          srcset="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=400&h=600&fit=crop"
+        >
+        <source
+          media="(min-width: 601px)"
+          srcset="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=1200&h=500&fit=crop"
+        >
+        <img
+          src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800"
+          alt="A vast green meadow with wildflowers stretching to the horizon under a blue sky"
+          width="800"
+          height="533"
+          loading="lazy"
+        >
+      </picture>
+    </section>
+
+    <section>
+      <h2>6. Decorative Image — Empty Alt</h2>
+      <p>Purely decorative images get <code>alt=""</code> so screen readers skip them.</p>
+
+      <img
+        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=4&fit=crop"
+        alt=""
+        width="800"
+        height="4"
+        loading="lazy"
+      >
+    </section>
+
+    <section>
+      <h2>7. Image as a Link</h2>
+      <p>When an image is a link, the alt text describes the destination, not the image.</p>
+
+      <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">
+        <img
+          src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400"
+          alt="Visit Unsplash — free high-resolution photography"
+          width="400"
+          height="267"
+          loading="lazy"
+        >
+      </a>
+    </section>
+
+    <section>
+      <h2>8. Gallery with Figure Elements</h2>
+
+      <ul>
+        <li>
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400"
+              alt="Aerial view of a winding river through a green valley"
+              width="400"
+              height="267"
+              loading="lazy"
+            >
+            <figcaption>River Valley</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=400"
+              alt="A lone pine tree on a rocky cliff overlooking a misty mountain range"
+              width="400"
+              height="267"
+              loading="lazy"
+            >
+            <figcaption>Mountain Pine</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=400"
+              alt="Waves crashing on a rocky coastline at golden hour"
+              width="400"
+              height="267"
+              loading="lazy"
+            >
+            <figcaption>Rocky Coast</figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>All photos from <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a> — free to use for learning.</p>
+  </footer>
+
+</body>
+</html>

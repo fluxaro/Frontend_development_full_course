@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Tables Demo — colspan and rowspan</title>
+</head>
+<body>
+
+  <h1>HTML Tables — Complete Demo</h1>
+  <p>This page demonstrates all table features including colspan, rowspan, thead, tbody, tfoot, and scope.</p>
+
+  <hr>
+
+  <h2>1. Basic Table</h2>
+
+  <table border="1">
+    <caption>Top Frontend Frameworks — 2025</caption>
+    <thead>
+      <tr>
+        <th scope="col">Framework</th>
+        <th scope="col">Language</th>
+        <th scope="col">Creator</th>
+        <th scope="col">Year</th>
+        <th scope="col">Weekly Downloads</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>React</td>
+        <td>JavaScript</td>
+        <td>Meta (Facebook)</td>
+        <td>2013</td>
+        <td>25 million</td>
+      </tr>
+      <tr>
+        <td>Vue</td>
+        <td>JavaScript</td>
+        <td>Evan You</td>
+        <td>2014</td>
+        <td>5 million</td>
+      </tr>
+      <tr>
+        <td>Angular</td>
+        <td>TypeScript</td>
+        <td>Google</td>
+        <td>2016</td>
+        <td>3 million</td>
+      </tr>
+      <tr>
+        <td>Svelte</td>
+        <td>JavaScript</td>
+        <td>Rich Harris</td>
+        <td>2016</td>
+        <td>1 million</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5">Data from npm download statistics, January 2025</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <hr>
+
+  <h2>2. Table with colspan</h2>
+  <p>The top header spans all 4 quarter columns using <code>colspan="4"</code>.</p>
+
+  <table border="1">
+    <caption>Annual Revenue Report</caption>
+    <thead>
+      <tr>
+        <th scope="col" rowspan="2">Product</th>
+        <th scope="colgroup" colspan="4">2025 Revenue by Quarter</th>
+        <th scope="col" rowspan="2">Total</th>
+      </tr>
+      <tr>
+        <th scope="col">Q1</th>
+        <th scope="col">Q2</th>
+        <th scope="col">Q3</th>
+        <th scope="col">Q4</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Product A</th>
+        <td>$10,000</td>
+        <td>$12,000</td>
+        <td>$11,500</td>
+        <td>$14,000</td>
+        <td>$47,500</td>
+      </tr>
+      <tr>
+        <th scope="row">Product B</th>
+        <td>$8,000</td>
+        <td>$9,500</td>
+        <td>$10,000</td>
+        <td>$11,000</td>
+        <td>$38,500</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th scope="row">Total</th>
+        <td>$18,000</td>
+        <td>$21,500</td>
+        <td>$21,500</td>
+        <td>$25,000</td>
+        <td>$86,000</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <hr>
+
+  <h2>3. Table with rowspan</h2>
+  <p>The "Monday" cell spans 2 rows using <code>rowspan="2"</code>.</p>
+
+  <table border="1">
+    <caption>Class Schedule — Monday</caption>
+    <thead>
+      <tr>
+        <th scope="col">Day</th>
+        <th scope="col">Time</th>
+        <th scope="col">Subject</th>
+        <th scope="col">Room</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="rowgroup" rowspan="3">Monday</th>
+        <td>9:00 AM</td>
+        <td>HTML Basics</td>
+        <td>Room 101</td>
+      </tr>
+      <tr>
+        <!-- No day cell here — rowspan covers it -->
+        <td>10:00 AM</td>
+        <td>CSS Fundamentals</td>
+        <td>Room 101</td>
+      </tr>
+      <tr>
+        <!-- No day cell here — rowspan covers it -->
+        <td>11:00 AM</td>
+        <td>JavaScript Intro</td>
+        <td>Room 102</td>
+      </tr>
+      <tr>
+        <th scope="rowgroup" rowspan="2">Tuesday</th>
+        <td>9:00 AM</td>
+        <td>CSS Advanced</td>
+        <td>Room 101</td>
+      </tr>
+      <tr>
+        <td>10:00 AM</td>
+        <td>Flexbox and Grid</td>
+        <td>Room 101</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>4. Combined colspan and rowspan</h2>
+
+  <table border="1">
+    <caption>Weekly Schedule with Lunch Break</caption>
+    <thead>
+      <tr>
+        <th scope="col">Time</th>
+        <th scope="col">Monday</th>
+        <th scope="col">Tuesday</th>
+        <th scope="col">Wednesday</th>
+        <th scope="col">Thursday</th>
+        <th scope="col">Friday</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">9:00 AM</th>
+        <td>HTML</td>
+        <td>CSS</td>
+        <td>JavaScript</td>
+        <td>React</td>
+        <td>Projects</td>
+      </tr>
+      <tr>
+        <th scope="row">12:00 PM</th>
+        <td colspan="5">Lunch Break — 1 hour</td>
+      </tr>
+      <tr>
+        <th scope="row">1:00 PM</th>
+        <td>Practice</td>
+        <td>Practice</td>
+        <td rowspan="2">Workshop</td>
+        <td>Practice</td>
+        <td>Practice</td>
+      </tr>
+      <tr>
+        <th scope="row">2:00 PM</th>
+        <td>Q&amp;A</td>
+        <td>Q&amp;A</td>
+        <!-- No Wednesday cell — rowspan covers it -->
+        <td>Q&amp;A</td>
+        <td>Q&amp;A</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

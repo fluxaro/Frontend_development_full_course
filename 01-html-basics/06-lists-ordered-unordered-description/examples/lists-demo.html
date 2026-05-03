@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Lists Demo</title>
+</head>
+<body>
+
+  <h1>HTML Lists — All Three Types</h1>
+  <p>HTML has three types of lists. Each one is used for a different purpose.</p>
+
+  <hr>
+
+  <h2>1. Unordered List — ul</h2>
+  <p>Use when the order does not matter. Items appear with bullet points.</p>
+
+  <h3>Example: Shopping List</h3>
+  <ul>
+    <li>Milk</li>
+    <li>Eggs</li>
+    <li>Bread</li>
+    <li>Butter</li>
+    <li>Coffee</li>
+  </ul>
+
+  <h3>Example: Skills List</h3>
+  <ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+    <li>React</li>
+    <li>Git</li>
+  </ul>
+
+  <hr>
+
+  <h2>2. Ordered List — ol</h2>
+  <p>Use when the order matters. Items appear numbered.</p>
+
+  <h3>Example: How to Make Tea</h3>
+  <ol>
+    <li>Boil water in a kettle</li>
+    <li>Place a tea bag in your mug</li>
+    <li>Pour the boiling water over the tea bag</li>
+    <li>Wait 3–5 minutes for the tea to steep</li>
+    <li>Remove the tea bag</li>
+    <li>Add milk or sugar if desired</li>
+    <li>Enjoy your tea</li>
+  </ol>
+
+  <h3>Example: Top 5 Programming Languages (with start attribute)</h3>
+  <ol>
+    <li>JavaScript</li>
+    <li>Python</li>
+    <li>TypeScript</li>
+    <li>Java</li>
+    <li>C#</li>
+  </ol>
+
+  <h3>Example: Countdown (reversed attribute)</h3>
+  <ol reversed>
+    <li>One</li>
+    <li>Two</li>
+    <li>Three</li>
+    <li>Four</li>
+    <li>Five</li>
+  </ol>
+
+  <h3>Example: Using Letters (type="A")</h3>
+  <ol type="A">
+    <li>Option A</li>
+    <li>Option B</li>
+    <li>Option C</li>
+  </ol>
+
+  <hr>
+
+  <h2>3. Description List — dl</h2>
+  <p>Use for term-definition pairs. Like a glossary or dictionary.</p>
+
+  <h3>Example: Web Development Glossary</h3>
+  <dl>
+    <dt>HTML</dt>
+    <dd>HyperText Markup Language. The structure of web pages.</dd>
+
+    <dt>CSS</dt>
+    <dd>Cascading Style Sheets. The styling of web pages.</dd>
+
+    <dt>JavaScript</dt>
+    <dd>A programming language that makes web pages interactive.</dd>
+
+    <dt>API</dt>
+    <dd>Application Programming Interface. A way for programs to communicate with each other.</dd>
+
+    <dt>DOM</dt>
+    <dd>Document Object Model. The browser's representation of an HTML page as a tree of objects.</dd>
+  </dl>
+
+  <hr>
+
+  <h2>4. Nested Lists</h2>
+  <p>You can put a list inside a list item to create sub-items.</p>
+
+  <h3>Example: Web Development Topics</h3>
+  <ul>
+    <li>Frontend Development
+      <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>React</li>
+      </ul>
+    </li>
+    <li>Backend Development
+      <ul>
+        <li>Node.js</li>
+        <li>Python</li>
+        <li>Databases</li>
+      </ul>
+    </li>
+    <li>DevOps
+      <ul>
+        <li>Git</li>
+        <li>Docker</li>
+        <li>CI/CD</li>
+      </ul>
+    </li>
+  </ul>
+
+  <hr>
+
+  <h2>5. Navigation Menu (ul in practice)</h2>
+  <p>Navigation menus are built with unordered lists. CSS makes them look like a menu bar.</p>
+
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+</body>
+</html>

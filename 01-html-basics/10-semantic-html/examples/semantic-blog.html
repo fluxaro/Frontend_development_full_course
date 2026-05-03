@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Dev Journal — Semantic HTML Demo</title>
+  <meta name="description" content="A blog post page demonstrating correct semantic HTML structure.">
+</head>
+<body>
+
+  <header>
+    <h1>The Dev Journal</h1>
+    <p>Practical web development for working developers</p>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/html">HTML</a></li>
+        <li><a href="/css">CSS</a></li>
+        <li><a href="/javascript">JavaScript</a></li>
+        <li><a href="/react">React</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <article>
+
+      <header>
+        <mark>HTML</mark>
+        <h2>Why Semantic HTML Is the Foundation of Good Web Development</h2>
+        <p>
+          By <strong>Sarah Chen</strong> ·
+          <time datetime="2025-01-15">January 15, 2025</time> ·
+          <small>8 min read</small>
+        </p>
+      </header>
+
+      <section>
+        <h3>Introduction</h3>
+        <p>
+          When developers first learn HTML, they often reach for <code>&lt;div&gt;</code> for everything.
+          It works — the page renders. But it misses the point of HTML entirely.
+          HTML is not just about making things appear on screen. It is about communicating meaning.
+        </p>
+        <p>
+          Semantic HTML means choosing elements based on what the content <em>means</em>,
+          not how it looks. A <code>&lt;nav&gt;</code> is for navigation.
+          An <code>&lt;article&gt;</code> is for a self-contained piece of content.
+          A <code>&lt;button&gt;</code> is for actions.
+        </p>
+      </section>
+
+      <section>
+        <h3>The Problem with Div Soup</h3>
+        <p>
+          Here is what a non-semantic page looks like:
+        </p>
+        <pre><code>&lt;div class="header"&gt;
+  &lt;div class="nav"&gt;
+    &lt;div class="nav-item"&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="main"&gt;
+  &lt;div class="article"&gt;
+    &lt;div class="title"&gt;My Post&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <p>
+          A screen reader sees a wall of divs with no structure.
+          A search engine cannot tell what is important.
+          A developer reading this code has to guess what each div does.
+        </p>
+      </section>
+
+      <section>
+        <h3>The Semantic Solution</h3>
+        <p>Here is the same page written semantically:</p>
+        <pre><code>&lt;header&gt;
+  &lt;nav&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;article&gt;
+    &lt;h1&gt;My Post&lt;/h1&gt;
+  &lt;/article&gt;
+&lt;/main&gt;</code></pre>
+        <p>
+          Now a screen reader can announce "navigation landmark" and "main content area."
+          A search engine knows the <code>&lt;h1&gt;</code> is the article title.
+          A developer reading this code immediately understands the structure.
+        </p>
+      </section>
+
+      <section>
+        <h3>Key Semantic Elements</h3>
+
+        <dl>
+          <dt><code>&lt;header&gt;</code></dt>
+          <dd>Introductory content. Can be used for the page header or an article header.</dd>
+
+          <dt><code>&lt;nav&gt;</code></dt>
+          <dd>Navigation links. Use for main navigation, breadcrumbs, and pagination.</dd>
+
+          <dt><code>&lt;main&gt;</code></dt>
+          <dd>The main content of the page. Only one per page.</dd>
+
+          <dt><code>&lt;article&gt;</code></dt>
+          <dd>Self-contained content that makes sense on its own — blog posts, news articles, comments.</dd>
+
+          <dt><code>&lt;section&gt;</code></dt>
+          <dd>A thematic grouping of content. Should have a heading.</dd>
+
+          <dt><code>&lt;aside&gt;</code></dt>
+          <dd>Content tangentially related to the main content — sidebars, pull quotes, ads.</dd>
+
+          <dt><code>&lt;footer&gt;</code></dt>
+          <dd>Footer for the page or a section. Contains copyright, links, author info.</dd>
+        </dl>
+      </section>
+
+      <footer>
+        <p>
+          <strong>Tags:</strong>
+          <a href="/tag/html">HTML</a>,
+          <a href="/tag/accessibility">Accessibility</a>,
+          <a href="/tag/seo">SEO</a>
+        </p>
+        <address>
+          Questions? Email <a href="mailto:sarah@devjournal.example.com">sarah@devjournal.example.com</a>
+        </address>
+      </footer>
+
+    </article>
+
+    <aside>
+      <h2>Related Articles</h2>
+      <ul>
+        <li><a href="#">HTML Accessibility and ARIA</a></li>
+        <li><a href="#">The Complete Guide to HTML Forms</a></li>
+        <li><a href="#">HTML SEO Best Practices</a></li>
+      </ul>
+
+      <h2>About the Author</h2>
+      <p>Sarah Chen is a senior frontend developer with 8 years of experience building accessible web applications.</p>
+    </aside>
+
+  </main>
+
+  <footer>
+    <nav aria-label="Footer navigation">
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/rss">RSS Feed</a></li>
+      </ul>
+    </nav>
+    <p>
+      <small>
+        Copyright <time datetime="2025">2025</time> The Dev Journal. All rights reserved.
+      </small>
+    </p>
+  </footer>
+
+</body>
+</html>

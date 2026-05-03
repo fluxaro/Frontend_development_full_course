@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browser Rendering Pipeline</title>
+</head>
+<body>
+
+  <h1>How the Browser Renders a Page</h1>
+  <p>When your browser receives HTML from a server, it goes through 6 steps before you see anything on screen. This process is called the Critical Rendering Path.</p>
+
+  <hr>
+
+  <h2>Step 1: Parse HTML — Build the DOM</h2>
+  <p>The browser reads the HTML file from top to bottom and builds a tree structure called the DOM (Document Object Model). Every HTML element becomes a node in this tree.</p>
+  <pre>
+HTML Input:
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello&lt;/h1&gt;
+    &lt;p&gt;World&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
+DOM Tree:
+html
+└── body
+    ├── h1 → "Hello"
+    └── p  → "World"
+  </pre>
+
+  <h2>Step 2: Parse CSS — Build the CSSOM</h2>
+  <p>While building the DOM, the browser also parses all CSS files and builds the CSSOM (CSS Object Model). This is a tree of all CSS rules and their computed values.</p>
+  <p>Important: CSS is render-blocking. The browser will not show anything until all CSS is downloaded and parsed.</p>
+
+  <h2>Step 3: Combine DOM + CSSOM — Build the Render Tree</h2>
+  <p>The browser combines the DOM and CSSOM into a Render Tree. This tree only contains visible elements. Elements with <code>display: none</code> are excluded from the Render Tree.</p>
+
+  <h2>Step 4: Layout (Reflow)</h2>
+  <p>The browser calculates the exact position and size of every element on the page. This answers: "Where does each box go? How wide and tall is it?"</p>
+  <p>Any time you change an element's size or position, the browser must redo this step. This is called a reflow and it is expensive.</p>
+
+  <h2>Step 5: Paint (Rasterize)</h2>
+  <p>The browser fills in the pixels — colors, text, images, borders, shadows. This is called painting or rasterization.</p>
+  <p>Changing a color triggers a repaint but not a reflow. Repaints are cheaper than reflows.</p>
+
+  <h2>Step 6: Composite</h2>
+  <p>If the page has multiple layers (from CSS transforms, opacity, z-index), the browser composites them together in the correct order to produce the final image on screen.</p>
+  <p>CSS <code>transform</code> and <code>opacity</code> only trigger compositing — they skip Layout and Paint entirely, making them the cheapest properties to animate.</p>
+
+  <hr>
+
+  <h2>CSS Property Performance Cost</h2>
+
+  <table border="1">
+    <caption>Which rendering steps each CSS property triggers</caption>
+    <thead>
+      <tr>
+        <th>CSS Property</th>
+        <th>Triggers Layout?</th>
+        <th>Triggers Paint?</th>
+        <th>Triggers Composite?</th>
+        <th>Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>width, height</td><td>Yes</td><td>Yes</td><td>Yes</td><td>High</td></tr>
+      <tr><td>margin, padding</td><td>Yes</td><td>Yes</td><td>Yes</td><td>High</td></tr>
+      <tr><td>top, left</td><td>Yes</td><td>Yes</td><td>Yes</td><td>High</td></tr>
+      <tr><td>color</td><td>No</td><td>Yes</td><td>Yes</td><td>Medium</td></tr>
+      <tr><td>background-color</td><td>No</td><td>Yes</td><td>Yes</td><td>Medium</td></tr>
+      <tr><td>box-shadow</td><td>No</td><td>Yes</td><td>Yes</td><td>Medium</td></tr>
+      <tr><td>transform</td><td>No</td><td>No</td><td>Yes</td><td>Low</td></tr>
+      <tr><td>opacity</td><td>No</td><td>No</td><td>Yes</td><td>Low</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>Key Terms</h2>
+
+  <dl>
+    <dt>DOM (Document Object Model)</dt>
+    <dd>A tree representation of your HTML that the browser builds and uses internally.</dd>
+
+    <dt>CSSOM (CSS Object Model)</dt>
+    <dd>A tree representation of your CSS rules and their computed values.</dd>
+
+    <dt>Render Tree</dt>
+    <dd>The combined DOM + CSSOM, containing only visible elements with their styles.</dd>
+
+    <dt>Layout / Reflow</dt>
+    <dd>The step where the browser calculates the position and size of every element.</dd>
+
+    <dt>Paint / Rasterize</dt>
+    <dd>The step where the browser draws the actual pixels on screen.</dd>
+
+    <dt>Composite</dt>
+    <dd>The step where the browser combines multiple layers into the final image.</dd>
+
+    <dt>Render-blocking</dt>
+    <dd>Resources (CSS, sync JS) that prevent the browser from rendering until they are loaded.</dd>
+
+    <dt>Critical Rendering Path</dt>
+    <dd>The sequence of steps the browser must complete before showing the first pixel.</dd>
+  </dl>
+
+</body>
+</html>
