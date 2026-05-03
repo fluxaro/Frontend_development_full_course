@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessible Form — ARIA Demo</title>
+  <meta name="description" content="A demonstration of accessible HTML form patterns using ARIA attributes.">
+</head>
+<body>
+
+  <!-- Skip link: lets keyboard users jump past navigation -->
+  <a href="#main-content">Skip to main content</a>
+
+  <header>
+    <h1>Accessible Form Patterns</h1>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <section aria-labelledby="form-heading">
+      <h2 id="form-heading">Contact Form</h2>
+      <p>Fields marked with * are required.</p>
+
+      <form action="/contact" method="POST" novalidate>
+
+        <!-- Name field with label -->
+        <div>
+          <label for="full-name">Full Name *</label>
+          <input
+            type="text"
+            id="full-name"
+            name="full_name"
+            required
+            aria-required="true"
+            autocomplete="name"
+          >
+        </div>
+
+        <!-- Email with hint text -->
+        <div>
+          <label for="email">Email Address *</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            aria-required="true"
+            aria-describedby="email-hint"
+            autocomplete="email"
+          >
+          <p id="email-hint">
+            <small>We will never share your email. See our <a href="/privacy">Privacy Policy</a>.</small>
+          </p>
+        </div>
+
+        <!-- Phone (optional) -->
+        <div>
+          <label for="phone">Phone Number</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            autocomplete="tel"
+            aria-describedby="phone-hint"
+          >
+          <p id="phone-hint"><small>Optional. Include country code for international numbers.</small></p>
+        </div>
+
+        <!-- Subject select -->
+        <div>
+          <label for="subject">Subject *</label>
+          <select
+            id="subject"
+            name="subject"
+            required
+            aria-required="true"
+          >
+            <option value="">-- Please select a subject --</option>
+            <option value="general">General Inquiry</option>
+            <option value="support">Technical Support</option>
+            <option value="billing">Billing Question</option>
+            <option value="partnership">Partnership Opportunity</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <!-- Message textarea -->
+        <div>
+          <label for="message">Message *</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="6"
+            required
+            aria-required="true"
+            aria-describedby="message-hint"
+            minlength="20"
+            maxlength="1000"
+          ></textarea>
+          <p id="message-hint"><small>Minimum 20 characters. Maximum 1000 characters.</small></p>
+        </div>
+
+        <!-- Checkbox with label -->
+        <div>
+          <input
+            type="checkbox"
+            id="newsletter"
+            name="newsletter"
+          >
+          <label for="newsletter">Subscribe to our newsletter for updates</label>
+        </div>
+
+        <!-- Buttons -->
+        <div>
+          <button type="submit">Send Message</button>
+          <button type="reset">Clear Form</button>
+        </div>
+
+      </form>
+    </section>
+
+    <section aria-labelledby="contact-info-heading">
+      <h2 id="contact-info-heading">Other Ways to Reach Us</h2>
+
+      <address>
+        <strong>Frontend Bootcamp HQ</strong><br>
+        123 Developer Street<br>
+        San Francisco, CA 94102<br>
+        United States<br>
+        <br>
+        Email: <a href="mailto:hello@bootcamp.example.com">hello@bootcamp.example.com</a><br>
+        Phone: <a href="tel:+14155550100">+1 (415) 555-0100</a>
+      </address>
+
+      <h3>Business Hours</h3>
+      <dl>
+        <dt>Monday – Friday</dt>
+        <dd>9:00 AM – 6:00 PM PST</dd>
+
+        <dt>Saturday</dt>
+        <dd>10:00 AM – 2:00 PM PST</dd>
+
+        <dt>Sunday</dt>
+        <dd>Closed</dd>
+      </dl>
+    </section>
+
+    <section aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+
+      <details>
+        <summary>How long does it take to get a response?</summary>
+        <p>We typically respond within 1–2 business days. For urgent matters, please call us directly.</p>
+      </details>
+
+      <details>
+        <summary>Do you offer phone support?</summary>
+        <p>Yes! Phone support is available Monday through Friday, 9 AM to 6 PM PST.</p>
+      </details>
+
+      <details>
+        <summary>Can I request a refund?</summary>
+        <p>Yes. We offer a 30-day money-back guarantee. Contact us with your order number and reason for the refund request.</p>
+      </details>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>
+      <small>
+        Copyright <time datetime="2025">2025</time> Frontend Bootcamp.
+        <a href="/privacy">Privacy Policy</a> |
+        <a href="/accessibility">Accessibility Statement</a>
+      </small>
+    </p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>localStorage Demo — Remember Me</title>
+</head>
+<body>
+
+  <header>
+    <h1>localStorage Demo</h1>
+    <p>This page remembers your name even after you close the browser.</p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2 id="greeting">Welcome!</h2>
+      <p id="greeting-message">We do not know your name yet. Enter it below.</p>
+    </section>
+
+    <section>
+      <h2>Save Your Name</h2>
+      <form id="name-form">
+        <label for="user-name">Your Name:</label>
+        <input
+          type="text"
+          id="user-name"
+          name="username"
+          placeholder="Enter your name"
+          required
+          autocomplete="name"
+        >
+        <button type="submit">Save My Name</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>What Is Stored in localStorage</h2>
+      <dl>
+        <dt>Key</dt>
+        <dd><code>username</code></dd>
+        <dt>Value</dt>
+        <dd id="stored-value">Nothing stored yet</dd>
+      </dl>
+      <button id="clear-btn" type="button">Clear Saved Name</button>
+    </section>
+
+    <section>
+      <h2>Session Notes (sessionStorage)</h2>
+      <p>These notes are saved for this browser session only. They will be cleared when you close this tab.</p>
+      <label for="session-notes">Notes:</label>
+      <textarea
+        id="session-notes"
+        rows="5"
+        cols="50"
+        placeholder="Type your notes here..."
+      ></textarea>
+      <p><small>Notes are saved automatically as you type.</small></p>
+    </section>
+
+    <section>
+      <h2>How localStorage Works</h2>
+      <dl>
+        <dt>localStorage.setItem(key, value)</dt>
+        <dd>Saves a value with the given key. Both must be strings.</dd>
+
+        <dt>localStorage.getItem(key)</dt>
+        <dd>Retrieves the value for the given key. Returns null if not found.</dd>
+
+        <dt>localStorage.removeItem(key)</dt>
+        <dd>Removes the item with the given key.</dd>
+
+        <dt>localStorage.clear()</dt>
+        <dd>Removes all items from localStorage for this domain.</dd>
+      </dl>
+    </section>
+
+  </main>
+
+  <script>
+    // On page load: restore saved data
+    window.addEventListener('load', function() {
+      const savedName = localStorage.getItem('username');
+      if (savedName) {
+        document.getElementById('greeting').textContent = 'Welcome back, ' + savedName + '!';
+        document.getElementById('greeting-message').textContent = 'We remembered you from your last visit.';
+        document.getElementById('stored-value').textContent = savedName;
+        document.getElementById('user-name').value = savedName;
+      }
+
+      const savedNotes = sessionStorage.getItem('session-notes');
+      if (savedNotes) {
+        document.getElementById('session-notes').value = savedNotes;
+      }
+    });
+
+    // Save name on form submit
+    document.getElementById('name-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('user-name').value.trim();
+      if (name) {
+        localStorage.setItem('username', name);
+        document.getElementById('greeting').textContent = 'Hello, ' + name + '!';
+        document.getElementById('greeting-message').textContent = 'Your name has been saved. Reload the page to see it remembered.';
+        document.getElementById('stored-value').textContent = name;
+      }
+    });
+
+    // Clear saved name
+    document.getElementById('clear-btn').addEventListener('click', function() {
+      localStorage.removeItem('username');
+      document.getElementById('greeting').textContent = 'Welcome!';
+      document.getElementById('greeting-message').textContent = 'We do not know your name yet.';
+      document.getElementById('stored-value').textContent = 'Nothing stored yet';
+      document.getElementById('user-name').value = '';
+    });
+
+    // Save session notes as user types
+    document.getElementById('session-notes').addEventListener('input', function() {
+      sessionStorage.setItem('session-notes', this.value);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Three Ways to Add CSS</title>
+
+  <!-- METHOD 2: Internal CSS -->
+  <style>
+    /* These styles apply to the whole page */
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      color: #2c3e50;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 10px;
+    }
+
+    .method-section {
+      background: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      border-left: 5px solid #3498db;
+    }
+
+    .method-label {
+      font-size: 0.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 8px;
+    }
+  </style>
+
+  <!-- METHOD 3: External CSS (linked file) -->
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <!-- Commented out since we are showing all methods in one file -->
+
+</head>
+<body>
+
+  <h1>Three Ways to Add CSS</h1>
+  <p>This page demonstrates all three methods of adding CSS to HTML.</p>
+
+  <!-- METHOD 1: Inline CSS -->
+  <div class="method-section">
+    <p class="method-label">Method 1: Inline CSS</p>
+    <h2 style="color: #e74c3c; margin: 0 0 10px 0;">Inline Styles</h2>
+    <p style="color: #666; background: #fff3cd; padding: 12px; border-radius: 4px;">
+      This paragraph has inline CSS applied directly via the <code>style</code> attribute.
+      Notice the yellow background and gray text.
+    </p>
+    <p style="font-size: 0.9rem; color: #888;">
+      <strong>Pros:</strong> Highest specificity, no extra files<br>
+      <strong>Cons:</strong> Hard to maintain, cannot reuse, mixes content with presentation
+    </p>
+  </div>
+
+  <!-- METHOD 2: Internal CSS (styles defined in head above) -->
+  <div class="method-section">
+    <p class="method-label">Method 2: Internal CSS</p>
+    <h2 style="margin: 0 0 10px 0;">Internal Styles</h2>
+    <p>
+      This section is styled by the <code>&lt;style&gt;</code> block in the
+      <code>&lt;head&gt;</code> of this document. The <code>.method-section</code>
+      class and <code>.method-label</code> class are defined there.
+    </p>
+    <p style="font-size: 0.9rem; color: #888;">
+      <strong>Pros:</strong> Applies to whole page, no extra HTTP request<br>
+      <strong>Cons:</strong> Cannot reuse across pages, page file gets large
+    </p>
+  </div>
+
+  <!-- METHOD 3: External CSS -->
+  <div class="method-section">
+    <p class="method-label">Method 3: External CSS (Recommended)</p>
+    <h2 style="margin: 0 0 10px 0;">External Stylesheet</h2>
+    <p>
+      In a real project, you would link an external <code>style.css</code> file:
+    </p>
+    <pre><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+    <p>
+      The CSS file contains all your styles, and every HTML page links to it.
+      When you update the CSS file, all pages update automatically.
+    </p>
+    <p style="font-size: 0.9rem; color: #888;">
+      <strong>Pros:</strong> Reusable, browser caches it, clean separation<br>
+      <strong>Cons:</strong> Extra HTTP request (negligible with HTTP/2)
+    </p>
+  </div>
+
+  <div class="method-section">
+    <p class="method-label">The Cascade Priority</p>
+    <h2 style="margin: 0 0 10px 0;">Which Wins?</h2>
+    <ol>
+      <li><strong>Inline styles</strong> — highest priority</li>
+      <li><strong>Internal styles</strong> — medium priority</li>
+      <li><strong>External styles</strong> — normal priority</li>
+      <li><strong>Browser defaults</strong> — lowest priority</li>
+    </ol>
+    <p>When multiple rules target the same element and property, the higher priority wins.</p>
+  </div>
+
+</body>
+</html>
