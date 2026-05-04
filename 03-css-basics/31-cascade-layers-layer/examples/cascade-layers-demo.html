@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cascade Layers Demo</title>
+  <style>
+    /* ══════════════════════════════════════
+       STEP 1: Define layer order (IMPORTANT!)
+       Later layers win over earlier ones.
+       Unlayered styles win over ALL layers.
+    ══════════════════════════════════════ */
+    @layer reset, base, components, utilities;
+
+    /* ══════════════════════════════════════
+       RESET LAYER — lowest priority
+    ══════════════════════════════════════ */
+    @layer reset {
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      a { text-decoration: none; }
+      ul { list-style: none; }
+      button { font-family: inherit; }
+    }
+
+    /* ══════════════════════════════════════
+       BASE LAYER — typography, body defaults
+    ══════════════════════════════════════ */
+    @layer base {
+      body {
+        font-family: sans-serif;
+        background: #f8f9fa;
+        color: #333;
+        padding: 2rem;
+        line-height: 1.6;
+      }
+
+      h1 { font-size: 1.75rem; margin-bottom: 2rem; }
+      h2 { font-size: 1.1rem; color: #555; margin: 2.5rem 0 1rem; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+      h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+      p  { color: #555; line-height: 1.6; }
+
+      a { color: #3498db; }
+    }
+
+    /* ══════════════════════════════════════
+       COMPONENTS LAYER — reusable UI pieces
+    ══════════════════════════════════════ */
+    @layer components {
+      .btn {
+        display: inline-block;
+        padding: 0.5rem 1.25rem;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: opacity 0.2s;
+      }
+
+      .btn:hover { opacity: 0.85; }
+
+      .btn-danger {
+        background: #e74c3c;
+      }
+
+      .btn-success {
+        background: #27ae60;
+      }
+
+      .card {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        margin-bottom: 1rem;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        background: #e8f4fd;
+        color: #3498db;
+      }
+    }
+
+    /* ══════════════════════════════════════
+       UTILITIES LAYER — highest layer priority
+    ══════════════════════════════════════ */
+    @layer utilities {
+      .hidden   { display: none; }
+      .sr-only  { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+      .text-red { color: #e74c3c; }
+      .text-green { color: #27ae60; }
+      .mt-4 { margin-top: 1rem; }
+      .mb-4 { margin-bottom: 1rem; }
+      .flex { display: flex; }
+      .gap-2 { gap: 0.5rem; }
+      .gap-4 { gap: 1rem; }
+      .flex-wrap { flex-wrap: wrap; }
+    }
+
+    /* ══════════════════════════════════════
+       UNLAYERED — wins over ALL layers
+    ══════════════════════════════════════ */
+    .override-example {
+      /* This is NOT in any layer, so it beats everything */
+      background: linear-gradient(135deg, #667eea, #764ba2) !important;
+      color: white;
+      border: none;
+    }
+
+    /* ══════════════════════════════════════
+       PRIORITY VISUALIZATION
+    ══════════════════════════════════════ */
+    .priority-bar {
+      display: flex;
+      border-radius: 8px;
+      overflow: hidden;
+      height: 50px;
+      margin-bottom: 0.5rem;
+    }
+
+    .priority-segment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: white;
+      flex: 1;
+    }
+
+    .seg-reset     { background: #95a5a6; }
+    .seg-base      { background: #3498db; }
+    .seg-components { background: #9b59b6; }
+    .seg-utilities { background: #27ae60; }
+    .seg-unlayered { background: #e74c3c; }
+
+    .arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #333;
+      margin-bottom: 0.25rem;
+    }
+
+    /* ══════════════════════════════════════
+       SPECIFICITY BATTLE DEMO
+    ══════════════════════════════════════ */
+    /* In components layer: .btn has background: blue */
+    /* In utilities layer: .text-red has color: red */
+    /* Utilities wins because it's a later layer */
+
+    /* This high-specificity rule is in components — it LOSES to utilities */
+    @layer components {
+      .specificity-test.specificity-test.specificity-test {
+        color: blue; /* high specificity but lower layer */
+      }
+    }
+
+    @layer utilities {
+      .text-red {
+        color: #e74c3c; /* lower specificity but higher layer — WINS */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Cascade Layers (@layer)</h1>
+
+  <!-- Priority visualization -->
+  <h2>Layer Priority — Later Layers Win</h2>
+  <div class="priority-bar">
+    <div class="priority-segment seg-reset">reset<br>(lowest)</div>
+    <div class="priority-segment seg-base">base</div>
+    <div class="priority-segment seg-components">components</div>
+    <div class="priority-segment seg-utilities">utilities</div>
+    <div class="priority-segment seg-unlayered">unlayered<br>(highest)</div>
+  </div>
+  <div class="arrow">→ priority increases →</div>
+  <p style="font-size:0.85rem; color:#666;">
+    Unlayered styles always beat all layers, regardless of specificity.
+  </p>
+
+  <!-- Layer order declaration -->
+  <h2>Layer Order Declaration</h2>
+  <div class="card">
+    <pre style="font-family:monospace; font-size:0.85rem; color:#333; line-height:1.8;">/* Define order at the top — this is critical */
+@layer reset, base, components, utilities;
+
+/* Then fill each layer */
+@layer reset    { /* CSS reset */ }
+@layer base     { /* body, typography */ }
+@layer components { /* buttons, cards */ }
+@layer utilities  { /* .hidden, .text-red */ }</pre>
+  </div>
+
+  <!-- Components from the layer -->
+  <h2>Components Layer — Buttons and Cards</h2>
+  <div class="flex gap-2 flex-wrap mb-4">
+    <button class="btn">Default Button</button>
+    <button class="btn btn-danger">Danger Button</button>
+    <button class="btn btn-success">Success Button</button>
+  </div>
+
+  <div class="card">
+    <h3>Card Component</h3>
+    <p>This card is defined in the <strong>components</strong> layer.</p>
+    <div class="mt-4">
+      <span class="badge">Badge</span>
+    </div>
+  </div>
+
+  <!-- Utilities override components -->
+  <h2>Utilities Override Components</h2>
+  <div class="card">
+    <p>Normal card text (from base layer)</p>
+    <p class="text-red">This text uses .text-red from utilities layer — overrides base layer color</p>
+    <p class="text-green">This text uses .text-green from utilities layer</p>
+  </div>
+
+  <!-- Specificity battle -->
+  <h2>Layers Beat Specificity</h2>
+  <div class="card">
+    <p class="specificity-test text-red">
+      This has both <code>.specificity-test</code> (high specificity, components layer)
+      and <code>.text-red</code> (low specificity, utilities layer).
+      The text is <strong>red</strong> because utilities layer wins over components layer,
+      even though .specificity-test has higher specificity.
+    </p>
+  </div>
+
+  <!-- Unlayered wins -->
+  <h2>Unlayered Styles Win Over All Layers</h2>
+  <div class="card override-example">
+    <h3>This card has .override-example</h3>
+    <p>The gradient background is set by an unlayered rule — it beats the white background from the components layer.</p>
+  </div>
+
+  <!-- When to use -->
+  <h2>When to Use Cascade Layers</h2>
+  <div class="card">
+    <ul style="list-style:disc; padding-left:1.5rem; font-size:0.9rem; color:#555; line-height:2;">
+      <li>Managing third-party CSS (put it in a layer so your styles win)</li>
+      <li>Large codebases with multiple teams</li>
+      <li>Design systems with base + component + utility layers</li>
+      <li>Avoiding specificity wars</li>
+    </ul>
+  </div>
+
+  <div class="card" style="border-color:#f39c12;">
+    <h3 style="color:#f39c12;">⚠️ Common Mistake</h3>
+    <p>Not defining layer order at the top. If you don't declare the order, layers are ordered by first appearance — which can be unpredictable.</p>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Grid Item Placement Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding: 2rem;
+    }
+
+    h1 { margin-bottom: 2rem; font-size: 1.75rem; }
+    h2 { margin: 2.5rem 0 0.75rem; font-size: 1.1rem; color: #555; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+
+    /* ── Base grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      background: #e8f4fd;
+      border: 2px solid #3498db;
+      border-radius: 8px;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .item {
+      background: #3498db;
+      color: white;
+      padding: 0.75rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 60px;
+    }
+
+    .item-auto { background: #aac8e4; color: #1a4a6e; }
+
+    /* ── grid-column / grid-row ── */
+    .span-full  { grid-column: 1 / -1; background: #e74c3c; }
+    .span-2     { grid-column: span 2; background: #27ae60; }
+    .span-3     { grid-column: span 3; background: #9b59b6; }
+    .col-2-4    { grid-column: 2 / 4;  background: #f39c12; }
+    .col-start2 { grid-column: 2 / span 2; background: #1abc9c; }
+
+    /* ── Row spanning ── */
+    .row-span-2 { grid-row: span 2; background: #e74c3c; }
+    .row-span-3 { grid-row: span 3; background: #9b59b6; }
+
+    /* ── grid-area shorthand ── */
+    .area-item {
+      grid-area: 1 / 1 / 3 / 3; /* row-start / col-start / row-end / col-end */
+      background: #e74c3c;
+    }
+
+    /* ── align-self / justify-self ── */
+    .align-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      background: #e8f4fd;
+      border: 2px solid #3498db;
+      border-radius: 8px;
+      padding: 0.75rem;
+    }
+
+    .align-cell {
+      background: #f0f0f0;
+      border: 1px dashed #aaa;
+      height: 100px;
+      border-radius: 4px;
+      display: grid; /* inner grid for the item */
+    }
+
+    .align-item {
+      background: #3498db;
+      color: white;
+      padding: 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-align: center;
+      width: 80px;
+    }
+
+    .as-start   { align-self: start;   justify-self: start; }
+    .as-center  { align-self: center;  justify-self: center; }
+    .as-end     { align-self: end;     justify-self: end; }
+    .as-stretch { align-self: stretch; justify-self: stretch; width: auto; }
+
+    /* ── Practical: Magazine layout ── */
+    .magazine {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 200px 150px 150px;
+      gap: 0.75rem;
+    }
+
+    .mag-item {
+      border-radius: 8px;
+      padding: 1rem;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .mag-item h3 { font-size: 1rem; margin-bottom: 0.25rem; }
+    .mag-item p  { font-size: 0.8rem; opacity: 0.85; }
+
+    .mag-featured {
+      grid-column: 1 / 3;
+      grid-row: 1 / 3;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .mag-featured h3 { font-size: 1.4rem; }
+
+    .mag-2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+    .mag-3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+    .mag-4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+    .mag-5 { background: linear-gradient(135deg, #fa709a, #fee140); }
+    .mag-6 { grid-column: 1 / -1; background: linear-gradient(135deg, #30cfd0, #330867); }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Grid — Item Placement</h1>
+
+  <!-- grid-column spanning -->
+  <h2>grid-column — Spanning Columns</h2>
+
+  <p style="font-size:0.85rem; color:#666; font-family:monospace; margin-bottom:0.5rem;">grid-column: 1 / -1 — span all columns</p>
+  <div class="grid">
+    <div class="item span-full">grid-column: 1 / -1 (full width)</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+  </div>
+
+  <p style="font-size:0.85rem; color:#666; font-family:monospace; margin-bottom:0.5rem;">grid-column: span 2 | span 3</p>
+  <div class="grid">
+    <div class="item span-2">span 2</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+    <div class="item span-3">span 3</div>
+    <div class="item item-auto">auto</div>
+  </div>
+
+  <p style="font-size:0.85rem; color:#666; font-family:monospace; margin-bottom:0.5rem;">grid-column: 2 / 4 (start at line 2, end at line 4)</p>
+  <div class="grid">
+    <div class="item item-auto">auto</div>
+    <div class="item col-2-4">col: 2 / 4</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+  </div>
+
+  <!-- grid-row spanning -->
+  <h2>grid-row — Spanning Rows</h2>
+
+  <p style="font-size:0.85rem; color:#666; font-family:monospace; margin-bottom:0.5rem;">grid-row: span 2 | span 3</p>
+  <div class="grid" style="grid-template-rows: repeat(3, 60px);">
+    <div class="item row-span-2">row-span: 2</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+    <div class="item row-span-3" style="grid-row: 1 / span 3;">row-span: 3</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+  </div>
+
+  <!-- grid-area shorthand -->
+  <h2>grid-area — row-start / col-start / row-end / col-end</h2>
+
+  <p style="font-size:0.85rem; color:#666; font-family:monospace; margin-bottom:0.5rem;">grid-area: 1 / 1 / 3 / 3 — spans rows 1–2 and columns 1–2</p>
+  <div class="grid" style="grid-template-rows: repeat(3, 60px);">
+    <div class="item area-item">1/1 → 3/3</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+    <div class="item item-auto">auto</div>
+  </div>
+
+  <!-- align-self / justify-self -->
+  <h2>align-self + justify-self — Position Within Cell</h2>
+
+  <div class="align-grid">
+    <div class="align-cell">
+      <div class="align-item as-start">start / start</div>
+    </div>
+    <div class="align-cell">
+      <div class="align-item as-center">center / center</div>
+    </div>
+    <div class="align-cell">
+      <div class="align-item as-end">end / end</div>
+    </div>
+    <div class="align-cell" style="grid-column: 1 / -1;">
+      <div class="align-item as-stretch">stretch / stretch (fills cell)</div>
+    </div>
+  </div>
+
+  <!-- Practical: Magazine layout -->
+  <h2>Practical: Magazine / Editorial Layout</h2>
+  <div class="magazine">
+    <div class="mag-item mag-featured">
+      <h3>Featured Story</h3>
+      <p>grid-column: 1 / 3 — grid-row: 1 / 3 — spans 2 columns and 2 rows</p>
+    </div>
+    <div class="mag-item mag-2">
+      <h3>Story 2</h3>
+      <p>Normal cell</p>
+    </div>
+    <div class="mag-item mag-3">
+      <h3>Story 3</h3>
+      <p>Normal cell</p>
+    </div>
+    <div class="mag-item mag-4">
+      <h3>Story 4</h3>
+      <p>Normal cell</p>
+    </div>
+    <div class="mag-item mag-5">
+      <h3>Story 5</h3>
+      <p>Normal cell</p>
+    </div>
+    <div class="mag-item mag-6">
+      <h3>Full-Width Banner</h3>
+      <p>grid-column: 1 / -1 — spans all 3 columns</p>
+    </div>
+  </div>
+
+</body>
+</html>

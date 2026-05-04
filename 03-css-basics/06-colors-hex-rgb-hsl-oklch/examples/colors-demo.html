@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Colors Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding: 2rem;
+    }
+
+    h1 { margin-bottom: 2rem; font-size: 1.75rem; }
+    h2 { margin: 2rem 0 1rem; font-size: 1.2rem; color: #555; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+
+    .swatch {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .swatch-color {
+      height: 80px;
+    }
+
+    .swatch-label {
+      background: white;
+      padding: 0.5rem;
+      font-size: 0.75rem;
+      font-family: monospace;
+    }
+
+    /* ── Named colors ── */
+    .named-tomato    { background: tomato; }
+    .named-steelblue { background: steelblue; }
+    .named-gold      { background: gold; }
+    .named-mediumseagreen { background: mediumseagreen; }
+
+    /* ── Hex colors ── */
+    .hex-blue   { background: #3498db; }
+    .hex-green  { background: #28a745; }
+    .hex-red    { background: #dc3545; }
+    .hex-alpha  { background: #3498dbcc; } /* with alpha */
+
+    /* ── RGB colors ── */
+    .rgb-blue   { background: rgb(52 152 219); }
+    .rgb-alpha  { background: rgb(52 152 219 / 60%); }
+
+    /* ── HSL colors ── */
+    .hsl-base   { background: hsl(204 70% 53%); }
+    .hsl-light  { background: hsl(204 70% 85%); }
+    .hsl-dark   { background: hsl(204 70% 25%); }
+
+    /* ── oklch colors ── */
+    .oklch-blue   { background: oklch(0.65 0.15 230); }
+    .oklch-green  { background: oklch(0.65 0.15 145); }
+    .oklch-red    { background: oklch(0.65 0.2 25); }
+
+    /* ── HSL Palette (same hue, vary lightness) ── */
+    .palette { display: flex; border-radius: 8px; overflow: hidden; }
+    .palette-swatch { flex: 1; height: 60px; }
+
+    /* ── Color wheel hues ── */
+    .hue-0   { background: hsl(0   70% 55%); }
+    .hue-30  { background: hsl(30  70% 55%); }
+    .hue-60  { background: hsl(60  70% 55%); }
+    .hue-120 { background: hsl(120 70% 40%); }
+    .hue-180 { background: hsl(180 70% 40%); }
+    .hue-240 { background: hsl(240 70% 55%); }
+    .hue-270 { background: hsl(270 70% 55%); }
+    .hue-300 { background: hsl(300 70% 55%); }
+
+    /* ── Transparency demo ── */
+    .transparency-demo {
+      display: flex;
+      gap: 0.5rem;
+      padding: 1rem;
+      background: repeating-linear-gradient(
+        45deg, #ccc 0px, #ccc 10px, white 10px, white 20px
+      );
+      border-radius: 8px;
+    }
+    .alpha-box {
+      width: 60px;
+      height: 60px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Colors — All Formats</h1>
+
+  <!-- Named Colors -->
+  <h2>Named Colors</h2>
+  <div class="grid">
+    <div class="swatch">
+      <div class="swatch-color named-tomato"></div>
+      <div class="swatch-label">color: tomato</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color named-steelblue"></div>
+      <div class="swatch-label">color: steelblue</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color named-gold"></div>
+      <div class="swatch-label">color: gold</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color named-mediumseagreen"></div>
+      <div class="swatch-label">color: mediumseagreen</div>
+    </div>
+  </div>
+
+  <!-- Hex Colors -->
+  <h2>Hex Colors</h2>
+  <div class="grid">
+    <div class="swatch">
+      <div class="swatch-color hex-blue"></div>
+      <div class="swatch-label">#3498db</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color hex-green"></div>
+      <div class="swatch-label">#28a745</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color hex-red"></div>
+      <div class="swatch-label">#dc3545</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color hex-alpha"></div>
+      <div class="swatch-label">#3498dbcc (80% alpha)</div>
+    </div>
+  </div>
+
+  <!-- RGB Colors -->
+  <h2>RGB Colors (modern syntax)</h2>
+  <div class="grid">
+    <div class="swatch">
+      <div class="swatch-color rgb-blue"></div>
+      <div class="swatch-label">rgb(52 152 219)</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color rgb-alpha"></div>
+      <div class="swatch-label">rgb(52 152 219 / 60%)</div>
+    </div>
+  </div>
+
+  <!-- HSL Colors -->
+  <h2>HSL Colors — Same Hue, Different Lightness</h2>
+  <div class="grid">
+    <div class="swatch">
+      <div class="swatch-color hsl-light"></div>
+      <div class="swatch-label">hsl(204 70% 85%) — light</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color hsl-base"></div>
+      <div class="swatch-label">hsl(204 70% 53%) — base</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color hsl-dark"></div>
+      <div class="swatch-label">hsl(204 70% 25%) — dark</div>
+    </div>
+  </div>
+
+  <!-- oklch Colors -->
+  <h2>oklch Colors (modern, perceptually uniform)</h2>
+  <div class="grid">
+    <div class="swatch">
+      <div class="swatch-color oklch-blue"></div>
+      <div class="swatch-label">oklch(0.65 0.15 230)</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color oklch-green"></div>
+      <div class="swatch-label">oklch(0.65 0.15 145)</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color oklch-red"></div>
+      <div class="swatch-label">oklch(0.65 0.2 25)</div>
+    </div>
+  </div>
+
+  <!-- HSL Palette -->
+  <h2>HSL Palette — Same Hue (204°), Varying Lightness</h2>
+  <div class="palette">
+    <div class="palette-swatch" style="background: hsl(204 70% 95%)" title="hsl(204 70% 95%)"></div>
+    <div class="palette-swatch" style="background: hsl(204 70% 85%)" title="hsl(204 70% 85%)"></div>
+    <div class="palette-swatch" style="background: hsl(204 70% 70%)" title="hsl(204 70% 70%)"></div>
+    <div class="palette-swatch" style="background: hsl(204 70% 53%)" title="hsl(204 70% 53%)"></div>
+    <div class="palette-swatch" style="background: hsl(204 70% 40%)" title="hsl(204 70% 40%)"></div>
+    <div class="palette-swatch" style="background: hsl(204 70% 25%)" title="hsl(204 70% 25%)"></div>
+    <div class="palette-swatch" style="background: hsl(204 70% 13%)" title="hsl(204 70% 13%)"></div>
+  </div>
+
+  <!-- Color Wheel -->
+  <h2>HSL Color Wheel — Hue Values</h2>
+  <div class="palette">
+    <div class="palette-swatch hue-0"   title="0° Red"></div>
+    <div class="palette-swatch hue-30"  title="30° Orange"></div>
+    <div class="palette-swatch hue-60"  title="60° Yellow"></div>
+    <div class="palette-swatch hue-120" title="120° Green"></div>
+    <div class="palette-swatch hue-180" title="180° Cyan"></div>
+    <div class="palette-swatch hue-240" title="240° Blue"></div>
+    <div class="palette-swatch hue-270" title="270° Purple"></div>
+    <div class="palette-swatch hue-300" title="300° Magenta"></div>
+  </div>
+
+  <!-- Transparency -->
+  <h2>Transparency (checkerboard = transparent)</h2>
+  <div class="transparency-demo">
+    <div class="alpha-box" style="background: rgb(52 152 219 / 100%)">100%</div>
+    <div class="alpha-box" style="background: rgb(52 152 219 / 75%)">75%</div>
+    <div class="alpha-box" style="background: rgb(52 152 219 / 50%)">50%</div>
+    <div class="alpha-box" style="background: rgb(52 152 219 / 25%)">25%</div>
+    <div class="alpha-box" style="background: rgb(52 152 219 / 10%)">10%</div>
+  </div>
+
+</body>
+</html>

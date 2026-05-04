@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Grid Template Areas Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding: 2rem;
+    }
+
+    h1 { margin-bottom: 2rem; font-size: 1.75rem; }
+    h2 { margin: 2.5rem 0 1rem; font-size: 1.1rem; color: #555; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+
+    .area-label {
+      font-size: 0.75rem;
+      font-family: monospace;
+      opacity: 0.8;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    /* ══════════════════════════════════════
+       1. CLASSIC PAGE LAYOUT
+    ══════════════════════════════════════ */
+    .classic-layout {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      grid-template-rows: 60px 1fr 50px;
+      grid-template-areas:
+        "header  header"
+        "sidebar main"
+        "footer  footer";
+      gap: 0.75rem;
+      min-height: 300px;
+    }
+
+    .classic-layout .header  { grid-area: header;  background: #2c3e50; color: white; }
+    .classic-layout .sidebar { grid-area: sidebar; background: #34495e; color: white; }
+    .classic-layout .main    { grid-area: main;    background: white; border: 1px solid #dee2e6; }
+    .classic-layout .footer  { grid-area: footer;  background: #2c3e50; color: white; }
+
+    .area-box {
+      padding: 1rem;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .area-box h3 { font-size: 0.9rem; margin-bottom: 0.25rem; }
+    .area-box p  { font-size: 0.8rem; opacity: 0.8; }
+
+    /* ══════════════════════════════════════
+       2. HOLY GRAIL LAYOUT
+    ══════════════════════════════════════ */
+    .holy-grail {
+      display: grid;
+      grid-template-columns: 160px 1fr 160px;
+      grid-template-rows: 60px 1fr 50px;
+      grid-template-areas:
+        "header  header  header"
+        "nav     main    aside"
+        "footer  footer  footer";
+      gap: 0.75rem;
+      min-height: 280px;
+    }
+
+    .holy-grail .header { grid-area: header;  background: #3498db; color: white; }
+    .holy-grail .nav    { grid-area: nav;     background: #2980b9; color: white; }
+    .holy-grail .main   { grid-area: main;    background: white; border: 1px solid #dee2e6; }
+    .holy-grail .aside  { grid-area: aside;   background: #2980b9; color: white; }
+    .holy-grail .footer { grid-area: footer;  background: #3498db; color: white; }
+
+    /* ══════════════════════════════════════
+       3. DASHBOARD LAYOUT
+    ══════════════════════════════════════ */
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      grid-template-rows: 60px 1fr;
+      grid-template-areas:
+        "sidebar header"
+        "sidebar main";
+      gap: 0.75rem;
+      min-height: 300px;
+    }
+
+    .dashboard-layout .sidebar { grid-area: sidebar; background: #1a1a2e; color: white; }
+    .dashboard-layout .header  { grid-area: header;  background: #16213e; color: white; }
+    .dashboard-layout .main    { grid-area: main;    background: white; border: 1px solid #dee2e6; }
+
+    /* ══════════════════════════════════════
+       4. BLOG LAYOUT (single column)
+    ══════════════════════════════════════ */
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "header"
+        "main"
+        "footer";
+      gap: 0.75rem;
+      max-width: 600px;
+    }
+
+    .blog-layout .header { grid-area: header; background: #9b59b6; color: white; }
+    .blog-layout .main   { grid-area: main;   background: white; border: 1px solid #dee2e6; min-height: 120px; }
+    .blog-layout .footer { grid-area: footer; background: #9b59b6; color: white; }
+
+    /* ══════════════════════════════════════
+       5. RESPONSIVE — areas change at breakpoint
+    ══════════════════════════════════════ */
+    .responsive-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "header"
+        "main"
+        "sidebar"
+        "footer";
+      gap: 0.75rem;
+      min-height: 200px;
+    }
+
+    @media (min-width: 640px) {
+      .responsive-layout {
+        grid-template-columns: 200px 1fr;
+        grid-template-areas:
+          "header  header"
+          "sidebar main"
+          "footer  footer";
+      }
+    }
+
+    .responsive-layout .header  { grid-area: header;  background: #27ae60; color: white; }
+    .responsive-layout .sidebar { grid-area: sidebar; background: #1a7a42; color: white; }
+    .responsive-layout .main    { grid-area: main;    background: white; border: 1px solid #dee2e6; }
+    .responsive-layout .footer  { grid-area: footer;  background: #27ae60; color: white; }
+
+    /* ══════════════════════════════════════
+       6. EMPTY CELLS with "."
+    ══════════════════════════════════════ */
+    .empty-cells {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-areas:
+        "a . c"
+        ". b .";
+      gap: 0.75rem;
+    }
+
+    .empty-cells .a { grid-area: a; background: #e74c3c; color: white; }
+    .empty-cells .b { grid-area: b; background: #e74c3c; color: white; }
+    .empty-cells .c { grid-area: c; background: #e74c3c; color: white; }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Grid — Template Areas</h1>
+
+  <!-- 1. Classic layout -->
+  <h2>1. Classic Page Layout</h2>
+  <pre style="background:#f0f0f0; padding:0.75rem; border-radius:6px; font-size:0.8rem; margin-bottom:1rem; overflow-x:auto;">grid-template-areas:
+  "header  header"
+  "sidebar main"
+  "footer  footer";</pre>
+  <div class="classic-layout">
+    <div class="area-box header"><span class="area-label">grid-area: header</span><h3>Header</h3></div>
+    <div class="area-box sidebar"><span class="area-label">grid-area: sidebar</span><h3>Sidebar</h3></div>
+    <div class="area-box main"><span class="area-label">grid-area: main</span><h3>Main Content</h3><p>The main content area fills the remaining space.</p></div>
+    <div class="area-box footer"><span class="area-label">grid-area: footer</span><h3>Footer</h3></div>
+  </div>
+
+  <!-- 2. Holy grail -->
+  <h2>2. Holy Grail Layout (header, nav, main, aside, footer)</h2>
+  <pre style="background:#f0f0f0; padding:0.75rem; border-radius:6px; font-size:0.8rem; margin-bottom:1rem; overflow-x:auto;">grid-template-areas:
+  "header  header  header"
+  "nav     main    aside"
+  "footer  footer  footer";</pre>
+  <div class="holy-grail">
+    <div class="area-box header"><span class="area-label">header</span></div>
+    <div class="area-box nav"><span class="area-label">nav</span></div>
+    <div class="area-box main"><span class="area-label">main</span></div>
+    <div class="area-box aside"><span class="area-label">aside</span></div>
+    <div class="area-box footer"><span class="area-label">footer</span></div>
+  </div>
+
+  <!-- 3. Dashboard -->
+  <h2>3. Dashboard Layout (persistent sidebar)</h2>
+  <pre style="background:#f0f0f0; padding:0.75rem; border-radius:6px; font-size:0.8rem; margin-bottom:1rem; overflow-x:auto;">grid-template-areas:
+  "sidebar header"
+  "sidebar main";</pre>
+  <div class="dashboard-layout">
+    <div class="area-box sidebar"><span class="area-label">sidebar</span><p>Spans both rows</p></div>
+    <div class="area-box header"><span class="area-label">header</span></div>
+    <div class="area-box main"><span class="area-label">main</span></div>
+  </div>
+
+  <!-- 4. Blog -->
+  <h2>4. Blog Layout (single column)</h2>
+  <pre style="background:#f0f0f0; padding:0.75rem; border-radius:6px; font-size:0.8rem; margin-bottom:1rem; overflow-x:auto;">grid-template-areas:
+  "header"
+  "main"
+  "footer";</pre>
+  <div class="blog-layout">
+    <div class="area-box header"><span class="area-label">header</span></div>
+    <div class="area-box main"><span class="area-label">main</span></div>
+    <div class="area-box footer"><span class="area-label">footer</span></div>
+  </div>
+
+  <!-- 5. Responsive -->
+  <h2>5. Responsive Layout — Areas Change at 640px</h2>
+  <p style="font-size:0.85rem; color:#666; margin-bottom:0.75rem;">Resize the window below 640px to see the layout switch to single column.</p>
+  <div class="responsive-layout">
+    <div class="area-box header"><span class="area-label">header</span></div>
+    <div class="area-box sidebar"><span class="area-label">sidebar</span></div>
+    <div class="area-box main"><span class="area-label">main</span></div>
+    <div class="area-box footer"><span class="area-label">footer</span></div>
+  </div>
+
+  <!-- 6. Empty cells -->
+  <h2>6. Empty Cells with "." (dot)</h2>
+  <pre style="background:#f0f0f0; padding:0.75rem; border-radius:6px; font-size:0.8rem; margin-bottom:1rem; overflow-x:auto;">grid-template-areas:
+  "a . c"
+  ". b .";</pre>
+  <div class="empty-cells">
+    <div class="area-box a"><span class="area-label">a</span></div>
+    <div class="area-box b"><span class="area-label">b</span></div>
+    <div class="area-box c"><span class="area-label">c</span></div>
+  </div>
+  <p style="font-size:0.85rem; color:#666; margin-top:0.5rem;">
+    The <code>.</code> in the template creates an empty cell — no element is placed there.
+  </p>
+
+</body>
+</html>

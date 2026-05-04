@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Units Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding: 2rem;
+    }
+
+    h1 { margin-bottom: 2rem; font-size: 1.75rem; }
+    h2 { margin: 2rem 0 1rem; font-size: 1.1rem; color: #555; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+
+    .demo-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .bar {
+      background: #3498db;
+      color: white;
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    /* ── px — fixed ── */
+    .px-100  { width: 100px; }
+    .px-200  { width: 200px; }
+    .px-300  { width: 300px; }
+
+    /* ── % — relative to parent ── */
+    .pct-25  { width: 25%; background: #9b59b6; }
+    .pct-50  { width: 50%; background: #9b59b6; }
+    .pct-75  { width: 75%; background: #9b59b6; }
+
+    /* ── rem — relative to root (16px) ── */
+    .rem-1   { width: 1rem;   background: #27ae60; }   /* 16px */
+    .rem-2   { width: 2rem;   background: #27ae60; }   /* 32px */
+    .rem-4   { width: 4rem;   background: #27ae60; }   /* 64px */
+    .rem-8   { width: 8rem;   background: #27ae60; }   /* 128px */
+    .rem-16  { width: 16rem;  background: #27ae60; }   /* 256px */
+
+    /* ── em — relative to parent font-size ── */
+    .em-parent {
+      font-size: 20px;
+      background: #fff3cd;
+      padding: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ffc107;
+    }
+    .em-1  { width: 1em;  background: #e67e22; }  /* 20px */
+    .em-2  { width: 2em;  background: #e67e22; }  /* 40px */
+    .em-5  { width: 5em;  background: #e67e22; }  /* 100px */
+    .em-10 { width: 10em; background: #e67e22; }  /* 200px */
+
+    /* ── vw / vh ── */
+    .vw-25  { width: 25vw;  background: #e74c3c; }
+    .vw-50  { width: 50vw;  background: #e74c3c; }
+    .vw-75  { width: 75vw;  background: #e74c3c; }
+
+    /* ── ch — width of "0" character ── */
+    .ch-box {
+      max-width: 65ch;
+      background: white;
+      border: 2px solid #3498db;
+      padding: 1rem;
+      border-radius: 6px;
+      line-height: 1.6;
+    }
+
+    /* ── clamp() ── */
+    .clamp-font {
+      font-size: clamp(1rem, 3vw, 2rem);
+      background: white;
+      border: 2px solid #9b59b6;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+
+    .clamp-width {
+      width: clamp(200px, 50%, 600px);
+      background: #9b59b6;
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+    }
+
+    /* ── Font size comparison ── */
+    .font-comparison p { margin-bottom: 0.5rem; }
+    .font-px   { font-size: 16px; }
+    .font-rem  { font-size: 1rem; }
+    .font-em   { font-size: 1em; }
+
+    /* ── rem conversion table ── */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    th, td {
+      padding: 0.6rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #dee2e6;
+      font-size: 0.9rem;
+    }
+    th { background: #3498db; color: white; }
+    tr:last-child td { border-bottom: none; }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Units Demo</h1>
+
+  <!-- px -->
+  <h2>px — Fixed pixels (not responsive)</h2>
+  <div class="demo-row">
+    <div class="bar px-100">width: 100px</div>
+    <div class="bar px-200">width: 200px</div>
+    <div class="bar px-300">width: 300px</div>
+  </div>
+
+  <!-- % -->
+  <h2>% — Relative to parent width</h2>
+  <div class="demo-row">
+    <div class="bar pct-25">width: 25%</div>
+    <div class="bar pct-50">width: 50%</div>
+    <div class="bar pct-75">width: 75%</div>
+  </div>
+
+  <!-- rem -->
+  <h2>rem — Relative to root font-size (16px default)</h2>
+  <div class="demo-row">
+    <div class="bar rem-1">width: 1rem = 16px</div>
+    <div class="bar rem-2">width: 2rem = 32px</div>
+    <div class="bar rem-4">width: 4rem = 64px</div>
+    <div class="bar rem-8">width: 8rem = 128px</div>
+    <div class="bar rem-16">width: 16rem = 256px</div>
+  </div>
+
+  <!-- em -->
+  <h2>em — Relative to parent font-size (parent = 20px here)</h2>
+  <div class="em-parent">
+    <p style="margin-bottom:0.5rem; font-size:0.85rem;">Parent font-size: 20px</p>
+    <div class="demo-row">
+      <div class="bar em-1">width: 1em = 20px</div>
+      <div class="bar em-2">width: 2em = 40px</div>
+      <div class="bar em-5">width: 5em = 100px</div>
+      <div class="bar em-10">width: 10em = 200px</div>
+    </div>
+  </div>
+
+  <!-- vw -->
+  <h2>vw — Relative to viewport width (resize the window!)</h2>
+  <div class="demo-row">
+    <div class="bar vw-25">width: 25vw</div>
+    <div class="bar vw-50">width: 50vw</div>
+    <div class="bar vw-75">width: 75vw</div>
+  </div>
+
+  <!-- ch -->
+  <h2>ch — Width of "0" character (great for readable text)</h2>
+  <div class="ch-box">
+    <strong>max-width: 65ch</strong> — This box is limited to 65 characters wide,
+    which is the ideal line length for comfortable reading. Notice how the text
+    wraps naturally and stays easy to read without lines getting too long.
+  </div>
+
+  <!-- clamp -->
+  <h2>clamp(min, preferred, max) — Fluid sizing</h2>
+  <div class="clamp-font">
+    <strong>font-size: clamp(1rem, 3vw, 2rem)</strong><br>
+    This text grows with the viewport but never goes below 1rem or above 2rem.
+    Resize the window to see it change!
+  </div>
+  <br>
+  <div class="clamp-width">
+    width: clamp(200px, 50%, 600px) — never smaller than 200px, never larger than 600px
+  </div>
+
+  <!-- rem conversion table -->
+  <h2>rem Conversion Table (base 16px)</h2>
+  <table>
+    <thead>
+      <tr><th>rem</th><th>px</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0.75rem</td><td>12px</td></tr>
+      <tr><td>0.875rem</td><td>14px</td></tr>
+      <tr><td>1rem</td><td>16px</td></tr>
+      <tr><td>1.125rem</td><td>18px</td></tr>
+      <tr><td>1.25rem</td><td>20px</td></tr>
+      <tr><td>1.5rem</td><td>24px</td></tr>
+      <tr><td>2rem</td><td>32px</td></tr>
+      <tr><td>3rem</td><td>48px</td></tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

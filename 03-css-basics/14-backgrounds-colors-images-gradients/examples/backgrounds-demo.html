@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Backgrounds Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding: 2rem;
+    }
+
+    h1 { margin-bottom: 2rem; font-size: 1.75rem; }
+    h2 { margin: 2rem 0 1rem; font-size: 1.1rem; color: #555; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .card-bg {
+      height: 120px;
+    }
+
+    .card-label {
+      background: white;
+      padding: 0.6rem 0.75rem;
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: #333;
+    }
+
+    /* ── Solid colors ── */
+    .bg-hex    { background-color: #3498db; }
+    .bg-hsl    { background-color: hsl(204 70% 53%); }
+    .bg-rgb    { background-color: rgb(52 152 219 / 70%); }
+
+    /* ── Linear gradients ── */
+    .grad-lr   { background: linear-gradient(to right, #3498db, #9b59b6); }
+    .grad-tb   { background: linear-gradient(to bottom, #f39c12, #e74c3c); }
+    .grad-diag { background: linear-gradient(135deg, #667eea, #764ba2); }
+    .grad-3    { background: linear-gradient(to right, #f093fb, #f5576c, #4facfe); }
+
+    /* ── Radial gradients ── */
+    .grad-radial-circle { background: radial-gradient(circle, #3498db, #1a1a2e); }
+    .grad-radial-ellipse { background: radial-gradient(ellipse at top, #e96c6c, #1a1a2e); }
+
+    /* ── Conic gradient ── */
+    .grad-conic { background: conic-gradient(from 0deg, red, yellow, green, cyan, blue, magenta, red); }
+    .grad-conic-pie {
+      background: conic-gradient(
+        #3498db 0deg 120deg,
+        #e74c3c 120deg 240deg,
+        #27ae60 240deg 360deg
+      );
+      border-radius: 50%;
+    }
+
+    /* ── Repeating gradient ── */
+    .grad-repeat {
+      background: repeating-linear-gradient(
+        45deg,
+        #f0f0f0 0px, #f0f0f0 10px,
+        white 10px, white 20px
+      );
+    }
+
+    .grad-repeat-color {
+      background: repeating-linear-gradient(
+        90deg,
+        #3498db 0px, #3498db 20px,
+        #9b59b6 20px, #9b59b6 40px
+      );
+    }
+
+    /* ── background-size ── */
+    .bg-size-cover {
+      background: url('https://picsum.photos/seed/cover/400/200') center/cover no-repeat;
+    }
+
+    .bg-size-contain {
+      background: #1a1a2e url('https://picsum.photos/seed/contain/400/200') center/contain no-repeat;
+    }
+
+    /* ── Hero pattern: image + overlay ── */
+    .hero {
+      background:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url('https://picsum.photos/seed/hero/800/300') center/cover no-repeat;
+      color: white;
+      padding: 3rem 2rem;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero h3 { font-size: 2rem; margin-bottom: 0.5rem; }
+    .hero p  { font-size: 1.1rem; opacity: 0.9; }
+
+    /* ── Multiple backgrounds ── */
+    .multi-bg {
+      background:
+        radial-gradient(circle at 20% 50%, rgba(52,152,219,0.4) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(155,89,182,0.4) 0%, transparent 50%),
+        #1a1a2e;
+      height: 120px;
+      border-radius: 10px;
+    }
+
+    /* ── background-clip: text ── */
+    .clip-text {
+      background: linear-gradient(135deg, #f093fb, #f5576c, #4facfe);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    /* ── background-position ── */
+    .pos-demo {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+    }
+
+    .pos-box {
+      height: 80px;
+      background: #3498db url('https://picsum.photos/seed/pos/60/60') no-repeat;
+      background-size: 40px 40px;
+      border-radius: 6px;
+      display: flex;
+      align-items: flex-end;
+      padding: 0.25rem 0.5rem;
+    }
+
+    .pos-box span { font-size: 0.7rem; color: white; background: rgba(0,0,0,0.5); padding: 1px 4px; border-radius: 3px; }
+
+    .pos-tl { background-position: top left; }
+    .pos-tc { background-position: top center; }
+    .pos-tr { background-position: top right; }
+    .pos-cl { background-position: center left; }
+    .pos-cc { background-position: center center; }
+    .pos-cr { background-position: center right; }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Backgrounds</h1>
+
+  <!-- Solid colors -->
+  <h2>Solid Background Colors</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="card-bg bg-hex"></div>
+      <div class="card-label">background-color: #3498db</div>
+    </div>
+    <div class="card">
+      <div class="card-bg bg-hsl"></div>
+      <div class="card-label">background-color: hsl(204 70% 53%)</div>
+    </div>
+    <div class="card">
+      <div class="card-bg bg-rgb"></div>
+      <div class="card-label">background-color: rgb(52 152 219 / 70%)</div>
+    </div>
+  </div>
+
+  <!-- Linear gradients -->
+  <h2>Linear Gradients</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="card-bg grad-lr"></div>
+      <div class="card-label">linear-gradient(to right, #3498db, #9b59b6)</div>
+    </div>
+    <div class="card">
+      <div class="card-bg grad-tb"></div>
+      <div class="card-label">linear-gradient(to bottom, #f39c12, #e74c3c)</div>
+    </div>
+    <div class="card">
+      <div class="card-bg grad-diag"></div>
+      <div class="card-label">linear-gradient(135deg, #667eea, #764ba2)</div>
+    </div>
+    <div class="card">
+      <div class="card-bg grad-3"></div>
+      <div class="card-label">3-stop gradient</div>
+    </div>
+  </div>
+
+  <!-- Radial gradients -->
+  <h2>Radial Gradients</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="card-bg grad-radial-circle"></div>
+      <div class="card-label">radial-gradient(circle, ...)</div>
+    </div>
+    <div class="card">
+      <div class="card-bg grad-radial-ellipse"></div>
+      <div class="card-label">radial-gradient(ellipse at top, ...)</div>
+    </div>
+  </div>
+
+  <!-- Conic gradients -->
+  <h2>Conic Gradients</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="card-bg grad-conic"></div>
+      <div class="card-label">conic-gradient(color wheel)</div>
+    </div>
+    <div class="card" style="display:flex; align-items:center; justify-content:center; padding:1rem; background:white;">
+      <div style="width:100px; height:100px;" class="grad-conic-pie"></div>
+    </div>
+  </div>
+
+  <!-- Repeating gradients -->
+  <h2>Repeating Gradients</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="card-bg grad-repeat"></div>
+      <div class="card-label">repeating-linear-gradient(45deg, ...)</div>
+    </div>
+    <div class="card">
+      <div class="card-bg grad-repeat-color"></div>
+      <div class="card-label">repeating-linear-gradient(90deg, stripes)</div>
+    </div>
+  </div>
+
+  <!-- background-size -->
+  <h2>background-size: cover vs contain</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="card-bg bg-size-cover"></div>
+      <div class="card-label">background-size: cover (fills, may crop)</div>
+    </div>
+    <div class="card">
+      <div class="card-bg bg-size-contain"></div>
+      <div class="card-label">background-size: contain (fits, may show bg-color)</div>
+    </div>
+  </div>
+
+  <!-- Multiple backgrounds -->
+  <h2>Multiple Backgrounds (layered)</h2>
+  <div class="multi-bg"></div>
+  <p style="font-size:0.8rem; color:#666; margin-top:0.5rem; font-family:monospace;">
+    background: radial-gradient(blue glow), radial-gradient(purple glow), #1a1a2e
+  </p>
+
+  <!-- Hero pattern -->
+  <h2>Hero Pattern — Image + Dark Overlay</h2>
+  <div class="hero">
+    <h3>Welcome to My Site</h3>
+    <p>Image with a semi-transparent gradient overlay for readable text</p>
+  </div>
+  <p style="font-size:0.8rem; color:#666; font-family:monospace;">
+    background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(...) center/cover
+  </p>
+
+  <!-- background-clip: text -->
+  <h2>background-clip: text — Gradient Text</h2>
+  <div style="background:white; padding:1.5rem; border-radius:8px; border:2px solid #dee2e6;">
+    <div class="clip-text">Gradient Text</div>
+  </div>
+
+</body>
+</html>

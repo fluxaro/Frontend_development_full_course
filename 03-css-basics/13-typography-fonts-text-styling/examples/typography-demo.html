@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typography Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding: 2rem;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    h1 { margin-bottom: 2rem; font-size: 1.75rem; }
+    h2 { margin: 2rem 0 1rem; font-size: 1.1rem; color: #555; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+
+    .demo-area {
+      background: white;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .note {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+      font-family: monospace;
+    }
+
+    /* ── Font families ── */
+    .font-sans   { font-family: 'Inter', sans-serif; }
+    .font-serif  { font-family: 'Merriweather', serif; }
+    .font-mono   { font-family: 'Courier New', monospace; }
+
+    /* ── Font sizes ── */
+    .size-sm   { font-size: 0.875rem; }
+    .size-base { font-size: 1rem; }
+    .size-lg   { font-size: 1.25rem; }
+    .size-xl   { font-size: 1.5rem; }
+    .size-2xl  { font-size: 2rem; }
+    .size-3xl  { font-size: 3rem; }
+
+    /* ── Font weights ── */
+    .weight-100 { font-weight: 100; }
+    .weight-400 { font-weight: 400; }
+    .weight-600 { font-weight: 600; }
+    .weight-700 { font-weight: 700; }
+    .weight-900 { font-weight: 900; }
+
+    /* ── Line height ── */
+    .lh-tight  { line-height: 1.1; }
+    .lh-normal { line-height: 1.5; }
+    .lh-loose  { line-height: 2; }
+
+    .lh-box {
+      background: #e8f4fd;
+      border-left: 4px solid #3498db;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.75rem;
+      max-width: 400px;
+    }
+
+    /* ── Letter spacing ── */
+    .ls-tight  { letter-spacing: -0.05em; }
+    .ls-normal { letter-spacing: 0; }
+    .ls-wide   { letter-spacing: 0.1em; }
+    .ls-wider  { letter-spacing: 0.2em; }
+
+    /* ── Text alignment ── */
+    .text-left    { text-align: left; }
+    .text-center  { text-align: center; }
+    .text-right   { text-align: right; }
+    .text-justify { text-align: justify; }
+
+    .align-box {
+      background: #f0f0f0;
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── Text decoration ── */
+    .deco-none      { text-decoration: none; color: #3498db; }
+    .deco-underline { text-decoration: underline; }
+    .deco-strike    { text-decoration: line-through; }
+    .deco-overline  { text-decoration: overline; }
+
+    /* ── Text transform ── */
+    .tt-upper { text-transform: uppercase; }
+    .tt-lower { text-transform: lowercase; }
+    .tt-cap   { text-transform: capitalize; }
+
+    /* ── Truncation ── */
+    .truncate {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 300px;
+      background: #fff3cd;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+
+    .clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      max-width: 400px;
+      background: #d5f5e3;
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      line-height: 1.6;
+    }
+
+    /* ── Readable article ── */
+    .article {
+      max-width: 65ch;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      border: 1px solid #dee2e6;
+    }
+
+    .article h3 {
+      font-size: 1.5rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .article p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    /* ── Type scale ── */
+    .type-scale p { margin-bottom: 0.25rem; }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Typography</h1>
+
+  <!-- Font families -->
+  <h2>Font Families</h2>
+  <div class="demo-area">
+    <p class="font-sans" style="margin-bottom:0.5rem;">Sans-serif: 'Inter' — Clean, modern, great for UI</p>
+    <p class="font-serif" style="margin-bottom:0.5rem;">Serif: 'Merriweather' — Classic, great for long-form reading</p>
+    <p class="font-mono">Monospace: 'Courier New' — Code, terminals, tabular data</p>
+  </div>
+
+  <!-- Font sizes -->
+  <h2>Font Sizes (rem)</h2>
+  <div class="demo-area type-scale">
+    <p class="size-sm">0.875rem — Small text, captions</p>
+    <p class="size-base">1rem — Body text (default)</p>
+    <p class="size-lg">1.25rem — Large body / subheading</p>
+    <p class="size-xl">1.5rem — Heading level 3</p>
+    <p class="size-2xl">2rem — Heading level 2</p>
+    <p class="size-3xl">3rem — Hero heading</p>
+  </div>
+
+  <!-- Font weights -->
+  <h2>Font Weights</h2>
+  <div class="demo-area">
+    <p class="weight-100" style="margin-bottom:0.25rem;">font-weight: 100 — Thin</p>
+    <p class="weight-400" style="margin-bottom:0.25rem;">font-weight: 400 — Regular (default)</p>
+    <p class="weight-600" style="margin-bottom:0.25rem;">font-weight: 600 — Semi-bold</p>
+    <p class="weight-700" style="margin-bottom:0.25rem;">font-weight: 700 — Bold</p>
+    <p class="weight-900">font-weight: 900 — Black</p>
+  </div>
+
+  <!-- Line height -->
+  <h2>Line Height</h2>
+  <div class="lh-box lh-tight">
+    <strong>line-height: 1.1 (tight)</strong><br>
+    Good for large headings. Too tight for body text — lines feel cramped and hard to read.
+  </div>
+  <div class="lh-box lh-normal">
+    <strong>line-height: 1.5 (normal)</strong><br>
+    The sweet spot for body text. Comfortable reading experience without too much space between lines.
+  </div>
+  <div class="lh-box lh-loose">
+    <strong>line-height: 2 (loose)</strong><br>
+    Very airy. Can work for short UI text but feels too spread out for paragraphs.
+  </div>
+
+  <!-- Letter spacing -->
+  <h2>Letter Spacing</h2>
+  <div class="demo-area">
+    <p class="ls-tight"  style="margin-bottom:0.5rem;">letter-spacing: -0.05em — Tight (good for large headings)</p>
+    <p class="ls-normal" style="margin-bottom:0.5rem;">letter-spacing: 0 — Normal (default)</p>
+    <p class="ls-wide"   style="margin-bottom:0.5rem;">letter-spacing: 0.1em — Wide</p>
+    <p class="ls-wider tt-upper">letter-spacing: 0.2em + uppercase — Label style</p>
+  </div>
+
+  <!-- Text alignment -->
+  <h2>Text Alignment</h2>
+  <div class="align-box text-left">text-align: left — Default, best for most text</div>
+  <div class="align-box text-center">text-align: center — Good for headings and short text</div>
+  <div class="align-box text-right">text-align: right — Useful for numbers and RTL</div>
+  <div class="align-box text-justify">text-align: justify — Stretches text to fill the line. Can create awkward spacing in narrow containers.</div>
+
+  <!-- Text decoration -->
+  <h2>Text Decoration</h2>
+  <div class="demo-area">
+    <p style="margin-bottom:0.5rem;"><a class="deco-none" href="#">text-decoration: none — removes underline from links</a></p>
+    <p class="deco-underline" style="margin-bottom:0.5rem;">text-decoration: underline</p>
+    <p class="deco-strike" style="margin-bottom:0.5rem;">text-decoration: line-through — strikethrough</p>
+    <p class="deco-overline">text-decoration: overline</p>
+  </div>
+
+  <!-- Text transform -->
+  <h2>Text Transform</h2>
+  <div class="demo-area">
+    <p class="tt-upper" style="margin-bottom:0.5rem;">text-transform: uppercase — great for labels and nav</p>
+    <p class="tt-lower" style="margin-bottom:0.5rem;">TEXT-TRANSFORM: LOWERCASE</p>
+    <p class="tt-cap">text-transform: capitalize — every word starts with a capital</p>
+  </div>
+
+  <!-- Truncation -->
+  <h2>Text Truncation</h2>
+  <div class="truncate">
+    Single-line truncation: This is a very long text that will be cut off with an ellipsis when it overflows the container.
+  </div>
+  <br>
+  <div class="clamp-3">
+    Multi-line clamp (3 lines): This paragraph will be clamped to exactly three lines of text. Any content beyond the third line will be hidden and an ellipsis will appear at the end. This is very useful for card components where you want consistent heights.
+  </div>
+
+  <!-- Readable article -->
+  <h2>Readable Article — max-width: 65ch</h2>
+  <div class="article">
+    <h3>The Ideal Reading Width</h3>
+    <p>
+      Using <code>max-width: 65ch</code> limits the line length to approximately 65 characters,
+      which research shows is the optimal range for comfortable reading. Lines that are too long
+      make it hard for the eye to track back to the start of the next line.
+    </p>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Animations & Keyframes Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #1a1a2e;
+      color: #e2e8f0;
+      padding: 2rem;
+    }
+
+    h1 { margin-bottom: 2rem; font-size: 1.75rem; }
+    h2 { margin: 2.5rem 0 1rem; font-size: 1.1rem; color: #94a3b8; border-bottom: 2px solid #334155; padding-bottom: 0.5rem; }
+
+    .grid { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; margin-bottom: 0.5rem; }
+    .note { font-size: 0.8rem; color: #64748b; margin-bottom: 1.5rem; font-family: monospace; }
+
+    /* ══════════════════════════════════════
+       KEYFRAME DEFINITIONS
+    ══════════════════════════════════════ */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-30px); opacity: 0; }
+      to   { transform: translateY(0);     opacity: 1; }
+    }
+
+    @keyframes slideLeft {
+      from { transform: translateX(30px); opacity: 0; }
+      to   { transform: translateX(0);    opacity: 1; }
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.15); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); animation-timing-function: ease-in; }
+      50%       { transform: translateY(-30px); animation-timing-function: ease-out; }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%       { transform: translateX(-10px); }
+      40%       { transform: translateX(10px); }
+      60%       { transform: translateX(-6px); }
+      80%       { transform: translateX(6px); }
+    }
+
+    @keyframes ping {
+      0%   { transform: scale(1);   opacity: 1; }
+      75%, 100% { transform: scale(2); opacity: 0; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-15px); }
+    }
+
+    @keyframes colorCycle {
+      0%   { background: #3498db; }
+      25%  { background: #9b59b6; }
+      50%  { background: #e74c3c; }
+      75%  { background: #f39c12; }
+      100% { background: #3498db; }
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to   { width: 100%; }
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: transparent; }
+      50%       { border-color: #3498db; }
+    }
+
+    @keyframes progressFill {
+      from { width: 0%; }
+      to   { width: 80%; }
+    }
+
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ══════════════════════════════════════
+       DEMO BOXES
+    ══════════════════════════════════════ */
+    .demo-box {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: bold;
+      text-align: center;
+      color: white;
+    }
+
+    .anim-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .anim-label {
+      font-size: 0.7rem;
+      font-family: monospace;
+      color: #64748b;
+      text-align: center;
+    }
+
+    /* ── Entrance animations ── */
+    .fade-in   { background: #3498db; animation: fadeIn  0.8s ease forwards; }
+    .slide-up  { background: #27ae60; animation: slideUp 0.8s ease forwards; }
+    .slide-down { background: #9b59b6; animation: slideDown 0.8s ease forwards; }
+    .slide-left { background: #e74c3c; animation: slideLeft 0.8s ease forwards; }
+
+    /* ── Looping animations ── */
+    .spin-box    { background: #3498db; animation: spin       1.5s linear infinite; }
+    .pulse-box   { background: #e74c3c; animation: pulse      1.5s ease-in-out infinite; }
+    .bounce-box  { background: #f39c12; animation: bounce     1s ease infinite; }
+    .float-box   { background: #9b59b6; animation: float      3s ease-in-out infinite; }
+    .color-box   { background: #3498db; animation: colorCycle 4s linear infinite; }
+
+    /* ── Attention seekers ── */
+    .shake-box   { background: #e74c3c; animation: shake 0.6s ease; }
+    .shake-box:hover { animation: shake 0.6s ease; }
+
+    /* ── Ping effect ── */
+    .ping-wrapper {
+      position: relative;
+      width: 40px;
+      height: 40px;
+    }
+
+    .ping-dot {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #3498db;
+    }
+
+    .ping-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #3498db;
+      animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    /* ── Typing effect ── */
+    .typing-demo {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      display: inline-block;
+    }
+
+    .typing-text {
+      font-family: monospace;
+      font-size: 1.1rem;
+      color: #3498db;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid #3498db;
+      width: 0;
+      animation:
+        typing 3s steps(30) 0.5s forwards,
+        blink  0.75s step-end infinite;
+    }
+
+    /* ── Progress bar ── */
+    .progress-track {
+      background: #334155;
+      border-radius: 9999px;
+      height: 12px;
+      overflow: hidden;
+      max-width: 400px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(to right, #3498db, #9b59b6);
+      border-radius: 9999px;
+      animation: progressFill 2s ease-out 0.5s forwards;
+      width: 0;
+    }
+
+    /* ── Gradient animation ── */
+    .gradient-box {
+      background: linear-gradient(270deg, #3498db, #9b59b6, #e74c3c, #f39c12);
+      background-size: 400% 400%;
+      animation: gradientShift 6s ease infinite;
+      border-radius: 10px;
+      padding: 1.5rem 2rem;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* ── Stagger ── */
+    .stagger-grid {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .stagger-item {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      background: #3498db;
+      animation: slideUp 0.5s ease both;
+    }
+
+    .stagger-item:nth-child(1) { animation-delay: 0s;    background: #3498db; }
+    .stagger-item:nth-child(2) { animation-delay: 0.1s;  background: #9b59b6; }
+    .stagger-item:nth-child(3) { animation-delay: 0.2s;  background: #e74c3c; }
+    .stagger-item:nth-child(4) { animation-delay: 0.3s;  background: #f39c12; }
+    .stagger-item:nth-child(5) { animation-delay: 0.4s;  background: #27ae60; }
+
+    /* ── Loading spinner ── */
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #334155;
+      border-top-color: #3498db;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    /* ══════════════════════════════════════
+       REDUCED MOTION
+    ══════════════════════════════════════ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Animations & Keyframes</h1>
+
+  <!-- Entrance animations -->
+  <h2>Entrance Animations — animation-fill-mode: forwards</h2>
+  <div class="grid">
+    <div class="anim-item"><div class="demo-box fade-in">fadeIn</div><div class="anim-label">fadeIn</div></div>
+    <div class="anim-item"><div class="demo-box slide-up">slideUp</div><div class="anim-label">slideUp</div></div>
+    <div class="anim-item"><div class="demo-box slide-down">slideDown</div><div class="anim-label">slideDown</div></div>
+    <div class="anim-item"><div class="demo-box slide-left">slideLeft</div><div class="anim-label">slideLeft</div></div>
+  </div>
+
+  <!-- Looping animations -->
+  <h2>Looping Animations — animation-iteration-count: infinite</h2>
+  <div class="grid">
+    <div class="anim-item"><div class="demo-box spin-box">spin</div><div class="anim-label">spin 1.5s linear</div></div>
+    <div class="anim-item"><div class="demo-box pulse-box">pulse</div><div class="anim-label">pulse 1.5s ease</div></div>
+    <div class="anim-item"><div class="demo-box bounce-box">bounce</div><div class="anim-label">bounce 1s ease</div></div>
+    <div class="anim-item"><div class="demo-box float-box">float</div><div class="anim-label">float 3s ease</div></div>
+    <div class="anim-item"><div class="demo-box color-box">colors</div><div class="anim-label">colorCycle 4s</div></div>
+  </div>
+
+  <!-- Attention seekers -->
+  <h2>Attention Seekers — Hover to replay</h2>
+  <div class="grid">
+    <div class="anim-item"><div class="demo-box shake-box">shake me</div><div class="anim-label">shake on hover</div></div>
+    <div class="anim-item">
+      <div class="ping-wrapper">
+        <div class="ping-ring"></div>
+        <div class="ping-dot"></div>
+      </div>
+      <div class="anim-label">ping effect</div>
+    </div>
+  </div>
+
+  <!-- Loading spinner -->
+  <h2>Loading Spinner</h2>
+  <div class="grid">
+    <div class="anim-item"><div class="spinner"></div><div class="anim-label">border-top spin</div></div>
+  </div>
+
+  <!-- Stagger -->
+  <h2>Stagger — animation-delay on each child</h2>
+  <div class="stagger-grid">
+    <div class="stagger-item"></div>
+    <div class="stagger-item"></div>
+    <div class="stagger-item"></div>
+    <div class="stagger-item"></div>
+    <div class="stagger-item"></div>
+  </div>
+  <p class="note">Each item: animation-delay: 0s, 0.1s, 0.2s, 0.3s, 0.4s</p>
+
+  <!-- Typing effect -->
+  <h2>Typing Effect — steps() timing function</h2>
+  <div class="typing-demo">
+    <div class="typing-text">Hello, World! Welcome to CSS animations.</div>
+  </div>
+  <p class="note">animation: typing 3s steps(30) forwards, blink 0.75s step-end infinite</p>
+
+  <!-- Progress bar -->
+  <h2>Progress Bar Animation</h2>
+  <div class="progress-track">
+    <div class="progress-fill"></div>
+  </div>
+  <p class="note">animation: progressFill 2s ease-out 0.5s forwards — width: 0 → 80%</p>
+
+  <!-- Gradient animation -->
+  <h2>Animated Gradient Background</h2>
+  <div class="gradient-box">
+    background-size: 400% 400% + animation: gradientShift 6s ease infinite
+  </div>
+
+</body>
+</html>

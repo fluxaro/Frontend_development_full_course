@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Grid Basics Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding: 2rem;
+    }
+
+    h1 { margin-bottom: 2rem; font-size: 1.75rem; }
+    h2 { margin: 2rem 0 0.5rem; font-size: 1.1rem; color: #555; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+    .subtitle { font-size: 0.85rem; color: #888; font-family: monospace; margin-bottom: 0.75rem; }
+
+    /* ── Base grid item style ── */
+    .grid-item {
+      background: #3498db;
+      color: white;
+      padding: 1rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 60px;
+    }
+
+    .grid-item:nth-child(2n)   { background: #2980b9; }
+    .grid-item:nth-child(3n)   { background: #1a6fa8; }
+    .grid-item:nth-child(4n)   { background: #155d8f; }
+
+    /* ── Grid containers ── */
+    .grid {
+      background: #e8f4fd;
+      border: 2px solid #3498db;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── Equal columns ── */
+    .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; }
+    .cols-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+
+    /* ── Mixed columns ── */
+    .cols-sidebar { display: grid; grid-template-columns: 200px 1fr; gap: 0.5rem; }
+    .cols-3-mixed { display: grid; grid-template-columns: 200px 1fr 150px; gap: 0.5rem; }
+    .cols-percent { display: grid; grid-template-columns: 30% 40% 30%; gap: 0.5rem; }
+
+    /* ── fr unit demo ── */
+    .cols-fr-1-2-1 { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 0.5rem; }
+    .cols-fr-1-3   { display: grid; grid-template-columns: 1fr 3fr; gap: 0.5rem; }
+
+    /* ── Rows ── */
+    .with-rows {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 80px 120px 60px;
+      gap: 0.5rem;
+    }
+
+    /* ── auto-fill vs auto-fit ── */
+    .auto-fill {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .auto-fit {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.5rem;
+    }
+
+    /* ── gap ── */
+    .gap-0  { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+    .gap-sm { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.25rem; }
+    .gap-md { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .gap-lg { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+    .gap-xy { display: grid; grid-template-columns: repeat(4, 1fr); column-gap: 2rem; row-gap: 0.5rem; }
+
+    /* ── Practical: Photo gallery ── */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: white;
+    }
+
+    /* ── Practical: Dashboard ── */
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 1.25rem;
+      border-radius: 10px;
+      border: 1px solid #dee2e6;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .stat-card .stat-label { font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-card .stat-value { font-size: 2rem; font-weight: 700; margin-top: 0.25rem; }
+    .stat-card .stat-change { font-size: 0.8rem; color: #27ae60; margin-top: 0.25rem; }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Grid — Basics</h1>
+
+  <!-- Equal columns -->
+  <h2>Equal Columns with fr</h2>
+
+  <p class="subtitle">grid-template-columns: 1fr 1fr</p>
+  <div class="grid cols-2">
+    <div class="grid-item">1</div><div class="grid-item">2</div>
+    <div class="grid-item">3</div><div class="grid-item">4</div>
+  </div>
+
+  <p class="subtitle">grid-template-columns: 1fr 1fr 1fr (or repeat(3, 1fr))</p>
+  <div class="grid cols-3">
+    <div class="grid-item">1</div><div class="grid-item">2</div><div class="grid-item">3</div>
+    <div class="grid-item">4</div><div class="grid-item">5</div><div class="grid-item">6</div>
+  </div>
+
+  <p class="subtitle">grid-template-columns: repeat(4, 1fr)</p>
+  <div class="grid cols-4">
+    <div class="grid-item">1</div><div class="grid-item">2</div>
+    <div class="grid-item">3</div><div class="grid-item">4</div>
+    <div class="grid-item">5</div><div class="grid-item">6</div>
+    <div class="grid-item">7</div><div class="grid-item">8</div>
+  </div>
+
+  <!-- fr unit -->
+  <h2>fr Unit — Proportional Fractions</h2>
+
+  <p class="subtitle">grid-template-columns: 1fr 2fr 1fr — middle is twice as wide</p>
+  <div class="grid cols-fr-1-2-1">
+    <div class="grid-item">1fr<br>(25%)</div>
+    <div class="grid-item">2fr<br>(50%)</div>
+    <div class="grid-item">1fr<br>(25%)</div>
+  </div>
+
+  <p class="subtitle">grid-template-columns: 1fr 3fr — sidebar + main</p>
+  <div class="grid cols-fr-1-3">
+    <div class="grid-item">1fr<br>(25%)</div>
+    <div class="grid-item">3fr<br>(75%)</div>
+  </div>
+
+  <!-- Mixed columns -->
+  <h2>Mixed Column Sizes</h2>
+
+  <p class="subtitle">grid-template-columns: 200px 1fr — fixed sidebar + fluid main</p>
+  <div class="grid cols-sidebar">
+    <div class="grid-item">200px fixed</div>
+    <div class="grid-item">1fr (fills rest)</div>
+  </div>
+
+  <p class="subtitle">grid-template-columns: 200px 1fr 150px</p>
+  <div class="grid cols-3-mixed">
+    <div class="grid-item">200px</div>
+    <div class="grid-item">1fr</div>
+    <div class="grid-item">150px</div>
+  </div>
+
+  <!-- Explicit rows -->
+  <h2>Explicit Rows — grid-template-rows</h2>
+
+  <p class="subtitle">grid-template-rows: 80px 120px 60px</p>
+  <div class="grid with-rows">
+    <div class="grid-item">Row 1<br>80px</div>
+    <div class="grid-item">Row 1</div>
+    <div class="grid-item">Row 1</div>
+    <div class="grid-item">Row 2<br>120px</div>
+    <div class="grid-item">Row 2</div>
+    <div class="grid-item">Row 2</div>
+    <div class="grid-item">Row 3<br>60px</div>
+    <div class="grid-item">Row 3</div>
+    <div class="grid-item">Row 3</div>
+  </div>
+
+  <!-- auto-fill vs auto-fit -->
+  <h2>auto-fill vs auto-fit (resize the window!)</h2>
+
+  <p class="subtitle">auto-fill — creates columns even if empty</p>
+  <div class="grid auto-fill">
+    <div class="grid-item">1</div>
+    <div class="grid-item">2</div>
+    <div class="grid-item">3</div>
+  </div>
+
+  <p class="subtitle">auto-fit — collapses empty columns, items stretch to fill</p>
+  <div class="grid auto-fit">
+    <div class="grid-item">1</div>
+    <div class="grid-item">2</div>
+    <div class="grid-item">3</div>
+  </div>
+
+  <!-- gap -->
+  <h2>gap</h2>
+
+  <p class="subtitle">gap: 0 | 0.25rem | 1rem | 2rem | column-gap: 2rem, row-gap: 0.5rem</p>
+  <div class="grid gap-0" style="margin-bottom:0.5rem;">
+    <div class="grid-item">A</div><div class="grid-item">B</div><div class="grid-item">C</div><div class="grid-item">D</div>
+  </div>
+  <div class="grid gap-sm" style="margin-bottom:0.5rem;">
+    <div class="grid-item">A</div><div class="grid-item">B</div><div class="grid-item">C</div><div class="grid-item">D</div>
+  </div>
+  <div class="grid gap-md" style="margin-bottom:0.5rem;">
+    <div class="grid-item">A</div><div class="grid-item">B</div><div class="grid-item">C</div><div class="grid-item">D</div>
+  </div>
+  <div class="grid gap-xy">
+    <div class="grid-item">A</div><div class="grid-item">B</div><div class="grid-item">C</div><div class="grid-item">D</div>
+    <div class="grid-item">E</div><div class="grid-item">F</div><div class="grid-item">G</div><div class="grid-item">H</div>
+  </div>
+  <p style="font-size:0.8rem; color:#666; font-family:monospace; margin-top:0.25rem;">column-gap: 2rem; row-gap: 0.5rem</p>
+
+  <!-- Practical: Photo gallery -->
+  <h2>Practical: Responsive Photo Gallery</h2>
+  <div class="gallery">
+    <div class="gallery-item" style="background: linear-gradient(135deg, #3498db, #9b59b6);">🏔️</div>
+    <div class="gallery-item" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">🌿</div>
+    <div class="gallery-item" style="background: linear-gradient(135deg, #e74c3c, #f39c12);">🌅</div>
+    <div class="gallery-item" style="background: linear-gradient(135deg, #9b59b6, #3498db);">🌊</div>
+    <div class="gallery-item" style="background: linear-gradient(135deg, #f39c12, #e74c3c);">🏜️</div>
+    <div class="gallery-item" style="background: linear-gradient(135deg, #1abc9c, #3498db);">🌴</div>
+  </div>
+  <p style="font-size:0.8rem; color:#666; font-family:monospace; margin-top:0.25rem;">
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr))
+  </p>
+
+  <!-- Practical: Dashboard stats -->
+  <h2>Practical: Dashboard Stats</h2>
+  <div class="dashboard">
+    <div class="stat-card">
+      <div class="stat-label">Total Users</div>
+      <div class="stat-value" style="color:#3498db;">12,847</div>
+      <div class="stat-change">↑ 12% this month</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Revenue</div>
+      <div class="stat-value" style="color:#27ae60;">$48,290</div>
+      <div class="stat-change">↑ 8% this month</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Orders</div>
+      <div class="stat-value" style="color:#9b59b6;">3,421</div>
+      <div class="stat-change">↑ 5% this month</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Conversion</div>
+      <div class="stat-value" style="color:#e74c3c;">4.2%</div>
+      <div class="stat-change" style="color:#e74c3c;">↓ 1% this month</div>
+    </div>
+  </div>
+
+</body>
+</html>

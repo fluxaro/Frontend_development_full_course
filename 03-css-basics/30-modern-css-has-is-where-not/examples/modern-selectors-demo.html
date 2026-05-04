@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern CSS Selectors Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding: 2rem;
+    }
+
+    h1 { margin-bottom: 2rem; font-size: 1.75rem; }
+    h2 { margin: 2.5rem 0 1rem; font-size: 1.1rem; color: #555; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+
+    .demo-area {
+      background: white;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+      font-family: monospace;
+      background: #f0f0f0;
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+    }
+
+    /* ══════════════════════════════════════
+       :is() — GROUP SELECTORS
+    ══════════════════════════════════════ */
+    /* Instead of: h1, h2, h3 { color: blue } */
+    :is(h1, h2, h3) {
+      color: #3498db;
+    }
+
+    /* Instead of: article p, section p, aside p { ... } */
+    :is(article, section, aside) p {
+      line-height: 1.7;
+      color: #555;
+    }
+
+    /* Nested :is() */
+    :is(header, footer) :is(a, button) {
+      text-decoration: none;
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      background: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    /* ══════════════════════════════════════
+       :where() — ZERO SPECIFICITY
+    ══════════════════════════════════════ */
+    /* :where() has zero specificity — easy to override */
+    :where(header, footer) a {
+      color: #999;
+    }
+
+    /* This simple selector wins because :where() has 0 specificity */
+    a.override {
+      color: #e74c3c;
+    }
+
+    /* ══════════════════════════════════════
+       :not() — EXCLUSION
+    ══════════════════════════════════════ */
+    /* All list items except the last one */
+    .list-dividers li:not(:last-child) {
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* All buttons except disabled */
+    button:not(:disabled) {
+      cursor: pointer;
+    }
+
+    button:not(:disabled):hover {
+      opacity: 0.85;
+    }
+
+    /* All inputs except checkboxes and radios */
+    input:not([type="checkbox"]):not([type="radio"]) {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 2px solid #dee2e6;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    /* ══════════════════════════════════════
+       :has() — PARENT SELECTOR
+    ══════════════════════════════════════ */
+    /* Card with an image — remove padding */
+    .card:has(img) {
+      padding: 0;
+    }
+
+    .card:has(img) .card-body {
+      padding: 1rem;
+    }
+
+    /* Form field with invalid input — highlight label */
+    .field:has(input:invalid) label {
+      color: #e74c3c;
+    }
+
+    .field:has(input:invalid) input {
+      border-color: #e74c3c;
+    }
+
+    /* Article without images — narrower max-width */
+    article:not(:has(img)) {
+      max-width: 65ch;
+    }
+
+    /* Navigation with open dropdown — change background */
+    nav:has(.dropdown.open) {
+      background: #2c3e50;
+    }
+
+    /* ══════════════════════════════════════
+       DEMO COMPONENTS
+    ══════════════════════════════════════ */
+    .card {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px 8px 0 0;
+      margin: -1.25rem -1.25rem 0;
+    }
+
+    .card h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+    .card p  { font-size: 0.85rem; color: #666; line-height: 1.5; }
+
+    .field {
+      margin-bottom: 1rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      transition: color 0.2s;
+    }
+
+    .field input {
+      transition: border-color 0.2s;
+    }
+
+    .list-dividers {
+      list-style: none;
+    }
+
+    .list-dividers li {
+      font-size: 0.9rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      background: #3498db;
+      color: white;
+      font-size: 0.85rem;
+      font-family: inherit;
+    }
+
+    .btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    nav {
+      background: #34495e;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-toggle {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: none;
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      margin-top: 0.25rem;
+      min-width: 150px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .dropdown.open .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: #333;
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+
+    .dropdown-menu a:hover {
+      background: #f0f0f0;
+    }
+
+    article {
+      background: white;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    article h3 { margin-bottom: 0.75rem; }
+    article p  { color: #555; line-height: 1.7; margin-bottom: 1rem; }
+    article img { width: 100%; border-radius: 6px; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+
+  <h1>Modern CSS Selectors — :is(), :where(), :not(), :has()</h1>
+
+  <!-- :is() -->
+  <h2>:is() — Group Selectors</h2>
+  <div class="note">:is(h1, h2, h3) { color: blue } — all headings get the same style</div>
+  <div class="demo-area">
+    <h3>This h3 is blue (styled by :is(h1, h2, h3))</h3>
+    <p>This paragraph is styled by :is(article, section, aside) p</p>
+  </div>
+
+  <!-- :where() -->
+  <h2>:where() — Zero Specificity (easy to override)</h2>
+  <div class="note">:where(header, footer) a { color: gray } — but a.override { color: red } wins</div>
+  <div class="demo-area">
+    <header>
+      <a href="#">Normal link (gray from :where())</a>
+      <a href="#" class="override">Override link (red from .override)</a>
+    </header>
+  </div>
+
+  <!-- :not() -->
+  <h2>:not() — Exclusion</h2>
+  <div class="note">li:not(:last-child) { border-bottom } — all except the last</div>
+  <div class="demo-area">
+    <ul class="list-dividers">
+      <li>Item 1 (has border)</li>
+      <li>Item 2 (has border)</li>
+      <li>Item 3 (has border)</li>
+      <li>Item 4 (no border — it's the last)</li>
+    </ul>
+  </div>
+
+  <div class="note">button:not(:disabled):hover { opacity: 0.85 }</div>
+  <div class="demo-area">
+    <div class="btn-group">
+      <button class="btn">Enabled (hover works)</button>
+      <button class="btn" disabled>Disabled (hover ignored)</button>
+    </div>
+  </div>
+
+  <!-- :has() -->
+  <h2>:has() — Parent Selector (the "if" selector)</h2>
+
+  <div class="note">.card:has(img) { padding: 0 } — card with image removes padding</div>
+  <div class="demo-area">
+    <div class="card">
+      <img src="https://picsum.photos/seed/card1/400/140" alt="Card image">
+      <div class="card-body">
+        <h3>Card with Image</h3>
+        <p>This card has an image, so .card:has(img) removes the padding and the image fills the top.</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Card without Image</h3>
+      <p>This card has no image, so it keeps the default padding.</p>
+    </div>
+  </div>
+
+  <div class="note">.field:has(input:invalid) label { color: red } — highlight label when input is invalid</div>
+  <div class="demo-area">
+    <div class="field">
+      <label>Email (required)</label>
+      <input type="email" required placeholder="Type an invalid email">
+    </div>
+    <p style="font-size:0.8rem; color:#666;">Type something that's not an email to see the label turn red.</p>
+  </div>
+
+  <div class="note">nav:has(.dropdown.open) { background: dark } — nav changes when dropdown is open</div>
+  <div class="demo-area">
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li>
+          <div class="dropdown" id="dropdown">
+            <button class="dropdown-toggle" onclick="document.getElementById('dropdown').classList.toggle('open')">
+              More ▼
+            </button>
+            <div class="dropdown-menu">
+              <a href="#">Projects</a>
+              <a href="#">Blog</a>
+              <a href="#">Contact</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <p style="font-size:0.8rem; color:#666; margin-top:0.5rem;">Click "More" to open the dropdown — the nav background changes.</p>
+  </div>
+
+  <div class="note">article:not(:has(img)) { max-width: 65ch } — articles without images are narrower</div>
+  <div class="demo-area">
+    <article>
+      <h3>Article with Image</h3>
+      <img src="https://picsum.photos/seed/article/600/200" alt="Article image">
+      <p>This article has an image, so it uses the full width.</p>
+    </article>
+    <article>
+      <h3>Article without Image</h3>
+      <p>This article has no image, so article:not(:has(img)) limits it to 65ch for better readability.</p>
+    </article>
+  </div>
+
+</body>
+</html>

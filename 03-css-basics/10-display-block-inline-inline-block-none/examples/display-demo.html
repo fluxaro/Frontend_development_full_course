@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display Property Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding: 2rem;
+    }
+
+    h1 { margin-bottom: 2rem; font-size: 1.75rem; }
+    h2 { margin: 2rem 0 1rem; font-size: 1.1rem; color: #555; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+
+    .demo-area {
+      background: white;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .note {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── display: block ── */
+    .block-demo span {
+      display: block;
+      background: #3498db;
+      color: white;
+      padding: 0.5rem 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 4px;
+    }
+
+    /* ── display: inline ── */
+    .inline-demo span {
+      display: inline;
+      background: #9b59b6;
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      /* width and height have NO effect on inline elements */
+    }
+
+    /* ── display: inline-block ── */
+    .inline-block-demo span {
+      display: inline-block;
+      background: #27ae60;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      width: 120px;          /* width WORKS on inline-block */
+      text-align: center;
+    }
+
+    /* ── display: none vs visibility: hidden ── */
+    .hidden-demo {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .box {
+      width: 100px;
+      height: 60px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    .box-a { background: #3498db; }
+    .box-b { background: #e74c3c; }
+    .box-c { background: #27ae60; }
+
+    .display-none    { display: none; }
+    .visibility-hidden { visibility: hidden; }
+
+    /* ── Inline elements: width/height ignored ── */
+    .inline-width-demo span {
+      display: inline;
+      background: #e74c3c;
+      color: white;
+      padding: 0.25rem 0.5rem;
+      width: 200px;   /* IGNORED — inline ignores width */
+      height: 100px;  /* IGNORED — inline ignores height */
+    }
+
+    /* ── img default inline gap ── */
+    .img-gap-demo {
+      background: #ffeeba;
+      border: 2px solid #856404;
+      display: inline-block;
+      line-height: 0;
+    }
+
+    .img-gap-demo img {
+      width: 80px;
+      height: 60px;
+      background: #3498db;
+      /* display: block; ← uncomment to fix the gap */
+    }
+
+    /* ── Nav with inline-block ── */
+    .nav-demo {
+      background: #2c3e50;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+    }
+
+    .nav-demo ul {
+      list-style: none;
+    }
+
+    .nav-demo li {
+      display: inline-block;
+    }
+
+    .nav-demo a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .nav-demo a:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* ── Badge / tag ── */
+    .badge-demo {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    .badge-blue   { background: #3498db; }
+    .badge-green  { background: #27ae60; }
+    .badge-red    { background: #e74c3c; }
+    .badge-purple { background: #9b59b6; }
+
+    /* ── Modal toggle ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1.25rem;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .btn:hover { background: #2980b9; }
+    .btn-close { background: #e74c3c; margin-top: 1rem; }
+    .btn-close:hover { background: #c0392b; }
+
+    /* ── Quick reference table ── */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    th, td {
+      padding: 0.6rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #dee2e6;
+      font-size: 0.85rem;
+    }
+    th { background: #2c3e50; color: white; }
+    tr:last-child td { border-bottom: none; }
+    .yes { color: #27ae60; font-weight: bold; }
+    .no  { color: #e74c3c; }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Display Property</h1>
+
+  <!-- Quick reference table -->
+  <h2>Quick Reference</h2>
+  <table>
+    <thead>
+      <tr><th>Value</th><th>Full Width?</th><th>New Line?</th><th>Width/Height?</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>block</code></td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+      <tr><td><code>inline</code></td><td class="no">No (content)</td><td class="no">No</td><td class="no">No</td></tr>
+      <tr><td><code>inline-block</code></td><td class="no">No (content)</td><td class="no">No</td><td class="yes">Yes</td></tr>
+      <tr><td><code>none</code></td><td class="no">—</td><td class="no">—</td><td class="no">Removed</td></tr>
+      <tr><td><code>flex</code></td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+      <tr><td><code>grid</code></td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+    </tbody>
+  </table>
+
+  <!-- display: block -->
+  <h2>display: block — Each element takes a full row</h2>
+  <div class="demo-area block-demo">
+    <span>Block element 1</span>
+    <span>Block element 2</span>
+    <span>Block element 3</span>
+  </div>
+  <p class="note">Each span is forced to its own line and stretches full width.</p>
+
+  <!-- display: inline -->
+  <h2>display: inline — Elements flow in a line</h2>
+  <div class="demo-area inline-demo">
+    <span>Inline 1</span>
+    <span>Inline 2</span>
+    <span>Inline 3</span>
+    <span>Inline 4</span>
+    <span>Inline 5</span>
+  </div>
+  <p class="note">Elements sit side by side. Width and height properties are ignored.</p>
+
+  <!-- display: inline-block -->
+  <h2>display: inline-block — Inline flow + block sizing</h2>
+  <div class="demo-area inline-block-demo">
+    <span>Item 1</span>
+    <span>Item 2</span>
+    <span>Item 3</span>
+    <span>Item 4</span>
+  </div>
+  <p class="note">Elements sit side by side AND respect width/height. Each is 120px wide.</p>
+
+  <!-- display: none vs visibility: hidden -->
+  <h2>display: none vs visibility: hidden</h2>
+  <div class="demo-area">
+    <p style="margin-bottom:1rem; font-size:0.85rem;">Box B uses <code>display: none</code> — it's completely removed from layout:</p>
+    <div class="hidden-demo">
+      <div class="box box-a">Box A</div>
+      <div class="box box-b display-none">Box B (none)</div>
+      <div class="box box-c">Box C</div>
+    </div>
+    <p style="margin:1rem 0; font-size:0.85rem;">Box B uses <code>visibility: hidden</code> — invisible but keeps its space:</p>
+    <div class="hidden-demo">
+      <div class="box box-a">Box A</div>
+      <div class="box box-b visibility-hidden">Box B (hidden)</div>
+      <div class="box box-c">Box C</div>
+    </div>
+  </div>
+
+  <!-- Nav with inline-block -->
+  <h2>Practical: Horizontal Navigation</h2>
+  <nav class="nav-demo">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Projects</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+  <p class="note">li → display: inline-block | a → display: block (for full clickable area)</p>
+
+  <!-- Badges -->
+  <h2>Practical: Badges / Tags (inline-block)</h2>
+  <div class="demo-area">
+    <div class="badge-demo">
+      <span class="badge badge-blue">HTML</span>
+      <span class="badge badge-green">CSS</span>
+      <span class="badge badge-red">JavaScript</span>
+      <span class="badge badge-purple">React</span>
+    </div>
+  </div>
+
+  <!-- Modal toggle -->
+  <h2>Practical: Modal — display: none → display: flex</h2>
+  <button class="btn" onclick="document.getElementById('modal').classList.add('open')">
+    Open Modal
+  </button>
+
+  <div class="modal-overlay" id="modal">
+    <div class="modal-box">
+      <h3>Modal Dialog</h3>
+      <p style="margin-top:0.5rem; color:#666;">
+        This modal uses <code>display: none</code> by default and switches to
+        <code>display: flex</code> when the <code>.open</code> class is added.
+      </p>
+      <button class="btn btn-close" onclick="document.getElementById('modal').classList.remove('open')">
+        Close Modal
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>

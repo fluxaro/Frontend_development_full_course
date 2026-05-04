@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Transforms Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding: 2rem;
+    }
+
+    h1 { margin-bottom: 2rem; font-size: 1.75rem; }
+    h2 { margin: 2.5rem 0 1rem; font-size: 1.1rem; color: #555; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+
+    .grid { display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; margin-bottom: 0.5rem; }
+    .note { font-size: 0.85rem; color: #666; margin-bottom: 1.5rem; font-family: monospace; }
+
+    /* ── Base box ── */
+    .box {
+      width: 80px;
+      height: 80px;
+      background: #3498db;
+      color: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: bold;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .box-label {
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: #666;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .transform-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Translate ── */
+    .tx-20   { transform: translateX(20px); }
+    .tx-n20  { transform: translateX(-20px); }
+    .ty-20   { transform: translateY(20px); }
+    .ty-n20  { transform: translateY(-20px); }
+    .t-20-20 { transform: translate(20px, -20px); }
+
+    /* ── Scale ── */
+    .s-05  { transform: scale(0.5); }
+    .s-075 { transform: scale(0.75); }
+    .s-125 { transform: scale(1.25); }
+    .s-15  { transform: scale(1.5); }
+    .sx-2  { transform: scaleX(2); }
+    .sy-2  { transform: scaleY(2); }
+
+    /* ── Rotate ── */
+    .r-45   { transform: rotate(45deg); }
+    .r-90   { transform: rotate(90deg); }
+    .r-180  { transform: rotate(180deg); }
+    .r-n45  { transform: rotate(-45deg); }
+
+    /* ── Skew ── */
+    .skx-15 { transform: skewX(15deg); }
+    .sky-15 { transform: skewY(15deg); }
+
+    /* ── Multiple transforms ── */
+    .multi-1 { transform: translateY(-10px) scale(1.1); background: #27ae60; }
+    .multi-2 { transform: rotate(45deg) scale(0.8); background: #9b59b6; }
+    .multi-3 { transform: translateX(20px) rotate(-15deg) scale(1.2); background: #e74c3c; }
+
+    /* ── transform-origin ── */
+    .origin-center { transform: rotate(45deg); transform-origin: center; background: #3498db; }
+    .origin-tl     { transform: rotate(45deg); transform-origin: top left; background: #27ae60; }
+    .origin-br     { transform: rotate(45deg); transform-origin: bottom right; background: #e74c3c; }
+
+    /* ── 3D transforms ── */
+    .perspective-wrapper {
+      perspective: 600px;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .box-3d {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #3498db, #9b59b6);
+      color: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .rx-30  { transform: rotateX(30deg); }
+    .ry-30  { transform: rotateY(30deg); }
+    .rx-ry  { transform: rotateX(20deg) rotateY(30deg); }
+
+    /* ══════════════════════════════════════
+       HOVER DEMOS
+    ══════════════════════════════════════ */
+    .hover-grid { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+    .hover-card {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 1.25rem;
+      width: 160px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .hover-lift:hover  { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(0,0,0,0.15); }
+    .hover-scale:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+    .hover-rotate:hover { transform: rotate(3deg) scale(1.02); }
+    .hover-tilt:hover  { transform: perspective(400px) rotateY(10deg); }
+
+    .hover-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .hover-card h3    { font-size: 0.85rem; }
+
+    /* ══════════════════════════════════════
+       CENTERING WITH TRANSFORM
+    ══════════════════════════════════════ */
+    .center-demo {
+      position: relative;
+      height: 200px;
+      background: #1a1a2e;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .centered-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    /* ══════════════════════════════════════
+       ARROW ROTATION
+    ══════════════════════════════════════ */
+    .accordion-item {
+      background: white;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .accordion-arrow {
+      transition: transform 0.3s ease;
+      font-size: 1.2rem;
+    }
+
+    .accordion-item.open .accordion-arrow {
+      transform: rotate(180deg);
+    }
+
+    .accordion-body {
+      padding: 0 1.25rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .accordion-item.open .accordion-body {
+      max-height: 100px;
+      padding: 0 1.25rem 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Transforms</h1>
+
+  <!-- Translate -->
+  <h2>translate — Move without affecting layout</h2>
+  <div class="grid">
+    <div class="transform-item"><div class="box">original</div><div class="box-label">no transform</div></div>
+    <div class="transform-item"><div class="box tx-20">→</div><div class="box-label">translateX(20px)</div></div>
+    <div class="transform-item"><div class="box tx-n20">←</div><div class="box-label">translateX(-20px)</div></div>
+    <div class="transform-item"><div class="box ty-20">↓</div><div class="box-label">translateY(20px)</div></div>
+    <div class="transform-item"><div class="box ty-n20">↑</div><div class="box-label">translateY(-20px)</div></div>
+    <div class="transform-item"><div class="box t-20-20">↗</div><div class="box-label">translate(20px,-20px)</div></div>
+  </div>
+  <p class="note">⚠️ transform does NOT affect layout — other elements don't move</p>
+
+  <!-- Scale -->
+  <h2>scale — Resize from transform-origin</h2>
+  <div class="grid">
+    <div class="transform-item"><div class="box s-05">0.5x</div><div class="box-label">scale(0.5)</div></div>
+    <div class="transform-item"><div class="box s-075">0.75x</div><div class="box-label">scale(0.75)</div></div>
+    <div class="transform-item"><div class="box">1x</div><div class="box-label">scale(1) default</div></div>
+    <div class="transform-item"><div class="box s-125">1.25x</div><div class="box-label">scale(1.25)</div></div>
+    <div class="transform-item"><div class="box s-15">1.5x</div><div class="box-label">scale(1.5)</div></div>
+    <div class="transform-item"><div class="box sx-2">2x wide</div><div class="box-label">scaleX(2)</div></div>
+  </div>
+
+  <!-- Rotate -->
+  <h2>rotate — Spin around transform-origin</h2>
+  <div class="grid">
+    <div class="transform-item"><div class="box r-45">45°</div><div class="box-label">rotate(45deg)</div></div>
+    <div class="transform-item"><div class="box r-90">90°</div><div class="box-label">rotate(90deg)</div></div>
+    <div class="transform-item"><div class="box r-180">180°</div><div class="box-label">rotate(180deg)</div></div>
+    <div class="transform-item"><div class="box r-n45">-45°</div><div class="box-label">rotate(-45deg)</div></div>
+  </div>
+
+  <!-- Skew -->
+  <h2>skew — Slant along an axis</h2>
+  <div class="grid">
+    <div class="transform-item"><div class="box skx-15">skewX</div><div class="box-label">skewX(15deg)</div></div>
+    <div class="transform-item"><div class="box sky-15">skewY</div><div class="box-label">skewY(15deg)</div></div>
+  </div>
+
+  <!-- Multiple transforms -->
+  <h2>Multiple Transforms — Chained together</h2>
+  <div class="grid">
+    <div class="transform-item"><div class="box multi-1">lift+scale</div><div class="box-label">translateY(-10px) scale(1.1)</div></div>
+    <div class="transform-item"><div class="box multi-2">rot+scale</div><div class="box-label">rotate(45deg) scale(0.8)</div></div>
+    <div class="transform-item"><div class="box multi-3">all three</div><div class="box-label">translate + rotate + scale</div></div>
+  </div>
+
+  <!-- transform-origin -->
+  <h2>transform-origin — Changes the pivot point</h2>
+  <div class="grid">
+    <div class="transform-item"><div class="box origin-center">center</div><div class="box-label">origin: center (default)</div></div>
+    <div class="transform-item"><div class="box origin-tl">top left</div><div class="box-label">origin: top left</div></div>
+    <div class="transform-item"><div class="box origin-br">btm right</div><div class="box-label">origin: bottom right</div></div>
+  </div>
+
+  <!-- 3D transforms -->
+  <h2>3D Transforms — perspective required on parent</h2>
+  <div class="perspective-wrapper">
+    <div class="transform-item"><div class="box-3d rx-30">rotateX(30°)</div></div>
+    <div class="transform-item"><div class="box-3d ry-30">rotateY(30°)</div></div>
+    <div class="transform-item"><div class="box-3d rx-ry">rotateX+Y</div></div>
+  </div>
+
+  <!-- Hover demos -->
+  <h2>Hover Effects — Practical Patterns</h2>
+  <div class="hover-grid">
+    <div class="hover-card hover-lift">
+      <div class="icon">🚀</div>
+      <h3>Lift</h3>
+    </div>
+    <div class="hover-card hover-scale">
+      <div class="icon">🔍</div>
+      <h3>Scale</h3>
+    </div>
+    <div class="hover-card hover-rotate">
+      <div class="icon">🌀</div>
+      <h3>Rotate</h3>
+    </div>
+    <div class="hover-card hover-tilt">
+      <div class="icon">📐</div>
+      <h3>3D Tilt</h3>
+    </div>
+  </div>
+
+  <!-- Centering with transform -->
+  <h2>Centering with translate(-50%, -50%)</h2>
+  <div class="center-demo">
+    <div class="centered-box">
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)
+    </div>
+  </div>
+
+  <!-- Arrow rotation -->
+  <h2>Practical: Accordion Arrow — rotate(180deg)</h2>
+  <div>
+    <div class="accordion-item open" onclick="this.classList.toggle('open')">
+      <div class="accordion-header">
+        <span>What is CSS transform?</span>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        CSS transform lets you move, scale, rotate, and skew elements without affecting layout.
+      </div>
+    </div>
+    <div class="accordion-item" onclick="this.classList.toggle('open')">
+      <div class="accordion-header">
+        <span>Why use transform instead of top/left?</span>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        Transforms only trigger compositing — they're GPU-accelerated and don't cause layout reflow.
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

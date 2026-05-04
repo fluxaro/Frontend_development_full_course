@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- ⚠️ This meta tag is REQUIRED for responsive design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Design & Media Queries Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ══════════════════════════════════════
+       MOBILE FIRST — default styles (mobile)
+    ══════════════════════════════════════ */
+    :root {
+      --space: 1rem;
+      --font-base: 1rem;
+    }
+
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      font-size: var(--font-base);
+      line-height: 1.6;
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      background: #2c3e50;
+      color: white;
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-brand { font-weight: bold; font-size: 1.1rem; }
+
+    .navbar-links {
+      display: none; /* hidden on mobile */
+      list-style: none;
+      gap: 0.5rem;
+    }
+
+    .navbar-links a { color: rgba(255,255,255,0.8); text-decoration: none; padding: 0.4rem 0.75rem; border-radius: 4px; font-size: 0.9rem; }
+    .navbar-links a:hover { color: white; background: rgba(255,255,255,0.1); }
+
+    .hamburger {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.4);
+      color: white;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+
+    .hero h1 { font-size: 1.75rem; margin-bottom: 0.75rem; }
+    .hero p  { font-size: 1rem; opacity: 0.9; margin-bottom: 1.5rem; }
+    .hero-btn {
+      display: inline-block;
+      background: white;
+      color: #764ba2;
+      padding: 0.75rem 2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* ── Main content ── */
+    .container {
+      max-width: 1200px;
+      margin-inline: auto;
+      padding: 2rem 1rem;
+    }
+
+    /* ── Card grid — 1 column on mobile ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border: 1px solid #e0e0e0;
+    }
+
+    .card-img {
+      height: 160px;
+    }
+
+    .card-body { padding: 1.25rem; }
+    .card-body h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .card-body p  { font-size: 0.9rem; color: #666; line-height: 1.5; }
+
+    /* ── Sidebar layout — stacked on mobile ── */
+    .content-area {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .main-article {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid #dee2e6;
+    }
+
+    .main-article h2 { font-size: 1.3rem; margin-bottom: 0.75rem; border: none; padding: 0; color: #333; }
+    .main-article p  { color: #555; line-height: 1.7; margin-bottom: 1rem; }
+
+    .sidebar-widget {
+      background: white;
+      padding: 1.25rem;
+      border-radius: 10px;
+      border: 1px solid #dee2e6;
+    }
+
+    .sidebar-widget h3 { font-size: 1rem; margin-bottom: 0.75rem; }
+    .sidebar-widget ul { list-style: none; }
+    .sidebar-widget li { padding: 0.4rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9rem; color: #555; }
+    .sidebar-widget li:last-child { border-bottom: none; }
+
+    /* ── Breakpoint indicator ── */
+    .breakpoint-badge {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      background: #2c3e50;
+      color: white;
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-family: monospace;
+      z-index: 999;
+    }
+
+    .bp-mobile  { display: block; }
+    .bp-tablet  { display: none; }
+    .bp-desktop { display: none; }
+
+    /* ══════════════════════════════════════
+       TABLET — min-width: 640px
+    ══════════════════════════════════════ */
+    @media (min-width: 640px) {
+      .hero { padding: 4rem 2rem; }
+      .hero h1 { font-size: 2.25rem; }
+
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .bp-mobile  { display: none; }
+      .bp-tablet  { display: block; }
+    }
+
+    /* ══════════════════════════════════════
+       DESKTOP — min-width: 1024px
+    ══════════════════════════════════════ */
+    @media (min-width: 1024px) {
+      .navbar-links { display: flex; }
+      .hamburger    { display: none; }
+
+      .hero { padding: 6rem 2rem; }
+      .hero h1 { font-size: 3rem; }
+
+      .card-grid { grid-template-columns: repeat(3, 1fr); }
+
+      .content-area {
+        grid-template-columns: 1fr 280px;
+      }
+
+      .bp-tablet  { display: none; }
+      .bp-desktop { display: block; }
+    }
+
+    /* ══════════════════════════════════════
+       SPECIAL MEDIA QUERIES
+    ══════════════════════════════════════ */
+
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+      .dark-mode-demo {
+        background: #1e293b;
+        color: #e2e8f0;
+        border-color: #334155;
+      }
+    }
+
+    .dark-mode-demo {
+      background: white;
+      color: #333;
+      border: 2px solid #dee2e6;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* Print */
+    @media print {
+      .navbar, .hero-btn, .breakpoint-badge { display: none; }
+      body { background: white; }
+    }
+
+    /* Hover capability */
+    @media (hover: hover) {
+      .card:hover {
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        transform: translateY(-2px);
+        transition: box-shadow 0.3s, transform 0.3s;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Breakpoint indicator -->
+  <div class="breakpoint-badge">
+    <span class="bp-mobile">📱 Mobile (&lt;640px)</span>
+    <span class="bp-tablet">📟 Tablet (640–1023px)</span>
+    <span class="bp-desktop">🖥️ Desktop (1024px+)</span>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <span class="navbar-brand">MyBrand</span>
+    <ul class="navbar-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Work</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <button class="hamburger">☰</button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Responsive Design</h1>
+    <p>Resize the window to see the layout adapt at 640px and 1024px breakpoints.</p>
+    <a class="hero-btn" href="#">Get Started</a>
+  </section>
+
+  <!-- Main content -->
+  <div class="container">
+
+    <!-- Card grid -->
+    <h2 style="margin-bottom:1rem;">Card Grid — 1 → 2 → 3 columns</h2>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg, #3498db, #9b59b6);"></div>
+        <div class="card-body"><h3>Project One</h3><p>1 column on mobile, 2 on tablet, 3 on desktop.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg, #27ae60, #2ecc71);"></div>
+        <div class="card-body"><h3>Project Two</h3><p>No JavaScript needed — pure CSS media queries.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg, #e74c3c, #f39c12);"></div>
+        <div class="card-body"><h3>Project Three</h3><p>Mobile-first: start simple, add complexity at larger sizes.</p></div>
+      </div>
+    </div>
+
+    <!-- Content + sidebar -->
+    <div class="content-area">
+      <article class="main-article">
+        <h2>Main Article</h2>
+        <p>On mobile this stacks below the cards. On desktop (1024px+) it sits next to the sidebar in a two-column layout.</p>
+        <p>Mobile-first means writing default styles for small screens, then using <code>min-width</code> media queries to enhance for larger screens.</p>
+
+        <!-- Dark mode demo -->
+        <div class="dark-mode-demo">
+          <strong>Dark Mode Demo</strong><br>
+          This box responds to <code>@media (prefers-color-scheme: dark)</code>.
+          If your OS is in dark mode, this box will have a dark background.
+        </div>
+      </article>
+
+      <aside>
+        <div class="sidebar-widget">
+          <h3>Breakpoints Used</h3>
+          <ul>
+            <li>Default — Mobile (&lt;640px)</li>
+            <li>640px — Tablet</li>
+            <li>1024px — Desktop</li>
+          </ul>
+        </div>
+        <div class="sidebar-widget" style="margin-top:1rem;">
+          <h3>Special Queries</h3>
+          <ul>
+            <li>prefers-color-scheme</li>
+            <li>prefers-reduced-motion</li>
+            <li>hover: hover</li>
+            <li>print</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+
+</body>
+</html>

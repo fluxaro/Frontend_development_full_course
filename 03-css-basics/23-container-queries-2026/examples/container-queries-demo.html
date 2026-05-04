@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Container Queries Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f0f2f5;
+      color: #333;
+      padding: 2rem;
+    }
+
+    h1 { margin-bottom: 0.5rem; font-size: 1.75rem; }
+    .intro { color: #666; margin-bottom: 2rem; font-size: 0.95rem; }
+    h2 { margin: 2.5rem 0 1rem; font-size: 1.1rem; color: #555; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+
+    /* ══════════════════════════════════════
+       THE CARD COMPONENT
+       — same HTML, different container widths
+    ══════════════════════════════════════ */
+
+    /* 1. Define the container */
+    .card-wrapper {
+      container-type: inline-size;
+      container-name: card;
+    }
+
+    /* 2. Default (narrow) card styles */
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border: 1px solid #e0e0e0;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .card-tag {
+      display: inline-block;
+      background: #e8f4fd;
+      color: #3498db;
+      font-size: 0.7rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    }
+
+    .card-text {
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.5;
+      display: none; /* hidden in narrow layout */
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .card-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: bold;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .card-author { font-size: 0.8rem; color: #888; }
+    .card-btn    { display: none; } /* hidden in narrow layout */
+
+    /* 3. Container query — when card container ≥ 400px: horizontal layout */
+    @container card (min-width: 400px) {
+      .card {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .card-img {
+        width: 180px;
+        height: auto;
+        flex-shrink: 0;
+      }
+
+      .card-body {
+        padding: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .card-text { display: block; }
+
+      .card-title { font-size: 1.1rem; }
+    }
+
+    /* 4. Container query — when card container ≥ 600px: show button */
+    @container card (min-width: 600px) {
+      .card-img { width: 240px; }
+
+      .card-title { font-size: 1.3rem; }
+
+      .card-btn {
+        display: inline-block;
+        margin-top: 0.75rem;
+        background: #3498db;
+        color: white;
+        padding: 0.4rem 1rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 0.85rem;
+        align-self: flex-start;
+      }
+    }
+
+    /* ══════════════════════════════════════
+       LAYOUT DEMO — same card in different widths
+    ══════════════════════════════════════ */
+    .demo-section {
+      background: white;
+      border: 2px solid #dee2e6;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .demo-label {
+      font-size: 0.8rem;
+      font-family: monospace;
+      color: #888;
+      margin-bottom: 0.75rem;
+    }
+
+    .narrow  { max-width: 280px; }
+    .medium  { max-width: 480px; }
+    .wide    { max-width: 700px; }
+
+    /* ══════════════════════════════════════
+       CONTAINER UNITS
+    ══════════════════════════════════════ */
+    .cq-units-wrapper {
+      container-type: inline-size;
+      background: #e8f4fd;
+      border: 2px solid #3498db;
+      border-radius: 8px;
+      padding: 1rem;
+      resize: horizontal;
+      overflow: auto;
+      min-width: 200px;
+      max-width: 100%;
+    }
+
+    .cq-unit-demo {
+      background: #3498db;
+      color: white;
+      padding: 0.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .cq-font  { font-size: 5cqi; }   /* 5% of container inline size */
+    .cq-width { width: 50cqi; }      /* 50% of container inline size */
+
+    /* ══════════════════════════════════════
+       MEDIA vs CONTAINER comparison
+    ══════════════════════════════════════ */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .comparison-col {
+      background: white;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .comparison-col h3 { font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .comparison-col p  { font-size: 0.85rem; color: #666; line-height: 1.5; }
+
+    .tag-mq { background: #ffeeba; color: #856404; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+    .tag-cq { background: #d4edda; color: #155724; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h1>Container Queries</h1>
+  <p class="intro">
+    Container queries let a component respond to its <em>container's</em> size — not the viewport.
+    The same card component adapts based on how much space it's given.
+  </p>
+
+  <!-- Same card, different container widths -->
+  <h2>Same Card Component — Different Container Widths</h2>
+
+  <div class="demo-section">
+    <p class="demo-label">Narrow container (max-width: 280px) — stacked layout</p>
+    <div class="card-wrapper narrow">
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+        <div class="card-body">
+          <span class="card-tag">Design</span>
+          <h3 class="card-title">Building Better UI Components</h3>
+          <p class="card-text">Container queries make components truly reusable — they adapt to their context, not the viewport.</p>
+          <div class="card-footer">
+            <div class="card-avatar" style="background:#3498db;">AJ</div>
+            <span class="card-author">Alex Johnson</span>
+          </div>
+          <a class="card-btn" href="#">Read More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-section">
+    <p class="demo-label">Medium container (max-width: 480px) — horizontal layout, description visible</p>
+    <div class="card-wrapper medium">
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg, #f093fb, #f5576c);"></div>
+        <div class="card-body">
+          <span class="card-tag">CSS</span>
+          <h3 class="card-title">Building Better UI Components</h3>
+          <p class="card-text">Container queries make components truly reusable — they adapt to their context, not the viewport.</p>
+          <div class="card-footer">
+            <div class="card-avatar" style="background:#e74c3c;">SR</div>
+            <span class="card-author">Sam Rivera</span>
+          </div>
+          <a class="card-btn" href="#">Read More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-section">
+    <p class="demo-label">Wide container (max-width: 700px) — full layout with button</p>
+    <div class="card-wrapper wide">
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg, #43e97b, #38f9d7);"></div>
+        <div class="card-body">
+          <span class="card-tag">Layout</span>
+          <h3 class="card-title">Building Better UI Components</h3>
+          <p class="card-text">Container queries make components truly reusable — they adapt to their context, not the viewport.</p>
+          <div class="card-footer">
+            <div class="card-avatar" style="background:#27ae60;">MK</div>
+            <span class="card-author">Morgan Kim</span>
+          </div>
+          <a class="card-btn" href="#">Read More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Container units -->
+  <h2>Container Units (cqi, cqw)</h2>
+  <p style="font-size:0.85rem; color:#666; margin-bottom:0.75rem;">Drag the right edge of the box to resize it:</p>
+  <div class="cq-units-wrapper">
+    <div class="cq-unit-demo cq-font">font-size: 5cqi — scales with container</div>
+    <div class="cq-unit-demo cq-width">width: 50cqi — half the container width</div>
+  </div>
+
+  <!-- Media vs Container comparison -->
+  <h2>Media Queries vs Container Queries</h2>
+  <div class="comparison">
+    <div class="comparison-col">
+      <h3><span class="tag-mq">Media Query</span></h3>
+      <p>Responds to the <strong>viewport</strong> size. Good for page-level layout changes. Not reusable — a card in a sidebar and a card in the main area get the same breakpoint.</p>
+    </div>
+    <div class="comparison-col">
+      <h3><span class="tag-cq">Container Query</span></h3>
+      <p>Responds to the <strong>container</strong> size. Perfect for reusable components. The same card adapts whether it's in a narrow sidebar or a wide main area.</p>
+    </div>
+  </div>
+
+</body>
+</html>

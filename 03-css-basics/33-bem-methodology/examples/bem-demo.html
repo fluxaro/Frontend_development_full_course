@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEM Methodology Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f0f2f5;
+      color: #333;
+      padding: 2rem;
+    }
+
+    h1 { margin-bottom: 2rem; font-size: 1.75rem; }
+    h2 { margin: 2.5rem 0 1rem; font-size: 1.1rem; color: #555; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+
+    /* ══════════════════════════════════════
+       BEM NAMING: Block__Element--Modifier
+    ══════════════════════════════════════ */
+
+    /* ── CARD BLOCK ── */
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border: 1px solid #e0e0e0;
+    }
+
+    /* Card elements */
+    .card__image {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .card__body {
+      padding: 1.25rem;
+    }
+
+    .card__tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      background: #e8f4fd;
+      color: #3498db;
+      margin-bottom: 0.5rem;
+    }
+
+    .card__title {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    }
+
+    .card__text {
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+
+    .card__footer {
+      padding: 0.75rem 1.25rem;
+      border-top: 1px solid #f0f0f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card__author {
+      font-size: 0.8rem;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card__avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: bold;
+      color: white;
+      background: #3498db;
+    }
+
+    .card__btn {
+      font-size: 0.8rem;
+      padding: 0.3rem 0.75rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      background: #e8f4fd;
+      color: #3498db;
+      transition: background 0.2s;
+    }
+
+    .card__btn:hover { background: #3498db; color: white; }
+
+    /* Card modifiers */
+    .card--featured {
+      border-color: #3498db;
+      border-width: 2px;
+    }
+
+    .card--featured .card__title {
+      color: #3498db;
+    }
+
+    .card--dark {
+      background: #1e293b;
+      border-color: #334155;
+    }
+
+    .card--dark .card__title { color: #f1f5f9; }
+    .card--dark .card__text  { color: #94a3b8; }
+    .card--dark .card__footer { border-color: #334155; }
+    .card--dark .card__author { color: #64748b; }
+
+    .card--horizontal {
+      display: flex;
+    }
+
+    .card--horizontal .card__image {
+      width: 160px;
+      height: auto;
+      flex-shrink: 0;
+    }
+
+    /* ── BUTTON BLOCK ── */
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1.25rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-family: inherit;
+      font-weight: 600;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+
+    .button:hover   { opacity: 0.85; }
+    .button:active  { transform: scale(0.97); }
+
+    /* Button elements */
+    .button__icon { font-size: 1em; }
+    .button__text { }
+
+    /* Button modifiers */
+    .button--primary   { background: #3498db; color: white; }
+    .button--secondary { background: #9b59b6; color: white; }
+    .button--success   { background: #27ae60; color: white; }
+    .button--danger    { background: #e74c3c; color: white; }
+    .button--ghost     { background: transparent; border: 2px solid #3498db; color: #3498db; }
+    .button--sm        { padding: 0.3rem 0.75rem; font-size: 0.8rem; }
+    .button--lg        { padding: 0.75rem 2rem; font-size: 1rem; }
+    .button--full      { width: 100%; justify-content: center; }
+    .button--loading   { opacity: 0.7; cursor: wait; }
+
+    /* ── NAV BLOCK ── */
+    .nav {
+      background: #2c3e50;
+      padding: 0 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav__brand {
+      font-weight: bold;
+      color: white;
+      font-size: 1.1rem;
+      text-decoration: none;
+    }
+
+    .nav__list {
+      list-style: none;
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .nav__item { }
+
+    .nav__link {
+      display: block;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav__link:hover { background: rgba(255,255,255,0.1); color: white; }
+
+    /* Nav link modifier */
+    .nav__link--active { background: #3498db; color: white; }
+
+    /* ── FORM BLOCK ── */
+    .form { }
+
+    .form__group {
+      margin-bottom: 1rem;
+    }
+
+    .form__label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: #555;
+    }
+
+    .form__input {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 2px solid #dee2e6;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form__input:focus { border-color: #3498db; }
+
+    .form__hint {
+      font-size: 0.75rem;
+      color: #888;
+      margin-top: 0.25rem;
+    }
+
+    .form__error {
+      font-size: 0.75rem;
+      color: #e74c3c;
+      margin-top: 0.25rem;
+    }
+
+    /* Form group modifier */
+    .form__group--error .form__label { color: #e74c3c; }
+    .form__group--error .form__input { border-color: #e74c3c; }
+
+    /* ── LAYOUT ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>BEM Methodology — Block__Element--Modifier</h1>
+
+  <!-- BEM naming explanation -->
+  <h2>Naming Convention</h2>
+  <div style="background:white; border:2px solid #dee2e6; border-radius:8px; padding:1.5rem; font-family:monospace; font-size:0.9rem; line-height:2;">
+    <div><strong style="color:#3498db;">.block</strong> — standalone component (.card, .nav, .btn)</div>
+    <div><strong style="color:#27ae60;">.block__element</strong> — part of a block (.card__title, .nav__link)</div>
+    <div><strong style="color:#e74c3c;">.block--modifier</strong> — variant or state (.card--featured, .btn--primary)</div>
+    <div><strong style="color:#9b59b6;">.block__element--modifier</strong> — element variant (.card__btn--primary)</div>
+  </div>
+
+  <!-- Card block -->
+  <h2>Card Block — .card, .card__*, .card--*</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card__image" style="background: linear-gradient(135deg, #3498db, #9b59b6);"></div>
+      <div class="card__body">
+        <span class="card__tag">Design</span>
+        <h3 class="card__title">Normal Card</h3>
+        <p class="card__text">This is the base .card block with its elements.</p>
+      </div>
+      <div class="card__footer">
+        <div class="card__author">
+          <div class="card__avatar">AJ</div>
+          Alex Johnson
+        </div>
+        <button class="card__btn">Read</button>
+      </div>
+    </div>
+
+    <div class="card card--featured">
+      <div class="card__image" style="background: linear-gradient(135deg, #27ae60, #2ecc71);"></div>
+      <div class="card__body">
+        <span class="card__tag">Featured</span>
+        <h3 class="card__title">Featured Card</h3>
+        <p class="card__text">Uses .card--featured modifier — blue border and title.</p>
+      </div>
+      <div class="card__footer">
+        <div class="card__author">
+          <div class="card__avatar" style="background:#27ae60;">SR</div>
+          Sam Rivera
+        </div>
+        <button class="card__btn">Read</button>
+      </div>
+    </div>
+
+    <div class="card card--dark">
+      <div class="card__image" style="background: linear-gradient(135deg, #1a1a2e, #16213e);"></div>
+      <div class="card__body">
+        <span class="card__tag" style="background:#334155; color:#94a3b8;">Dark</span>
+        <h3 class="card__title">Dark Card</h3>
+        <p class="card__text">Uses .card--dark modifier — dark background and text.</p>
+      </div>
+      <div class="card__footer">
+        <div class="card__author">
+          <div class="card__avatar" style="background:#9b59b6;">MK</div>
+          Morgan Kim
+        </div>
+        <button class="card__btn" style="background:#334155; color:#94a3b8;">Read</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Horizontal card -->
+  <h2>Card — Horizontal Modifier (.card--horizontal)</h2>
+  <div class="card card--horizontal" style="max-width:500px;">
+    <div class="card__image" style="background: linear-gradient(135deg, #f093fb, #f5576c);"></div>
+    <div class="card__body">
+      <span class="card__tag">Layout</span>
+      <h3 class="card__title">Horizontal Card</h3>
+      <p class="card__text">Same HTML, different modifier. .card--horizontal changes the layout to flex row.</p>
+    </div>
+  </div>
+
+  <!-- Button block -->
+  <h2>Button Block — .button, .button__*, .button--*</h2>
+  <div class="btn-group">
+    <button class="button button--primary">
+      <span class="button__icon">🚀</span>
+      <span class="button__text">Primary</span>
+    </button>
+    <button class="button button--secondary">Secondary</button>
+    <button class="button button--success">Success</button>
+    <button class="button button--danger">Danger</button>
+    <button class="button button--ghost">Ghost</button>
+    <button class="button button--primary button--sm">Small</button>
+    <button class="button button--primary button--lg">Large</button>
+  </div>
+
+  <!-- Nav block -->
+  <h2>Nav Block — .nav, .nav__*, .nav__link--active</h2>
+  <nav class="nav">
+    <a class="nav__brand" href="#">Brand</a>
+    <ul class="nav__list">
+      <li class="nav__item"><a class="nav__link nav__link--active" href="#">Home</a></li>
+      <li class="nav__item"><a class="nav__link" href="#">About</a></li>
+      <li class="nav__item"><a class="nav__link" href="#">Work</a></li>
+      <li class="nav__item"><a class="nav__link" href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Form block -->
+  <h2>Form Block — .form, .form__*, .form__group--error</h2>
+  <form class="form" style="max-width:400px;" onsubmit="return false;">
+    <div class="form__group">
+      <label class="form__label">Username</label>
+      <input class="form__input" type="text" placeholder="Enter username">
+      <div class="form__hint">Must be 3–20 characters</div>
+    </div>
+    <div class="form__group form__group--error">
+      <label class="form__label">Email</label>
+      <input class="form__input" type="email" value="not-an-email">
+      <div class="form__error">Please enter a valid email address</div>
+    </div>
+    <button class="button button--primary button--full" type="submit">Submit</button>
+  </form>
+
+</body>
+</html>

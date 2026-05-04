@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Borders, Border-radius & Box-shadow Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f0f2f5;
+      color: #333;
+      padding: 2rem;
+    }
+
+    h1 { margin-bottom: 2rem; font-size: 1.75rem; }
+    h2 { margin: 2rem 0 1rem; font-size: 1.1rem; color: #555; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .demo-box {
+      background: white;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 100px;
+    }
+
+    .label {
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: #666;
+      text-align: center;
+    }
+
+    /* ── Border styles ── */
+    .b-solid  { border: 3px solid #3498db; }
+    .b-dashed { border: 3px dashed #e74c3c; }
+    .b-dotted { border: 3px dotted #27ae60; }
+    .b-double { border: 6px double #9b59b6; }
+    .b-groove { border: 6px groove #f39c12; }
+    .b-ridge  { border: 6px ridge #e67e22; }
+
+    /* ── Individual sides ── */
+    .b-top    { border-top: 4px solid #3498db; }
+    .b-right  { border-right: 4px solid #e74c3c; }
+    .b-bottom { border-bottom: 4px solid #27ae60; }
+    .b-left   { border-left: 6px solid #9b59b6; }
+
+    /* ── Border radius ── */
+    .br-4    { border: 2px solid #3498db; border-radius: 4px; }
+    .br-8    { border: 2px solid #3498db; border-radius: 8px; }
+    .br-16   { border: 2px solid #3498db; border-radius: 16px; }
+    .br-pill { border: 2px solid #3498db; border-radius: 9999px; }
+    .br-circle {
+      border: 2px solid #3498db;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+    }
+    .br-mixed {
+      border: 2px solid #3498db;
+      border-radius: 0 16px 16px 0;
+    }
+    .br-organic {
+      border: 2px solid #9b59b6;
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+
+    /* ── Box shadows ── */
+    .shadow-sm  { box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .shadow-md  { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .shadow-lg  { box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .shadow-xl  { box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+    .shadow-inset { box-shadow: inset 0 2px 8px rgba(0,0,0,0.2); background: #e8f4fd; }
+    .shadow-colored { box-shadow: 0 8px 24px rgba(52,152,219,0.4); }
+    .shadow-multi {
+      box-shadow:
+        0 1px 3px rgba(0,0,0,0.1),
+        0 8px 24px rgba(0,0,0,0.12),
+        0 20px 60px rgba(0,0,0,0.08);
+    }
+
+    /* ── Glass effect ── */
+    .glass-wrapper {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      padding: 2rem;
+      border-radius: 12px;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 12px;
+      padding: 1.5rem;
+      color: white;
+      flex: 1;
+      min-width: 150px;
+    }
+
+    .glass h3 { font-size: 1rem; margin-bottom: 0.25rem; }
+    .glass p  { font-size: 0.85rem; opacity: 0.85; }
+
+    /* ── Hover card ── */
+    .hover-cards {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hover-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+      flex: 1;
+      min-width: 160px;
+    }
+
+    .hover-card:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+      transform: translateY(-4px);
+    }
+
+    .hover-card h3 { font-size: 1rem; margin-bottom: 0.25rem; }
+    .hover-card p  { font-size: 0.85rem; color: #666; }
+
+    /* ── Outline for focus (accessibility) ── */
+    .focus-demo {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.6rem 1.25rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-family: inherit;
+    }
+
+    .btn-outline-focus {
+      background: #3498db;
+      color: white;
+      outline: none;
+    }
+
+    .btn-outline-focus:focus-visible {
+      outline: 3px solid #f39c12;
+      outline-offset: 3px;
+    }
+
+    .btn-shadow-focus {
+      background: #27ae60;
+      color: white;
+      outline: none;
+    }
+
+    .btn-shadow-focus:focus-visible {
+      box-shadow: 0 0 0 3px rgba(39,174,96,0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Borders, Border-radius & Box-shadow</h1>
+
+  <!-- Border styles -->
+  <h2>Border Styles</h2>
+  <div class="grid">
+    <div class="demo-box b-solid"><span class="label">border: 3px solid</span></div>
+    <div class="demo-box b-dashed"><span class="label">border: 3px dashed</span></div>
+    <div class="demo-box b-dotted"><span class="label">border: 3px dotted</span></div>
+    <div class="demo-box b-double"><span class="label">border: 6px double</span></div>
+    <div class="demo-box b-groove"><span class="label">border: 6px groove</span></div>
+    <div class="demo-box b-ridge"><span class="label">border: 6px ridge</span></div>
+  </div>
+
+  <!-- Individual sides -->
+  <h2>Individual Border Sides</h2>
+  <div class="grid">
+    <div class="demo-box b-top"><span class="label">border-top only</span></div>
+    <div class="demo-box b-right"><span class="label">border-right only</span></div>
+    <div class="demo-box b-bottom"><span class="label">border-bottom only</span></div>
+    <div class="demo-box b-left"><span class="label">border-left only (accent)</span></div>
+  </div>
+
+  <!-- Border radius -->
+  <h2>Border Radius</h2>
+  <div class="grid">
+    <div class="demo-box br-4"><span class="label">border-radius: 4px</span></div>
+    <div class="demo-box br-8"><span class="label">border-radius: 8px</span></div>
+    <div class="demo-box br-16"><span class="label">border-radius: 16px</span></div>
+    <div class="demo-box br-pill"><span class="label">border-radius: 9999px (pill)</span></div>
+    <div class="demo-box" style="background:transparent;">
+      <div class="br-circle"></div>
+      <span class="label">border-radius: 50% (circle)</span>
+    </div>
+    <div class="demo-box br-mixed"><span class="label">border-radius: 0 16px 16px 0</span></div>
+    <div class="demo-box br-organic" style="width:80px; height:80px;"></div>
+  </div>
+
+  <!-- Box shadows -->
+  <h2>Box Shadow Scale</h2>
+  <div class="grid">
+    <div class="demo-box shadow-sm"><span class="label">shadow-sm<br>0 1px 3px</span></div>
+    <div class="demo-box shadow-md"><span class="label">shadow-md<br>0 4px 12px</span></div>
+    <div class="demo-box shadow-lg"><span class="label">shadow-lg<br>0 8px 24px</span></div>
+    <div class="demo-box shadow-xl"><span class="label">shadow-xl<br>0 20px 60px</span></div>
+    <div class="demo-box shadow-inset"><span class="label">inset shadow</span></div>
+    <div class="demo-box shadow-colored"><span class="label">colored shadow<br>(blue glow)</span></div>
+    <div class="demo-box shadow-multi"><span class="label">layered shadows<br>(3 layers)</span></div>
+  </div>
+
+  <!-- Glass effect -->
+  <h2>Glass Effect (backdrop-filter: blur)</h2>
+  <div class="glass-wrapper">
+    <div class="glass">
+      <h3>Glass Card</h3>
+      <p>background: rgba(255,255,255,0.2)<br>backdrop-filter: blur(10px)</p>
+    </div>
+    <div class="glass">
+      <h3>Glass Card</h3>
+      <p>border: 1px solid rgba(255,255,255,0.3)</p>
+    </div>
+  </div>
+
+  <!-- Hover cards -->
+  <h2>Hover Effect — Shadow + Transform</h2>
+  <div class="hover-cards">
+    <div class="hover-card">
+      <h3>Hover Me</h3>
+      <p>Shadow lifts on hover</p>
+    </div>
+    <div class="hover-card">
+      <h3>Hover Me</h3>
+      <p>translateY(-4px) + shadow</p>
+    </div>
+    <div class="hover-card">
+      <h3>Hover Me</h3>
+      <p>transition: 0.3s ease</p>
+    </div>
+  </div>
+
+  <!-- Focus outlines -->
+  <h2>Focus States — Use outline, not box-shadow (accessibility)</h2>
+  <div class="focus-demo">
+    <button class="btn btn-outline-focus">Focus me (Tab key) — outline</button>
+    <button class="btn btn-shadow-focus">Focus me (Tab key) — box-shadow ring</button>
+  </div>
+  <p style="margin-top:0.5rem; font-size:0.85rem; color:#666;">
+    Tab to these buttons to see the focus indicators. Always provide visible focus styles for keyboard users.
+  </p>
+
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Transitions Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding: 2rem;
+    }
+
+    h1 { margin-bottom: 2rem; font-size: 1.75rem; }
+    h2 { margin: 2.5rem 0 1rem; font-size: 1.1rem; color: #555; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+
+    .grid { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.5rem; }
+    .note { font-size: 0.85rem; color: #666; margin-bottom: 1.5rem; font-family: monospace; }
+
+    /* ══════════════════════════════════════
+       TIMING FUNCTIONS
+    ══════════════════════════════════════ */
+    .timing-demo {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .timing-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .timing-label {
+      width: 200px;
+      font-size: 0.85rem;
+      font-family: monospace;
+      flex-shrink: 0;
+    }
+
+    .timing-track {
+      flex: 1;
+      height: 40px;
+      background: #e8f4fd;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .timing-ball {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #3498db;
+      transition: left 1s;
+    }
+
+    .timing-track:hover .timing-ball { left: calc(100% - 36px); }
+
+    .ball-ease        { transition-timing-function: ease; }
+    .ball-linear      { transition-timing-function: linear; }
+    .ball-ease-in     { transition-timing-function: ease-in; }
+    .ball-ease-out    { transition-timing-function: ease-out; }
+    .ball-ease-in-out { transition-timing-function: ease-in-out; }
+    .ball-bounce      { transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+    /* ══════════════════════════════════════
+       BUTTON TRANSITIONS
+    ══════════════════════════════════════ */
+    .btn {
+      padding: 0.6rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-family: inherit;
+      font-weight: 600;
+      color: white;
+    }
+
+    .btn-bg {
+      background: #3498db;
+      transition: background 0.2s ease;
+    }
+    .btn-bg:hover { background: #1a6fa8; }
+
+    .btn-lift {
+      background: #27ae60;
+      box-shadow: 0 2px 8px rgba(39,174,96,0.3);
+      transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    }
+    .btn-lift:hover {
+      background: #1a7a42;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(39,174,96,0.4);
+    }
+
+    .btn-scale {
+      background: #9b59b6;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .btn-scale:hover  { background: #7d3c98; transform: scale(1.05); }
+    .btn-scale:active { transform: scale(0.97); }
+
+    .btn-border {
+      background: transparent;
+      border: 2px solid #e74c3c;
+      color: #e74c3c;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .btn-border:hover { background: #e74c3c; color: white; }
+
+    .btn-glow {
+      background: #f39c12;
+      box-shadow: 0 0 0 0 rgba(243,156,18,0.5);
+      transition: box-shadow 0.3s ease;
+    }
+    .btn-glow:hover { box-shadow: 0 0 0 8px rgba(243,156,18,0); }
+
+    /* ══════════════════════════════════════
+       CARD TRANSITIONS
+    ══════════════════════════════════════ */
+    .card {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 1.5rem;
+      width: 200px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      cursor: pointer;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+      transform: translateY(-6px);
+    }
+
+    .card h3 { font-size: 0.95rem; margin-bottom: 0.4rem; }
+    .card p  { font-size: 0.8rem; color: #666; }
+
+    /* ══════════════════════════════════════
+       COLOR TRANSITIONS
+    ══════════════════════════════════════ */
+    .color-box {
+      width: 120px;
+      height: 80px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+    }
+
+    .color-slow   { background: #3498db; transition: background 1s ease; }
+    .color-slow:hover { background: #e74c3c; }
+
+    .color-fast   { background: #27ae60; transition: background 0.1s ease; }
+    .color-fast:hover { background: #9b59b6; }
+
+    .color-linear { background: #f39c12; transition: background 0.5s linear; }
+    .color-linear:hover { background: #1abc9c; }
+
+    /* ══════════════════════════════════════
+       FADE IN/OUT (toggle)
+    ══════════════════════════════════════ */
+    .fade-box {
+      background: #3498db;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+      display: inline-block;
+    }
+
+    .fade-box.hidden { opacity: 0; }
+
+    /* ══════════════════════════════════════
+       LINK UNDERLINE TRANSITION
+    ══════════════════════════════════════ */
+    .fancy-link {
+      text-decoration: none;
+      color: #3498db;
+      position: relative;
+      font-size: 1.1rem;
+    }
+
+    .fancy-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #3498db;
+      transition: width 0.3s ease;
+    }
+
+    .fancy-link:hover::after { width: 100%; }
+
+    /* ══════════════════════════════════════
+       TRANSITION DELAY
+    ══════════════════════════════════════ */
+    .delay-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .delay-item {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      background: #3498db;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .delay-group:hover .delay-item:nth-child(1) { transform: translateY(-20px); background: #e74c3c; transition-delay: 0s; }
+    .delay-group:hover .delay-item:nth-child(2) { transform: translateY(-20px); background: #f39c12; transition-delay: 0.1s; }
+    .delay-group:hover .delay-item:nth-child(3) { transform: translateY(-20px); background: #27ae60; transition-delay: 0.2s; }
+    .delay-group:hover .delay-item:nth-child(4) { transform: translateY(-20px); background: #9b59b6; transition-delay: 0.3s; }
+    .delay-group:hover .delay-item:nth-child(5) { transform: translateY(-20px); background: #1abc9c; transition-delay: 0.4s; }
+
+    /* ══════════════════════════════════════
+       REDUCED MOTION
+    ══════════════════════════════════════ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Transitions</h1>
+
+  <!-- Timing functions -->
+  <h2>Timing Functions — Hover each track to see the difference</h2>
+  <div class="timing-demo">
+    <div class="timing-row">
+      <span class="timing-label">ease (default)</span>
+      <div class="timing-track"><div class="timing-ball ball-ease"></div></div>
+    </div>
+    <div class="timing-row">
+      <span class="timing-label">linear</span>
+      <div class="timing-track"><div class="timing-ball ball-linear"></div></div>
+    </div>
+    <div class="timing-row">
+      <span class="timing-label">ease-in</span>
+      <div class="timing-track"><div class="timing-ball ball-ease-in"></div></div>
+    </div>
+    <div class="timing-row">
+      <span class="timing-label">ease-out</span>
+      <div class="timing-track"><div class="timing-ball ball-ease-out"></div></div>
+    </div>
+    <div class="timing-row">
+      <span class="timing-label">ease-in-out</span>
+      <div class="timing-track"><div class="timing-ball ball-ease-in-out"></div></div>
+    </div>
+    <div class="timing-row">
+      <span class="timing-label">cubic-bezier (bounce)</span>
+      <div class="timing-track"><div class="timing-ball ball-bounce" style="background:#e74c3c;"></div></div>
+    </div>
+  </div>
+
+  <!-- Button transitions -->
+  <h2>Button Transitions — Hover each button</h2>
+  <div class="grid">
+    <button class="btn btn-bg">Background color</button>
+    <button class="btn btn-lift">Lift + shadow</button>
+    <button class="btn btn-scale">Scale</button>
+    <button class="btn btn-border">Border fill</button>
+    <button class="btn btn-glow">Glow pulse</button>
+  </div>
+
+  <!-- Card transitions -->
+  <h2>Card Hover — box-shadow + transform</h2>
+  <div class="grid">
+    <div class="card"><h3>Hover Me</h3><p>Lifts with shadow on hover</p></div>
+    <div class="card"><h3>Hover Me</h3><p>transition: 0.3s ease</p></div>
+    <div class="card"><h3>Hover Me</h3><p>transform + box-shadow</p></div>
+  </div>
+
+  <!-- Color transitions -->
+  <h2>Color Transitions — Hover each box</h2>
+  <div class="grid">
+    <div class="color-box color-slow">1s slow</div>
+    <div class="color-box color-fast">0.1s fast</div>
+    <div class="color-box color-linear">0.5s linear</div>
+  </div>
+
+  <!-- Fade toggle -->
+  <h2>Fade In/Out — opacity transition</h2>
+  <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+    <div class="fade-box" id="fadeBox">I fade in and out</div>
+    <button onclick="document.getElementById('fadeBox').classList.toggle('hidden')"
+            style="padding:0.5rem 1rem; border:none; background:#333; color:white; border-radius:6px; cursor:pointer;">
+      Toggle Fade
+    </button>
+  </div>
+  <p class="note">opacity: 0 with transition: opacity 0.4s ease</p>
+
+  <!-- Fancy link underline -->
+  <h2>Link Underline — width transition on ::after</h2>
+  <a class="fancy-link" href="#">Hover to see the underline grow</a>
+
+  <!-- Stagger with delay -->
+  <h2>Transition Delay — Stagger Effect (hover the group)</h2>
+  <div class="delay-group">
+    <div class="delay-item"></div>
+    <div class="delay-item"></div>
+    <div class="delay-item"></div>
+    <div class="delay-item"></div>
+    <div class="delay-item"></div>
+  </div>
+  <p class="note">Each item has transition-delay: 0s, 0.1s, 0.2s, 0.3s, 0.4s</p>
+
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Functions Demo</title>
+  <style>
+    /* ── Custom Properties (CSS Variables) ── */
+    :root {
+      --color-primary:   #3498db;
+      --color-secondary: #2ecc71;
+      --color-danger:    #e74c3c;
+      --color-warning:   #f39c12;
+
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-4: 1rem;
+      --space-8: 2rem;
+
+      --font-sm:   0.875rem;
+      --font-base: 1rem;
+      --font-lg:   1.25rem;
+      --font-xl:   1.5rem;
+
+      --nav-height:    64px;
+      --max-width:     1200px;
+      --border-radius: 8px;
+      --shadow:        0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      font-size: var(--font-base);
+    }
+
+    /* ── Navbar using var() and calc() ── */
+    .navbar {
+      height: var(--nav-height);
+      background: var(--color-primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      padding-inline: var(--space-8);
+      font-size: var(--font-lg);
+      font-weight: bold;
+      box-shadow: var(--shadow);
+    }
+
+    /* ── Page content ── */
+    .page {
+      /* calc: full height minus the navbar */
+      min-height: calc(100dvh - var(--nav-height));
+      padding: var(--space-8);
+    }
+
+    h1 { margin-bottom: var(--space-8); font-size: var(--font-xl); }
+    h2 { margin: var(--space-8) 0 var(--space-4); font-size: var(--font-lg); color: #555; border-bottom: 2px solid #dee2e6; padding-bottom: var(--space-2); }
+
+    /* ── Centered container using min() ── */
+    .container {
+      width: min(var(--max-width), 100% - 2rem);
+      margin-inline: auto;
+    }
+
+    /* ── calc() demos ── */
+    .calc-demo {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .calc-bar {
+      background: var(--color-primary);
+      color: white;
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--border-radius);
+      font-size: var(--font-sm);
+    }
+
+    .calc-minus-40  { width: calc(100% - 40px); }
+    .calc-half-plus { width: calc(50% + 20px); }
+    .calc-thirds    { width: calc(100% / 3); }
+
+    /* ── min() and max() demos ── */
+    .min-demo {
+      width: min(50%, 400px);
+      background: var(--color-secondary);
+      color: white;
+      padding: var(--space-4);
+      border-radius: var(--border-radius);
+      margin-bottom: var(--space-2);
+    }
+
+    .max-demo {
+      width: max(200px, 30%);
+      background: var(--color-warning);
+      color: white;
+      padding: var(--space-4);
+      border-radius: var(--border-radius);
+    }
+
+    /* ── clamp() demo ── */
+    .clamp-demo {
+      font-size: clamp(var(--font-base), 3vw, 2rem);
+      background: white;
+      border: 2px solid var(--color-primary);
+      padding: var(--space-4);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    /* ── var() with fallback ── */
+    .fallback-demo {
+      /* --undefined-color is not defined, so it falls back to #333 */
+      color: var(--undefined-color, #333);
+      background: var(--color-primary);
+      color: white;
+      padding: var(--space-4);
+      border-radius: var(--border-radius);
+    }
+
+    /* ── Color palette using var() ── */
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: var(--space-4);
+    }
+
+    .palette-card {
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .palette-color { height: 70px; }
+    .palette-label {
+      background: white;
+      padding: var(--space-2);
+      font-size: 0.75rem;
+      font-family: monospace;
+    }
+
+    /* ── Scoped variable override ── */
+    .card-default {
+      --card-bg: white;
+      --card-border: #dee2e6;
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      padding: var(--space-4);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      margin-bottom: var(--space-4);
+    }
+
+    .card-danger {
+      --card-bg: #fff5f5;
+      --card-border: var(--color-danger);
+    }
+
+    .card-success {
+      --card-bg: #f0fff4;
+      --card-border: var(--color-secondary);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">CSS Functions Demo</nav>
+
+  <div class="page">
+    <div class="container">
+
+      <h1>CSS Functions: calc(), min(), max(), clamp(), var()</h1>
+
+      <!-- calc() -->
+      <h2>calc() — Mix Different Units</h2>
+      <div class="calc-demo">
+        <div class="calc-bar calc-minus-40">width: calc(100% - 40px)</div>
+        <div class="calc-bar calc-half-plus">width: calc(50% + 20px)</div>
+        <div class="calc-bar calc-thirds">width: calc(100% / 3)</div>
+      </div>
+      <p style="margin-top:0.5rem; font-size:0.85rem; color:#666;">
+        ⚠️ Spaces around <code>+</code> and <code>-</code> are required in calc()
+      </p>
+
+      <!-- min() -->
+      <h2>min() — Use the Smallest Value</h2>
+      <div class="min-demo">
+        width: min(50%, 400px) — never wider than 400px
+      </div>
+
+      <!-- max() -->
+      <h2>max() — Use the Largest Value</h2>
+      <div class="max-demo">
+        width: max(200px, 30%) — never narrower than 200px
+      </div>
+
+      <!-- clamp() -->
+      <h2>clamp(min, preferred, max) — Fluid Sizing</h2>
+      <div class="clamp-demo">
+        font-size: clamp(1rem, 3vw, 2rem) — resize the window to see this text scale!
+      </div>
+
+      <!-- var() with fallback -->
+      <h2>var() — Custom Properties with Fallback</h2>
+      <div class="fallback-demo">
+        color: var(--undefined-color, #333) — the fallback kicks in when the variable isn't defined
+      </div>
+
+      <!-- Color palette -->
+      <h2>CSS Variables — Color Palette from :root</h2>
+      <div class="palette">
+        <div class="palette-card">
+          <div class="palette-color" style="background: var(--color-primary)"></div>
+          <div class="palette-label">--color-primary</div>
+        </div>
+        <div class="palette-card">
+          <div class="palette-color" style="background: var(--color-secondary)"></div>
+          <div class="palette-label">--color-secondary</div>
+        </div>
+        <div class="palette-card">
+          <div class="palette-color" style="background: var(--color-danger)"></div>
+          <div class="palette-label">--color-danger</div>
+        </div>
+        <div class="palette-card">
+          <div class="palette-color" style="background: var(--color-warning)"></div>
+          <div class="palette-label">--color-warning</div>
+        </div>
+      </div>
+
+      <!-- Scoped variable override -->
+      <h2>Scoped Variable Override — Same Component, Different Theme</h2>
+      <div class="card-default">
+        Default card — uses <code>--card-bg: white</code>
+      </div>
+      <div class="card-default card-danger">
+        Danger card — overrides <code>--card-bg</code> and <code>--card-border</code> locally
+      </div>
+      <div class="card-default card-success">
+        Success card — overrides <code>--card-bg</code> and <code>--card-border</code> locally
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

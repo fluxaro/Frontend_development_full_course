@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Nesting Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding: 2rem;
+    }
+
+    h1 { margin-bottom: 2rem; font-size: 1.75rem; }
+    h2 { margin: 2.5rem 0 1rem; font-size: 1.1rem; color: #555; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+
+    .note {
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 1rem;
+      font-family: monospace;
+      background: #f0f0f0;
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+    }
+
+    /* ══════════════════════════════════════
+       BUTTON — all states nested
+    ══════════════════════════════════════ */
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.5rem;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-family: inherit;
+      transition: background 0.2s, transform 0.1s, opacity 0.2s;
+
+      /* & = .btn */
+      &:hover  { background: #2980b9; }
+      &:active { transform: scale(0.97); }
+      &:focus-visible { outline: 3px solid #f39c12; outline-offset: 3px; }
+      &:disabled { opacity: 0.5; cursor: not-allowed; }
+
+      /* Modifier variants */
+      &.btn-danger   { background: #e74c3c; &:hover { background: #c0392b; } }
+      &.btn-success  { background: #27ae60; &:hover { background: #1a7a42; } }
+      &.btn-outline  {
+        background: transparent;
+        border: 2px solid #3498db;
+        color: #3498db;
+        &:hover { background: #3498db; color: white; }
+      }
+      &.btn-sm { padding: 0.3rem 0.75rem; font-size: 0.8rem; }
+      &.btn-lg { padding: 0.75rem 2rem; font-size: 1rem; }
+    }
+
+    /* ══════════════════════════════════════
+       CARD — nested elements and states
+    ══════════════════════════════════════ */
+    .card {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: box-shadow 0.3s, transform 0.3s;
+
+      &:hover {
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        transform: translateY(-3px);
+      }
+
+      /* Nested elements */
+      .card-img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+      }
+
+      .card-body {
+        padding: 1.25rem;
+
+        h3 {
+          font-size: 1rem;
+          margin-bottom: 0.4rem;
+          color: #1a1a2e;
+        }
+
+        p {
+          font-size: 0.85rem;
+          color: #666;
+          line-height: 1.5;
+          margin-bottom: 0.75rem;
+        }
+      }
+
+      .card-footer {
+        padding: 0.75rem 1.25rem;
+        border-top: 1px solid #f0f0f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.8rem;
+        color: #999;
+      }
+
+      /* Modifier: featured card */
+      &.card-featured {
+        border-color: #3498db;
+        border-width: 2px;
+
+        .card-body h3 { color: #3498db; }
+      }
+    }
+
+    /* ══════════════════════════════════════
+       NAV — nested links and states
+    ══════════════════════════════════════ */
+    .nav {
+      background: #2c3e50;
+      padding: 0 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      height: 56px;
+
+      ul {
+        list-style: none;
+        display: flex;
+        gap: 0.25rem;
+      }
+
+      a {
+        display: block;
+        color: rgba(255,255,255,0.75);
+        text-decoration: none;
+        padding: 0.4rem 0.75rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        transition: background 0.2s, color 0.2s;
+
+        &:hover { background: rgba(255,255,255,0.1); color: white; }
+        &.active { background: #3498db; color: white; }
+      }
+    }
+
+    /* ══════════════════════════════════════
+       FORM — nested inputs and states
+    ══════════════════════════════════════ */
+    .form-group {
+      margin-bottom: 1rem;
+
+      label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+        color: #555;
+      }
+
+      input, textarea {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border: 2px solid #dee2e6;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-family: inherit;
+        transition: border-color 0.2s;
+        outline: none;
+
+        &:focus { border-color: #3498db; }
+        &:invalid { border-color: #e74c3c; }
+        &::placeholder { color: #aaa; }
+      }
+
+      /* Error state */
+      &.has-error {
+        label { color: #e74c3c; }
+        input { border-color: #e74c3c; }
+      }
+    }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE NESTING
+    ══════════════════════════════════════ */
+    .hero {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+
+      h2 {
+        font-size: 1.5rem;
+        border: none;
+        color: white;
+        padding: 0;
+        margin: 0 0 0.5rem;
+      }
+
+      p { color: rgba(255,255,255,0.85); }
+
+      /* Nested media query */
+      @media (min-width: 640px) {
+        padding: 4rem 2rem;
+
+        h2 { font-size: 2.5rem; }
+        p  { font-size: 1.1rem; }
+      }
+    }
+
+    /* ══════════════════════════════════════
+       BEM WITH NESTING
+    ══════════════════════════════════════ */
+    .alert {
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      border-left: 4px solid;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+
+      &__icon { margin-right: 0.5rem; }
+      &__title { font-weight: bold; margin-bottom: 0.25rem; }
+      &__message { opacity: 0.85; }
+
+      &--info    { background: #e8f4fd; border-color: #3498db; color: #1a4a6e; }
+      &--success { background: #d4edda; border-color: #27ae60; color: #155724; }
+      &--danger  { background: #f8d7da; border-color: #e74c3c; color: #721c24; }
+      &--warning { background: #fff3cd; border-color: #f39c12; color: #856404; }
+    }
+
+    /* ── Layout helpers ── */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    .flex { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .mb-4 { margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Nesting Module</h1>
+
+  <!-- Hero with nested media query -->
+  <div class="hero">
+    <h2>CSS Nesting</h2>
+    <p>Resize the window — this hero has a nested @media query inside .hero { }</p>
+  </div>
+
+  <!-- Buttons -->
+  <h2>Button — All States Nested</h2>
+  <div class="note">.btn { &:hover { } &:active { } &.btn-danger { } &.btn-sm { } }</div>
+  <div class="flex mb-4">
+    <button class="btn">Default</button>
+    <button class="btn btn-danger">Danger</button>
+    <button class="btn btn-success">Success</button>
+    <button class="btn btn-outline">Outline</button>
+    <button class="btn btn-sm">Small</button>
+    <button class="btn btn-lg">Large</button>
+    <button class="btn" disabled>Disabled</button>
+  </div>
+
+  <!-- Nav -->
+  <h2>Navigation — Nested Links</h2>
+  <div class="note">.nav { ul { } a { &:hover { } &.active { } } }</div>
+  <nav class="nav mb-4">
+    <ul>
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Work</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Cards -->
+  <h2>Cards — Nested Elements and Hover</h2>
+  <div class="note">.card { .card-body { h3 { } p { } } &:hover { } &.card-featured { } }</div>
+  <div class="grid mb-4">
+    <div class="card">
+      <div class="card-img" style="background: linear-gradient(135deg, #3498db, #9b59b6);"></div>
+      <div class="card-body">
+        <h3>Normal Card</h3>
+        <p>Hover to see the lift effect. All styles are nested inside .card { }</p>
+      </div>
+      <div class="card-footer">
+        <span>May 2026</span>
+        <span>3 min read</span>
+      </div>
+    </div>
+    <div class="card card-featured">
+      <div class="card-img" style="background: linear-gradient(135deg, #27ae60, #2ecc71);"></div>
+      <div class="card-body">
+        <h3>Featured Card</h3>
+        <p>The .card-featured modifier is nested inside .card { &.card-featured { } }</p>
+      </div>
+      <div class="card-footer">
+        <span>May 2026</span>
+        <span>5 min read</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <h2>Form — Nested Input States</h2>
+  <div class="note">.form-group { label { } input { &:focus { } &:invalid { } } &.has-error { } }</div>
+  <div style="max-width:400px;">
+    <div class="form-group">
+      <label>Normal field</label>
+      <input type="text" placeholder="Click to focus">
+    </div>
+    <div class="form-group">
+      <label>Email (try invalid input)</label>
+      <input type="email" placeholder="Type an invalid email">
+    </div>
+    <div class="form-group has-error">
+      <label>Error state (.has-error)</label>
+      <input type="text" value="Wrong value">
+    </div>
+  </div>
+
+  <!-- BEM with nesting -->
+  <h2>BEM with Nesting — &__element and &--modifier</h2>
+  <div class="note">.alert { &__title { } &--info { } &--success { } }</div>
+  <div class="alert alert--info">
+    <div class="alert__title">ℹ️ Info</div>
+    <div class="alert__message">This uses .alert--info modifier nested inside .alert { }</div>
+  </div>
+  <div class="alert alert--success">
+    <div class="alert__title">✅ Success</div>
+    <div class="alert__message">BEM modifiers work great with CSS nesting.</div>
+  </div>
+  <div class="alert alert--danger">
+    <div class="alert__title">❌ Danger</div>
+    <div class="alert__message">No need for separate .alert--danger { } blocks.</div>
+  </div>
+  <div class="alert alert--warning">
+    <div class="alert__title">⚠️ Warning</div>
+    <div class="alert__message">Keep nesting to 3 levels max for readability.</div>
+  </div>
+
+</body>
+</html>

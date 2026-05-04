@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Custom Properties Demo</title>
+  <style>
+    /* ══════════════════════════════════════
+       GLOBAL DESIGN TOKENS
+    ══════════════════════════════════════ */
+    :root {
+      /* Colors */
+      --color-primary:   #3498db;
+      --color-secondary: #9b59b6;
+      --color-success:   #27ae60;
+      --color-danger:    #e74c3c;
+      --color-warning:   #f39c12;
+
+      /* Surfaces */
+      --bg-page:    #f8f9fa;
+      --bg-surface: #ffffff;
+      --bg-muted:   #f0f2f5;
+
+      /* Text */
+      --text-primary: #1a1a2e;
+      --text-muted:   #666;
+      --text-inverse: #ffffff;
+
+      /* Borders */
+      --border-color: #dee2e6;
+      --border-radius: 8px;
+      --border-radius-lg: 12px;
+
+      /* Spacing */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+
+      /* Typography */
+      --font-sm:   0.875rem;
+      --font-base: 1rem;
+      --font-lg:   1.25rem;
+      --font-xl:   1.5rem;
+      --font-2xl:  2rem;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+
+      /* Layout */
+      --nav-height: 60px;
+      --max-width:  1100px;
+    }
+
+    /* ══════════════════════════════════════
+       DARK THEME — override variables
+    ══════════════════════════════════════ */
+    [data-theme="dark"] {
+      --bg-page:    #0f172a;
+      --bg-surface: #1e293b;
+      --bg-muted:   #334155;
+
+      --text-primary: #e2e8f0;
+      --text-muted:   #94a3b8;
+
+      --border-color: #334155;
+
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+    }
+
+    /* ══════════════════════════════════════
+       BASE STYLES — use variables everywhere
+    ══════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: var(--bg-page);
+      color: var(--text-primary);
+      font-size: var(--font-base);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      height: var(--nav-height);
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-inline: var(--space-8);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar-brand { font-weight: bold; font-size: var(--font-lg); color: var(--color-primary); }
+
+    .theme-toggle {
+      background: var(--bg-muted);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-size: var(--font-sm);
+      transition: background 0.2s;
+    }
+
+    .theme-toggle:hover { background: var(--border-color); }
+
+    /* ── Page ── */
+    .page {
+      max-width: var(--max-width);
+      margin-inline: auto;
+      padding: var(--space-8);
+    }
+
+    h1 { font-size: var(--font-2xl); margin-bottom: var(--space-2); }
+    .subtitle { color: var(--text-muted); margin-bottom: var(--space-8); }
+    h2 { font-size: var(--font-lg); margin: var(--space-8) 0 var(--space-4); color: var(--text-muted); border-bottom: 2px solid var(--border-color); padding-bottom: var(--space-2); }
+
+    /* ── Cards ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: var(--space-4);
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-lg);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .card-icon { font-size: 2rem; margin-bottom: var(--space-3); }
+    .card h3   { font-size: var(--font-base); margin-bottom: var(--space-2); }
+    .card p    { font-size: var(--font-sm); color: var(--text-muted); line-height: 1.5; }
+
+    /* ── Buttons using variables ── */
+    .btn-group { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+
+    .btn {
+      padding: var(--space-2) var(--space-6);
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-size: var(--font-sm);
+      font-family: inherit;
+      font-weight: 600;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+
+    .btn:hover   { opacity: 0.85; }
+    .btn:active  { transform: scale(0.97); }
+
+    .btn-primary   { background: var(--color-primary);   color: var(--text-inverse); }
+    .btn-secondary { background: var(--color-secondary); color: var(--text-inverse); }
+    .btn-success   { background: var(--color-success);   color: var(--text-inverse); }
+    .btn-danger    { background: var(--color-danger);    color: var(--text-inverse); }
+    .btn-warning   { background: var(--color-warning);   color: var(--text-inverse); }
+
+    /* ── Scoped variable override ── */
+    .alert {
+      --alert-bg:     #e8f4fd;
+      --alert-border: var(--color-primary);
+      --alert-text:   #1a4a6e;
+
+      background: var(--alert-bg);
+      border-left: 4px solid var(--alert-border);
+      color: var(--alert-text);
+      padding: var(--space-4);
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      margin-bottom: var(--space-3);
+      font-size: var(--font-sm);
+    }
+
+    .alert-success {
+      --alert-bg:     #d4edda;
+      --alert-border: var(--color-success);
+      --alert-text:   #155724;
+    }
+
+    .alert-danger {
+      --alert-bg:     #f8d7da;
+      --alert-border: var(--color-danger);
+      --alert-text:   #721c24;
+    }
+
+    .alert-warning {
+      --alert-bg:     #fff3cd;
+      --alert-border: var(--color-warning);
+      --alert-text:   #856404;
+    }
+
+    /* ── Fallback demo ── */
+    .fallback-demo {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: var(--space-4);
+    }
+
+    .fallback-demo p { font-size: var(--font-sm); margin-bottom: var(--space-2); }
+
+    .fallback-box {
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--border-radius);
+      font-size: var(--font-sm);
+      margin-bottom: var(--space-2);
+      color: white;
+    }
+
+    /* --defined-color exists, --undefined-color does not */
+    .fb-defined   { background: var(--color-primary); }
+    .fb-undefined { background: var(--undefined-color, #e74c3c); } /* fallback to red */
+    .fb-chain     { background: var(--also-undefined, var(--color-success)); } /* chain fallback */
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <span class="navbar-brand">CSS Variables</span>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙 Toggle Dark Mode</button>
+  </nav>
+
+  <div class="page">
+
+    <h1>CSS Custom Properties</h1>
+    <p class="subtitle">Click "Toggle Dark Mode" to see all variables switch at once — no individual overrides needed.</p>
+
+    <!-- Cards -->
+    <h2>Cards — All Using Variables</h2>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">🎨</div>
+        <h3>Design Tokens</h3>
+        <p>Define colors, spacing, and typography once in <code>:root</code> and reuse everywhere.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌙</div>
+        <h3>Dark Mode</h3>
+        <p>Override variables in <code>[data-theme="dark"]</code> — every component updates automatically.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔧</div>
+        <h3>Scoped Overrides</h3>
+        <p>Override a variable inside a component to create variants without duplicating CSS.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>JavaScript Access</h3>
+        <p>Read and write variables with <code>getPropertyValue</code> and <code>setProperty</code>.</p>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <h2>Buttons — Using Color Variables</h2>
+    <div class="btn-group">
+      <button class="btn btn-primary">Primary</button>
+      <button class="btn btn-secondary">Secondary</button>
+      <button class="btn btn-success">Success</button>
+      <button class="btn btn-danger">Danger</button>
+      <button class="btn btn-warning">Warning</button>
+    </div>
+
+    <!-- Alerts — scoped overrides -->
+    <h2>Alerts — Scoped Variable Overrides</h2>
+    <div class="alert">ℹ️ Info alert — uses <code>--color-primary</code> for the border</div>
+    <div class="alert alert-success">✅ Success alert — overrides <code>--alert-border</code> to <code>--color-success</code></div>
+    <div class="alert alert-danger">❌ Danger alert — overrides <code>--alert-border</code> to <code>--color-danger</code></div>
+    <div class="alert alert-warning">⚠️ Warning alert — overrides <code>--alert-border</code> to <code>--color-warning</code></div>
+
+    <!-- Fallback values -->
+    <h2>Fallback Values — var(--name, fallback)</h2>
+    <div class="fallback-demo">
+      <p>When a variable is not defined, the fallback value is used:</p>
+      <div class="fallback-box fb-defined">var(--color-primary) — defined ✅ → blue</div>
+      <div class="fallback-box fb-undefined">var(--undefined-color, #e74c3c) — undefined, fallback → red</div>
+      <div class="fallback-box fb-chain">var(--also-undefined, var(--color-success)) — chained fallback → green</div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      // Save preference
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+
+    // Restore saved preference on load
+    const saved = localStorage.getItem('theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+  </script>
+
+</body>
+</html>
