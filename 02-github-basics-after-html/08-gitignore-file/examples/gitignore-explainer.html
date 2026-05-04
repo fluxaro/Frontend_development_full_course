@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>.gitignore Explainer</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    h1 { font-size: 1.75rem; margin-bottom: 0.5rem; color: #f1f5f9; }
+    .subtitle { color: #64748b; margin-bottom: 2rem; }
+    h2 { font-size: 1.1rem; color: #94a3b8; margin: 2.5rem 0 1rem; border-bottom: 1px solid #1e293b; padding-bottom: 0.5rem; }
+
+    /* ── File viewer ── */
+    .file-viewer {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      font-family: 'Courier New', monospace;
+    }
+
+    .file-header {
+      background: #1e293b;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    .file-icon { font-size: 1rem; }
+
+    .file-body {
+      padding: 1.25rem;
+      font-size: 0.85rem;
+      line-height: 2;
+    }
+
+    .comment  { color: #64748b; }
+    .pattern  { color: #e2e8f0; }
+    .folder   { color: #f39c12; }
+    .wildcard { color: #3498db; }
+    .negation { color: #27ae60; }
+
+    /* ── Pattern table ── */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: #1e293b;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    th, td {
+      padding: 0.6rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #334155;
+      font-size: 0.85rem;
+    }
+
+    th { background: #334155; color: #e2e8f0; }
+    tr:last-child td { border-bottom: none; }
+    td:first-child { font-family: monospace; color: #3498db; }
+    td:last-child  { color: #94a3b8; }
+
+    /* ── Terminal ── */
+    .terminal {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      font-family: 'Courier New', monospace;
+    }
+
+    .terminal-header {
+      background: #1e293b;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-red    { background: #e74c3c; }
+    .dot-yellow { background: #f39c12; }
+    .dot-green  { background: #27ae60; }
+
+    .terminal-title { font-size: 0.8rem; color: #64748b; margin-left: 0.5rem; }
+
+    .terminal-body { padding: 1.25rem; font-size: 0.85rem; line-height: 1.8; }
+
+    .prompt  { color: #27ae60; }
+    .cmd     { color: #e2e8f0; }
+    .output  { color: #94a3b8; }
+    .warning { color: #f39c12; }
+    .error   { color: #e74c3c; }
+
+    /* ── What to ignore cards ── */
+    .ignore-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .ignore-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .ignore-card h3 {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      color: #f1f5f9;
+    }
+
+    .ignore-card ul {
+      list-style: none;
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: #94a3b8;
+      line-height: 1.8;
+    }
+
+    .ignore-card.danger { border-color: #e74c3c; }
+    .ignore-card.danger h3 { color: #e74c3c; }
+
+    /* ── Alert ── */
+    .alert {
+      background: #1e293b;
+      border-left: 4px solid #f39c12;
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.25rem;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      margin-bottom: 1rem;
+    }
+
+    .alert strong { color: #f39c12; }
+  </style>
+</head>
+<body>
+
+  <h1>.gitignore</h1>
+  <p class="subtitle">Tell Git which files to never track — keep secrets safe and repos clean</p>
+
+  <!-- What is .gitignore -->
+  <h2>What is .gitignore?</h2>
+  <div class="alert">
+    <strong>The rule:</strong> Any file or folder listed in .gitignore will never be committed to Git.
+    It's invisible to Git — as if it doesn't exist.
+  </div>
+
+  <!-- Standard frontend .gitignore -->
+  <h2>Standard Frontend .gitignore</h2>
+  <div class="file-viewer">
+    <div class="file-header">
+      <span class="file-icon">📄</span>
+      .gitignore
+    </div>
+    <div class="file-body">
+      <div><span class="comment"># Dependencies</span></div>
+      <div><span class="folder">node_modules/</span></div>
+      <br>
+      <div><span class="comment"># Build output</span></div>
+      <div><span class="folder">dist/</span></div>
+      <div><span class="folder">build/</span></div>
+      <div><span class="folder">.next/</span></div>
+      <br>
+      <div><span class="comment"># Environment variables (NEVER commit these!)</span></div>
+      <div><span class="pattern">.env</span></div>
+      <div><span class="pattern">.env.local</span></div>
+      <div><span class="wildcard">.env.*.local</span></div>
+      <br>
+      <div><span class="comment"># OS files</span></div>
+      <div><span class="pattern">.DS_Store</span>          <span class="comment"># macOS</span></div>
+      <div><span class="pattern">Thumbs.db</span>          <span class="comment"># Windows</span></div>
+      <br>
+      <div><span class="comment"># Editor files</span></div>
+      <div><span class="folder">.vscode/</span></div>
+      <div><span class="folder">.idea/</span></div>
+      <br>
+      <div><span class="comment"># Logs</span></div>
+      <div><span class="wildcard">*.log</span></div>
+      <br>
+      <div><span class="comment"># Test coverage</span></div>
+      <div><span class="folder">coverage/</span></div>
+      <div><span class="folder">.cache/</span></div>
+    </div>
+  </div>
+
+  <!-- Pattern syntax -->
+  <h2>Pattern Syntax</h2>
+  <table>
+    <thead>
+      <tr><th>Pattern</th><th>What it matches</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>*.log</td><td>Any file ending in .log (anywhere)</td></tr>
+      <tr><td>temp/</td><td>The temp folder (trailing / = folder only)</td></tr>
+      <tr><td>**/temp/</td><td>temp folder anywhere in the project</td></tr>
+      <tr><td>!keep.log</td><td>Exception — do NOT ignore this file</td></tr>
+      <tr><td>doc/*.txt</td><td>.txt files in doc folder only (not subdirs)</td></tr>
+      <tr><td>doc/**/*.txt</td><td>.txt files in doc and all subdirectories</td></tr>
+      <tr><td>secret.txt</td><td>Exact file named secret.txt</td></tr>
+      <tr><td>*.env</td><td>Any file ending in .env</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Pattern examples in file -->
+  <h2>Pattern Examples</h2>
+  <div class="file-viewer">
+    <div class="file-header">
+      <span class="file-icon">📄</span>
+      .gitignore — pattern examples
+    </div>
+    <div class="file-body">
+      <div><span class="comment"># Ignore a specific file</span></div>
+      <div><span class="pattern">secret.txt</span></div>
+      <br>
+      <div><span class="comment"># Ignore all files with extension</span></div>
+      <div><span class="wildcard">*.log</span></div>
+      <div><span class="wildcard">*.env</span></div>
+      <br>
+      <div><span class="comment"># Ignore a folder (trailing slash = folder)</span></div>
+      <div><span class="folder">node_modules/</span></div>
+      <div><span class="folder">dist/</span></div>
+      <br>
+      <div><span class="comment"># Ignore folder anywhere in the project</span></div>
+      <div><span class="wildcard">**/temp/</span></div>
+      <br>
+      <div><span class="comment"># Exception: do NOT ignore this specific file</span></div>
+      <div><span class="negation">!important.log</span></div>
+      <br>
+      <div><span class="comment"># Ignore .txt files in logs/ folder only</span></div>
+      <div><span class="pattern">logs/*.txt</span></div>
+      <br>
+      <div><span class="comment"># Ignore .txt files in logs/ and all subdirs</span></div>
+      <div><span class="wildcard">logs/**/*.txt</span></div>
+    </div>
+  </div>
+
+  <!-- What to always ignore -->
+  <h2>What to Always Ignore</h2>
+  <div class="ignore-grid">
+    <div class="ignore-card danger">
+      <h3>🔴 NEVER commit these</h3>
+      <ul>
+        <li>.env</li>
+        <li>.env.local</li>
+        <li>API keys</li>
+        <li>passwords</li>
+        <li>private keys</li>
+        <li>credentials.json</li>
+      </ul>
+    </div>
+    <div class="ignore-card">
+      <h3>📦 Dependencies</h3>
+      <ul>
+        <li>node_modules/</li>
+        <li>vendor/</li>
+        <li>bower_components/</li>
+      </ul>
+    </div>
+    <div class="ignore-card">
+      <h3>🏗️ Build Output</h3>
+      <ul>
+        <li>dist/</li>
+        <li>build/</li>
+        <li>.next/</li>
+        <li>.nuxt/</li>
+        <li>out/</li>
+      </ul>
+    </div>
+    <div class="ignore-card">
+      <h3>💻 OS & Editor</h3>
+      <ul>
+        <li>.DS_Store</li>
+        <li>Thumbs.db</li>
+        <li>.vscode/</li>
+        <li>.idea/</li>
+        <li>*.swp</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Untrack already committed files -->
+  <h2>Untrack Files Already Committed</h2>
+  <div class="alert">
+    <strong>Problem:</strong> You committed node_modules/ or .env before adding .gitignore.
+    Adding them to .gitignore now won't remove them from Git history — you need to untrack them.
+  </div>
+
+  <div class="terminal">
+    <div class="terminal-header">
+      <div class="dot dot-red"></div>
+      <div class="dot dot-yellow"></div>
+      <div class="dot dot-green"></div>
+      <span class="terminal-title">Untrack files that should be ignored</span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="comment"># Untrack a single file (keeps it on disk)</span></div>
+      <div><span class="prompt">$ </span><span class="cmd">git rm --cached .env</span></div>
+      <br>
+      <div><span class="comment"># Untrack a folder</span></div>
+      <div><span class="prompt">$ </span><span class="cmd">git rm --cached -r node_modules/</span></div>
+      <br>
+      <div><span class="comment"># Then commit the removal</span></div>
+      <div><span class="prompt">$ </span><span class="cmd">git add .gitignore</span></div>
+      <div><span class="prompt">$ </span><span class="cmd">git commit -m "Remove tracked files that should be ignored"</span></div>
+      <div><span class="prompt">$ </span><span class="cmd">git push</span></div>
+    </div>
+  </div>
+
+  <!-- Global gitignore -->
+  <h2>Global .gitignore — For OS Files</h2>
+  <div class="terminal">
+    <div class="terminal-header">
+      <div class="dot dot-red"></div>
+      <div class="dot dot-yellow"></div>
+      <div class="dot dot-green"></div>
+      <span class="terminal-title">Set up a global gitignore</span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="comment"># Create a global gitignore file</span></div>
+      <div><span class="prompt">$ </span><span class="cmd">touch ~/.gitignore_global</span></div>
+      <br>
+      <div><span class="comment"># Tell Git to use it</span></div>
+      <div><span class="prompt">$ </span><span class="cmd">git config --global core.excludesfile ~/.gitignore_global</span></div>
+      <br>
+      <div><span class="comment"># Add OS-specific files to it (so you don't repeat in every project)</span></div>
+      <div><span class="output">.DS_Store</span></div>
+      <div><span class="output">Thumbs.db</span></div>
+      <div><span class="output">.vscode/</span></div>
+      <div><span class="output">.idea/</span></div>
+    </div>
+  </div>
+
+  <!-- Common mistakes -->
+  <h2>Common Mistakes</h2>
+  <div class="ignore-grid">
+    <div class="ignore-card danger">
+      <h3>❌ Not adding .gitignore first</h3>
+      <ul>
+        <li>Create .gitignore before</li>
+        <li>your first commit</li>
+        <li>Otherwise you must</li>
+        <li>untrack files manually</li>
+      </ul>
+    </div>
+    <div class="ignore-card danger">
+      <h3>❌ Committing node_modules</h3>
+      <ul>
+        <li>Can be 100MB+</li>
+        <li>Slows down cloning</li>
+        <li>npm install recreates it</li>
+        <li>Always ignore it</li>
+      </ul>
+    </div>
+    <div class="ignore-card danger">
+      <h3>❌ Committing .env files</h3>
+      <ul>
+        <li>Contains API keys</li>
+        <li>Contains passwords</li>
+        <li>Public repos = exposed</li>
+        <li>Rotate keys immediately</li>
+      </ul>
+    </div>
+    <div class="ignore-card">
+      <h3>⚠️ Missing trailing /</h3>
+      <ul>
+        <li>dist ignores files AND</li>
+        <li>folders named "dist"</li>
+        <li>dist/ ignores only</li>
+        <li>the folder</li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>

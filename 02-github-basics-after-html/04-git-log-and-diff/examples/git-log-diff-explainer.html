@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>git log & git diff Explainer</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    h1 { font-size: 1.75rem; margin-bottom: 0.5rem; color: #f1f5f9; }
+    .subtitle { color: #64748b; margin-bottom: 2rem; }
+    h2 { font-size: 1.1rem; color: #94a3b8; margin: 2.5rem 0 1rem; border-bottom: 1px solid #1e293b; padding-bottom: 0.5rem; }
+
+    /* ── Terminal ── */
+    .terminal {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      font-family: 'Courier New', monospace;
+    }
+
+    .terminal-header {
+      background: #1e293b;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-red    { background: #e74c3c; }
+    .dot-yellow { background: #f39c12; }
+    .dot-green  { background: #27ae60; }
+
+    .terminal-title { font-size: 0.8rem; color: #64748b; margin-left: 0.5rem; }
+
+    .terminal-body { padding: 1.25rem; font-size: 0.85rem; line-height: 1.8; }
+
+    .prompt { color: #27ae60; }
+    .cmd    { color: #e2e8f0; }
+    .output { color: #94a3b8; }
+    .hash   { color: #f39c12; }
+    .author { color: #3498db; }
+    .date   { color: #64748b; }
+    .msg    { color: #e2e8f0; }
+    .added  { color: #27ae60; }
+    .removed { color: #e74c3c; }
+    .hunk   { color: #3498db; }
+    .file   { color: #9b59b6; }
+
+    /* ── Command cards ── */
+    .cmd-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .cmd-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .cmd-card code {
+      display: block;
+      background: #020617;
+      color: #27ae60;
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      font-family: 'Courier New', monospace;
+    }
+
+    .cmd-card p {
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    /* ── Diff explanation ── */
+    .diff-legend {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.8rem;
+    }
+
+    /* ── HEAD diagram ── */
+    .head-diagram {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 1.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+    }
+
+    .commit-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .commit-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #3498db;
+      flex-shrink: 0;
+    }
+
+    .commit-line {
+      width: 2px;
+      height: 20px;
+      background: #334155;
+      margin-left: 5px;
+    }
+
+    .head-badge {
+      background: #e74c3c;
+      color: white;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    .branch-badge {
+      background: #27ae60;
+      color: white;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>git log & git diff</h1>
+  <p class="subtitle">Inspect your commit history and see exactly what changed</p>
+
+  <!-- git log examples -->
+  <h2>git log — View Commit History</h2>
+
+  <div class="terminal">
+    <div class="terminal-header">
+      <div class="dot dot-red"></div>
+      <div class="dot dot-yellow"></div>
+      <div class="dot dot-green"></div>
+      <span class="terminal-title">git log --oneline --graph --all</span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="prompt">$ </span><span class="cmd">git log --oneline --graph --all</span></div>
+      <div><span class="output">* </span><span class="hash">a3f8d70</span> <span class="msg">(HEAD → main) Add contact form validation</span></div>
+      <div><span class="output">* </span><span class="hash">b2c1e45</span> <span class="msg">Style the navigation bar</span></div>
+      <div><span class="output">* </span><span class="hash">9d4f123</span> <span class="msg">Add about.html page</span></div>
+      <div><span class="output">* </span><span class="hash">7e8a901</span> <span class="msg">Initial commit: add index.html</span></div>
+    </div>
+  </div>
+
+  <div class="terminal">
+    <div class="terminal-header">
+      <div class="dot dot-red"></div>
+      <div class="dot dot-yellow"></div>
+      <div class="dot dot-green"></div>
+      <span class="terminal-title">git log --stat (shows which files changed)</span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="prompt">$ </span><span class="cmd">git log --stat --oneline</span></div>
+      <div><span class="hash">a3f8d70</span> <span class="msg">Add contact form validation</span></div>
+      <div><span class="output"> contact.html | 15 </span><span class="added">+++++++++++++++</span></div>
+      <div><span class="output"> style.css    |  8 </span><span class="added">++++++++</span></div>
+      <div><span class="output"> 2 files changed, 23 insertions(+)</span></div>
+      <br>
+      <div><span class="hash">b2c1e45</span> <span class="msg">Style the navigation bar</span></div>
+      <div><span class="output"> style.css | 24 </span><span class="added">++++++++++++</span><span class="removed">------------</span></div>
+      <div><span class="output"> 1 file changed, 12 insertions(+), 12 deletions(-)</span></div>
+    </div>
+  </div>
+
+  <!-- git log command cards -->
+  <div class="cmd-grid">
+    <div class="cmd-card">
+      <code>git log</code>
+      <p>Full log with author, date, and message</p>
+    </div>
+    <div class="cmd-card">
+      <code>git log --oneline</code>
+      <p>Compact one-line format — hash + message</p>
+    </div>
+    <div class="cmd-card">
+      <code>git log --oneline --graph --all</code>
+      <p>Visual branch graph — most useful format</p>
+    </div>
+    <div class="cmd-card">
+      <code>git log -5</code>
+      <p>Show only the last 5 commits</p>
+    </div>
+    <div class="cmd-card">
+      <code>git log --author="Alex"</code>
+      <p>Filter commits by author name</p>
+    </div>
+    <div class="cmd-card">
+      <code>git log --since="1 week ago"</code>
+      <p>Filter commits by date range</p>
+    </div>
+    <div class="cmd-card">
+      <code>git log --grep="fix"</code>
+      <p>Search commit messages for a keyword</p>
+    </div>
+    <div class="cmd-card">
+      <code>git log -- index.html</code>
+      <p>Show commits that changed a specific file</p>
+    </div>
+  </div>
+
+  <!-- git diff -->
+  <h2>git diff — See What Changed</h2>
+
+  <div class="terminal">
+    <div class="terminal-header">
+      <div class="dot dot-red"></div>
+      <div class="dot dot-yellow"></div>
+      <div class="dot dot-green"></div>
+      <span class="terminal-title">git diff — reading the output</span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="prompt">$ </span><span class="cmd">git diff HEAD~1</span></div>
+      <br>
+      <div><span class="file">diff --git a/index.html b/index.html</span></div>
+      <div><span class="output">index 3f4a2b1..8c9d0e2 100644</span></div>
+      <div><span class="removed">--- a/index.html</span>  <span class="output">← old version</span></div>
+      <div><span class="added">+++ b/index.html</span>  <span class="output">← new version</span></div>
+      <div><span class="hunk">@@ -10,7 +10,10 @@</span>  <span class="output">← line numbers</span></div>
+      <div><span class="output">   &lt;body&gt;</span>              <span class="output">← unchanged context</span></div>
+      <div><span class="output">     &lt;h1&gt;Hello&lt;/h1&gt;</span>   <span class="output">← unchanged context</span></div>
+      <div><span class="removed">-    &lt;p&gt;Old text&lt;/p&gt;</span>  <span class="output">← REMOVED (red)</span></div>
+      <div><span class="added">+    &lt;p&gt;New text&lt;/p&gt;</span>  <span class="output">← ADDED (green)</span></div>
+      <div><span class="added">+    &lt;p&gt;Extra line&lt;/p&gt;</span> <span class="output">← ADDED (green)</span></div>
+      <div><span class="output">   &lt;/body&gt;</span>             <span class="output">← unchanged context</span></div>
+    </div>
+  </div>
+
+  <!-- Diff legend -->
+  <div class="diff-legend">
+    <div class="legend-item">
+      <div class="legend-color" style="background:#27ae60;">+</div>
+      <span>Added line (green)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background:#e74c3c;">-</div>
+      <span>Removed line (red)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background:#334155;"> </div>
+      <span>Unchanged context</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background:#3498db;">@@</div>
+      <span>Hunk header (line numbers)</span>
+    </div>
+  </div>
+
+  <!-- git diff command cards -->
+  <div class="cmd-grid">
+    <div class="cmd-card">
+      <code>git diff</code>
+      <p>Changes not yet staged (working directory)</p>
+    </div>
+    <div class="cmd-card">
+      <code>git diff --staged</code>
+      <p>Changes staged but not yet committed</p>
+    </div>
+    <div class="cmd-card">
+      <code>git diff HEAD~1</code>
+      <p>Compare last commit to current state</p>
+    </div>
+    <div class="cmd-card">
+      <code>git diff abc1234 def5678</code>
+      <p>Compare two specific commits</p>
+    </div>
+    <div class="cmd-card">
+      <code>git diff --name-only HEAD~1</code>
+      <p>Show only file names that changed</p>
+    </div>
+    <div class="cmd-card">
+      <code>git diff HEAD~1 index.html</code>
+      <p>Diff a specific file only</p>
+    </div>
+  </div>
+
+  <!-- git show -->
+  <h2>git show — Inspect a Single Commit</h2>
+
+  <div class="terminal">
+    <div class="terminal-header">
+      <div class="dot dot-red"></div>
+      <div class="dot dot-yellow"></div>
+      <div class="dot dot-green"></div>
+      <span class="terminal-title">git show HEAD</span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="prompt">$ </span><span class="cmd">git show HEAD</span></div>
+      <div><span class="output">commit </span><span class="hash">a3f8d70c2b1e4f5d6a7b8c9d0e1f2a3b4c5d6e7f</span></div>
+      <div><span class="output">Author: </span><span class="author">Alex Rivera &lt;alex@example.com&gt;</span></div>
+      <div><span class="output">Date:   </span><span class="date">Mon May 4 14:32:00 2026</span></div>
+      <br>
+      <div><span class="msg">    Add contact form validation</span></div>
+      <br>
+      <div><span class="file">diff --git a/contact.html b/contact.html</span></div>
+      <div><span class="hunk">@@ -20,5 +20,12 @@</span></div>
+      <div><span class="added">+  &lt;script&gt;</span></div>
+      <div><span class="added">+    form.addEventListener('submit', validateForm);</span></div>
+      <div><span class="added">+  &lt;/script&gt;</span></div>
+    </div>
+  </div>
+
+  <!-- Understanding HEAD -->
+  <h2>Understanding HEAD</h2>
+
+  <div class="head-diagram">
+    <p style="color:#94a3b8; margin-bottom:1rem;">HEAD points to your current position in history:</p>
+    <div class="commit-row">
+      <div class="commit-dot"></div>
+      <span class="hash">7e8a901</span>
+      <span style="color:#94a3b8;">Initial commit</span>
+    </div>
+    <div class="commit-line"></div>
+    <div class="commit-row">
+      <div class="commit-dot"></div>
+      <span class="hash">9d4f123</span>
+      <span style="color:#94a3b8;">Add about.html</span>
+    </div>
+    <div class="commit-line"></div>
+    <div class="commit-row">
+      <div class="commit-dot"></div>
+      <span class="hash">b2c1e45</span>
+      <span style="color:#94a3b8;">Style navigation</span>
+    </div>
+    <div class="commit-line"></div>
+    <div class="commit-row">
+      <div class="commit-dot" style="background:#e74c3c;"></div>
+      <span class="hash">a3f8d70</span>
+      <span style="color:#94a3b8;">Add form validation</span>
+      <span class="head-badge">HEAD</span>
+      <span class="branch-badge">main</span>
+    </div>
+    <br>
+    <p style="color:#64748b; font-size:0.8rem;">
+      HEAD~1 = b2c1e45 (one before HEAD)<br>
+      HEAD~2 = 9d4f123 (two before HEAD)<br>
+      HEAD~3 = 7e8a901 (three before HEAD)
+    </p>
+  </div>
+
+  <!-- Quick reference -->
+  <h2>Quick Reference</h2>
+  <div class="cmd-grid">
+    <div class="cmd-card">
+      <code>git log --oneline</code>
+      <p>What commits exist?</p>
+    </div>
+    <div class="cmd-card">
+      <code>git show HEAD</code>
+      <p>What changed in the last commit?</p>
+    </div>
+    <div class="cmd-card">
+      <code>git diff</code>
+      <p>What have I changed but not staged?</p>
+    </div>
+    <div class="cmd-card">
+      <code>git diff --staged</code>
+      <p>What have I staged but not committed?</p>
+    </div>
+    <div class="cmd-card">
+      <code>git log -- filename</code>
+      <p>When did this file last change?</p>
+    </div>
+    <div class="cmd-card">
+      <code>git blame filename</code>
+      <p>Who changed each line?</p>
+    </div>
+  </div>
+
+</body>
+</html>

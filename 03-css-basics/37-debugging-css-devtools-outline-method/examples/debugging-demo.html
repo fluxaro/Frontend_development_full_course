@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Debugging Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding: 2rem;
+    }
+
+    h1 { margin-bottom: 2rem; font-size: 1.75rem; }
+    h2 { margin: 2.5rem 0 1rem; font-size: 1.1rem; color: #555; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+
+    .note {
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 1rem;
+      font-family: monospace;
+      background: #f0f0f0;
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+    }
+
+    /* ══════════════════════════════════════
+       DEBUG TOGGLE — add class to body
+    ══════════════════════════════════════ */
+    body.debug-outlines * {
+      outline: 1px solid red;
+    }
+
+    body.debug-backgrounds * {
+      background: rgba(255, 0, 0, 0.05) !important;
+    }
+
+    /* ══════════════════════════════════════
+       COMMON BUG DEMOS
+    ══════════════════════════════════════ */
+
+    /* ── Bug 1: Missing box-sizing ── */
+    .bug-content-box {
+      box-sizing: content-box; /* the default — causes problems */
+      width: 300px;
+      padding: 20px;
+      border: 5px solid #e74c3c;
+      background: #fadbd8;
+      /* Total width = 300 + 40 + 10 = 350px — wider than expected! */
+    }
+
+    .fix-border-box {
+      box-sizing: border-box; /* the fix */
+      width: 300px;
+      padding: 20px;
+      border: 5px solid #27ae60;
+      background: #d5f5e3;
+      /* Total width = 300px — exactly as specified */
+    }
+
+    /* ── Bug 2: Margin collapse ── */
+    .margin-collapse-demo {
+      background: white;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .collapse-box {
+      background: #3498db;
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    .collapse-box-a { margin-bottom: 30px; }
+    .collapse-box-b { margin-top: 20px; }
+    /* Gap = 30px (not 50px) — margins collapse */
+
+    .no-collapse-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* ── Bug 3: z-index not working ── */
+    .z-index-demo {
+      position: relative;
+      height: 120px;
+    }
+
+    .z-box {
+      position: absolute;
+      width: 100px;
+      height: 80px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    .z-bug-1 { background: #3498db; top: 10px; left: 10px; z-index: 10; }
+    .z-bug-2 { background: #e74c3c; top: 30px; left: 50px; /* no position = z-index ignored */ }
+
+    .z-fix-1 { background: #3498db; top: 10px; left: 10px; z-index: 10; }
+    .z-fix-2 { background: #e74c3c; top: 30px; left: 50px; position: relative; z-index: 20; }
+
+    /* ── Bug 4: Flexbox on wrong element ── */
+    .flex-bug {
+      /* display: flex is on the wrong element */
+    }
+
+    .flex-bug .flex-child {
+      display: flex; /* WRONG — should be on parent */
+      gap: 0.5rem;
+    }
+
+    .flex-fix {
+      display: flex; /* CORRECT — on the parent */
+      gap: 0.5rem;
+    }
+
+    .flex-item {
+      background: #3498db;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    /* ── Bug 5: Image gap ── */
+    .img-gap-demo {
+      background: #ffeeba;
+      border: 2px solid #856404;
+      display: inline-block;
+      font-size: 0;
+    }
+
+    .img-gap-demo img {
+      width: 80px;
+      height: 60px;
+      background: #3498db;
+      display: block; /* fix: removes inline gap */
+    }
+
+    /* ── Bug 6: Overflow hidden not working ── */
+    .overflow-bug {
+      overflow: hidden;
+      border-radius: 12px;
+      /* missing position: relative */
+    }
+
+    .overflow-fix {
+      overflow: hidden;
+      border-radius: 12px;
+      position: relative; /* fix */
+    }
+
+    .overflow-child {
+      background: linear-gradient(135deg, #3498db, #9b59b6);
+      height: 80px;
+      margin: -10px; /* intentionally overflows */
+    }
+
+    /* ══════════════════════════════════════
+       DEBUG TOOLBAR
+    ══════════════════════════════════════ */
+    .debug-toolbar {
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a1a2e;
+      border-radius: 8px;
+      padding: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .debug-btn {
+      background: #334155;
+      color: white;
+      border: none;
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-family: monospace;
+      transition: background 0.2s;
+    }
+
+    .debug-btn:hover { background: #475569; }
+    .debug-btn.active { background: #e74c3c; }
+
+    /* ══════════════════════════════════════
+       COMPARISON LAYOUT
+    ══════════════════════════════════════ */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .comparison-col {
+      background: white;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .comparison-col.bug  { border-color: #e74c3c; }
+    .comparison-col.fix  { border-color: #27ae60; }
+
+    .comparison-col h3 {
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .comparison-col.bug h3  { background: #f8d7da; color: #721c24; }
+    .comparison-col.fix h3  { background: #d4edda; color: #155724; }
+
+    /* ══════════════════════════════════════
+       DEVTOOLS CHEAT SHEET
+    ══════════════════════════════════════ */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    th, td {
+      padding: 0.6rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #dee2e6;
+      font-size: 0.85rem;
+    }
+
+    th { background: #2c3e50; color: white; }
+    tr:last-child td { border-bottom: none; }
+    code { background: #f0f0f0; padding: 1px 4px; border-radius: 3px; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Debug toolbar -->
+  <div class="debug-toolbar">
+    <button class="debug-btn" id="outlineBtn" onclick="toggleDebug('outlines')">🔴 Outline All</button>
+    <button class="debug-btn" id="bgBtn" onclick="toggleDebug('backgrounds')">🟥 BG Tint</button>
+    <button class="debug-btn" onclick="toggleDebug('none')">✕ Clear</button>
+  </div>
+
+  <h1>CSS Debugging</h1>
+
+  <!-- Debug methods -->
+  <h2>Debug Methods — Click the toolbar buttons above</h2>
+  <div class="note">* { outline: 1px solid red } — reveals all element boundaries without affecting layout</div>
+  <div style="background:white; border:2px solid #dee2e6; border-radius:8px; padding:1.5rem;">
+    <p>Click <strong>"Outline All"</strong> to see red outlines on every element on this page.</p>
+    <p>Click <strong>"BG Tint"</strong> to see a red tint on every element's background.</p>
+    <p>These are the fastest ways to understand your layout structure.</p>
+    <div style="display:flex; gap:1rem; margin-top:1rem; flex-wrap:wrap;">
+      <div style="background:#3498db; color:white; padding:0.75rem 1rem; border-radius:6px;">Box 1</div>
+      <div style="background:#27ae60; color:white; padding:0.75rem 1rem; border-radius:6px;">Box 2</div>
+      <div style="background:#9b59b6; color:white; padding:0.75rem 1rem; border-radius:6px;">Box 3</div>
+    </div>
+  </div>
+
+  <!-- Bug 1: box-sizing -->
+  <h2>Bug 1: Missing box-sizing: border-box</h2>
+  <div class="comparison">
+    <div class="comparison-col bug">
+      <h3>❌ Bug — content-box</h3>
+      <div class="bug-content-box">
+        width: 300px but total = 350px<br>
+        (padding + border added on top)
+      </div>
+    </div>
+    <div class="comparison-col fix">
+      <h3>✅ Fix — border-box</h3>
+      <div class="fix-border-box">
+        width: 300px and total = 300px<br>
+        (padding + border included)
+      </div>
+    </div>
+  </div>
+
+  <!-- Bug 2: Margin collapse -->
+  <h2>Bug 2: Margin Collapse</h2>
+  <div class="comparison">
+    <div class="comparison-col bug">
+      <h3>❌ Bug — margins collapse</h3>
+      <div class="margin-collapse-demo">
+        <div class="collapse-box collapse-box-a">margin-bottom: 30px</div>
+        <div class="collapse-box collapse-box-b">margin-top: 20px</div>
+        <p style="font-size:0.75rem; color:#666; margin-top:0.5rem;">Gap = 30px (not 50px)</p>
+      </div>
+    </div>
+    <div class="comparison-col fix">
+      <h3>✅ Fix — use flex/grid or padding</h3>
+      <div class="margin-collapse-demo">
+        <div class="no-collapse-wrapper" style="gap:0;">
+          <div class="collapse-box" style="margin-bottom:0; padding-bottom:30px;">padding-bottom: 30px</div>
+          <div class="collapse-box" style="margin-top:0; padding-top:20px;">padding-top: 20px</div>
+        </div>
+        <p style="font-size:0.75rem; color:#666; margin-top:0.5rem;">Gap = 50px (no collapse)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bug 3: z-index -->
+  <h2>Bug 3: z-index Not Working (missing position)</h2>
+  <div class="comparison">
+    <div class="comparison-col bug">
+      <h3>❌ Bug — no position on red box</h3>
+      <div class="z-index-demo">
+        <div class="z-box z-bug-1">z-index: 10</div>
+        <div class="z-box z-bug-2">z-index: 20<br>(no position!)</div>
+      </div>
+      <p style="font-size:0.75rem; color:#666;">Red box has z-index: 20 but no position — z-index is ignored</p>
+    </div>
+    <div class="comparison-col fix">
+      <h3>✅ Fix — add position: relative</h3>
+      <div class="z-index-demo">
+        <div class="z-box z-fix-1">z-index: 10</div>
+        <div class="z-box z-fix-2">z-index: 20<br>position: relative</div>
+      </div>
+      <p style="font-size:0.75rem; color:#666;">Red box now has position: relative — z-index works</p>
+    </div>
+  </div>
+
+  <!-- Bug 4: Flexbox on wrong element -->
+  <h2>Bug 4: display: flex on Wrong Element</h2>
+  <div class="comparison">
+    <div class="comparison-col bug">
+      <h3>❌ Bug — flex on child</h3>
+      <div class="flex-bug">
+        <div class="flex-child">
+          <div class="flex-item">A</div>
+          <div class="flex-item">B</div>
+          <div class="flex-item">C</div>
+        </div>
+      </div>
+      <p style="font-size:0.75rem; color:#666; margin-top:0.5rem;">display: flex on .flex-child — items stack vertically</p>
+    </div>
+    <div class="comparison-col fix">
+      <h3>✅ Fix — flex on parent</h3>
+      <div class="flex-fix">
+        <div class="flex-item">A</div>
+        <div class="flex-item">B</div>
+        <div class="flex-item">C</div>
+      </div>
+      <p style="font-size:0.75rem; color:#666; margin-top:0.5rem;">display: flex on parent — items flow horizontally</p>
+    </div>
+  </div>
+
+  <!-- DevTools cheat sheet -->
+  <h2>DevTools Cheat Sheet</h2>
+  <table>
+    <thead>
+      <tr><th>Problem</th><th>Cause</th><th>Fix</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Element wider than expected</td><td>Missing box-sizing</td><td><code>* { box-sizing: border-box }</code></td></tr>
+      <tr><td>Margin not working</td><td>Margin collapse</td><td>Use padding or flex/grid</td></tr>
+      <tr><td>z-index not working</td><td>No position set</td><td>Add <code>position: relative</code></td></tr>
+      <tr><td>Flexbox not working</td><td>Applied to child</td><td>Apply to parent container</td></tr>
+      <tr><td>Image has gap below</td><td>Inline element</td><td><code>img { display: block }</code></td></tr>
+      <tr><td>overflow: hidden not working</td><td>Missing position</td><td>Add <code>position: relative</code></td></tr>
+      <tr><td>Width: 100% overflows</td><td>Padding adds to width</td><td><code>box-sizing: border-box</code></td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    function toggleDebug(type) {
+      const body = document.body;
+      const outlineBtn = document.getElementById('outlineBtn');
+      const bgBtn = document.getElementById('bgBtn');
+
+      body.classList.remove('debug-outlines', 'debug-backgrounds');
+      outlineBtn.classList.remove('active');
+      bgBtn.classList.remove('active');
+
+      if (type === 'outlines') {
+        body.classList.add('debug-outlines');
+        outlineBtn.classList.add('active');
+      } else if (type === 'backgrounds') {
+        body.classList.add('debug-backgrounds');
+        bgBtn.classList.add('active');
+      }
+    }
+  </script>
+
+</body>
+</html>

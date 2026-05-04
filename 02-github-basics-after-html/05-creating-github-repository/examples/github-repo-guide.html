@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creating a GitHub Repository — Guide</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    .subtitle { color: #666; margin-bottom: 2rem; }
+    h2 { font-size: 1.1rem; color: #555; margin: 2.5rem 0 1rem; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+
+    /* ── Steps ── */
+    .steps { display: flex; flex-direction: column; gap: 1rem; }
+
+    .step {
+      display: flex;
+      gap: 1rem;
+      background: white;
+      border: 1px solid #dee2e6;
+      border-radius: 10px;
+      padding: 1.25rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #3498db;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .step-content h3 { font-size: 0.95rem; margin-bottom: 0.4rem; }
+    .step-content p  { font-size: 0.85rem; color: #666; }
+
+    /* ── Naming examples ── */
+    .name-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .name-list {
+      background: white;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .name-list.good { border-color: #27ae60; }
+    .name-list.bad  { border-color: #e74c3c; }
+
+    .name-list h3 {
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .name-list.good h3 { background: #d4edda; color: #155724; }
+    .name-list.bad  h3 { background: #f8d7da; color: #721c24; }
+
+    .name-list ul { list-style: none; }
+    .name-list li {
+      font-family: monospace;
+      font-size: 0.85rem;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid #f0f0f0;
+      color: #333;
+    }
+
+    .name-list li:last-child { border-bottom: none; }
+
+    /* ── Visibility table ── */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    th, td {
+      padding: 0.6rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #dee2e6;
+      font-size: 0.85rem;
+    }
+
+    th { background: #2c3e50; color: white; }
+    tr:last-child td { border-bottom: none; }
+
+    /* ── README template ── */
+    .readme-preview {
+      background: white;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .readme-header {
+      background: #f6f8fa;
+      border-bottom: 1px solid #dee2e6;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .readme-body {
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .readme-body h1 { font-size: 1.5rem; margin-bottom: 0.5rem; border-bottom: 1px solid #dee2e6; padding-bottom: 0.5rem; }
+    .readme-body h2 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; border: none; padding: 0; color: #333; }
+    .readme-body p  { color: #555; margin-bottom: 0.75rem; }
+    .readme-body ul { padding-left: 1.5rem; color: #555; margin-bottom: 0.75rem; }
+    .readme-body code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 0.85rem; }
+
+    /* ── GitHub Pages ── */
+    .pages-steps {
+      background: white;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+
+    .pages-steps ol {
+      padding-left: 1.5rem;
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 2;
+    }
+
+    .url-preview {
+      background: #f0f0f0;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: #3498db;
+      margin-top: 0.75rem;
+    }
+
+    /* ── License table ── */
+    .license-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .license-card {
+      background: white;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .license-card h3 { font-size: 0.9rem; margin-bottom: 0.4rem; color: #3498db; }
+    .license-card p  { font-size: 0.8rem; color: #666; line-height: 1.5; }
+
+    .license-card.recommended { border-color: #27ae60; }
+    .license-card.recommended h3 { color: #27ae60; }
+
+    /* ── Terminal ── */
+    .terminal {
+      background: #1a1a2e;
+      border-radius: 8px;
+      padding: 1.25rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: #e2e8f0;
+    }
+
+    .prompt { color: #27ae60; }
+    .cmd    { color: #e2e8f0; }
+    .output { color: #64748b; }
+  </style>
+</head>
+<body>
+
+  <h1>Creating a GitHub Repository</h1>
+  <p class="subtitle">From zero to a live repository — step by step</p>
+
+  <!-- Steps to create a repo -->
+  <h2>Steps to Create a New Repository</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3>Go to github.com and click the "+" button → "New repository"</h3>
+        <p>Or go directly to github.com/new</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3>Choose a clear, descriptive name</h3>
+        <p>Use lowercase letters and hyphens. No spaces. See naming examples below.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h3>Add a short description (optional but recommended)</h3>
+        <p>2–3 sentences about what the project does. This shows on your profile.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h3>Choose Public or Private</h3>
+        <p>Public = anyone can see it. Private = only you (and collaborators). Portfolio projects should be Public.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <h3>Initialize with a README (recommended)</h3>
+        <p>Creates a README.md file automatically. You can also add a .gitignore template and a license.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">6</div>
+      <div class="step-content">
+        <h3>Click "Create repository"</h3>
+        <p>Your repo is live! Copy the clone URL to start working locally.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Naming conventions -->
+  <h2>Repository Naming Conventions</h2>
+  <div class="name-grid">
+    <div class="name-list good">
+      <h3>✅ Good Names</h3>
+      <ul>
+        <li>my-portfolio</li>
+        <li>todo-app-vanilla-js</li>
+        <li>weather-dashboard</li>
+        <li>alex-rivera-portfolio</li>
+        <li>frontend-bootcamp-projects</li>
+        <li>restaurant-landing-page</li>
+      </ul>
+    </div>
+    <div class="name-list bad">
+      <h3>❌ Bad Names</h3>
+      <ul>
+        <li>test</li>
+        <li>untitled</li>
+        <li>asdfgh</li>
+        <li>MyPortfolio (use hyphens)</li>
+        <li>my portfolio (no spaces)</li>
+        <li>project1</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Public vs Private -->
+  <h2>Public vs Private</h2>
+  <table>
+    <thead>
+      <tr><th>Situation</th><th>Use</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Portfolio project</td><td>✅ Public</td></tr>
+      <tr><td>Open source project</td><td>✅ Public</td></tr>
+      <tr><td>Bootcamp assignments</td><td>✅ Public (instructors can see)</td></tr>
+      <tr><td>Work / client project</td><td>🔒 Private</td></tr>
+      <tr><td>Projects with API keys or secrets</td><td>🔒 Private</td></tr>
+      <tr><td>Personal experiments</td><td>Either</td></tr>
+    </tbody>
+  </table>
+
+  <!-- README template -->
+  <h2>README Best Practices</h2>
+  <div class="readme-preview">
+    <div class="readme-header">
+      📄 README.md — example structure
+    </div>
+    <div class="readme-body">
+      <h1>🌤️ Weather Dashboard</h1>
+      <p>A responsive weather app that shows current conditions and a 5-day forecast for any city. Built with vanilla HTML, CSS, and JavaScript using the OpenWeather API.</p>
+
+      <h2>🛠️ Technologies</h2>
+      <ul>
+        <li>HTML5 &amp; CSS3</li>
+        <li>Vanilla JavaScript (ES6+)</li>
+        <li>OpenWeather API</li>
+      </ul>
+
+      <h2>🚀 How to Run</h2>
+      <p>1. Clone the repo: <code>git clone https://github.com/username/weather-dashboard</code></p>
+      <p>2. Open <code>index.html</code> in your browser</p>
+      <p>3. Enter a city name and press Enter</p>
+
+      <h2>👤 Author</h2>
+      <p>Alex Rivera — <a href="https://github.com/alexrivera" style="color:#3498db;">@alexrivera</a></p>
+    </div>
+  </div>
+
+  <!-- GitHub Pages -->
+  <h2>GitHub Pages — Free Hosting for Static Sites</h2>
+  <div class="pages-steps">
+    <ol>
+      <li>Go to your repo → <strong>Settings</strong> → <strong>Pages</strong></li>
+      <li>Under "Source", select <strong>Deploy from a branch</strong></li>
+      <li>Branch: <strong>main</strong>, Folder: <strong>/ (root)</strong></li>
+      <li>Click <strong>Save</strong></li>
+      <li>Wait ~1 minute, then your site is live at:</li>
+    </ol>
+    <div class="url-preview">https://yourusername.github.io/repo-name</div>
+    <p style="font-size:0.85rem; color:#666; margin-top:0.75rem;">
+      ✅ Works with: HTML, CSS, JavaScript, images<br>
+      ❌ Does NOT work with: PHP, Python, Node.js, databases
+    </p>
+  </div>
+
+  <!-- Connect local repo to GitHub -->
+  <h2>Connect a Local Repo to GitHub</h2>
+  <div class="terminal">
+    <div><span class="output"># After creating the repo on GitHub, run these commands locally:</span></div>
+    <br>
+    <div><span class="prompt">$ </span><span class="cmd">git init</span></div>
+    <div><span class="prompt">$ </span><span class="cmd">git add .</span></div>
+    <div><span class="prompt">$ </span><span class="cmd">git commit -m "Initial commit"</span></div>
+    <div><span class="prompt">$ </span><span class="cmd">git branch -M main</span></div>
+    <div><span class="prompt">$ </span><span class="cmd">git remote add origin https://github.com/username/repo-name.git</span></div>
+    <div><span class="prompt">$ </span><span class="cmd">git push -u origin main</span></div>
+    <br>
+    <div><span class="output"># If your local branch is "master" but GitHub expects "main":</span></div>
+    <div><span class="prompt">$ </span><span class="cmd">git branch -M main</span></div>
+  </div>
+
+  <!-- Licenses -->
+  <h2>License Types</h2>
+  <div class="license-grid">
+    <div class="license-card recommended">
+      <h3>MIT ⭐ Recommended</h3>
+      <p>Anyone can use, copy, modify, and distribute your code. Just keep the copyright notice. Best for most projects.</p>
+    </div>
+    <div class="license-card">
+      <h3>Apache 2.0</h3>
+      <p>Like MIT but includes patent protection. Good for larger projects.</p>
+    </div>
+    <div class="license-card">
+      <h3>GPL v3</h3>
+      <p>Derivatives must also be open source. Good if you want to keep the ecosystem open.</p>
+    </div>
+    <div class="license-card">
+      <h3>No License</h3>
+      <p>You keep all rights. Others technically cannot use your code without permission.</p>
+    </div>
+  </div>
+
+</body>
+</html>
