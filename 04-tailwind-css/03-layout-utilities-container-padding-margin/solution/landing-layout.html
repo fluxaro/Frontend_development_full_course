@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page Layout — Solution</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans text-gray-800">
+
+  <!-- Fixed Navbar -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur border-b border-gray-200">
+    <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+      <span class="font-bold text-xl text-blue-600">DevCourse</span>
+      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
+        <a href="#features" class="hover:text-gray-900 transition-colors">Features</a>
+        <a href="#pricing" class="hover:text-gray-900 transition-colors">Pricing</a>
+        <a href="#cta" class="hover:text-gray-900 transition-colors">About</a>
+      </div>
+      <a href="#cta" class="bg-blue-600 text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+        Get Started
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="min-h-screen bg-gradient-to-br from-slate-900 to-blue-900 flex items-center pt-16">
+    <div class="container mx-auto px-4 text-center">
+      <span class="inline-block bg-blue-500/20 text-blue-300 text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
+        🚀 New: React 19 module added
+      </span>
+      <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
+        Learn Frontend<br>
+        <span class="text-blue-400">Development</span>
+      </h1>
+      <p class="text-lg text-slate-300 max-w-xl mx-auto mb-10 leading-relaxed">
+        A complete bootcamp from HTML to React. Build real projects, master modern tools, and get hired.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="#cta" class="bg-blue-500 hover:bg-blue-400 text-white font-bold px-8 py-4 rounded-xl transition-colors text-base">
+          Start Free Trial
+        </a>
+        <a href="#features" class="border-2 border-white/30 hover:border-white/60 text-white font-semibold px-8 py-4 rounded-xl transition-colors text-base">
+          See Curriculum
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Everything You Need</h2>
+        <p class="text-gray-500 max-w-lg mx-auto">A structured path from zero to job-ready, with real projects and expert support.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+          <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl mb-5">📚</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Structured Curriculum</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Follow a proven path from beginner to job-ready. No guessing what to learn next.</p>
+        </div>
+        <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+          <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-2xl mb-5">🛠️</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Real Projects</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Build 10+ portfolio projects you can show to employers. Learn by doing, not watching.</p>
+        </div>
+        <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+          <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl mb-5">🎯</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Job Ready</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Interview prep, portfolio review, and career support included in every plan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="py-16 bg-blue-600">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
+        <div>
+          <p class="text-4xl font-extrabold mb-1">12k+</p>
+          <p class="text-blue-200 text-sm">Students enrolled</p>
+        </div>
+        <div>
+          <p class="text-4xl font-extrabold mb-1">94%</p>
+          <p class="text-blue-200 text-sm">Completion rate</p>
+        </div>
+        <div>
+          <p class="text-4xl font-extrabold mb-1">10+</p>
+          <p class="text-blue-200 text-sm">Real projects</p>
+        </div>
+        <div>
+          <p class="text-4xl font-extrabold mb-1">4.9★</p>
+          <p class="text-blue-200 text-sm">Average rating</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section id="cta" class="py-20 bg-gray-900">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold text-white mb-4">Ready to Start?</h2>
+      <p class="text-gray-400 mb-8 max-w-md mx-auto">Join thousands of developers who launched their careers with DevCourse.</p>
+      <a href="#" class="inline-block bg-blue-500 hover:bg-blue-400 text-white font-bold px-10 py-4 rounded-xl transition-colors text-base">
+        Enroll Now — It's Free
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-950 text-gray-500 py-8">
+    <div class="container mx-auto px-4 text-center text-sm">
+      <p>© 2026 DevCourse. Built with Tailwind CSS layout utilities.</p>
+    </div>
+  </footer>
+
+  <!-- Fixed back-to-top -->
+  <a href="#" class="fixed bottom-6 right-6 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-blue-500 transition-colors z-50 text-lg">
+    ↑
+  </a>
+
+</body>
+</html>

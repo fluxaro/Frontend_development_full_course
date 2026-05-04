@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind Layout Utilities</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+
+  <!-- Container demo -->
+  <div class="bg-blue-600 text-white py-3 text-center text-sm">
+    ↔ Resize the window to see the container max-width snap
+  </div>
+
+  <div class="container mx-auto px-4 py-8">
+
+    <h1 class="text-3xl font-bold mb-2">Layout Utilities</h1>
+    <p class="text-gray-500 mb-8">container, padding, margin, width, display, position</p>
+
+    <!-- Container -->
+    <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">container + mx-auto</h2>
+    <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+      <pre class="bg-gray-900 text-green-400 rounded-lg p-4 text-sm overflow-x-auto mb-3"><code>&lt;div class="container mx-auto px-4"&gt;
+  &lt;!-- content centered with max-width --&gt;
+&lt;/div&gt;</code></pre>
+      <div class="overflow-x-auto">
+        <table class="text-sm w-full">
+          <thead><tr class="bg-gray-100"><th class="text-left p-2 font-mono">Breakpoint</th><th class="text-left p-2">Max-width</th></tr></thead>
+          <tbody>
+            <tr class="border-t"><td class="p-2 font-mono text-blue-600">sm</td><td class="p-2">640px</td></tr>
+            <tr class="border-t"><td class="p-2 font-mono text-blue-600">md</td><td class="p-2">768px</td></tr>
+            <tr class="border-t"><td class="p-2 font-mono text-blue-600">lg</td><td class="p-2">1024px</td></tr>
+            <tr class="border-t"><td class="p-2 font-mono text-blue-600">xl</td><td class="p-2">1280px</td></tr>
+            <tr class="border-t"><td class="p-2 font-mono text-blue-600">2xl</td><td class="p-2">1536px</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Padding -->
+    <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Padding — p-*, px-*, py-*, pt-*, pr-*, pb-*, pl-*</h2>
+    <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+      <div class="flex flex-wrap gap-3">
+        <div class="bg-blue-50 border-2 border-blue-200 rounded"><div class="bg-blue-400 text-white text-xs font-mono p-2 rounded">p-2</div></div>
+        <div class="bg-blue-50 border-2 border-blue-200 rounded"><div class="bg-blue-400 text-white text-xs font-mono px-6 py-2 rounded">px-6 py-2</div></div>
+        <div class="bg-blue-50 border-2 border-blue-200 rounded"><div class="bg-blue-400 text-white text-xs font-mono pt-4 pb-1 px-3 rounded">pt-4 pb-1</div></div>
+        <div class="bg-blue-50 border-2 border-blue-200 rounded"><div class="bg-blue-400 text-white text-xs font-mono pl-8 pr-2 py-2 rounded">pl-8 pr-2</div></div>
+      </div>
+      <p class="text-xs text-gray-400 font-mono mt-3">p=all | px=horizontal | py=vertical | pt/pr/pb/pl=individual sides</p>
+    </div>
+
+    <!-- Margin -->
+    <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Margin — m-*, mx-auto (centering), space-y-*, space-x-*</h2>
+    <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+      <!-- mx-auto centering -->
+      <p class="text-sm text-gray-500 mb-3 font-mono">mx-auto — center a block element</p>
+      <div class="bg-blue-500 text-white text-sm font-mono px-4 py-2 rounded-lg w-48 mx-auto text-center mb-4">mx-auto centered</div>
+
+      <!-- space-y -->
+      <p class="text-sm text-gray-500 mb-3 font-mono">space-y-4 — vertical gap between children</p>
+      <div class="space-y-4 bg-gray-50 p-4 rounded-lg">
+        <div class="bg-purple-400 text-white text-xs font-mono px-3 py-2 rounded">Item 1</div>
+        <div class="bg-purple-400 text-white text-xs font-mono px-3 py-2 rounded">Item 2</div>
+        <div class="bg-purple-400 text-white text-xs font-mono px-3 py-2 rounded">Item 3</div>
+      </div>
+    </div>
+
+    <!-- Width & Height -->
+    <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Width & Height — w-*, h-*, max-w-*, min-h-*</h2>
+    <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+      <div class="space-y-2 mb-4">
+        <div class="h-5 bg-green-200 rounded w-1/4 text-xs font-mono text-green-700 flex items-center px-2">w-1/4</div>
+        <div class="h-5 bg-green-300 rounded w-2/4 text-xs font-mono text-green-800 flex items-center px-2">w-2/4 (w-1/2)</div>
+        <div class="h-5 bg-green-400 rounded w-3/4 text-xs font-mono text-white flex items-center px-2">w-3/4</div>
+        <div class="h-5 bg-green-500 rounded w-full text-xs font-mono text-white flex items-center px-2">w-full</div>
+      </div>
+      <div class="flex gap-3 items-end">
+        <div class="bg-orange-200 rounded w-12 h-12 flex items-center justify-center text-xs font-mono text-orange-700">h-12</div>
+        <div class="bg-orange-300 rounded w-12 h-20 flex items-center justify-center text-xs font-mono text-orange-800">h-20</div>
+        <div class="bg-orange-400 rounded w-12 h-32 flex items-center justify-center text-xs font-mono text-white">h-32</div>
+        <div class="bg-orange-500 rounded w-12 h-screen/2 flex items-center justify-center text-xs font-mono text-white">h-48</div>
+      </div>
+    </div>
+
+    <!-- Display -->
+    <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Display — block, inline, inline-block, hidden</h2>
+    <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+      <div class="mb-3">
+        <span class="bg-blue-100 text-blue-700 text-xs font-mono px-2 py-1 rounded inline-block">inline-block</span>
+        <span class="bg-blue-100 text-blue-700 text-xs font-mono px-2 py-1 rounded inline-block">inline-block</span>
+        <span class="bg-blue-100 text-blue-700 text-xs font-mono px-2 py-1 rounded inline-block">inline-block</span>
+      </div>
+      <div class="bg-green-100 text-green-700 text-xs font-mono px-2 py-1 rounded block mb-1">block — full width</div>
+      <div class="bg-green-100 text-green-700 text-xs font-mono px-2 py-1 rounded block mb-3">block — full width</div>
+      <div class="hidden bg-red-100 text-red-700 text-xs font-mono px-2 py-1 rounded">hidden — not visible</div>
+      <p class="text-xs text-gray-400 font-mono">The red box above uses "hidden" — it's not rendered</p>
+    </div>
+
+    <!-- Position -->
+    <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Position — relative, absolute, fixed, sticky, inset-*</h2>
+    <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+      <div class="relative bg-gray-100 rounded-lg h-32 mb-4">
+        <span class="text-xs text-gray-400 font-mono p-2">relative parent</span>
+        <div class="absolute top-2 right-2 bg-blue-500 text-white text-xs font-mono px-2 py-1 rounded">absolute top-2 right-2</div>
+        <div class="absolute bottom-2 left-2 bg-purple-500 text-white text-xs font-mono px-2 py-1 rounded">absolute bottom-2 left-2</div>
+        <div class="absolute inset-x-0 bottom-0 bg-green-500 text-white text-xs font-mono px-2 py-1 rounded-b-lg text-center">inset-x-0 bottom-0 (full width bottom)</div>
+      </div>
+      <p class="text-xs text-gray-400 font-mono">inset-0 = top-0 right-0 bottom-0 left-0 (fills parent)</p>
+    </div>
+
+    <!-- Overflow -->
+    <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Overflow — overflow-hidden, overflow-auto, truncate</h2>
+    <div class="bg-white rounded-xl border border-gray-200 p-6">
+      <div class="overflow-hidden rounded-lg bg-blue-50 h-16 mb-3">
+        <div class="bg-blue-400 text-white text-xs font-mono p-2 h-32">overflow-hidden — content clipped</div>
+      </div>
+      <p class="truncate text-sm text-gray-600 bg-gray-50 px-3 py-2 rounded font-mono">
+        truncate — This is a very long text that will be cut off with an ellipsis when it overflows the container width
+      </p>
+    </div>
+
+  </div>
+</body>
+</html>

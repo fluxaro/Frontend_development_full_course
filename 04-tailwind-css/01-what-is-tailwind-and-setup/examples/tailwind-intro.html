@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is Tailwind CSS?</title>
+  <!-- Tailwind via CDN (for learning only — use CLI in real projects) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 p-8 font-sans">
+
+  <h1 class="text-3xl font-bold mb-2">What is Tailwind CSS?</h1>
+  <p class="text-gray-500 mb-8">A utility-first CSS framework — style directly in HTML with small, single-purpose classes</p>
+
+  <!-- Traditional CSS vs Tailwind comparison -->
+  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Traditional CSS vs Tailwind</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <!-- Traditional -->
+    <div class="bg-white border-2 border-red-200 rounded-xl p-5">
+      <h3 class="text-sm font-bold text-red-600 bg-red-50 px-2 py-1 rounded inline-block mb-3">Traditional CSS</h3>
+      <pre class="bg-gray-900 text-green-400 rounded-lg p-4 text-xs overflow-x-auto leading-relaxed"><code>/* style.css */
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  color: #666;
+  line-height: 1.6;
+}</code></pre>
+      <pre class="bg-gray-900 text-blue-300 rounded-lg p-4 text-xs overflow-x-auto leading-relaxed mt-2"><code>&lt;!-- index.html --&gt;
+&lt;div class="card"&gt;
+  &lt;h3 class="card-title"&gt;Title&lt;/h3&gt;
+  &lt;p class="card-text"&gt;Text&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <!-- Tailwind -->
+    <div class="bg-white border-2 border-green-200 rounded-xl p-5">
+      <h3 class="text-sm font-bold text-green-600 bg-green-50 px-2 py-1 rounded inline-block mb-3">Tailwind CSS ✅</h3>
+      <pre class="bg-gray-900 text-blue-300 rounded-lg p-4 text-xs overflow-x-auto leading-relaxed"><code>&lt;!-- No separate CSS file needed --&gt;
+&lt;div class="bg-white rounded-xl p-6
+            shadow-md"&gt;
+  &lt;h3 class="text-xl font-bold mb-2"&gt;
+    Title
+  &lt;/h3&gt;
+  &lt;p class="text-gray-500 leading-relaxed"&gt;
+    Text
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      <p class="text-xs text-gray-400 mt-3">No CSS file. No class naming. No context switching.</p>
+    </div>
+  </div>
+
+  <!-- Live card example -->
+  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Live Example — Built with Tailwind</h2>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+      <div class="h-36 bg-gradient-to-br from-blue-500 to-purple-600"></div>
+      <div class="p-5">
+        <span class="text-xs font-bold uppercase tracking-wide text-blue-500 bg-blue-50 px-2 py-1 rounded-full">Design</span>
+        <h3 class="text-base font-bold mt-2 mb-1">Card Component</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Built entirely with Tailwind utility classes — no custom CSS written.</p>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+      <div class="h-36 bg-gradient-to-br from-green-400 to-teal-500"></div>
+      <div class="p-5">
+        <span class="text-xs font-bold uppercase tracking-wide text-green-600 bg-green-50 px-2 py-1 rounded-full">CSS</span>
+        <h3 class="text-base font-bold mt-2 mb-1">Utility First</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Each class does one thing. Compose them to build any design.</p>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+      <div class="h-36 bg-gradient-to-br from-orange-400 to-red-500"></div>
+      <div class="p-5">
+        <span class="text-xs font-bold uppercase tracking-wide text-orange-600 bg-orange-50 px-2 py-1 rounded-full">Fast</span>
+        <h3 class="text-base font-bold mt-2 mb-1">No Context Switch</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Style in HTML. No jumping between files. Faster development.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Setup methods -->
+  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Setup Methods</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+    <div class="bg-white border border-gray-200 rounded-xl p-5">
+      <h3 class="font-bold mb-1">CDN <span class="text-xs text-yellow-600 bg-yellow-50 px-2 py-0.5 rounded ml-1">Learning only</span></h3>
+      <p class="text-sm text-gray-500 mb-3">Quick start, no build step. Not for production.</p>
+      <pre class="bg-gray-900 text-green-400 rounded p-3 text-xs overflow-x-auto"><code>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</code></pre>
+    </div>
+    <div class="bg-white border-2 border-green-200 rounded-xl p-5">
+      <h3 class="font-bold mb-1">CLI / Vite <span class="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded ml-1">Recommended</span></h3>
+      <p class="text-sm text-gray-500 mb-3">Full features, tree-shaking, production-ready.</p>
+      <pre class="bg-gray-900 text-green-400 rounded p-3 text-xs overflow-x-auto leading-relaxed"><code>npm install -D tailwindcss @tailwindcss/vite
+# Add to vite.config.js and import in CSS</code></pre>
+    </div>
+  </div>
+
+  <!-- Why Tailwind -->
+  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Why Tailwind?</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+    <div class="bg-blue-50 border border-blue-100 rounded-xl p-4">
+      <div class="text-2xl mb-2">⚡</div>
+      <h3 class="font-bold text-sm mb-1">Fast to build</h3>
+      <p class="text-xs text-gray-500">No naming classes or writing CSS files</p>
+    </div>
+    <div class="bg-purple-50 border border-purple-100 rounded-xl p-4">
+      <div class="text-2xl mb-2">🎨</div>
+      <h3 class="font-bold text-sm mb-1">Design system built-in</h3>
+      <p class="text-xs text-gray-500">Consistent spacing, colors, and typography</p>
+    </div>
+    <div class="bg-green-50 border border-green-100 rounded-xl p-4">
+      <div class="text-2xl mb-2">📦</div>
+      <h3 class="font-bold text-sm mb-1">Tiny production CSS</h3>
+      <p class="text-xs text-gray-500">Only includes classes you actually use</p>
+    </div>
+    <div class="bg-orange-50 border border-orange-100 rounded-xl p-4">
+      <div class="text-2xl mb-2">🔧</div>
+      <h3 class="font-bold text-sm mb-1">Fully customizable</h3>
+      <p class="text-xs text-gray-500">Extend with your own design tokens</p>
+    </div>
+  </div>
+
+</body>
+</html>

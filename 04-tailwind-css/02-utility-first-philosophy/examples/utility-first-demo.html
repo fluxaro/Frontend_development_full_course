@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utility-First Philosophy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-8 font-sans">
+
+  <h1 class="text-3xl font-bold mb-2">Utility-First Philosophy</h1>
+  <p class="text-gray-500 mb-8">One class = one CSS property. Compose them to build anything.</p>
+
+  <!-- Spacing utilities -->
+  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Spacing — p-*, m-*, gap-*</h2>
+  <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+    <div class="flex flex-wrap gap-3 mb-4">
+      <div class="bg-blue-100 text-blue-800 text-xs font-mono p-1 rounded">p-1 = 4px</div>
+      <div class="bg-blue-100 text-blue-800 text-xs font-mono p-2 rounded">p-2 = 8px</div>
+      <div class="bg-blue-100 text-blue-800 text-xs font-mono p-3 rounded">p-3 = 12px</div>
+      <div class="bg-blue-100 text-blue-800 text-xs font-mono p-4 rounded">p-4 = 16px</div>
+      <div class="bg-blue-100 text-blue-800 text-xs font-mono p-6 rounded">p-6 = 24px</div>
+      <div class="bg-blue-100 text-blue-800 text-xs font-mono p-8 rounded">p-8 = 32px</div>
+    </div>
+    <p class="text-xs text-gray-400 font-mono">Scale: 1 unit = 4px. p-4 = padding: 1rem (16px)</p>
+  </div>
+
+  <!-- Color utilities -->
+  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Colors — bg-*, text-*, border-*</h2>
+  <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+    <div class="flex flex-wrap gap-2 mb-4">
+      <div class="bg-slate-500 text-white text-xs px-3 py-1.5 rounded font-mono">bg-slate-500</div>
+      <div class="bg-blue-500 text-white text-xs px-3 py-1.5 rounded font-mono">bg-blue-500</div>
+      <div class="bg-green-500 text-white text-xs px-3 py-1.5 rounded font-mono">bg-green-500</div>
+      <div class="bg-yellow-400 text-white text-xs px-3 py-1.5 rounded font-mono">bg-yellow-400</div>
+      <div class="bg-red-500 text-white text-xs px-3 py-1.5 rounded font-mono">bg-red-500</div>
+      <div class="bg-purple-500 text-white text-xs px-3 py-1.5 rounded font-mono">bg-purple-500</div>
+      <div class="bg-pink-500 text-white text-xs px-3 py-1.5 rounded font-mono">bg-pink-500</div>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <span class="text-blue-500 text-sm font-mono">text-blue-500</span>
+      <span class="text-green-600 text-sm font-mono">text-green-600</span>
+      <span class="text-red-500 text-sm font-mono">text-red-500</span>
+      <span class="text-purple-600 text-sm font-mono">text-purple-600</span>
+      <span class="text-gray-400 text-sm font-mono">text-gray-400</span>
+    </div>
+  </div>
+
+  <!-- Typography utilities -->
+  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Typography — text-*, font-*, leading-*</h2>
+  <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6 space-y-2">
+    <p class="text-xs font-mono text-gray-400">text-xs</p>
+    <p class="text-sm font-mono text-gray-400">text-sm</p>
+    <p class="text-base font-mono text-gray-600">text-base (default)</p>
+    <p class="text-lg font-mono text-gray-700">text-lg</p>
+    <p class="text-xl font-mono text-gray-800">text-xl</p>
+    <p class="text-2xl font-bold text-gray-900">text-2xl font-bold</p>
+    <p class="text-3xl font-extrabold text-gray-900">text-3xl font-extrabold</p>
+    <div class="pt-2 border-t border-gray-100">
+      <p class="text-sm leading-tight text-gray-500 mb-2">leading-tight — tight line height for headings</p>
+      <p class="text-sm leading-relaxed text-gray-500 mb-2">leading-relaxed — comfortable for body text. This is a longer sentence to show the line height difference clearly.</p>
+      <p class="text-sm leading-loose text-gray-500">leading-loose — very airy, good for short UI text</p>
+    </div>
+  </div>
+
+  <!-- Sizing utilities -->
+  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Sizing — w-*, h-*, max-w-*</h2>
+  <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+    <div class="space-y-2 mb-4">
+      <div class="h-4 bg-blue-200 rounded w-1/4 flex items-center pl-2"><span class="text-xs text-blue-700 font-mono">w-1/4</span></div>
+      <div class="h-4 bg-blue-300 rounded w-1/2 flex items-center pl-2"><span class="text-xs text-blue-800 font-mono">w-1/2</span></div>
+      <div class="h-4 bg-blue-400 rounded w-3/4 flex items-center pl-2"><span class="text-xs text-white font-mono">w-3/4</span></div>
+      <div class="h-4 bg-blue-500 rounded w-full flex items-center pl-2"><span class="text-xs text-white font-mono">w-full</span></div>
+    </div>
+    <div class="flex gap-3 items-end">
+      <div class="bg-purple-200 rounded w-8 h-8 flex items-center justify-center text-xs font-mono text-purple-700">8</div>
+      <div class="bg-purple-300 rounded w-12 h-12 flex items-center justify-center text-xs font-mono text-purple-800">12</div>
+      <div class="bg-purple-400 rounded w-16 h-16 flex items-center justify-center text-xs font-mono text-white">16</div>
+      <div class="bg-purple-500 rounded w-20 h-20 flex items-center justify-center text-xs font-mono text-white">20</div>
+      <div class="bg-purple-600 rounded w-24 h-24 flex items-center justify-center text-xs font-mono text-white">24</div>
+    </div>
+  </div>
+
+  <!-- Border & radius utilities -->
+  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Borders & Radius</h2>
+  <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+    <div class="flex flex-wrap gap-4">
+      <div class="w-16 h-16 bg-blue-100 border-2 border-blue-400 flex items-center justify-center text-xs font-mono text-blue-700 text-center">rounded-none</div>
+      <div class="w-16 h-16 bg-blue-100 border-2 border-blue-400 rounded flex items-center justify-center text-xs font-mono text-blue-700 text-center">rounded</div>
+      <div class="w-16 h-16 bg-blue-100 border-2 border-blue-400 rounded-lg flex items-center justify-center text-xs font-mono text-blue-700 text-center">rounded-lg</div>
+      <div class="w-16 h-16 bg-blue-100 border-2 border-blue-400 rounded-xl flex items-center justify-center text-xs font-mono text-blue-700 text-center">rounded-xl</div>
+      <div class="w-16 h-16 bg-blue-100 border-2 border-blue-400 rounded-2xl flex items-center justify-center text-xs font-mono text-blue-700 text-center">rounded-2xl</div>
+      <div class="w-16 h-16 bg-blue-100 border-2 border-blue-400 rounded-full flex items-center justify-center text-xs font-mono text-blue-700 text-center">rounded-full</div>
+    </div>
+  </div>
+
+  <!-- Shadow utilities -->
+  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Shadows — shadow-*</h2>
+  <div class="bg-gray-100 rounded-xl p-6 mb-6">
+    <div class="flex flex-wrap gap-6">
+      <div class="bg-white rounded-xl p-4 shadow-sm w-28 text-center text-xs font-mono text-gray-500">shadow-sm</div>
+      <div class="bg-white rounded-xl p-4 shadow w-28 text-center text-xs font-mono text-gray-500">shadow</div>
+      <div class="bg-white rounded-xl p-4 shadow-md w-28 text-center text-xs font-mono text-gray-500">shadow-md</div>
+      <div class="bg-white rounded-xl p-4 shadow-lg w-28 text-center text-xs font-mono text-gray-500">shadow-lg</div>
+      <div class="bg-white rounded-xl p-4 shadow-xl w-28 text-center text-xs font-mono text-gray-500">shadow-xl</div>
+      <div class="bg-white rounded-xl p-4 shadow-2xl w-28 text-center text-xs font-mono text-gray-500">shadow-2xl</div>
+    </div>
+  </div>
+
+  <!-- Composing utilities into a component -->
+  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Composing Utilities → Component</h2>
+  <div class="bg-white rounded-xl border border-gray-200 p-6">
+    <p class="text-sm text-gray-500 mb-4 font-mono">
+      bg-white + rounded-xl + shadow-md + p-6 + border + hover:shadow-lg + transition
+    </p>
+    <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-shadow max-w-sm cursor-pointer">
+      <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white text-xl mb-4">🚀</div>
+      <h3 class="text-lg font-bold mb-2">Composed Component</h3>
+      <p class="text-gray-500 text-sm leading-relaxed">This card is built by composing ~10 utility classes. No CSS file needed.</p>
+      <button class="mt-4 bg-blue-500 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+        Learn More
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>

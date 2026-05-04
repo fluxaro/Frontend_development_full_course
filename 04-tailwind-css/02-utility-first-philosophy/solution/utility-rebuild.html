@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utility-First Rebuild — Solution</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Traditional CSS version — left side only */
+    .profile-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      max-width: 300px;
+      text-align: center;
+    }
+    .profile-card .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .profile-card h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .profile-card .role { color: #6b7280; font-size: 0.875rem; margin-bottom: 1rem; }
+    .profile-card .follow-btn {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-100 p-8 font-sans">
+
+  <h1 class="text-2xl font-bold text-gray-800 mb-2">Utility-First Rebuild</h1>
+  <p class="text-gray-500 mb-10">Same visual result — two different approaches</p>
+
+  <div class="flex flex-wrap gap-12 items-start">
+
+    <!-- LEFT: Traditional CSS -->
+    <div>
+      <p class="text-xs font-bold uppercase tracking-widest text-red-500 mb-3">Traditional CSS</p>
+      <div class="profile-card">
+        <div class="avatar">JD</div>
+        <h2>Jordan Davis</h2>
+        <p class="role">UI Designer</p>
+        <button class="follow-btn">Follow</button>
+      </div>
+      <p class="text-xs text-gray-400 mt-3 max-w-xs">Uses a separate &lt;style&gt; block with custom class names</p>
+    </div>
+
+    <!-- Divider -->
+    <div class="hidden sm:flex flex-col items-center self-stretch">
+      <div class="w-px bg-gray-300 flex-1"></div>
+      <span class="text-gray-400 text-sm font-bold my-3">VS</span>
+      <div class="w-px bg-gray-300 flex-1"></div>
+    </div>
+
+    <!-- RIGHT: Tailwind Rebuild -->
+    <div>
+      <p class="text-xs font-bold uppercase tracking-widest text-green-600 mb-3">Tailwind CSS ✅</p>
+
+      <!-- Tailwind card — zero custom CSS -->
+      <div class="bg-white rounded-2xl p-8 shadow-lg max-w-xs text-center">
+        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
+          JD
+        </div>
+        <h2 class="text-xl font-bold text-gray-900 mb-1">Jordan Davis</h2>
+        <p class="text-sm text-gray-500 mb-4">UI Designer</p>
+        <button class="bg-blue-500 text-white text-sm font-semibold px-6 py-2 rounded-full hover:bg-blue-600 transition-colors">
+          Follow
+        </button>
+      </div>
+
+      <p class="text-xs text-gray-400 mt-3 max-w-xs">Zero custom CSS — every style is a Tailwind utility class</p>
+    </div>
+
+  </div>
+
+  <!-- Utility mapping table -->
+  <div class="mt-16 bg-white rounded-2xl border border-gray-200 p-6 max-w-2xl">
+    <h2 class="text-base font-bold text-gray-800 mb-4">CSS → Tailwind Mapping</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50">
+            <th class="text-left p-2 font-semibold text-gray-600 rounded-l">CSS Property</th>
+            <th class="text-left p-2 font-semibold text-gray-600 rounded-r">Tailwind Class</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          <tr><td class="p-2 font-mono text-red-500">background: white</td><td class="p-2 font-mono text-blue-600">bg-white</td></tr>
+          <tr><td class="p-2 font-mono text-red-500">border-radius: 16px</td><td class="p-2 font-mono text-blue-600">rounded-2xl</td></tr>
+          <tr><td class="p-2 font-mono text-red-500">padding: 2rem</td><td class="p-2 font-mono text-blue-600">p-8</td></tr>
+          <tr><td class="p-2 font-mono text-red-500">box-shadow: 0 4px 20px ...</td><td class="p-2 font-mono text-blue-600">shadow-lg</td></tr>
+          <tr><td class="p-2 font-mono text-red-500">max-width: 300px</td><td class="p-2 font-mono text-blue-600">max-w-xs</td></tr>
+          <tr><td class="p-2 font-mono text-red-500">text-align: center</td><td class="p-2 font-mono text-blue-600">text-center</td></tr>
+          <tr><td class="p-2 font-mono text-red-500">width/height: 80px</td><td class="p-2 font-mono text-blue-600">w-20 h-20</td></tr>
+          <tr><td class="p-2 font-mono text-red-500">border-radius: 50%</td><td class="p-2 font-mono text-blue-600">rounded-full</td></tr>
+          <tr><td class="p-2 font-mono text-red-500">font-size: 1.25rem</td><td class="p-2 font-mono text-blue-600">text-xl</td></tr>
+          <tr><td class="p-2 font-mono text-red-500">font-weight: 700</td><td class="p-2 font-mono text-blue-600">font-bold</td></tr>
+          <tr><td class="p-2 font-mono text-red-500">color: #6b7280</td><td class="p-2 font-mono text-blue-600">text-gray-500</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>
