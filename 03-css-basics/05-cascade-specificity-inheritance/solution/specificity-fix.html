@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Specificity Fix — Solution</title>
+  <link rel="stylesheet" href="specificity-fix.css">
+</head>
+<body>
+
+  <nav class="main-nav">
+    <a href="/" class="nav-link active">Home</a>
+    <a href="/about" class="nav-link">About</a>
+    <a href="/services" class="nav-link">Services</a>
+    <a href="/contact" class="nav-link">Contact</a>
+  </nav>
+
+  <main>
+    <article class="post">
+      <h2 class="post-title">Understanding CSS Specificity</h2>
+      <p class="post-text">This is regular post text. It should be gray.</p>
+      <p class="post-text highlight">This is highlighted text. It should be dark blue.</p>
+      <p class="post-text">More regular text here.</p>
+    </article>
+
+    <section>
+      <h2>Inheritance Demo</h2>
+      <div class="parent-demo">
+        <p>I inherit color from my parent.</p>
+        <p>I also inherit font-family.</p>
+        <p style="border: inherit;">I forced border to inherit with <code>border: inherit</code>.</p>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

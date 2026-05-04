@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Positioning Demo — Complete Solution</title>
+  <link rel="stylesheet" href="positioning-demo.css">
+</head>
+<body>
+
+  <nav class="navbar" id="top">
+    <span class="logo">Brand</span>
+    <ul>
+      <li><a href="#cards">Cards</a></li>
+      <li><a href="#sidebar">Sidebar</a></li>
+      <li><a href="#modal">Modal</a></li>
+    </ul>
+    <button class="btn" onclick="document.getElementById('modal').classList.add('open')">Open Modal</button>
+  </nav>
+
+  <div class="toast">✓ Welcome back!</div>
+  <a href="#top" class="back-to-top">↑</a>
+
+  <main>
+
+    <section id="cards">
+      <h2>Cards with Absolute Badges</h2>
+      <div class="card-grid">
+        <div class="card">
+          <span class="badge badge-new">NEW</span>
+          <h3>Product Card</h3>
+          <p>The badge is absolutely positioned at the top-right corner of the card.</p>
+        </div>
+        <div class="card">
+          <span class="badge badge-sale">SALE</span>
+          <h3>Sale Item</h3>
+          <p>The card has <code>position: relative</code> as the positioning context.</p>
+        </div>
+        <div class="card">
+          <span class="badge badge-hot">HOT</span>
+          <h3>Popular Item</h3>
+          <p>Without <code>position: relative</code> on the card, the badge would escape to the viewport.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sidebar">
+      <h2>Sticky Sidebar Layout</h2>
+      <div class="sidebar-layout">
+        <aside class="sticky-sidebar">
+          <h3>Table of Contents</h3>
+          <ul>
+            <li><a href="#cards">Cards Section</a></li>
+            <li><a href="#sidebar">Sidebar Section</a></li>
+            <li><a href="#modal">Modal Section</a></li>
+          </ul>
+        </aside>
+        <div class="main-content">
+          <p>Scroll down to see the sidebar stick. It uses <code>position: sticky; top: calc(64px + 1rem)</code> to account for the fixed navbar.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="modal">
+      <h2>Fixed Modal</h2>
+      <p>The modal uses <code>position: fixed; inset: 0</code> for the overlay and <code>align-items: center; justify-content: center</code> to center the dialog.</p>
+      <button class="btn" onclick="document.getElementById('modal').classList.add('open')">Open Modal</button>
+    </section>
+
+  </main>
+
+  <div class="modal-overlay" id="modal" onclick="this.classList.remove('open')">
+    <div class="modal-dialog" onclick="event.stopPropagation()">
+      <h3>Modal Dialog</h3>
+      <p>This modal uses <code>position: fixed</code> with <code>z-index: 400</code> — it appears above the sticky navbar (z-index: 200).</p>
+      <button class="btn" onclick="document.getElementById('modal').classList.remove('open')">Close</button>
+    </div>
+  </div>
+
+</body>
+</html>

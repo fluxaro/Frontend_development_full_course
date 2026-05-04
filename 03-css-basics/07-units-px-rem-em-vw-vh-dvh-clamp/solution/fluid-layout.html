@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fluid Layout — Units Solution</title>
+  <link rel="stylesheet" href="fluid-layout.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <span class="logo">FluidApp</span>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Work</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Fluid Responsive Design</h1>
+      <p>This layout uses only relative units — rem, em, vw, dvh, and clamp(). Resize the browser to see everything scale smoothly.</p>
+      <a href="#features" class="btn">Explore Features</a>
+    </div>
+  </section>
+
+  <main id="features">
+    <section class="features">
+      <h2>Why Relative Units?</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>rem</h3>
+          <p>Scales with the root font size. Respects user browser preferences. Use for font sizes and spacing.</p>
+        </div>
+        <div class="card">
+          <h3>clamp()</h3>
+          <p>Fluid sizing between a minimum and maximum. Perfect for headings and padding that should scale with viewport.</p>
+        </div>
+        <div class="card">
+          <h3>dvh</h3>
+          <p>Dynamic viewport height. Accounts for mobile browser UI. Use instead of vh for full-screen sections.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reading-section">
+      <h2>Optimal Reading Width</h2>
+      <p>This text is constrained to 65ch — the optimal line length for reading. Studies show 45–75 characters per line is ideal for readability.</p>
+      <p>The font size uses clamp() to scale fluidly between 1rem on mobile and 1.125rem on large screens.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built with fluid CSS — no fixed pixel widths.</p>
+  </footer>
+
+</body>
+</html>

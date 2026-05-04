@@ -1,0 +1,114 @@
+:root {
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, sans-serif;
+  background: #f0f2f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+header {
+  background: #2c3e50;
+  color: white;
+  padding: var(--space-8) var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+header h1 { font-size: 1.75rem; margin-bottom: var(--space-2); }
+header p  { opacity: 0.8; }
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 var(--space-8) var(--space-12);
+}
+
+h2 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #888;
+  margin-bottom: var(--space-6);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-6);
+}
+
+/* Base card */
+.card {
+  border-radius: 8px;
+  padding: var(--space-6);
+  background: white;
+}
+
+.card h3 { font-size: 1.1rem; margin-bottom: var(--space-2); color: #2c3e50; }
+.card p  { color: #666; font-size: 0.9rem; margin-bottom: var(--space-4); }
+
+/* Variants */
+.card-default  { border: 1px solid #e0e0e0; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.card-outlined { border: 2px solid #3498db; background: transparent; }
+.card-elevated { border: none; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+.card-colored  { background: #3498db; color: white; border: none; }
+.card-colored h3 { color: white; }
+.card-colored p  { color: rgba(255,255,255,0.85); }
+
+/* Horizontal card */
+.card-horizontal {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: var(--space-6);
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+}
+
+.card-horizontal img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.card-horizontal .card-body {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  background: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 2px solid #3498db;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #3498db;
+}
+
+.btn-white {
+  background: white;
+  color: #3498db;
+  border-color: white;
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Positioning Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; color: #333; }
+
+    /* FIXED navbar */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 60px; background: #2c3e50; color: white;
+      display: flex; align-items: center; padding: 0 2rem;
+      justify-content: space-between; z-index: 100;
+    }
+    .navbar ul { list-style: none; display: flex; gap: 1.5rem; }
+    .navbar a { color: #bdc3c7; text-decoration: none; }
+
+    /* FIXED back-to-top */
+    .back-to-top {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 44px; height: 44px; background: #3498db; color: white;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: 1.2rem; z-index: 100;
+    }
+
+    main { max-width: 900px; margin: 0 auto; padding: 80px 2rem 4rem; }
+    section { margin-bottom: 4rem; }
+    h2 { font-size: 1.4rem; margin-bottom: 1.5rem; color: #2c3e50; }
+
+    /* RELATIVE + ABSOLUTE badge */
+    .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .card {
+      position: relative; /* positioning context for badge */
+      background: white; border: 1px solid #e0e0e0;
+      border-radius: 8px; padding: 1.5rem;
+    }
+    .badge {
+      position: absolute; top: -10px; right: -10px;
+      background: #e74c3c; color: white;
+      padding: 4px 10px; border-radius: 20px;
+      font-size: 0.7rem; font-weight: bold;
+    }
+
+    /* STICKY sidebar */
+    .layout { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; align-items: start; }
+    .sticky-sidebar {
+      position: sticky; top: 76px;
+      background: white; border: 1px solid #e0e0e0;
+      border-radius: 8px; padding: 1.5rem;
+    }
+    .sticky-sidebar h3 { margin-bottom: 1rem; font-size: 1rem; }
+    .sticky-sidebar ul { list-style: none; }
+    .sticky-sidebar li { margin-bottom: 0.5rem; }
+    .sticky-sidebar a { color: #3498db; text-decoration: none; }
+    .content p { margin-bottom: 1rem; line-height: 1.7; color: #555; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="top">
+    <span style="font-weight:bold;">Brand</span>
+    <ul>
+      <li><a href="#cards">Cards</a></li>
+      <li><a href="#sidebar">Sidebar</a></li>
+    </ul>
+  </nav>
+
+  <a href="#top" class="back-to-top">↑</a>
+
+  <main>
+
+    <section id="cards">
+      <h2>Cards with Absolute Badges (position: relative + absolute)</h2>
+      <div class="card-grid">
+        <div class="card">
+          <span class="badge" style="background:#3498db;">NEW</span>
+          <h3>Product Card</h3>
+          <p>The badge is absolutely positioned at the top-right corner.</p>
+        </div>
+        <div class="card">
+          <span class="badge" style="background:#27ae60;">SALE</span>
+          <h3>Sale Item</h3>
+          <p>The card has position: relative as the positioning context.</p>
+        </div>
+        <div class="card">
+          <span class="badge" style="background:#f39c12;">HOT</span>
+          <h3>Popular Item</h3>
+          <p>Without position: relative on the card, the badge would position relative to the viewport.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sidebar">
+      <h2>Sticky Sidebar (position: sticky)</h2>
+      <div class="layout">
+        <aside class="sticky-sidebar">
+          <h3>Sticky Sidebar</h3>
+          <ul>
+            <li><a href="#">Section 1</a></li>
+            <li><a href="#">Section 2</a></li>
+            <li><a href="#">Section 3</a></li>
+          </ul>
+        </aside>
+        <div class="content">
+          <p>Scroll down to see the sidebar stick. The sidebar uses <code>position: sticky; top: 76px</code> — it sticks 76px from the top (accounting for the fixed navbar).</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

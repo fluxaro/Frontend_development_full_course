@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Preferences — localStorage Solution</title>
+</head>
+<body>
+
+  <header>
+    <h1>User Preferences</h1>
+    <p>Your preferences are saved automatically and restored on every visit.</p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Current Settings</h2>
+      <dl id="current-settings">
+        <dt>Username</dt>
+        <dd id="display-username">Not set</dd>
+
+        <dt>Theme</dt>
+        <dd id="display-theme">Not set</dd>
+
+        <dt>Font Size</dt>
+        <dd id="display-fontsize">Not set</dd>
+
+        <dt>Language</dt>
+        <dd id="display-language">Not set</dd>
+
+        <dt>Notifications</dt>
+        <dd id="display-notifications">Not set</dd>
+
+        <dt>Last Saved</dt>
+        <dd id="display-timestamp">Never</dd>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Edit Preferences</h2>
+
+      <form id="preferences-form">
+
+        <fieldset>
+          <legend>Account</legend>
+
+          <div>
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Enter your name"
+              autocomplete="name"
+            >
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Appearance</legend>
+
+          <div>
+            <p>Theme:</p>
+            <div>
+              <input type="radio" id="theme-light" name="theme" value="light">
+              <label for="theme-light">Light</label>
+            </div>
+            <div>
+              <input type="radio" id="theme-dark" name="theme" value="dark">
+              <label for="theme-dark">Dark</label>
+            </div>
+            <div>
+              <input type="radio" id="theme-system" name="theme" value="system">
+              <label for="theme-system">System Default</label>
+            </div>
+          </div>
+
+          <div>
+            <label for="font-size">Font Size: <output id="font-size-output">16px</output></label>
+            <input
+              type="range"
+              id="font-size"
+              name="font_size"
+              min="12"
+              max="24"
+              value="16"
+              step="1"
+            >
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Language and Notifications</legend>
+
+          <div>
+            <label for="language">Language</label>
+            <select id="language" name="language">
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+              <option value="de">Deutsch</option>
+              <option value="pt">Português</option>
+              <option value="ar">العربية</option>
+              <option value="zh">中文</option>
+            </select>
+          </div>
+
+          <div>
+            <input type="checkbox" id="notifications" name="notifications">
+            <label for="notifications">Enable email notifications</label>
+          </div>
+        </fieldset>
+
+        <div>
+          <button type="submit">Save Preferences</button>
+          <button type="button" id="reset-btn">Reset to Defaults</button>
+        </div>
+
+      </form>
+    </section>
+
+    <section>
+      <h2>Session Notes</h2>
+      <p>These notes are saved for this browser session only. They will be cleared when you close this tab.</p>
+      <label for="session-notes">Notes:</label>
+      <textarea
+        id="session-notes"
+        rows="5"
+        cols="60"
+        placeholder="Type your notes here..."
+      ></textarea>
+      <p><small>Notes are saved automatically as you type.</small></p>
+    </section>
+
+  </main>
+
+  <script>
+    // Keys for localStorage
+    const STORAGE_KEY = 'user_preferences';
+
+    // Default preferences
+    const defaults = {
+      username: '',
+      theme: 'system',
+      fontSize: 16,
+      language: 'en',
+      notifications: false
+    };
+
+    // Load preferences from localStorage
+    function loadPreferences() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        return stored ? JSON.parse(stored) : { ...defaults };
+      } catch (e) {
+        return { ...defaults };
+      }
+    }
+
+    // Save preferences to localStorage
+    function savePreferences(prefs) {
+      try {
+        prefs.timestamp = new Date().toLocaleString();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    // Apply preferences to the form
+    function applyToForm(prefs) {
+      document.getElementById('username').value = prefs.username || '';
+
+      const themeRadio = document.querySelector(`input[name="theme"][value="${prefs.theme || 'system'}"]`);
+      if (themeRadio) themeRadio.checked = true;
+
+      const fontSizeInput = document.getElementById('font-size');
+      fontSizeInput.value = prefs.fontSize || 16;
+      document.getElementById('font-size-output').textContent = (prefs.fontSize || 16) + 'px';
+
+      document.getElementById('language').value = prefs.language || 'en';
+      document.getElementById('notifications').checked = prefs.notifications || false;
+    }
+
+    // Update the "Current Settings" display
+    function updateDisplay(prefs) {
+      document.getElementById('display-username').textContent = prefs.username || 'Not set';
+      document.getElementById('display-theme').textContent = prefs.theme || 'Not set';
+      document.getElementById('display-fontsize').textContent = (prefs.fontSize || 16) + 'px';
+      document.getElementById('display-language').textContent = prefs.language || 'Not set';
+      document.getElementById('display-notifications').textContent = prefs.notifications ? 'Enabled' : 'Disabled';
+      document.getElementById('display-timestamp').textContent = prefs.timestamp || 'Never';
+    }
+
+    // On page load: restore preferences
+    window.addEventListener('load', function () {
+      const prefs = loadPreferences();
+      applyToForm(prefs);
+      updateDisplay(prefs);
+
+      // Restore session notes
+      const savedNotes = sessionStorage.getItem('session_notes');
+      if (savedNotes) {
+        document.getElementById('session-notes').value = savedNotes;
+      }
+    });
+
+    // Font size slider: live update
+    document.getElementById('font-size').addEventListener('input', function () {
+      document.getElementById('font-size-output').textContent = this.value + 'px';
+    });
+
+    // Form submit: save preferences
+    document.getElementById('preferences-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const prefs = {
+        username: document.getElementById('username').value.trim(),
+        theme: document.querySelector('input[name="theme"]:checked')?.value || 'system',
+        fontSize: parseInt(document.getElementById('font-size').value),
+        language: document.getElementById('language').value,
+        notifications: document.getElementById('notifications').checked
+      };
+
+      if (savePreferences(prefs)) {
+        updateDisplay(loadPreferences());
+        alert('Preferences saved!');
+      }
+    });
+
+    // Reset button
+    document.getElementById('reset-btn').addEventListener('click', function () {
+      localStorage.removeItem(STORAGE_KEY);
+      applyToForm(defaults);
+      updateDisplay(defaults);
+    });
+
+    // Session notes: auto-save as user types
+    document.getElementById('session-notes').addEventListener('input', function () {
+      sessionStorage.setItem('session_notes', this.value);
+    });
+  </script>
+
+</body>
+</html>

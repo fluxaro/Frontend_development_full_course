@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Application Form — Solution</title>
+  <meta name="description" content="A complete job application form using all HTML5 input types.">
+</head>
+<body>
+
+  <header>
+    <h1>Job Application</h1>
+    <p>Frontend Developer Position — TechCorp Inc.</p>
+    <p>Fields marked with * are required.</p>
+  </header>
+
+  <main>
+    <form action="/apply" method="POST">
+
+      <fieldset>
+        <legend>Personal Information</legend>
+
+        <div>
+          <label for="first-name">First Name *</label>
+          <input
+            type="text"
+            id="first-name"
+            name="first_name"
+            required
+            autocomplete="given-name"
+            placeholder="Enter your first name"
+          >
+        </div>
+
+        <div>
+          <label for="last-name">Last Name *</label>
+          <input
+            type="text"
+            id="last-name"
+            name="last_name"
+            required
+            autocomplete="family-name"
+            placeholder="Enter your last name"
+          >
+        </div>
+
+        <div>
+          <label for="email">Email Address *</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            autocomplete="email"
+            placeholder="you@example.com"
+          >
+        </div>
+
+        <div>
+          <label for="phone">Phone Number *</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            required
+            autocomplete="tel"
+            placeholder="+1 (555) 000-0000"
+          >
+        </div>
+
+        <div>
+          <label for="location">City, Country *</label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            required
+            autocomplete="address-level2"
+            placeholder="San Francisco, USA"
+          >
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Professional Details</legend>
+
+        <div>
+          <label for="position">Position Applying For *</label>
+          <select id="position" name="position" required>
+            <option value="">-- Select a position --</option>
+            <option value="frontend-junior">Junior Frontend Developer</option>
+            <option value="frontend-mid">Mid-level Frontend Developer</option>
+            <option value="frontend-senior">Senior Frontend Developer</option>
+            <option value="react-developer">React Developer</option>
+            <option value="fullstack">Fullstack Developer</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="experience">Years of Experience *</label>
+          <input
+            type="number"
+            id="experience"
+            name="years_experience"
+            required
+            min="0"
+            max="50"
+            placeholder="e.g. 3"
+          >
+        </div>
+
+        <div>
+          <label for="start-date">Available Start Date *</label>
+          <input
+            type="date"
+            id="start-date"
+            name="start_date"
+            required
+          >
+        </div>
+
+        <div>
+          <label for="portfolio">Portfolio URL</label>
+          <input
+            type="url"
+            id="portfolio"
+            name="portfolio_url"
+            placeholder="https://yourportfolio.com"
+            autocomplete="url"
+          >
+        </div>
+
+        <div>
+          <label for="linkedin">LinkedIn Profile</label>
+          <input
+            type="url"
+            id="linkedin"
+            name="linkedin_url"
+            placeholder="https://linkedin.com/in/yourname"
+          >
+        </div>
+
+        <div>
+          <label for="resume">Resume / CV *</label>
+          <input
+            type="file"
+            id="resume"
+            name="resume"
+            required
+            accept="application/pdf"
+          >
+          <small>PDF only. Maximum 5MB.</small>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Skills and Availability</legend>
+
+        <div>
+          <p>Technical Skills (select all that apply):</p>
+
+          <div>
+            <input type="checkbox" id="skill-html" name="skills" value="html">
+            <label for="skill-html">HTML5</label>
+          </div>
+          <div>
+            <input type="checkbox" id="skill-css" name="skills" value="css">
+            <label for="skill-css">CSS3 / Tailwind</label>
+          </div>
+          <div>
+            <input type="checkbox" id="skill-js" name="skills" value="javascript">
+            <label for="skill-js">JavaScript / TypeScript</label>
+          </div>
+          <div>
+            <input type="checkbox" id="skill-react" name="skills" value="react">
+            <label for="skill-react">React</label>
+          </div>
+          <div>
+            <input type="checkbox" id="skill-node" name="skills" value="nodejs">
+            <label for="skill-node">Node.js</label>
+          </div>
+          <div>
+            <input type="checkbox" id="skill-git" name="skills" value="git">
+            <label for="skill-git">Git / GitHub</label>
+          </div>
+        </div>
+
+        <div>
+          <p>Employment Type *</p>
+          <div>
+            <input type="radio" id="type-fulltime" name="employment_type" value="full-time" required>
+            <label for="type-fulltime">Full-time</label>
+          </div>
+          <div>
+            <input type="radio" id="type-parttime" name="employment_type" value="part-time">
+            <label for="type-parttime">Part-time</label>
+          </div>
+          <div>
+            <input type="radio" id="type-contract" name="employment_type" value="contract">
+            <label for="type-contract">Contract</label>
+          </div>
+          <div>
+            <input type="radio" id="type-remote" name="employment_type" value="remote">
+            <label for="type-remote">Remote only</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Cover Letter</legend>
+
+        <div>
+          <label for="cover-letter">Why do you want to work at TechCorp? *</label>
+          <textarea
+            id="cover-letter"
+            name="cover_letter"
+            rows="8"
+            required
+            minlength="100"
+            maxlength="2000"
+            placeholder="Tell us about yourself, your experience, and why you are a great fit for this role..."
+          ></textarea>
+          <small>Minimum 100 characters. Maximum 2000 characters.</small>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Terms</legend>
+
+        <div>
+          <input type="checkbox" id="terms" name="terms" required>
+          <label for="terms">I confirm that all information provided is accurate and complete. *</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="gdpr" name="gdpr_consent" required>
+          <label for="gdpr">I consent to TechCorp processing my personal data for recruitment purposes. *</label>
+        </div>
+      </fieldset>
+
+      <div>
+        <button type="submit">Submit Application</button>
+        <button type="reset">Clear Form</button>
+      </div>
+
+    </form>
+  </main>
+
+  <footer>
+    <address>
+      TechCorp Inc. — Careers Department<br>
+      <a href="mailto:careers@techcorp.example.com">careers@techcorp.example.com</a>
+    </address>
+  </footer>
+
+</body>
+</html>

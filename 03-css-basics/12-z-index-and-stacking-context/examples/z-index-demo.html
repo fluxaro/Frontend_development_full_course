@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>z-index Demo</title>
+  <style>
+    :root {
+      --z-dropdown: 100;
+      --z-sticky: 200;
+      --z-overlay: 300;
+      --z-modal: 400;
+      --z-toast: 500;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; color: #333; }
+
+    .sticky-header {
+      position: sticky; top: 0;
+      z-index: var(--z-sticky);
+      background: #2c3e50; color: white;
+      padding: 0 2rem; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .dropdown-wrapper { position: relative; }
+    .dropdown-btn {
+      background: transparent; color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 8px 16px; border-radius: 4px; cursor: pointer;
+    }
+    .dropdown-menu {
+      display: none; position: absolute;
+      top: calc(100% + 8px); right: 0;
+      background: white; border: 1px solid #e0e0e0;
+      border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      min-width: 160px; z-index: var(--z-dropdown);
+    }
+    .dropdown-menu.open { display: block; }
+    .dropdown-menu a { display: block; padding: 12px 16px; color: #333; text-decoration: none; }
+    .dropdown-menu a:hover { background: #f5f5f5; }
+
+    main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+    h1 { margin-bottom: 1rem; }
+    p  { margin-bottom: 1rem; color: #666; }
+
+    .btn {
+      padding: 10px 20px; background: #3498db; color: white;
+      border: none; border-radius: 6px; cursor: pointer; margin-bottom: 2rem;
+    }
+
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: var(--z-overlay);
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-dialog {
+      background: white; padding: 2rem; border-radius: 12px;
+      max-width: 400px; width: 90%;
+      z-index: var(--z-modal); position: relative;
+    }
+    .modal-dialog h2 { margin-bottom: 1rem; }
+    .modal-dialog p  { margin-bottom: 1.5rem; }
+
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem;
+      background: #27ae60; color: white;
+      padding: 12px 20px; border-radius: 8px;
+      z-index: var(--z-toast);
+      transform: translateY(100px); opacity: 0;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <header class="sticky-header">
+    <span style="font-weight:bold;">MyApp</span>
+    <div class="dropdown-wrapper">
+      <button class="dropdown-btn" onclick="this.nextElementSibling.classList.toggle('open')">Menu ▾</button>
+      <div class="dropdown-menu">
+        <a href="#">Profile</a>
+        <a href="#">Settings</a>
+        <a href="#">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <h1>z-index and Stacking Context</h1>
+    <p>Click "Menu" to see the dropdown appear above the content. Click "Open Modal" to see the modal appear above the header.</p>
+    <button class="btn" onclick="document.getElementById('modal').classList.add('open')">Open Modal</button>
+  </main>
+
+  <div class="modal-overlay" id="modal" onclick="this.classList.remove('open')">
+    <div class="modal-dialog" onclick="event.stopPropagation()">
+      <h2>Modal (z-index: 400)</h2>
+      <p>This modal appears above the sticky header (z-index: 200) because it has a higher z-index value.</p>
+      <button class="btn" onclick="document.getElementById('modal').classList.remove('open')">Close</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">✓ Toast (z-index: 500) — above everything!</div>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById('toast').classList.add('show');
+      setTimeout(() => document.getElementById('toast').classList.remove('show'), 3000);
+    }, 1000);
+  </script>
+
+</body>
+</html>

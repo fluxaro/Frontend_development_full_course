@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Combinators Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; padding: 40px; background: #f8f9fa; }
+    h1 { margin-bottom: 40px; color: #2c3e50; }
+    h2 { margin-bottom: 16px; color: #2c3e50; font-size: 1.2rem; }
+    section { margin-bottom: 50px; background: white; padding: 24px; border-radius: 8px; border: 1px solid #e0e0e0; }
+
+    /* DESCENDANT: all a inside nav */
+    nav a { color: white; text-decoration: none; padding: 8px 16px; }
+
+    /* CHILD: only direct li of nav ul */
+    nav > ul > li { display: inline-block; background: #2c3e50; }
+
+    /* ADJACENT SIBLING: p immediately after h2 */
+    h2 + p { font-size: 1.1rem; color: #2c3e50; font-weight: 500; }
+
+    /* GENERAL SIBLING: all p after blockquote */
+    blockquote ~ p { font-style: italic; color: #888; }
+
+    blockquote { border-left: 4px solid #3498db; padding: 12px 16px; background: #ebf5fb; margin: 16px 0; }
+    p { margin-bottom: 12px; line-height: 1.6; }
+    ul { list-style: none; }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Combinators Demo</h1>
+
+  <section>
+    <h2>Descendant Combinator (space)</h2>
+    <p>Selects all matching elements anywhere inside the parent.</p>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a>
+          <ul>
+            <li><a href="#">Team</a></li>
+            <li><a href="#">History</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <p style="margin-top:12px; font-size:0.85rem; color:#666;">All <code>a</code> tags inside <code>nav</code> are styled — including nested ones.</p>
+  </section>
+
+  <section>
+    <h2>Adjacent Sibling Combinator (+)</h2>
+    <p>The paragraph immediately after this h2 is styled differently.</p>
+    <p>This second paragraph is NOT the adjacent sibling — it is not styled.</p>
+    <p>Neither is this one.</p>
+  </section>
+
+  <section>
+    <h2>General Sibling Combinator (~)</h2>
+    <p>This paragraph is before the blockquote — not affected.</p>
+    <blockquote>
+      <p>A famous quote goes here.</p>
+    </blockquote>
+    <p>This paragraph comes after the blockquote — styled italic.</p>
+    <p>So does this one — also styled italic.</p>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card System — Box Model Solution</title>
+  <link rel="stylesheet" href="card-system.css">
+</head>
+<body>
+
+  <header>
+    <h1>Card Component System</h1>
+    <p>All spacing uses a consistent scale via CSS custom properties.</p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Card Variants</h2>
+      <div class="card-grid">
+
+        <div class="card card-default">
+          <h3>Default Card</h3>
+          <p>Subtle border, small shadow. The standard card for most use cases.</p>
+          <a href="#" class="btn">Learn More</a>
+        </div>
+
+        <div class="card card-outlined">
+          <h3>Outlined Card</h3>
+          <p>Transparent background with a colored border. Good for secondary content.</p>
+          <a href="#" class="btn btn-outline">Learn More</a>
+        </div>
+
+        <div class="card card-elevated">
+          <h3>Elevated Card</h3>
+          <p>No border, large shadow. Creates a floating effect above the page.</p>
+          <a href="#" class="btn">Learn More</a>
+        </div>
+
+        <div class="card card-colored">
+          <h3>Colored Card</h3>
+          <p>Colored background with white text. Use for featured or highlighted content.</p>
+          <a href="#" class="btn btn-white">Learn More</a>
+        </div>
+
+        <div class="card card-horizontal">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=200&h=200&fit=crop" alt="Code" width="200" height="200">
+          <div class="card-body">
+            <h3>Horizontal Card</h3>
+            <p>Image on the left, content on the right. Great for article previews.</p>
+            <a href="#" class="btn">Read More</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

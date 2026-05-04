@@ -1,0 +1,137 @@
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, sans-serif;
+  color: #333;
+  line-height: 1.7;
+  background: #fafafa;
+}
+
+/* DESCENDANT: all links inside nav */
+nav a {
+  color: #bdc3c7;
+  text-decoration: none;
+  padding: 8px 16px;
+  display: block;
+  transition: color 0.2s;
+}
+
+nav a:hover { color: white; }
+
+/* CHILD: only direct li of nav ul */
+nav > ul > li {
+  display: inline-block;
+}
+
+/* CHILD: nested ul li — different style */
+nav > ul > li > ul > li {
+  display: block;
+  background: #34495e;
+}
+
+header {
+  background: #2c3e50;
+  padding: 0 40px;
+}
+
+nav > ul { list-style: none; }
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 40px;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 60px;
+  align-items: start;
+}
+
+article h1 {
+  font-size: 2.2rem;
+  color: #1a1a2e;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+/* ADJACENT SIBLING: first p after h1 = lead paragraph */
+h1 + p {
+  font-size: 1.15rem;
+  color: #555;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+article h2 {
+  font-size: 1.4rem;
+  color: #2c3e50;
+  margin: 2rem 0 0.75rem;
+}
+
+/* ADJACENT SIBLING: first p after h2 */
+h2 + p {
+  color: #2980b9;
+}
+
+/* DESCENDANT: all p inside article */
+article p {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+blockquote {
+  border-left: 4px solid #3498db;
+  padding: 16px 20px;
+  background: #ebf5fb;
+  border-radius: 0 8px 8px 0;
+  margin: 1.5rem 0;
+  font-style: italic;
+}
+
+/* GENERAL SIBLING: all p after blockquote */
+blockquote ~ p {
+  color: #888;
+  font-style: italic;
+}
+
+/* CHILD: direct li of article ul */
+article > ul > li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+/* DESCENDANT: nested li */
+article ul li li {
+  padding: 4px 0 4px 20px;
+  color: #888;
+  font-size: 0.9rem;
+  border-bottom: none;
+}
+
+/* Aside */
+aside {
+  position: sticky;
+  top: 40px;
+}
+
+aside h2 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+aside ul { list-style: none; }
+aside li { margin-bottom: 8px; }
+aside a { color: #3498db; text-decoration: none; font-size: 0.9rem; }
+aside a:hover { text-decoration: underline; }
+
+footer {
+  background: #2c3e50;
+  color: #95a5a6;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.85rem;
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magazine Layout — Grid Placement Solution</title>
+  <link rel="stylesheet" href="magazine-layout.css">
+</head>
+<body>
+
+  <header>
+    <h1>The Dev Journal</h1>
+    <nav>
+      <a href="#">Web Dev</a>
+      <a href="#">AI</a>
+      <a href="#">Tools</a>
+      <a href="#">Jobs</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="magazine-grid">
+
+      <!-- Featured: spans columns 1-8, rows 1-3 -->
+      <article class="article featured">
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=500&fit=crop" alt="Code" width="800" height="500" loading="lazy">
+        <div class="article-content">
+          <span class="tag">Featured</span>
+          <h2>CSS Grid Changes Everything About Web Layout</h2>
+          <p>A deep dive into how CSS Grid has transformed the way we build complex layouts without hacks or workarounds.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <!-- Secondary 1: columns 9-12, rows 1-2 -->
+      <article class="article secondary-1">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=200&fit=crop" alt="Developer" width="400" height="200" loading="lazy">
+        <div class="article-content">
+          <span class="tag">React</span>
+          <h3>React 20 Ships with Server Components by Default</h3>
+          <a href="#" class="read-more">Read →</a>
+        </div>
+      </article>
+
+      <!-- Secondary 2: columns 9-12, rows 3-4 -->
+      <article class="article secondary-2">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=200&fit=crop" alt="AI" width="400" height="200" loading="lazy">
+        <div class="article-content">
+          <span class="tag">AI</span>
+          <h3>GitHub Copilot Now Understands Your Entire Codebase</h3>
+          <a href="#" class="read-more">Read →</a>
+        </div>
+      </article>
+
+      <!-- Full-width banner -->
+      <div class="banner">
+        <p>🚀 New Course: Master CSS Grid in 7 Days — <a href="#">Enroll Free</a></p>
+      </div>
+
+      <!-- Article row: 4 equal articles -->
+      <article class="article small-1">
+        <div class="article-content">
+          <span class="tag">CSS</span>
+          <h3>Container Queries: The Future of Responsive Design</h3>
+          <p>How container queries change component-level responsive design.</p>
+        </div>
+      </article>
+
+      <article class="article small-2">
+        <div class="article-content">
+          <span class="tag">JS</span>
+          <h3>TypeScript 6 Brings Improved Type Inference</h3>
+          <p>What's new in TypeScript 6 and how it affects your workflow.</p>
+        </div>
+      </article>
+
+      <article class="article small-3">
+        <div class="article-content">
+          <span class="tag">Tools</span>
+          <h3>Vite 7 Is 10x Faster Than Previous Versions</h3>
+          <p>The new Oxc compiler makes Vite blazingly fast.</p>
+        </div>
+      </article>
+
+      <article class="article small-4">
+        <div class="article-content">
+          <span class="tag">Career</span>
+          <h3>Frontend Developer Salaries in 2025: Full Report</h3>
+          <p>Comprehensive salary data from 10,000+ developers worldwide.</p>
+        </div>
+      </article>
+
+    </div>
+
+  </main>
+
+</body>
+</html>

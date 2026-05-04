@@ -1,0 +1,152 @@
+:root {
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+  --shadow-xl: 0 20px 60px rgba(0,0,0,0.2);
+  --radius: 12px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+header {
+  text-align: center;
+  color: white;
+  margin-bottom: 40px;
+}
+
+header h1 { font-size: 2rem; margin-bottom: 8px; }
+header p  { opacity: 0.8; }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Base card */
+.card {
+  padding: 24px;
+  border-radius: var(--radius);
+  background: white;
+}
+
+.card h2 { font-size: 1.1rem; margin-bottom: 8px; color: #2c3e50; }
+.card p  { color: #666; font-size: 0.9rem; margin-bottom: 16px; line-height: 1.5; }
+
+/* 1. Default */
+.card-default {
+  border: 1px solid #e0e0e0;
+  box-shadow: var(--shadow-sm);
+}
+
+/* 2. Elevated */
+.card-elevated {
+  border: none;
+  box-shadow: var(--shadow-lg);
+}
+
+/* 3. Outlined */
+.card-outlined {
+  background: transparent;
+  border: 2px solid #3498db;
+  color: white;
+}
+.card-outlined h2 { color: white; }
+.card-outlined p  { color: rgba(255,255,255,0.8); }
+
+/* 4. Flat */
+.card-flat {
+  border: 1px solid #e0e0e0;
+  box-shadow: none;
+}
+
+/* 5. Glass */
+.card-glass {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  color: white;
+}
+.card-glass h2 { color: white; }
+.card-glass p  { color: rgba(255,255,255,0.85); }
+
+/* 6. Gradient border via pseudo-element */
+.card-gradient-border {
+  position: relative;
+  border: none;
+  background: white;
+  z-index: 0;
+}
+
+.card-gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(var(--radius) + 2px);
+  background: linear-gradient(135deg, #f093fb, #f5576c, #4facfe);
+  z-index: -1;
+}
+
+/* 7. Hover card */
+.card-hover {
+  border: 1px solid #e0e0e0;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.card-hover:hover {
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-6px);
+}
+
+/* 8. Notification card */
+.card-notification {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  border: 1px solid #e0e0e0;
+  border-left: 4px solid #27ae60;
+  box-shadow: var(--shadow-sm);
+  padding: 20px;
+}
+
+.notification-icon {
+  width: 36px; height: 36px;
+  background: #27ae60; color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: bold; flex-shrink: 0;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 8px 20px;
+  background: #3498db; color: white;
+  text-decoration: none; border-radius: 6px;
+  font-size: 0.875rem; font-weight: 600;
+  border: 2px solid #3498db;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #3498db;
+}
+
+.btn-white {
+  background: white;
+  color: #764ba2;
+  border-color: white;
+}

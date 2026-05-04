@@ -1,0 +1,87 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, sans-serif;
+  background: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Navigation */
+.main-nav {
+  background: #2c3e50;
+  padding: 0 40px;
+  display: flex;
+  gap: 4px;
+}
+
+/* All nav links white */
+.nav-link {
+  color: #bdc3c7;
+  text-decoration: none;
+  padding: 16px 12px;
+  display: block;
+  transition: color 0.2s;
+}
+
+.nav-link:hover { color: white; }
+
+/* Active link yellow — higher specificity than .nav-link without !important */
+.main-nav .nav-link.active {
+  color: #f1c40f;
+  font-weight: 600;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+/* Post title inside .post is larger */
+.post h2.post-title {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 16px;
+}
+
+/* All post text gray */
+.post-text {
+  color: #666;
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+
+/* Highlighted text dark blue — more specific than .post-text */
+.post-text.highlight {
+  color: #1a3a5c;
+  font-weight: 600;
+  background: #ebf5fb;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border-left: 3px solid #3498db;
+}
+
+/* Inheritance demo */
+.parent-demo {
+  color: #e74c3c;
+  font-family: Georgia, serif;
+  font-size: 18px;
+  border: 2px solid #e74c3c;
+  background: #fef9e7;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.parent-demo p {
+  margin-bottom: 10px;
+  /* color and font-family are inherited from .parent-demo */
+  /* border and background are NOT inherited */
+}
+
+h2 {
+  font-size: 1.3rem;
+  margin: 30px 0 16px;
+  color: #2c3e50;
+}

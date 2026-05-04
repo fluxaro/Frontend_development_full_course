@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Gallery — CSS Grid Solution</title>
+  <link rel="stylesheet" href="photo-gallery.css">
+</head>
+<body>
+
+  <header>
+    <h1>Photo Gallery</h1>
+    <p>Responsive photo gallery using CSS Grid with auto-fill and minmax.</p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Featured Row (2fr 1fr 1fr)</h2>
+      <div class="featured-grid">
+        <div class="featured-main">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=500&fit=crop" alt="Mountain landscape" width="800" height="500" loading="lazy">
+        </div>
+        <div class="featured-side">
+          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=240&fit=crop" alt="Forest" width="400" height="240" loading="lazy">
+        </div>
+        <div class="featured-side">
+          <img src="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=400&h=240&fit=crop" alt="Fox" width="400" height="240" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Standard Gallery (auto-fill, minmax 250px)</h2>
+      <div class="standard-grid">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=300&fit=crop" alt="River valley" width="400" height="300" loading="lazy">
+          <figcaption>River Valley</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=400&h=300&fit=crop" alt="Mountain pine" width="400" height="300" loading="lazy">
+          <figcaption>Mountain Pine</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=400&h=300&fit=crop" alt="Rocky coast" width="400" height="300" loading="lazy">
+          <figcaption>Rocky Coast</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=400&h=300&fit=crop" alt="Meadow" width="400" height="300" loading="lazy">
+          <figcaption>Wildflower Meadow</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&h=300&fit=crop" alt="Island" width="400" height="300" loading="lazy">
+          <figcaption>Tropical Island</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=300&fit=crop" alt="Autumn forest" width="400" height="300" loading="lazy">
+          <figcaption>Autumn Forest</figcaption>
+        </figure>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>All photos from <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a>.</p>
+  </footer>
+
+</body>
+</html>

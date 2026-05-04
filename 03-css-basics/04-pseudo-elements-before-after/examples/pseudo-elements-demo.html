@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pseudo-elements Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; padding: 40px; background: #f8f9fa; }
+    h1 { margin-bottom: 40px; color: #2c3e50; }
+    h2 { margin-bottom: 16px; color: #2c3e50; font-size: 1.1rem; }
+    section { margin-bottom: 50px; }
+
+    /* Heading underline with ::after */
+    .decorated-heading {
+      position: relative;
+      padding-bottom: 12px;
+      display: inline-block;
+    }
+    .decorated-heading::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 50px; height: 3px;
+      background: #3498db;
+      border-radius: 2px;
+    }
+
+    /* Custom bullets with ::before */
+    .custom-list { list-style: none; padding: 0; }
+    .custom-list li { position: relative; padding-left: 28px; margin-bottom: 10px; }
+    .custom-list li::before {
+      content: '→';
+      position: absolute; left: 0;
+      color: #3498db; font-weight: bold;
+    }
+
+    /* Blockquote with ::before */
+    .quote { position: relative; padding: 20px 20px 20px 70px; background: #ebf5fb; border-radius: 8px; }
+    .quote::before {
+      content: '"';
+      position: absolute; left: 12px; top: -10px;
+      font-size: 5rem; color: #3498db; line-height: 1; font-family: Georgia, serif;
+    }
+
+    /* Required asterisk with ::after */
+    label.required::after { content: ' *'; color: #e74c3c; font-weight: bold; }
+    form div { margin-bottom: 12px; }
+    label { display: block; font-weight: 600; margin-bottom: 4px; font-size: 0.9rem; }
+    input { padding: 10px 14px; border: 2px solid #ddd; border-radius: 6px; width: 300px; font-size: 1rem; }
+
+    /* Tooltip with ::after */
+    [data-tooltip] { position: relative; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 6px; cursor: pointer; margin-right: 10px; }
+    [data-tooltip]::after {
+      content: attr(data-tooltip);
+      position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%);
+      background: #2c3e50; color: white; padding: 6px 12px;
+      border-radius: 4px; font-size: 0.8rem; white-space: nowrap;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    [data-tooltip]:hover::after { opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <h1>Pseudo-elements Demo</h1>
+
+  <section>
+    <h2 class="decorated-heading">Heading with ::after Underline</h2>
+    <p style="margin-top:20px;">The colored bar under the heading is created with <code>::after</code> — no extra HTML needed.</p>
+  </section>
+
+  <section>
+    <h2>Custom List Bullets with ::before</h2>
+    <ul class="custom-list">
+      <li>First item with arrow bullet</li>
+      <li>Second item with arrow bullet</li>
+      <li>Third item with arrow bullet</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Blockquote with ::before Quote Mark</h2>
+    <div class="quote">
+      <p>The best way to learn CSS is to build things and break things.</p>
+      <footer style="margin-top:8px; font-size:0.85rem; color:#666;">— A wise developer</footer>
+    </div>
+  </section>
+
+  <section>
+    <h2>Required Field Asterisk with ::after</h2>
+    <form>
+      <div>
+        <label class="required" for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your name">
+      </div>
+      <div>
+        <label class="required" for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email">
+      </div>
+      <div>
+        <label for="website">Website</label>
+        <input type="url" id="website" placeholder="Optional">
+      </div>
+    </form>
+  </section>
+
+  <section>
+    <h2>Tooltip with ::after</h2>
+    <button data-tooltip="Save your work">Save</button>
+    <button data-tooltip="This will delete permanently" style="background:#e74c3c;">Delete</button>
+  </section>
+
+</body>
+</html>

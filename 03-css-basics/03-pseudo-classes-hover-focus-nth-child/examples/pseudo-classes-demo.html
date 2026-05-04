@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pseudo-classes Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; padding: 40px; background: #f8f9fa; }
+    h1 { margin-bottom: 40px; color: #2c3e50; }
+    h2 { margin-bottom: 16px; color: #2c3e50; font-size: 1.1rem; }
+    section { margin-bottom: 40px; }
+
+    /* :hover */
+    .hover-btn {
+      padding: 10px 24px; background: #3498db; color: white;
+      border: none; border-radius: 6px; cursor: pointer; font-size: 1rem;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .hover-btn:hover { background: #2980b9; transform: translateY(-2px); }
+    .hover-btn:active { transform: translateY(0); }
+
+    /* :focus */
+    .focus-input {
+      padding: 10px 14px; border: 2px solid #ddd; border-radius: 6px;
+      font-size: 1rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+      display: block; width: 300px; margin-bottom: 12px;
+    }
+    .focus-input:focus { border-color: #3498db; box-shadow: 0 0 0 3px rgba(52,152,219,0.2); }
+
+    /* :nth-child */
+    .list { list-style: none; }
+    .list li { padding: 10px 16px; border-bottom: 1px solid #eee; }
+    .list li:nth-child(even) { background: #f0f7ff; }
+    .list li:first-child { font-weight: bold; color: #2c3e50; }
+    .list li:last-child { border-bottom: none; color: #e74c3c; }
+    .list li:hover { background: #ebf5fb; }
+
+    /* :not */
+    .btn-group button { padding: 8px 16px; border: 1px solid #ddd; background: white; cursor: pointer; }
+    .btn-group button:not(:disabled):hover { background: #3498db; color: white; border-color: #3498db; }
+    .btn-group button:disabled { opacity: 0.4; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+
+  <h1>Pseudo-classes Demo</h1>
+
+  <section>
+    <h2>:hover and :active</h2>
+    <button class="hover-btn">Hover and Click Me</button>
+  </section>
+
+  <section>
+    <h2>:focus on inputs</h2>
+    <input type="text" class="focus-input" placeholder="Click to focus — see the ring">
+    <input type="email" class="focus-input" placeholder="Email input with focus style">
+  </section>
+
+  <section>
+    <h2>:nth-child, :first-child, :last-child</h2>
+    <ul class="list">
+      <li>First item (bold)</li>
+      <li>Second item (even — blue bg)</li>
+      <li>Third item</li>
+      <li>Fourth item (even — blue bg)</li>
+      <li>Fifth item</li>
+      <li>Sixth item (even — blue bg)</li>
+      <li>Last item (red)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>:not(:disabled)</h2>
+    <div class="btn-group">
+      <button>Active</button>
+      <button>Active</button>
+      <button disabled>Disabled</button>
+      <button>Active</button>
+    </div>
+  </section>
+
+</body>
+</html>

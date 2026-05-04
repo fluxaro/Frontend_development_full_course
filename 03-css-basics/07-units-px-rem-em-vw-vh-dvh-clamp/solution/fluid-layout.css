@@ -1,0 +1,144 @@
+:root {
+  font-size: 16px;
+
+  /* Fluid type scale */
+  --text-sm:   clamp(0.875rem, 1.5vw, 1rem);
+  --text-base: clamp(1rem, 2vw, 1.125rem);
+  --text-lg:   clamp(1.125rem, 2.5vw, 1.5rem);
+  --text-xl:   clamp(1.5rem, 4vw, 2.5rem);
+  --text-2xl:  clamp(2rem, 6vw, 4rem);
+
+  /* Fluid spacing */
+  --space-sm:  clamp(0.75rem, 2vw, 1.5rem);
+  --space-md:  clamp(1rem, 4vw, 2.5rem);
+  --space-lg:  clamp(2rem, 6vw, 5rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, sans-serif;
+  font-size: var(--text-base);
+  color: #333;
+  line-height: 1.7;
+}
+
+/* Navbar — em for padding, rem for font */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--space-md);
+  height: 4rem;
+  background: #2c3e50;
+}
+
+.logo {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar a {
+  color: #bdc3c7;
+  text-decoration: none;
+  font-size: var(--text-sm);
+}
+
+/* Hero — dvh for height, clamp for heading */
+.hero {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  color: white;
+  padding: var(--space-md);
+}
+
+.hero-content {
+  max-width: min(800px, 90%);
+}
+
+.hero h1 {
+  font-size: var(--text-2xl);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: var(--text-lg);
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  max-width: 65ch;
+  margin-inline: auto;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75em 2em;
+  background: white;
+  color: #2c3e50;
+  text-decoration: none;
+  border-radius: 2rem;
+  font-weight: 700;
+  font-size: var(--text-base);
+}
+
+/* Main content */
+main {
+  width: min(1200px, 100% - 2rem);
+  margin-inline: auto;
+  padding: var(--space-lg) 0;
+}
+
+section { margin-bottom: var(--space-lg); }
+
+h2 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-sm);
+  color: #2c3e50;
+}
+
+/* Card grid — fr units */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  gap: var(--space-sm);
+}
+
+.card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.5rem;
+  padding: var(--space-sm);
+}
+
+.card h3 {
+  font-size: var(--text-lg);
+  margin-bottom: 0.5rem;
+  color: #3498db;
+}
+
+/* Reading section — ch for max-width */
+.reading-section p {
+  max-width: 65ch;
+  font-size: var(--text-base);
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+footer {
+  background: #2c3e50;
+  color: #95a5a6;
+  text-align: center;
+  padding: var(--space-sm);
+  font-size: var(--text-sm);
+}

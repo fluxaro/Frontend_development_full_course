@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Table — Pseudo-classes Solution</title>
+  <link rel="stylesheet" href="product-table.css">
+</head>
+<body>
+
+  <main>
+    <h1>Product Comparison</h1>
+
+    <div class="filters">
+      <input type="search" class="search-input" placeholder="Search products..." required>
+      <select class="filter-select">
+        <option value="">All Categories</option>
+        <option value="laptop">Laptops</option>
+        <option value="phone">Phones</option>
+        <option value="tablet">Tablets</option>
+      </select>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Rating</th>
+          <th>In Stock</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>MacBook Pro 14"</td>
+          <td>Laptop</td>
+          <td>$1,999</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>Yes</td>
+          <td><button class="btn btn-primary">Buy</button></td>
+        </tr>
+        <tr>
+          <td>iPhone 16 Pro</td>
+          <td>Phone</td>
+          <td>$999</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>Yes</td>
+          <td><button class="btn btn-primary">Buy</button></td>
+        </tr>
+        <tr>
+          <td>Samsung Galaxy S25</td>
+          <td>Phone</td>
+          <td>$899</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>Yes</td>
+          <td><button class="btn btn-primary">Buy</button></td>
+        </tr>
+        <tr>
+          <td>iPad Pro 13"</td>
+          <td>Tablet</td>
+          <td>$1,299</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>No</td>
+          <td><button class="btn" disabled>Out of Stock</button></td>
+        </tr>
+        <tr>
+          <td>Dell XPS 15</td>
+          <td>Laptop</td>
+          <td>$1,599</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>Yes</td>
+          <td><button class="btn btn-primary">Buy</button></td>
+        </tr>
+        <tr>
+          <td>Google Pixel 9</td>
+          <td>Phone</td>
+          <td>$799</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>Yes</td>
+          <td><button class="btn btn-primary">Buy</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+</body>
+</html>

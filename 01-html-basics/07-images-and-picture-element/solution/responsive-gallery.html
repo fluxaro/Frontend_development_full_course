@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Photo Gallery — Solution</title>
+  <meta name="description" content="A responsive photo gallery demonstrating all HTML image techniques.">
+</head>
+<body>
+
+  <header>
+    <h1>Responsive Photo Gallery</h1>
+    <p>Demonstrating proper HTML image techniques: alt text, lazy loading, picture element, and figure/figcaption.</p>
+    <nav>
+      <ul>
+        <li><a href="#featured">Featured</a></li>
+        <li><a href="#responsive">Responsive</a></li>
+        <li><a href="#formats">Formats</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="featured">
+      <h2>Featured Photo</h2>
+      <figure>
+        <img
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200"
+          alt="Snow-capped mountain peaks reflected in a calm alpine lake at sunrise, with pine trees in the foreground"
+          width="1200"
+          height="800"
+          loading="eager"
+        >
+        <figcaption>
+          <strong>Alpine Reflection</strong> — Snow-capped peaks reflected in a mountain lake at sunrise.
+          Photo by <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a>.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="responsive">
+      <h2>Responsive Images (Art Direction)</h2>
+      <p>These images serve different crops depending on screen size. Resize your browser to see the difference.</p>
+
+      <figure>
+        <picture>
+          <source
+            media="(max-width: 600px)"
+            srcset="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=600&fit=crop"
+          >
+          <source
+            media="(min-width: 601px)"
+            srcset="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&h=500&fit=crop"
+          >
+          <img
+            src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800"
+            alt="Sunlight filtering through a dense forest of tall trees creating a golden glow on the forest floor"
+            width="800"
+            height="533"
+            loading="lazy"
+          >
+        </picture>
+        <figcaption>Forest Light — Different crops served for mobile and desktop.</figcaption>
+      </figure>
+    </section>
+
+    <section id="formats">
+      <h2>Format Optimization (WebP with JPEG fallback)</h2>
+      <p>Modern browsers receive WebP (smaller file size). Older browsers fall back to JPEG.</p>
+
+      <figure>
+        <picture>
+          <source
+            srcset="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&fm=webp"
+            type="image/webp"
+          >
+          <img
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800"
+            alt="A humpback whale breaching the ocean surface at sunset with water spray around it"
+            width="800"
+            height="533"
+            loading="lazy"
+          >
+        </picture>
+        <figcaption>Whale Breach — WebP served to modern browsers, JPEG to older ones.</figcaption>
+      </figure>
+
+      <figure>
+        <picture>
+          <source
+            srcset="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=800&fm=webp"
+            type="image/webp"
+          >
+          <img
+            src="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=800"
+            alt="A red fox sitting in a snowy field looking directly at the camera with alert eyes"
+            width="800"
+            height="533"
+            loading="lazy"
+          >
+        </picture>
+        <figcaption>Red Fox — Photographed in Yellowstone National Park.</figcaption>
+      </figure>
+    </section>
+
+    <section id="gallery">
+      <h2>Photo Gallery</h2>
+
+      <ul>
+        <li>
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400"
+              alt="Aerial view of a winding river through a lush green valley surrounded by mountains"
+              width="400"
+              height="267"
+              loading="lazy"
+              decoding="async"
+            >
+            <figcaption>River Valley</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=400"
+              alt="A lone pine tree on a rocky cliff overlooking a misty mountain range at dawn"
+              width="400"
+              height="267"
+              loading="lazy"
+              decoding="async"
+            >
+            <figcaption>Mountain Pine</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=400"
+              alt="Waves crashing on a rocky coastline at golden hour with orange sky"
+              width="400"
+              height="267"
+              loading="lazy"
+              decoding="async"
+            >
+            <figcaption>Rocky Coast</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=400"
+              alt="A vast green meadow with wildflowers stretching to the horizon under a blue sky with clouds"
+              width="400"
+              height="267"
+              loading="lazy"
+              decoding="async"
+            >
+            <figcaption>Wildflower Meadow</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400"
+              alt="Aerial view of a tropical island with turquoise water and white sand beach"
+              width="400"
+              height="267"
+              loading="lazy"
+              decoding="async"
+            >
+            <figcaption>Tropical Island</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400"
+              alt="Autumn forest with orange and red leaves on trees reflected in a still lake"
+              width="400"
+              height="267"
+              loading="lazy"
+              decoding="async"
+            >
+            <figcaption>Autumn Forest</figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>All photos from <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a> — free to use for learning.</p>
+  </footer>
+
+</body>
+</html>

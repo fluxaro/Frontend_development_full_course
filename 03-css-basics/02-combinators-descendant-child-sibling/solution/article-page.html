@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article Page — Combinators Solution</title>
+  <link rel="stylesheet" href="article-page.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/articles">Articles</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/newsletter">Newsletter</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <h1>Understanding CSS Combinators</h1>
+      <p>This is the lead paragraph — it appears immediately after the h1 and gets special styling via the adjacent sibling combinator.</p>
+      <p>This is a regular paragraph. It does not get the lead styling.</p>
+
+      <h2>What Are Combinators?</h2>
+      <p>Combinators define the relationship between selectors. They let you target elements based on their position in the HTML tree.</p>
+      <p>There are four combinators in CSS: descendant, child, adjacent sibling, and general sibling.</p>
+
+      <blockquote>
+        <p>"CSS combinators are one of the most powerful tools for writing clean, class-free CSS."</p>
+      </blockquote>
+      <p>This paragraph follows the blockquote — styled via general sibling combinator.</p>
+      <p>So does this one.</p>
+
+      <h2>The Child Combinator</h2>
+      <p>The child combinator selects only direct children, not grandchildren.</p>
+
+      <ul>
+        <li>Direct child item
+          <ul>
+            <li>Nested item — styled differently</li>
+            <li>Another nested item</li>
+          </ul>
+        </li>
+        <li>Another direct child</li>
+        <li>Third direct child</li>
+      </ul>
+    </article>
+
+    <aside>
+      <h2>Related Articles</h2>
+      <ul>
+        <li><a href="#">CSS Specificity Explained</a></li>
+        <li><a href="#">Pseudo-classes in Depth</a></li>
+        <li><a href="#">Modern CSS Selectors</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>
+    <p>The Dev Journal — 2025</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, sans-serif;
+  background: #f8f9fa;
+  color: #333;
+  padding: 40px;
+}
+
+h1 { margin-bottom: 24px; color: #2c3e50; }
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.search-input, .filter-select {
+  padding: 10px 14px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* :focus */
+.search-input:focus, .filter-select:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52,152,219,0.2);
+}
+
+/* :valid on search */
+.search-input:valid:not(:placeholder-shown) {
+  border-color: #27ae60;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+th {
+  background: #2c3e50;
+  color: white;
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* :first-child on th */
+th:first-child { border-radius: 0; }
+
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.9rem;
+}
+
+/* :nth-child(even) — zebra striping */
+tbody tr:nth-child(even) { background: #f8f9fa; }
+
+/* :hover on rows */
+tbody tr:hover { background: #ebf5fb; }
+
+/* :last-child — remove bottom border */
+tbody tr:last-child td { border-bottom: none; }
+
+/* Buttons */
+.btn {
+  padding: 6px 16px;
+  border: 1px solid #3498db;
+  border-radius: 4px;
+  background: transparent;
+  color: #3498db;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-primary { background: #3498db; color: white; }
+
+/* :hover on buttons — :not(:disabled) */
+.btn:not(:disabled):hover {
+  background: #2980b9;
+  color: white;
+  border-color: #2980b9;
+}
+
+/* :active */
+.btn:not(:disabled):active { transform: scale(0.98); }
+
+/* :disabled */
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: #ccc;
+  color: #999;
+}

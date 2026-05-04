@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Daily Tech — News Homepage Solution</title>
+  <meta name="description" content="The latest technology news, developer updates, and industry insights.">
+</head>
+<body>
+
+  <header>
+    <h1>The Daily Tech</h1>
+    <p>Technology news for developers and builders</p>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/web">Web Dev</a></li>
+        <li><a href="/ai">AI</a></li>
+        <li><a href="/tools">Tools</a></li>
+        <li><a href="/jobs">Jobs</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section aria-labelledby="featured-heading">
+      <h2 id="featured-heading">Featured Story</h2>
+
+      <article>
+        <header>
+          <mark>Breaking</mark>
+          <h3>CSS Container Queries Now Supported in All Major Browsers</h3>
+          <p>
+            By <strong>Sarah Chen</strong> ·
+            <time datetime="2025-01-15">January 15, 2025</time> ·
+            <small>5 min read</small>
+          </p>
+        </header>
+
+        <p>
+          Container queries have officially reached full cross-browser support, marking a major milestone
+          for component-based CSS development. Developers can now style components based on their
+          container size rather than the viewport — enabling truly reusable, context-aware components.
+        </p>
+
+        <p>
+          The feature, which allows CSS to respond to the size of a parent element rather than the
+          browser window, has been in development for several years. With Safari 18 completing the
+          rollout, all major browsers now support the <code>@container</code> rule.
+        </p>
+
+        <figure>
+          <img
+            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=400&fit=crop"
+            alt="Code editor showing CSS container query syntax on a dark background"
+            width="800"
+            height="400"
+            loading="lazy"
+          >
+          <figcaption>Container queries enable component-level responsive design without media queries.</figcaption>
+        </figure>
+
+        <footer>
+          <p>Tags: <a href="/tag/css">CSS</a>, <a href="/tag/browsers">Browsers</a>, <a href="/tag/responsive">Responsive Design</a></p>
+        </footer>
+      </article>
+    </section>
+
+    <section aria-labelledby="latest-heading">
+      <h2 id="latest-heading">Latest News</h2>
+
+      <article>
+        <header>
+          <mark>Web Dev</mark>
+          <h3>React 20 Announced with Server Components by Default</h3>
+          <p>By <strong>Marcus Williams</strong> · <time datetime="2025-01-14">January 14, 2025</time></p>
+        </header>
+        <p>The React team has announced version 20, which ships with Server Components enabled by default in all new projects. The update also includes improved hydration performance and a new compiler that eliminates the need for manual memoization.</p>
+        <footer>
+          <a href="/articles/react-20">Read full article →</a>
+        </footer>
+      </article>
+
+      <article>
+        <header>
+          <mark>AI</mark>
+          <h3>GitHub Copilot Adds Full Codebase Understanding</h3>
+          <p>By <strong>Alex Rivera</strong> · <time datetime="2025-01-13">January 13, 2025</time></p>
+        </header>
+        <p>GitHub has updated Copilot with the ability to understand and reason about entire codebases, not just the current file. The feature uses a new indexing system that maps relationships between files, functions, and modules.</p>
+        <footer>
+          <a href="/articles/copilot-update">Read full article →</a>
+        </footer>
+      </article>
+
+      <article>
+        <header>
+          <mark>Tools</mark>
+          <h3>Vite 7 Released with Native TypeScript Compilation</h3>
+          <p>By <strong>James Park</strong> · <time datetime="2025-01-12">January 12, 2025</time></p>
+        </header>
+        <p>Vite 7 ships with native TypeScript compilation using the new Oxc compiler, resulting in build times up to 10x faster than previous versions. The update also includes improved HMR and better tree-shaking.</p>
+        <footer>
+          <a href="/articles/vite-7">Read full article →</a>
+        </footer>
+      </article>
+
+      <article>
+        <header>
+          <mark>Web Dev</mark>
+          <h3>Tailwind CSS v4 Removes Configuration File Requirement</h3>
+          <p>By <strong>Sarah Chen</strong> · <time datetime="2025-01-11">January 11, 2025</time></p>
+        </header>
+        <p>Tailwind CSS version 4 introduces zero-configuration mode, automatically detecting your project structure and generating only the utilities you use. The new engine is also 10x faster than v3.</p>
+        <footer>
+          <a href="/articles/tailwind-v4">Read full article →</a>
+        </footer>
+      </article>
+
+    </section>
+
+    <aside aria-labelledby="trending-heading">
+      <h2 id="trending-heading">Trending Topics</h2>
+      <ul>
+        <li><a href="/tag/ai">Artificial Intelligence</a></li>
+        <li><a href="/tag/react">React 20</a></li>
+        <li><a href="/tag/css">CSS Container Queries</a></li>
+        <li><a href="/tag/typescript">TypeScript 6</a></li>
+        <li><a href="/tag/webassembly">WebAssembly</a></li>
+        <li><a href="/tag/performance">Web Performance</a></li>
+      </ul>
+
+      <h2>Newsletter</h2>
+      <p>Get the top 5 developer stories every Monday morning.</p>
+      <form action="/subscribe" method="POST">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </aside>
+
+  </main>
+
+  <footer>
+    <nav aria-label="Footer navigation">
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/advertise">Advertise</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/rss">RSS Feed</a></li>
+      </ul>
+    </nav>
+    <address>
+      The Daily Tech · <a href="mailto:hello@dailytech.example.com">hello@dailytech.example.com</a>
+    </address>
+    <p><small>Copyright <time datetime="2025">2025</time> The Daily Tech. All rights reserved.</small></p>
+  </footer>
+
+</body>
+</html>

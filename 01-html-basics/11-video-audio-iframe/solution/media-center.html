@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Center — Solution</title>
+  <meta name="description" content="A complete media center demonstrating HTML5 video, audio, and iframe embedding.">
+</head>
+<body>
+
+  <header>
+    <h1>Media Center</h1>
+    <p>A complete demonstration of HTML5 video, audio, and embedded content.</p>
+    <nav>
+      <ul>
+        <li><a href="#video">Video</a></li>
+        <li><a href="#audio">Audio</a></li>
+        <li><a href="#youtube">YouTube</a></li>
+        <li><a href="#map">Map</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="video">
+      <h2>HTML5 Video Player</h2>
+
+      <figure>
+        <video
+          controls
+          width="640"
+          height="360"
+          poster="https://images.unsplash.com/photo-1536240478700-b869ad10e128?w=640&h=360&fit=crop"
+          preload="metadata"
+        >
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+          <source src="https://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
+          <track kind="subtitles" src="subtitles-en.vtt" srclang="en" label="English">
+          <p>
+            Your browser does not support HTML5 video.
+            <a href="https://www.w3schools.com/html/mov_bbb.mp4">Download the video (MP4)</a>.
+          </p>
+        </video>
+        <figcaption>
+          <strong>Big Buck Bunny</strong> — A short animated film by the Blender Foundation.
+          Licensed under <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution 3.0</a>.
+        </figcaption>
+      </figure>
+
+      <h3>Autoplay Background Video (Muted)</h3>
+      <p>Autoplay only works when the video is muted. This is a browser security requirement to prevent unwanted audio.</p>
+
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        width="640"
+        height="360"
+      >
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      </video>
+    </section>
+
+    <section id="audio">
+      <h2>HTML5 Audio Player</h2>
+
+      <figure>
+        <audio controls preload="metadata">
+          <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+          <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg">
+          <p>
+            Your browser does not support HTML5 audio.
+            <a href="https://www.w3schools.com/html/horse.mp3">Download the audio (MP3)</a>.
+          </p>
+        </audio>
+        <figcaption>
+          <strong>Sample Audio</strong> — A demonstration of the HTML5 audio element with controls.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="youtube">
+      <h2>Embedded YouTube Video</h2>
+
+      <figure>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/qz0aGYrrlhU"
+          title="HTML Tutorial for Beginners — Learn HTML from Scratch in 1 Hour"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+        <figcaption>
+          <strong>HTML Tutorial for Beginners</strong> — Learn HTML from scratch.
+          <a href="https://www.youtube.com/watch?v=qz0aGYrrlhU" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="map">
+      <h2>Embedded Google Map</h2>
+
+      <figure>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343008!2d-74.00425878459418!3d40.74076684379132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bf5c1654f3%3A0xc80f9cfce5383d5d!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
+          width="600"
+          height="450"
+          title="Map showing the Empire State Building location in Midtown Manhattan, New York City"
+          loading="lazy"
+          allowfullscreen
+        ></iframe>
+        <figcaption>
+          <address>
+            <strong>Empire State Building</strong><br>
+            350 5th Ave, New York, NY 10118<br>
+            <a href="https://maps.google.com/?q=Empire+State+Building" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
+          </address>
+        </figcaption>
+      </figure>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Video: Big Buck Bunny by Blender Foundation (CC BY 3.0). All other media for demonstration purposes.</p>
+  </footer>
+
+</body>
+</html>

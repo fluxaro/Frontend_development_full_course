@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typography System — Solution</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="typography-system.css">
+</head>
+<body>
+
+  <header>
+    <h1>Typography System</h1>
+    <p>A complete type scale, font pairing, and text styling reference.</p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Type Scale</h2>
+      <div class="type-scale">
+        <p class="text-xs">text-xs — 0.75rem (12px)</p>
+        <p class="text-sm">text-sm — 0.875rem (14px)</p>
+        <p class="text-base">text-base — 1rem (16px)</p>
+        <p class="text-lg">text-lg — 1.125rem (18px)</p>
+        <p class="text-xl">text-xl — 1.25rem (20px)</p>
+        <p class="text-2xl">text-2xl — 1.5rem (24px)</p>
+        <p class="text-3xl">text-3xl — 1.875rem (30px)</p>
+        <p class="text-4xl">text-4xl — 2.25rem (36px)</p>
+        <p class="text-5xl">text-5xl — 3rem (48px)</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Font Weights</h2>
+      <div class="weights">
+        <p style="font-weight:400;">400 — Regular</p>
+        <p style="font-weight:500;">500 — Medium</p>
+        <p style="font-weight:600;">600 — Semibold</p>
+        <p style="font-weight:700;">700 — Bold</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Heading Hierarchy</h2>
+      <h1>Heading 1 — Page Title</h1>
+      <h2>Heading 2 — Section Title</h2>
+      <h3>Heading 3 — Subsection</h3>
+      <h4>Heading 4 — Sub-subsection</h4>
+      <h5>Heading 5 — Minor heading</h5>
+      <h6>Heading 6 — Smallest heading</h6>
+    </section>
+
+    <section>
+      <h2>Body Text</h2>
+      <p class="body-text">This is body text at the optimal reading size. The line-height is 1.7 and the max-width is 65ch — the ideal line length for readability. Studies show that 45–75 characters per line is optimal for comfortable reading.</p>
+      <p class="body-text">A second paragraph to show the spacing between paragraphs. The margin-bottom creates visual breathing room between blocks of text.</p>
+    </section>
+
+    <section>
+      <h2>Text Decorations</h2>
+      <p><span style="text-decoration:underline;">Underline</span> — for links and emphasis</p>
+      <p><span style="text-decoration:line-through;">Strikethrough</span> — for deleted content</p>
+      <p><span style="text-decoration:overline;">Overline</span> — rarely used</p>
+    </section>
+
+    <section>
+      <h2>Text Transforms</h2>
+      <p class="uppercase">uppercase text — all caps</p>
+      <p class="lowercase">LOWERCASE TEXT — all lowercase</p>
+      <p class="capitalize">capitalize each word of this sentence</p>
+    </section>
+
+    <section>
+      <h2>Truncation</h2>
+      <p class="truncate-single">This text is very long and will be truncated with an ellipsis when it overflows its container on a single line.</p>
+      <p class="truncate-multi">This text is very long and will be truncated after three lines. It demonstrates the multi-line clamp technique using -webkit-line-clamp. The text continues here but will be cut off after the third line with an ellipsis.</p>
+    </section>
+
+    <section>
+      <h2>Letter Spacing</h2>
+      <p style="letter-spacing: -0.05em;">Tight letter spacing — -0.05em</p>
+      <p style="letter-spacing: 0;">Normal letter spacing — 0</p>
+      <p style="letter-spacing: 0.05em;">Wide letter spacing — 0.05em</p>
+      <p style="letter-spacing: 0.15em; text-transform: uppercase;">Very wide — 0.15em (uppercase labels)</p>
+    </section>
+
+    <section>
+      <h2>Blockquote</h2>
+      <blockquote>
+        <p>Typography is what language looks like. Good typography is invisible. Bad typography is everywhere.</p>
+        <footer>— <cite>Ellen Lupton</cite>, <cite>Thinking with Type</cite></footer>
+      </blockquote>
+    </section>
+
+    <section>
+      <h2>Code</h2>
+      <p>Use <code>font-family: monospace</code> for inline code. For code blocks:</p>
+      <pre><code>:root {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --text-base: 1rem;
+  --line-height: 1.7;
+}</code></pre>
+    </section>
+
+  </main>
+
+</body>
+</html>

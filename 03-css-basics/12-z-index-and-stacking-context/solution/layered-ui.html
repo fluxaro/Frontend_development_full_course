@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layered UI — z-index Solution</title>
+  <link rel="stylesheet" href="layered-ui.css">
+</head>
+<body>
+
+  <nav class="sticky-header">
+    <span class="logo">LayerApp</span>
+    <div class="dropdown-wrapper">
+      <button class="dropdown-btn" onclick="this.nextElementSibling.classList.toggle('open')">Account ▾</button>
+      <div class="dropdown-menu">
+        <a href="#">Profile</a>
+        <a href="#">Settings</a>
+        <a href="#">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <h1>Layered UI Components</h1>
+    <p>This page demonstrates a proper z-index scale using CSS custom properties.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <h2>Card 1</h2>
+        <p>Regular content card.</p>
+      </div>
+      <div class="card">
+        <h2>Card 2</h2>
+        <p>Regular content card.</p>
+      </div>
+      <div class="card">
+        <h2>Card 3</h2>
+        <p>Regular content card.</p>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="document.getElementById('modal').classList.add('open')">Open Modal</button>
+    </div>
+  </main>
+
+  <a href="#" class="fab">+</a>
+
+  <div class="modal-overlay" id="modal" onclick="this.classList.remove('open')">
+    <div class="modal-dialog" onclick="event.stopPropagation()">
+      <h2>Modal Dialog</h2>
+      <p>z-index: var(--z-modal) = 400. Appears above the sticky header (200) and overlay (300).</p>
+      <button class="btn" onclick="document.getElementById('modal').classList.remove('open')">Close</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">✓ Action completed! (z-index: 500)</div>
+
+  <script>
+    setTimeout(() => {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }, 1500);
+  </script>
+
+</body>
+</html>

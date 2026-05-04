@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Grid Template Areas Solution</title>
+  <link rel="stylesheet" href="dashboard-grid.css">
+</head>
+<body>
+
+  <div class="dashboard">
+
+    <header class="topbar">
+      <span class="logo">AdminPro</span>
+      <input type="search" placeholder="Search..." class="search">
+      <div class="user-menu">
+        <img src="https://i.pravatar.cc/36?img=1" alt="User" width="36" height="36">
+        <span>Alex Johnson</span>
+      </div>
+    </header>
+
+    <aside class="sidebar">
+      <nav>
+        <a href="#" class="nav-link active">📊 Dashboard</a>
+        <a href="#" class="nav-link">📈 Analytics</a>
+        <a href="#" class="nav-link">👥 Users</a>
+        <a href="#" class="nav-link">📦 Products</a>
+        <a href="#" class="nav-link">💬 Messages</a>
+        <a href="#" class="nav-link">⚙️ Settings</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <h1>Dashboard Overview</h1>
+
+      <div class="stats-grid">
+        <div class="stat-card"><span class="stat-num">12,847</span><span class="stat-lbl">Total Users</span></div>
+        <div class="stat-card"><span class="stat-num">$48,295</span><span class="stat-lbl">Revenue</span></div>
+        <div class="stat-card"><span class="stat-num">3,421</span><span class="stat-lbl">Orders</span></div>
+        <div class="stat-card"><span class="stat-num">4.2%</span><span class="stat-lbl">Conversion</span></div>
+      </div>
+
+      <div class="chart-area">
+        <h2>Revenue Chart</h2>
+        <div class="chart-placeholder">Chart visualization would go here</div>
+      </div>
+    </main>
+
+    <aside class="widgets">
+      <div class="widget">
+        <h3>Quick Stats</h3>
+        <ul>
+          <li>Active users: <strong>1,234</strong></li>
+          <li>New today: <strong>+47</strong></li>
+          <li>Pending: <strong>12</strong></li>
+        </ul>
+      </div>
+      <div class="widget">
+        <h3>Recent Activity</h3>
+        <ul>
+          <li>User signed up</li>
+          <li>Order #4521 placed</li>
+          <li>Payment received</li>
+          <li>Report generated</li>
+        </ul>
+      </div>
+    </aside>
+
+    <footer class="footer">
+      <p>© 2025 AdminPro. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

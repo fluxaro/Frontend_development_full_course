@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — Flexbox Solution</title>
+  <link rel="stylesheet" href="portfolio-flexbox.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <span class="logo">Alex Johnson</span>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="cta">Hire Me</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Frontend Developer</h1>
+      <p>I build beautiful, accessible, and performant web experiences using HTML, CSS, JavaScript, and React.</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn-primary">View My Work</a>
+        <a href="#contact" class="btn-outline">Get In Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-image">
+      <img src="https://i.pravatar.cc/300?img=12" alt="Alex Johnson" width="300" height="300">
+    </div>
+    <div class="about-text">
+      <h2>About Me</h2>
+      <p>Hi! I am Alex Johnson, a frontend developer with a passion for creating clean, user-friendly interfaces. I have been building for the web for 3 years and love every minute of it.</p>
+      <p>When I am not coding, I enjoy hiking, photography, and reading about technology and design.</p>
+    </div>
+  </section>
+
+  <section class="skills" id="skills">
+    <h2>My Skills</h2>
+    <div class="skills-tags">
+      <span class="tag">HTML5</span>
+      <span class="tag">CSS3</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">TypeScript</span>
+      <span class="tag">React</span>
+      <span class="tag">Tailwind CSS</span>
+      <span class="tag">Git</span>
+      <span class="tag">Figma</span>
+      <span class="tag">Node.js</span>
+      <span class="tag">REST APIs</span>
+    </div>
+  </section>
+
+  <section class="projects" id="projects">
+    <h2>My Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=200&fit=crop" alt="E-commerce project" width="400" height="200">
+        <div class="project-info">
+          <h3>E-commerce Store</h3>
+          <p>A full-featured online store built with React and Tailwind CSS.</p>
+          <div class="project-links">
+            <a href="#" class="btn-sm">Live Demo</a>
+            <a href="#" class="btn-sm btn-ghost">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=200&fit=crop" alt="Dashboard project" width="400" height="200">
+        <div class="project-info">
+          <h3>Analytics Dashboard</h3>
+          <p>A data visualization dashboard with charts and real-time updates.</p>
+          <div class="project-links">
+            <a href="#" class="btn-sm">Live Demo</a>
+            <a href="#" class="btn-sm btn-ghost">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=200&fit=crop" alt="Blog project" width="400" height="200">
+        <div class="project-info">
+          <h3>Personal Blog</h3>
+          <p>A markdown-powered blog with dark mode and search functionality.</p>
+          <div class="project-links">
+            <a href="#" class="btn-sm">Live Demo</a>
+            <a href="#" class="btn-sm btn-ghost">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact-form">
+      <h2>Get In Touch</h2>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn-primary">Send Message</button>
+      </form>
+    </div>
+    <div class="contact-info">
+      <h2>Contact Info</h2>
+      <ul>
+        <li>📧 <a href="mailto:alex@example.com">alex@example.com</a></li>
+        <li>📞 <a href="tel:+15551234567">+1 (555) 123-4567</a></li>
+        <li>🐙 <a href="https://github.com" target="_blank" rel="noopener noreferrer">github.com/alexjohnson</a></li>
+        <li>💼 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">linkedin.com/in/alexjohnson</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <p>© 2025 Alex Johnson. Built with HTML, CSS, and Flexbox.</p>
+  </footer>
+
+</body>
+</html>
