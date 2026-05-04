@@ -1,0 +1,228 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, sans-serif; padding: 40px; background: #f8f9fa; color: #333; }
+
+h1 { margin-bottom: 40px; }
+h2 { margin-bottom: 20px; color: #2c3e50; font-size: 1.1rem; }
+section { margin-bottom: 50px; }
+
+/* Navigation with nesting */
+.nav {
+  background: #2c3e50;
+  padding: 0 2rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+
+  &__logo {
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  &__links {
+    list-style: none;
+    display: flex;
+    gap: 0;
+  }
+
+  &__link {
+    display: block;
+    padding: 20px 16px;
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover { color: white; }
+    &--active { color: white; font-weight: 600; }
+  }
+}
+
+/* Card with nesting */
+.card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 360px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: box-shadow 0.3s, transform 0.3s;
+
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    transform: translateY(-4px);
+  }
+
+  &__image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__body { padding: 1.5rem; }
+
+  &__title {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+  }
+
+  &__text {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  &__footer {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  &--featured {
+    border-color: #3498db;
+    border-width: 2px;
+  }
+}
+
+/* Button with nesting */
+.btn {
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+
+  &:active { transform: scale(0.98); }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  &--primary {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+
+    &:hover:not(:disabled) { background: #2980b9; border-color: #2980b9; }
+  }
+
+  &--secondary {
+    background: #9b59b6;
+    color: white;
+    border-color: #9b59b6;
+
+    &:hover:not(:disabled) { background: #8e44ad; }
+  }
+
+  &--danger {
+    background: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+
+    &:hover:not(:disabled) { background: #c0392b; }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: #3498db;
+    border-color: #3498db;
+
+    &:hover:not(:disabled) { background: #3498db; color: white; }
+  }
+}
+
+/* Form with nesting */
+.form {
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  &__input {
+    padding: 10px 14px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+
+    &:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 0 3px rgba(52,152,219,0.15);
+    }
+
+    &--error {
+      border-color: #e74c3c;
+
+      &:focus { box-shadow: 0 0 0 3px rgba(231,76,60,0.15); }
+    }
+  }
+
+  &__error {
+    font-size: 0.8rem;
+    color: #e74c3c;
+  }
+}
+
+/* Alert with nesting */
+.alert {
+  padding: 12px 16px 12px 48px;
+  border-radius: 8px;
+  position: relative;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+
+  &::before {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+  }
+
+  &--success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+
+    &::before { content: '✓'; }
+  }
+
+  &--warning {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+
+    &::before { content: '⚠'; }
+  }
+
+  &--error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+
+    &::before { content: '✕'; }
+  }
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fixed Layout — Debugging Solution</title>
+  <link rel="stylesheet" href="fixed-layout.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <span class="logo">Brand</span>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>Debugging CSS — Fixed Layout</h1>
+    <p>All bugs from the broken layout have been fixed.</p>
+
+    <section>
+      <h2>Bug 1 Fixed: box-sizing: border-box</h2>
+      <p>Cards now respect their 50% width including padding.</p>
+      <div class="card-grid">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=300&h=200&fit=crop" alt="Code" width="300" height="200">
+          <div class="card-body">
+            <h3>Card Title</h3>
+            <p>Width is 50% including padding. No overflow.</p>
+            <button class="btn">Action</button>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=300&h=200&fit=crop" alt="Developer" width="300" height="200">
+          <div class="card-body">
+            <h3>Card Title</h3>
+            <p>Both cards fit side by side correctly.</p>
+            <button class="btn">Action</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Bug 2 Fixed: Image gap removed</h2>
+      <p>Images have <code>display: block</code> — no gap below.</p>
+      <div class="image-demo">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=200&fit=crop" alt="Mountain" width="400" height="200">
+      </div>
+    </section>
+
+    <section>
+      <h2>Bug 3 Fixed: z-index works</h2>
+      <p>The badge appears above the card because it has <code>position: relative</code>.</p>
+      <div class="card-with-badge">
+        <span class="badge">NEW</span>
+        <h3>Card with Badge</h3>
+        <p>The badge is positioned correctly.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Debugging Techniques</h2>
+      <div class="debug-tips">
+        <div class="tip">
+          <h3>Outline Method</h3>
+          <pre><code>* { outline: 1px solid red; }</code></pre>
+          <p>Reveals all element boxes without affecting layout.</p>
+        </div>
+        <div class="tip">
+          <h3>Background Method</h3>
+          <pre><code>* { background: rgba(255,0,0,0.1); }</code></pre>
+          <p>Shows element boundaries including padding.</p>
+        </div>
+        <div class="tip">
+          <h3>DevTools</h3>
+          <p>Right-click → Inspect → Styles panel shows all applied rules. Computed panel shows final values.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

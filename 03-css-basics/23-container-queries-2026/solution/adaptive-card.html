@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adaptive Card — Container Queries Solution</title>
+  <link rel="stylesheet" href="adaptive-card.css">
+</head>
+<body>
+
+  <h1>Adaptive Card Component</h1>
+  <p>The same card HTML adapts to its container size using container queries.</p>
+
+  <div class="demo-layout">
+
+    <div class="container-narrow">
+      <h2>Narrow (250px)</h2>
+      <div class="card-wrapper">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=300&fit=crop" alt="Code on screen" width="400" height="300" loading="lazy">
+          <div class="card-body">
+            <div class="tags">
+              <span class="tag">CSS</span>
+              <span class="tag">Layout</span>
+            </div>
+            <h3>Container Queries</h3>
+            <p>Style components based on their container size, not the viewport.</p>
+            <a href="#" class="btn">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-medium">
+      <h2>Medium (420px)</h2>
+      <div class="card-wrapper">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=300&fit=crop" alt="Code on screen" width="400" height="300" loading="lazy">
+          <div class="card-body">
+            <div class="tags">
+              <span class="tag">CSS</span>
+              <span class="tag">Layout</span>
+            </div>
+            <h3>Container Queries</h3>
+            <p>Style components based on their container size, not the viewport.</p>
+            <a href="#" class="btn">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-wide">
+      <h2>Wide (620px)</h2>
+      <div class="card-wrapper">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=300&fit=crop" alt="Code on screen" width="400" height="300" loading="lazy">
+          <div class="card-body">
+            <div class="tags">
+              <span class="tag">CSS</span>
+              <span class="tag">Layout</span>
+            </div>
+            <h3>Container Queries</h3>
+            <p>Style components based on their container size, not the viewport. This is the future of component-level responsive design.</p>
+            <a href="#" class="btn">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

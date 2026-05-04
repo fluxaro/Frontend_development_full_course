@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Form — Modern CSS Solution</title>
+  <link rel="stylesheet" href="smart-form.css">
+</head>
+<body>
+
+  <header>
+    <h1>Smart Form</h1>
+    <p>Real-time validation feedback using :has(), :is(), :where(), and :not() — no JavaScript.</p>
+  </header>
+
+  <main>
+    <form id="signup-form" novalidate>
+
+      <div class="field">
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" name="name" required minlength="2" placeholder="Enter your full name">
+        <p class="hint">Minimum 2 characters.</p>
+      </div>
+
+      <div class="field">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" required placeholder="you@example.com">
+        <p class="hint">We will never share your email.</p>
+      </div>
+
+      <div class="field">
+        <label for="password">Password *</label>
+        <input type="password" id="password" name="password" required minlength="8" placeholder="Min 8 characters">
+        <p class="hint">At least 8 characters.</p>
+      </div>
+
+      <div class="field">
+        <label for="country">Country *</label>
+        <select id="country" name="country" required>
+          <option value="">-- Select your country --</option>
+          <option value="us">United States</option>
+          <option value="uk">United Kingdom</option>
+          <option value="ca">Canada</option>
+          <option value="ng">Nigeria</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="field optional">
+        <label for="bio">Bio</label>
+        <textarea id="bio" name="bio" rows="4" maxlength="300" placeholder="Optional — tell us about yourself..."></textarea>
+        <p class="hint">Optional. Maximum 300 characters.</p>
+      </div>
+
+      <button type="submit">Create Account</button>
+
+    </form>
+  </main>
+
+</body>
+</html>

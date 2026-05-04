@@ -1,0 +1,88 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, sans-serif; padding: 40px; background: #f8f9fa; color: #333; }
+
+header { margin-bottom: 40px; }
+header h1 { font-size: 2rem; margin-bottom: 8px; }
+header p  { color: #666; }
+
+/* === :is() — group heading styles === */
+:is(h1, h2, h3) { font-weight: 700; line-height: 1.3; }
+
+/* === :where() — zero specificity default link styles === */
+:where(a) { color: #3498db; text-decoration: none; }
+:where(a):hover { text-decoration: underline; }
+
+/* Form */
+form {
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Field wrapper */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Required asterisk using :not(.optional) */
+.field:not(.optional) label::after {
+  content: ' *';
+  color: #e74c3c;
+}
+
+input, select, textarea {
+  padding: 10px 14px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52,152,219,0.15);
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* === :has() — field wrapper reacts to input state === */
+
+/* Field with valid input — green */
+.field:has(input:valid:not(:placeholder-shown)) label { color: #27ae60; }
+.field:has(input:valid:not(:placeholder-shown)) input { border-color: #27ae60; }
+.field:has(input:valid:not(:placeholder-shown)) .hint { color: #27ae60; }
+
+/* Field with invalid input — red */
+.field:has(input:invalid:not(:placeholder-shown)) label { color: #e74c3c; }
+.field:has(input:invalid:not(:placeholder-shown)) input { border-color: #e74c3c; }
+.field:has(input:invalid:not(:placeholder-shown)) .hint { color: #e74c3c; }
+
+/* Select valid */
+.field:has(select:valid:not([value=""])) label { color: #27ae60; }
+.field:has(select option:checked:not([value=""])) select { border-color: #27ae60; }
+
+/* Submit button */
+button[type="submit"] {
+  padding: 12px 28px;
+  background: #3498db; color: white;
+  border: none; border-radius: 6px;
+  cursor: pointer; font-size: 1rem; font-weight: 600;
+  transition: background 0.2s, transform 0.1s;
+}
+
+button[type="submit"]:hover { background: #2980b9; transform: translateY(-1px); }
+button[type="submit"]:active { transform: translateY(0); }

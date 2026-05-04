@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Performance Page — Solution</title>
+  <link rel="stylesheet" href="performance-page.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <span class="logo">PerfApp</span>
+    <ul>
+      <li><a href="#cards">Cards</a></li>
+      <li><a href="#list">Long List</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <h1>CSS Performance</h1>
+      <p>will-change, contain, and content-visibility in action.</p>
+      <a href="#cards" class="btn">Explore ↓</a>
+    </div>
+  </section>
+
+  <main>
+
+    <section id="cards">
+      <h2>Cards (contain: content + will-change on hover)</h2>
+      <div class="card-grid">
+        <div class="card"><h3>Card 1</h3><p>Hover to animate</p></div>
+        <div class="card"><h3>Card 2</h3><p>Hover to animate</p></div>
+        <div class="card"><h3>Card 3</h3><p>Hover to animate</p></div>
+        <div class="card"><h3>Card 4</h3><p>Hover to animate</p></div>
+        <div class="card"><h3>Card 5</h3><p>Hover to animate</p></div>
+        <div class="card"><h3>Card 6</h3><p>Hover to animate</p></div>
+        <div class="card"><h3>Card 7</h3><p>Hover to animate</p></div>
+        <div class="card"><h3>Card 8</h3><p>Hover to animate</p></div>
+        <div class="card"><h3>Card 9</h3><p>Hover to animate</p></div>
+        <div class="card"><h3>Card 10</h3><p>Hover to animate</p></div>
+        <div class="card"><h3>Card 11</h3><p>Hover to animate</p></div>
+        <div class="card"><h3>Card 12</h3><p>Hover to animate</p></div>
+      </div>
+    </section>
+
+    <section id="list">
+      <h2>Long List (content-visibility: auto)</h2>
+      <div class="long-list" id="list-container"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 PerfApp. Optimized with CSS performance techniques.</p>
+  </footer>
+
+  <script>
+    // Generate 50 list items
+    const container = document.getElementById('list-container');
+    for (let i = 1; i <= 50; i++) {
+      container.innerHTML += `
+        <div class="list-item">
+          <div class="list-item-avatar">${i}</div>
+          <div class="list-item-content">
+            <h4>List Item ${i}</h4>
+            <p>This item uses content-visibility: auto — it is skipped when off-screen.</p>
+          </div>
+        </div>
+      `;
+    }
+  </script>
+
+</body>
+</html>

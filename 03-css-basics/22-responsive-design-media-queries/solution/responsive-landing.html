@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Landing Page — Solution</title>
+  <link rel="stylesheet" href="responsive-landing.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <span class="logo">ResponsiveApp</span>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#footer">Contact</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Get Started</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Responsive Design Done Right</h1>
+      <p>This page uses mobile-first CSS with media queries at 640px and 1024px. Resize your browser to see the layout change.</p>
+      <div class="hero-buttons">
+        <a href="#features" class="btn-primary">See Features</a>
+        <a href="#" class="btn-outline">Learn More</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop" alt="Developer working on responsive design" width="600" height="400" loading="lazy">
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <h2>Features</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">📱</span>
+        <h3>Mobile First</h3>
+        <p>Designed for mobile, enhanced for desktop. The right approach.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">⚡</span>
+        <h3>Fast Loading</h3>
+        <p>Optimized images and minimal CSS for blazing fast performance.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">♿</span>
+        <h3>Accessible</h3>
+        <p>WCAG 2.1 compliant. Works for everyone on every device.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials" id="testimonials">
+    <h2>What Users Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p>"The responsive design is flawless. Works perfectly on my phone and desktop."</p>
+        <footer>— Sarah Chen, Frontend Developer</footer>
+      </div>
+      <div class="testimonial-card">
+        <p>"Finally a product that actually works on mobile. The mobile-first approach is evident."</p>
+        <footer>— Marcus Williams, UX Designer</footer>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" id="footer">
+    <div class="footer-grid">
+      <div>
+        <h4>Product</h4>
+        <ul><li>Features</li><li>Pricing</li><li>Changelog</li></ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul><li>About</li><li>Blog</li><li>Careers</li></ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul><li>Docs</li><li>Community</li><li>Contact</li></ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul><li>Privacy</li><li>Terms</li><li>Cookies</li></ul>
+      </div>
+    </div>
+    <p class="copyright">© 2025 ResponsiveApp. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

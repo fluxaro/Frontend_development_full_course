@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System — CSS Variables Solution</title>
+  <link rel="stylesheet" href="design-system.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <span class="logo">DesignSys</span>
+    <ul>
+      <li><a href="#">Components</a></li>
+      <li><a href="#">Tokens</a></li>
+      <li><a href="#">Docs</a></li>
+    </ul>
+    <button id="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+  </nav>
+
+  <main>
+    <h1>Design System</h1>
+    <p>All colors, spacing, and typography use CSS custom properties. Toggle the theme to see them all update instantly.</p>
+
+    <section>
+      <h2>Buttons</h2>
+      <div class="button-row">
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-secondary">Secondary</button>
+        <button class="btn btn-success">Success</button>
+        <button class="btn btn-warning">Warning</button>
+        <button class="btn btn-danger">Danger</button>
+        <button class="btn btn-ghost">Ghost</button>
+        <button class="btn btn-primary" disabled>Disabled</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Cards</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Default Card</h3>
+          <p>Uses surface background and border color from tokens.</p>
+          <button class="btn btn-primary btn-sm">Action</button>
+        </div>
+        <div class="card card-featured">
+          <h3>Featured Card</h3>
+          <p>Uses primary color for the border accent.</p>
+          <button class="btn btn-primary btn-sm">Action</button>
+        </div>
+        <div class="card">
+          <h3>Another Card</h3>
+          <p>All spacing uses the spacing scale tokens.</p>
+          <button class="btn btn-ghost btn-sm">Action</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Form</h2>
+      <form class="form">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" rows="4" placeholder="Your message..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Badges</h2>
+      <div class="badge-row">
+        <span class="badge badge-primary">Primary</span>
+        <span class="badge badge-success">Success</span>
+        <span class="badge badge-warning">Warning</span>
+        <span class="badge badge-danger">Danger</span>
+        <span class="badge badge-neutral">Neutral</span>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const btn = document.getElementById('theme-toggle');
+      if (html.getAttribute('data-theme') === 'light') {
+        html.setAttribute('data-theme', 'dark');
+        btn.textContent = '☀️ Light';
+      } else {
+        html.setAttribute('data-theme', 'light');
+        btn.textContent = '🌙 Dark';
+      }
+    }
+  </script>
+
+</body>
+</html>

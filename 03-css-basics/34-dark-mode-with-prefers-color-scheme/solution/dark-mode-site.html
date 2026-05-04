@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark Mode Site — Solution</title>
+  <link rel="stylesheet" href="dark-mode-site.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <span class="logo">DarkApp</span>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <button id="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+  </nav>
+
+  <main>
+    <h1>Dark Mode with CSS Variables</h1>
+    <p>Toggle the theme button to switch between light and dark mode. All colors update instantly via CSS custom properties.</p>
+
+    <section>
+      <h2>Cards</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Card Title</h3>
+          <p>This card uses CSS custom properties for all colors. Toggle the theme to see it update.</p>
+          <button class="btn">Action</button>
+        </div>
+        <div class="card">
+          <h3>Another Card</h3>
+          <p>The background, text, and border all change with the theme.</p>
+          <button class="btn">Action</button>
+        </div>
+        <div class="card">
+          <h3>Third Card</h3>
+          <p>No JavaScript needed for the color changes — only CSS variables.</p>
+          <button class="btn">Action</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Form</h2>
+      <form class="form">
+        <div>
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Enter your name">
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="you@example.com">
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" rows="4" placeholder="Your message..."></textarea>
+        </div>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 DarkApp. Built with CSS custom properties and prefers-color-scheme.</p>
+  </footer>
+
+  <script>
+    // Check system preference on load
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (prefersDark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.getElementById('theme-toggle').textContent = '☀️ Light';
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const btn = document.getElementById('theme-toggle');
+      if (html.getAttribute('data-theme') === 'light') {
+        html.setAttribute('data-theme', 'dark');
+        btn.textContent = '☀️ Light';
+      } else {
+        html.setAttribute('data-theme', 'light');
+        btn.textContent = '🌙 Dark';
+      }
+    }
+  </script>
+
+</body>
+</html>

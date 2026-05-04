@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layered Design System — Solution</title>
+  <link rel="stylesheet" href="layered-design-system.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <span class="logo">LayerSys</span>
+    <ul>
+      <li><a href="#">Components</a></li>
+      <li><a href="#">Tokens</a></li>
+      <li><a href="#">Utilities</a></li>
+    </ul>
+  </nav>
+
+  <h1>Cascade Layers Design System</h1>
+  <p>Layer order: reset → tokens → base → components → utilities. Utilities always win.</p>
+
+  <section>
+    <h2>Buttons</h2>
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <button class="btn btn-primary">Primary</button>
+      <button class="btn btn-success">Success</button>
+      <button class="btn btn-danger">Danger</button>
+      <!-- Utility overrides component: bg-success wins over btn-primary -->
+      <button class="btn btn-primary bg-success">Utility Override</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Cards</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Default Card</h3>
+        <p>Styled by the components layer.</p>
+        <button class="btn btn-primary">Action</button>
+      </div>
+      <!-- Utility border-primary overrides card's default border -->
+      <div class="card border-primary">
+        <h3>Utility Border</h3>
+        <p>The border-primary utility overrides the card's default border.</p>
+        <button class="btn btn-primary">Action</button>
+      </div>
+      <div class="card bg-primary">
+        <h3>Utility Background</h3>
+        <p>The bg-primary utility overrides the card's white background.</p>
+        <button class="btn btn-success">Action</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Layer Priority Demo</h2>
+    <p>The <code>.btn-primary</code> class is in the <strong>components</strong> layer. The <code>.bg-success</code> class is in the <strong>utilities</strong> layer. Even though both have the same specificity (0,1,0), utilities win because they are in a higher layer.</p>
+    <p class="text-danger">This text uses the <code>.text-danger</code> utility class from the utilities layer.</p>
+  </section>
+
+</body>
+</html>

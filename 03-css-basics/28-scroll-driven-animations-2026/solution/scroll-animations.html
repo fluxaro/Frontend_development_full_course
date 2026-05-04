@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Animations — Solution</title>
+  <link rel="stylesheet" href="scroll-animations.css">
+</head>
+<body>
+
+  <!-- Reading progress bar -->
+  <div class="progress-bar" role="progressbar" aria-label="Reading progress"></div>
+
+  <nav class="navbar">
+    <span class="logo">ScrollApp</span>
+    <ul>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#stats">Stats</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1>Scroll-Driven Animations</h1>
+    <p>Scroll down to see elements animate into view using CSS scroll-driven animations — no JavaScript required.</p>
+    <a href="#features" class="btn">Explore ↓</a>
+  </section>
+
+  <section class="features reveal-section" id="features">
+    <h2>Features</h2>
+    <div class="features-grid">
+      <div class="reveal-card">
+        <span class="icon">🎯</span>
+        <h3>No JavaScript</h3>
+        <p>Pure CSS scroll-driven animations using animation-timeline: view().</p>
+      </div>
+      <div class="reveal-card">
+        <span class="icon">⚡</span>
+        <h3>Performant</h3>
+        <p>Runs on the compositor thread — no layout or paint triggered.</p>
+      </div>
+      <div class="reveal-card">
+        <span class="icon">♿</span>
+        <h3>Accessible</h3>
+        <p>Respects prefers-reduced-motion for users who prefer less motion.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats reveal-section" id="stats">
+    <h2>By the Numbers</h2>
+    <div class="stats-grid">
+      <div class="stat reveal-card">
+        <span class="stat-number">50K+</span>
+        <span class="stat-label">Users</span>
+      </div>
+      <div class="stat reveal-card">
+        <span class="stat-number">99.9%</span>
+        <span class="stat-label">Uptime</span>
+      </div>
+      <div class="stat reveal-card">
+        <span class="stat-number">4.9★</span>
+        <span class="stat-label">Rating</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials reveal-section" id="testimonials">
+    <h2>What Users Say</h2>
+    <div class="testimonials-grid">
+      <blockquote class="reveal-card">
+        <p>"The scroll animations are buttery smooth and the code is so clean."</p>
+        <footer>— Sarah Chen, Frontend Developer</footer>
+      </blockquote>
+      <blockquote class="reveal-card">
+        <p>"Finally, scroll animations without a JavaScript library. This is the future."</p>
+        <footer>— Marcus Williams, UI Engineer</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 ScrollApp. Built with CSS scroll-driven animations.</p>
+  </footer>
+
+</body>
+</html>

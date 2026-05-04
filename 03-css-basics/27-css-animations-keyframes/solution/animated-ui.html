@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated UI — Solution</title>
+  <link rel="stylesheet" href="animated-ui.css">
+</head>
+<body>
+
+  <main>
+    <h1>CSS Animations — Complete Demo</h1>
+
+    <section>
+      <h2>Loading Spinners</h2>
+      <div class="loaders">
+        <div class="spinner"></div>
+        <div class="spinner spinner-dots">
+          <div></div><div></div><div></div>
+        </div>
+        <div class="progress-bar-demo">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Page Entrance (Staggered Cards)</h2>
+      <div class="card-grid">
+        <div class="card fade-card">
+          <h3>Card 1</h3>
+          <p>Fades in with a 0.1s delay.</p>
+        </div>
+        <div class="card fade-card">
+          <h3>Card 2</h3>
+          <p>Fades in with a 0.2s delay.</p>
+        </div>
+        <div class="card fade-card">
+          <h3>Card 3</h3>
+          <p>Fades in with a 0.3s delay.</p>
+        </div>
+        <div class="card fade-card">
+          <h3>Card 4</h3>
+          <p>Fades in with a 0.4s delay.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Hero Entrance</h2>
+      <div class="hero-demo">
+        <h2 class="hero-title">Welcome to the Future</h2>
+        <p class="hero-subtitle">This text slides up with a delay after the heading.</p>
+        <button class="hero-btn">Get Started</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Notification Badge (Pulse)</h2>
+      <div class="badge-demo">
+        <span class="icon">🔔</span>
+        <span class="badge">5</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Skeleton Loading</h2>
+      <div class="skeleton-list">
+        <div class="skeleton-item">
+          <div class="skeleton skeleton-avatar"></div>
+          <div class="skeleton-lines">
+            <div class="skeleton skeleton-line"></div>
+            <div class="skeleton skeleton-line short"></div>
+          </div>
+        </div>
+        <div class="skeleton-item">
+          <div class="skeleton skeleton-avatar"></div>
+          <div class="skeleton-lines">
+            <div class="skeleton skeleton-line"></div>
+            <div class="skeleton skeleton-line short"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Button Shake (Error State)</h2>
+      <button class="btn-shake" onclick="this.classList.remove('shake'); void this.offsetWidth; this.classList.add('shake')">
+        Click to Shake
+      </button>
+    </section>
+
+  </main>
+
+</body>
+</html>

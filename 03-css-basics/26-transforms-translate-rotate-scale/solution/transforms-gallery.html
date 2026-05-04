@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transform Effects Gallery — Solution</title>
+  <link rel="stylesheet" href="transforms-gallery.css">
+</head>
+<body>
+
+  <main>
+    <h1>CSS Transform Effects Gallery</h1>
+
+    <section>
+      <h2>Scale Gallery (Hover to Zoom)</h2>
+      <div class="scale-gallery">
+        <div class="scale-card">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop" alt="Mountain" width="300" height="200" loading="lazy">
+          <div class="scale-overlay"><span>Mountain</span></div>
+        </div>
+        <div class="scale-card">
+          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=300&h=200&fit=crop" alt="Forest" width="300" height="200" loading="lazy">
+          <div class="scale-overlay"><span>Forest</span></div>
+        </div>
+        <div class="scale-card">
+          <img src="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=300&h=200&fit=crop" alt="Fox" width="300" height="200" loading="lazy">
+          <div class="scale-overlay"><span>Fox</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>3D Card Flip (Hover)</h2>
+      <div class="flip-row">
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <h3>Front Side</h3>
+              <p>Hover to flip</p>
+            </div>
+            <div class="flip-back">
+              <h3>Back Side</h3>
+              <p>rotateY(180deg)</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card">
+          <div class="flip-inner flip-vertical">
+            <div class="flip-front" style="background: #9b59b6;">
+              <h3>Vertical Flip</h3>
+              <p>Hover to flip</p>
+            </div>
+            <div class="flip-back" style="background: #27ae60;">
+              <h3>Back Side</h3>
+              <p>rotateX(180deg)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Rotating Loader</h2>
+      <div class="loaders">
+        <div class="spinner"></div>
+        <div class="spinner spinner-lg"></div>
+        <div class="pulse-ring"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Skewed Section</h2>
+      <div class="skewed-section">
+        <div class="skewed-content">
+          <h3>Skewed Background</h3>
+          <p>The background is skewed using <code>skewY(-3deg)</code> on a pseudo-element.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Centered Modal (translate -50%, -50%)</h2>
+      <div class="modal-demo">
+        <div class="modal-centered">
+          <h3>Perfectly Centered</h3>
+          <p>Using <code>top: 50%; left: 50%; transform: translate(-50%, -50%)</code></p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Accordion Arrow (rotate on open)</h2>
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-btn" onclick="this.parentElement.classList.toggle('open')">
+            What is CSS Transform?
+            <span class="arrow">▼</span>
+          </button>
+          <div class="accordion-content">
+            <p>CSS transforms let you move, rotate, scale, and skew elements without affecting document flow.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn" onclick="this.parentElement.classList.toggle('open')">
+            Why use transform instead of top/left?
+            <span class="arrow">▼</span>
+          </button>
+          <div class="accordion-content">
+            <p>Transform only triggers compositing — it does not cause layout or paint, making it much more performant.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
