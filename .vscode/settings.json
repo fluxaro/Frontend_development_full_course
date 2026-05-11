@@ -1,3 +1,4 @@
 {
-    "html.autoClosingTags": false
+    "html.autoClosingTags": false,
+    "livePreview.defaultPreviewPath": "/index.html"
 }

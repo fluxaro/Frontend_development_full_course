@@ -22,382 +22,227 @@
     --radius: 12px;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
+  html, body {
     background: var(--bg);
     color: var(--text);
     font-family: 'Syne', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
   }
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 50% at 20% -10%, rgba(108,99,255,0.12) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 80% 110%, rgba(255,101,132,0.08) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
-  }
 
-  /* ─── COVER SCREEN ─── */
-  #cover {
-    position: fixed; inset: 0; z-index: 100;
+  /* ─── SCREENS ─── */
+  .screen { display: none; }
+
+  /* Cover uses flex when active */
+  #cover.active {
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    background: var(--bg);
-    padding: 2rem;
-    animation: fadeIn .6s ease;
+    min-height: 100vh;
+    padding: 3rem 2rem;
+    text-align: center;
   }
+
+  /* Exam and results just block when active */
+  #exam.active,
+  #results.active { display: block; }
   .cover-badge {
     font-family: 'Space Mono', monospace;
-    font-size: .72rem;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--accent);
+    font-size: .72rem; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--accent);
     border: 1px solid var(--accent);
-    padding: .35rem .9rem;
-    border-radius: 999px;
+    padding: .35rem .9rem; border-radius: 999px;
     margin-bottom: 2rem;
   }
   .cover-title {
-    font-size: clamp(2.4rem, 6vw, 4.5rem);
-    font-weight: 800;
-    line-height: 1.05;
-    text-align: center;
-    max-width: 700px;
-    margin-bottom: 1rem;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 800; line-height: 1.1;
+    max-width: 700px; margin-bottom: 1rem;
   }
   .cover-title span { color: var(--accent); }
   .cover-sub {
-    color: var(--muted);
-    font-size: 1rem;
-    margin-bottom: 3rem;
-    text-align: center;
-    max-width: 500px;
-    line-height: 1.6;
+    color: var(--muted); font-size: 1rem;
+    margin-bottom: 2.5rem; max-width: 480px; line-height: 1.6;
   }
   .cover-meta {
-    display: flex; gap: 2rem; flex-wrap: wrap;
+    display: flex; gap: 1.2rem; flex-wrap: wrap;
     justify-content: center; margin-bottom: 2.5rem;
   }
   .meta-pill {
     display: flex; align-items: center; gap: .5rem;
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: 999px; padding: .5rem 1.2rem;
-    font-size: .88rem; color: var(--muted);
+    border-radius: 999px; padding: .45rem 1.1rem;
+    font-size: .85rem; color: var(--muted);
   }
-  .meta-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .meta-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
   .meta-pill.warn .dot { background: var(--warn); }
   .meta-pill.go .dot { background: var(--correct); }
   .btn-start {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: var(--radius);
-    padding: 1rem 3rem;
-    font-family: 'Syne', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: transform .15s, box-shadow .15s;
-    box-shadow: 0 0 40px rgba(108,99,255,.35);
+    background: var(--accent); color: #fff; border: none;
+    border-radius: var(--radius); padding: 1rem 3rem;
+    font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700;
+    cursor: pointer; transition: transform .15s;
   }
-  .btn-start:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(108,99,255,.5); }
+  .btn-start:hover { transform: translateY(-2px); }
 
-  /* ─── EXAM WRAPPER ─── */
-  #exam { display: none; position: relative; z-index: 1; }
-
-  /* ─── STICKY HEADER ─── */
+  /* ─── EXAM HEADER (fixed) ─── */
   .exam-header {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(10,10,15,.9);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(10,10,15,.97);
     backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
-    padding: .9rem 2rem;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 1rem; flex-wrap: wrap;
+    padding: .8rem 1.5rem;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 1rem; flex-wrap: wrap;
   }
-  .header-title {
-    font-size: .95rem; font-weight: 700;
-    color: var(--text);
-  }
+  .header-title { font-size: .9rem; font-weight: 700; }
   .header-title span { color: var(--muted); font-weight: 400; }
   .timer-wrap {
-    display: flex; align-items: center; gap: .6rem;
+    display: flex; align-items: center; gap: .5rem;
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: 999px; padding: .4rem 1.1rem;
+    border-radius: 999px; padding: .35rem 1rem;
   }
-  .timer-icon { font-size: 1rem; }
   #timer {
-    font-family: 'Space Mono', monospace;
-    font-size: 1.05rem; font-weight: 700;
-    color: var(--accent);
-    transition: color .3s;
+    font-family: 'Space Mono', monospace; font-size: 1rem;
+    font-weight: 700; color: var(--accent);
   }
   #timer.warn { color: var(--warn); }
   #timer.danger { color: var(--wrong); animation: pulse 1s infinite; }
-  .progress-wrap { display: flex; align-items: center; gap: .7rem; }
-  .progress-track {
-    width: 160px; height: 6px;
-    background: var(--border); border-radius: 999px;
-    overflow: hidden;
-  }
-  .progress-bar {
-    height: 100%; border-radius: 999px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    transition: width .4s ease;
-  }
-  #progress-label {
-    font-size: .8rem; color: var(--muted);
-    font-family: 'Space Mono', monospace;
-  }
+  .progress-wrap { display: flex; align-items: center; gap: .6rem; }
+  .progress-track { width: 140px; height: 5px; background: var(--border); border-radius: 999px; overflow: hidden; }
+  .progress-bar { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width .3s; }
+  #progress-label { font-size: .78rem; color: var(--muted); font-family: 'Space Mono', monospace; }
 
-  /* ─── CONTENT ─── */
+  /* ─── EXAM BODY ─── */
   .exam-body {
     max-width: 860px; margin: 0 auto;
-    padding: 2rem 1.5rem 6rem;
+    padding: 5.5rem 1.5rem 8rem;
   }
 
   /* ─── SECTION HEADERS ─── */
   .section-header {
     display: flex; align-items: center; gap: 1rem;
-    margin: 2.5rem 0 1.2rem;
+    margin: 2.5rem 0 1rem;
   }
   .section-label {
-    font-family: 'Space Mono', monospace;
-    font-size: .7rem; letter-spacing: .15em;
-    text-transform: uppercase; color: var(--accent);
-    background: rgba(108,99,255,.12);
-    border: 1px solid rgba(108,99,255,.3);
-    padding: .3rem .8rem; border-radius: 6px;
-    white-space: nowrap;
+    font-family: 'Space Mono', monospace; font-size: .68rem;
+    letter-spacing: .14em; text-transform: uppercase;
+    padding: .28rem .75rem; border-radius: 6px;
+    border: 1px solid; white-space: nowrap;
   }
   .section-line { flex: 1; height: 1px; background: var(--border); }
 
   /* ─── QUESTION CARD ─── */
   .q-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-    transition: border-color .2s;
-    position: relative;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.4rem 1.4rem 1.2rem;
+    margin-bottom: 1rem; transition: border-color .2s;
   }
-  .q-card:hover { border-color: rgba(108,99,255,.4); }
+  .q-card:hover { border-color: rgba(108,99,255,.35); }
   .q-card.answered { border-color: rgba(108,99,255,.5); }
-  .q-num {
-    font-family: 'Space Mono', monospace;
-    font-size: .72rem; color: var(--muted);
-    margin-bottom: .6rem;
-  }
-  .q-text {
-    font-size: .97rem; line-height: 1.6;
-    color: var(--text); margin-bottom: 1.1rem;
-  }
+  .q-num { font-family: 'Space Mono', monospace; font-size: .7rem; color: var(--muted); margin-bottom: .55rem; }
+  .q-text { font-size: .96rem; line-height: 1.65; color: var(--text); margin-bottom: 1rem; }
   .q-text code {
     font-family: 'Space Mono', monospace;
-    background: rgba(108,99,255,.15);
-    color: var(--accent);
-    padding: .1em .35em;
-    border-radius: 4px;
-    font-size: .88em;
+    background: rgba(108,99,255,.15); color: var(--accent);
+    padding: .1em .3em; border-radius: 4px; font-size: .86em;
   }
-  .options { display: flex; flex-direction: column; gap: .5rem; }
+  .options { display: flex; flex-direction: column; gap: .45rem; }
+
+  /* ─── OPTION ─── */
   .option {
-    display: flex; align-items: flex-start; gap: .75rem;
+    display: flex; align-items: flex-start; gap: .7rem;
     background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 8px; padding: .75rem 1rem;
+    border-radius: 8px; padding: .7rem .95rem;
     cursor: pointer; transition: all .15s;
-    font-size: .92rem; line-height: 1.45;
-    user-select: none;
+    font-size: .9rem; line-height: 1.45; user-select: none;
   }
   .option:hover { border-color: var(--accent); background: rgba(108,99,255,.08); }
   .option.selected { border-color: var(--accent); background: rgba(108,99,255,.14); color: #c8c4ff; }
-  .option input[type=radio] { display: none; }
   .opt-letter {
-    font-family: 'Space Mono', monospace;
-    font-size: .75rem; font-weight: 700;
-    color: var(--muted); min-width: 18px;
-    padding-top: .1rem;
+    font-family: 'Space Mono', monospace; font-size: .72rem;
+    font-weight: 700; color: var(--muted); min-width: 16px;
+    padding-top: .1rem; flex-shrink: 0;
   }
   .option.selected .opt-letter { color: var(--accent); }
+  .opt-text { flex: 1; }
 
-  /* ─── FLOATING SUBMIT ─── */
+  /* ─── SUBMIT BAR ─── */
   .submit-bar {
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
-    padding: 1rem 2rem;
-    background: rgba(10,10,15,.95);
-    backdrop-filter: blur(16px);
+    padding: .9rem 1.5rem;
+    background: rgba(10,10,15,.97);
     border-top: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 1rem; flex-wrap: wrap;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 1rem; flex-wrap: wrap;
   }
-  .submit-info { font-size: .88rem; color: var(--muted); }
+  .submit-info { font-size: .86rem; color: var(--muted); }
   .submit-info strong { color: var(--text); }
   .btn-submit {
     background: linear-gradient(135deg, var(--accent), #8b5cf6);
-    color: #fff; border: none;
-    border-radius: var(--radius);
-    padding: .75rem 2.5rem;
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem; font-weight: 700;
-    cursor: pointer;
-    transition: transform .15s, opacity .15s;
+    color: #fff; border: none; border-radius: var(--radius);
+    padding: .72rem 2.2rem;
+    font-family: 'Syne', sans-serif; font-size: .98rem; font-weight: 700;
+    cursor: pointer; transition: transform .15s, opacity .15s;
   }
   .btn-submit:hover { transform: translateY(-2px); opacity: .9; }
 
-  /* ─── RESULTS SCREEN ─── */
-  #results {
-    display: none; position: fixed; inset: 0; z-index: 200;
-    background: var(--bg);
-    overflow-y: auto;
-    animation: slideUp .5s ease;
-  }
-  .results-inner {
-    max-width: 760px; margin: 0 auto;
-    padding: 3rem 1.5rem 4rem;
-  }
-  .results-badge {
-    font-family: 'Space Mono', monospace;
-    font-size: .7rem; letter-spacing: .18em;
-    text-transform: uppercase;
-    margin-bottom: 1rem; display: inline-block;
-  }
+  /* ─── RESULTS ─── */
+  #results { background: var(--bg); min-height: 100vh; }
+  .results-inner { max-width: 760px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+  .results-badge { font-family: 'Space Mono', monospace; font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; display: inline-block; margin-bottom: .8rem; }
   .results-badge.pass { color: var(--correct); }
   .results-badge.fail { color: var(--wrong); }
-  .results-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 800; line-height: 1.1;
-    margin-bottom: .6rem;
-  }
-  .score-ring-wrap {
-    display: flex; align-items: center;
-    justify-content: center; margin: 2.5rem 0;
-  }
-  .score-ring {
-    position: relative; width: 180px; height: 180px;
-  }
+  .results-title { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1.2rem; }
+  .score-ring-wrap { display: flex; justify-content: center; margin: 2rem 0; }
+  .score-ring { position: relative; width: 180px; height: 180px; }
   .score-ring svg { transform: rotate(-90deg); }
   .ring-bg { fill: none; stroke: var(--border); stroke-width: 12; }
-  .ring-fill {
-    fill: none; stroke-width: 12;
-    stroke-linecap: round;
-    transition: stroke-dashoffset 1.5s cubic-bezier(.4,0,.2,1);
-  }
-  .score-label {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-  }
-  .score-num {
-    font-size: 2.4rem; font-weight: 800;
-    font-family: 'Space Mono', monospace;
-  }
-  .score-pct { font-size: .8rem; color: var(--muted); margin-top: -.2rem; }
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 1rem; margin-bottom: 2rem;
-  }
-  .stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.2rem;
-    text-align: center;
-  }
-  .stat-val {
-    font-size: 1.8rem; font-weight: 800;
-    font-family: 'Space Mono', monospace;
-    margin-bottom: .2rem;
-  }
+  .ring-fill { fill: none; stroke-width: 12; stroke-linecap: round; transition: stroke-dashoffset 1.5s cubic-bezier(.4,0,.2,1); }
+  .score-label { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .score-num { font-size: 2.4rem; font-weight: 800; font-family: 'Space Mono', monospace; }
+  .score-pct { font-size: .8rem; color: var(--muted); }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; text-align: center; }
+  .stat-val { font-size: 1.8rem; font-weight: 800; font-family: 'Space Mono', monospace; margin-bottom: .2rem; }
   .stat-val.green { color: var(--correct); }
   .stat-val.red { color: var(--wrong); }
   .stat-val.blue { color: var(--accent); }
   .stat-val.yellow { color: var(--warn); }
-  .stat-label { font-size: .8rem; color: var(--muted); }
-  .topic-breakdown {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-  }
-  .topic-breakdown h3 { font-size: 1rem; margin-bottom: 1.2rem; }
-  .topic-row {
-    display: flex; align-items: center; gap: 1rem;
-    margin-bottom: .7rem;
-  }
-  .topic-name { font-size: .85rem; color: var(--muted); min-width: 90px; }
-  .topic-track { flex: 1; height: 8px; background: var(--border); border-radius: 999px; overflow: hidden; }
-  .topic-fill { height: 100%; border-radius: 999px; transition: width 1s ease .3s; }
-  .topic-score { font-family: 'Space Mono', monospace; font-size: .8rem; min-width: 55px; text-align: right; color: var(--text); }
-  .review-section h3 {
-    font-size: 1rem; margin-bottom: 1rem;
-    color: var(--text);
-  }
-  .review-item {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1.1rem;
-    margin-bottom: .7rem;
-    font-size: .88rem;
-  }
+  .stat-label { font-size: .78rem; color: var(--muted); }
+  .topic-breakdown { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; margin-bottom: 1.5rem; }
+  .topic-breakdown h3 { font-size: 1rem; margin-bottom: 1rem; }
+  .topic-row { display: flex; align-items: center; gap: .9rem; margin-bottom: .65rem; }
+  .topic-name { font-size: .83rem; color: var(--muted); min-width: 88px; }
+  .topic-track { flex: 1; height: 7px; background: var(--border); border-radius: 999px; overflow: hidden; }
+  .topic-fill { height: 100%; border-radius: 999px; transition: width 1s ease .3s; width: 0%; }
+  .topic-score { font-family: 'Space Mono', monospace; font-size: .78rem; min-width: 52px; text-align: right; }
+  .review-section h3 { font-size: 1rem; margin-bottom: 1rem; }
+  .review-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem; margin-bottom: .65rem; font-size: .87rem; }
   .review-item.correct { border-color: rgba(67,233,123,.35); }
   .review-item.wrong { border-color: rgba(255,101,132,.35); }
   .review-item.skipped { border-color: rgba(247,183,49,.35); }
-  .review-q { margin-bottom: .5rem; line-height: 1.5; }
-  .review-answers { display: flex; flex-direction: column; gap: .25rem; font-size: .83rem; }
-  .review-answers .your { color: var(--wrong); }
-  .review-answers .your.correct { color: var(--correct); }
-  .review-answers .answer-correct { color: var(--correct); }
-  .review-answers .skipped-label { color: var(--warn); }
-  .btn-retry {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--text);
-    border-radius: var(--radius);
-    padding: .8rem 2rem;
-    font-family: 'Syne', sans-serif;
-    font-size: .95rem; font-weight: 700;
-    cursor: pointer;
-    transition: border-color .15s;
-    margin-top: 1rem;
-  }
+  .review-q { margin-bottom: .45rem; line-height: 1.5; }
+  .review-answers { display: flex; flex-direction: column; gap: .2rem; font-size: .82rem; }
+  .your-ans { color: var(--wrong); }
+  .your-ans.correct { color: var(--correct); }
+  .ans-correct { color: var(--correct); }
+  .skipped-label { color: var(--warn); }
+  .pass-banner { background: rgba(67,233,123,.08); border: 1px solid rgba(67,233,123,.3); border-radius: var(--radius); padding: 1rem 1.4rem; margin-bottom: 1.5rem; font-size: .9rem; line-height: 1.6; }
+  .fail-banner { background: rgba(255,101,132,.08); border: 1px solid rgba(255,101,132,.25); border-radius: var(--radius); padding: 1rem 1.4rem; margin-bottom: 1.5rem; font-size: .9rem; line-height: 1.6; }
+  .btn-retry { background: var(--surface); border: 1px solid var(--border); color: var(--text); border-radius: var(--radius); padding: .75rem 2rem; font-family: 'Syne', sans-serif; font-size: .95rem; font-weight: 700; cursor: pointer; margin-top: 1rem; transition: border-color .15s; }
   .btn-retry:hover { border-color: var(--accent); color: var(--accent); }
-  .pass-banner {
-    background: linear-gradient(135deg, rgba(67,233,123,.12), rgba(67,233,123,.04));
-    border: 1px solid rgba(67,233,123,.3);
-    border-radius: var(--radius);
-    padding: 1rem 1.5rem;
-    margin-bottom: 1.5rem;
-    font-size: .92rem; line-height: 1.6;
-  }
-  .fail-banner {
-    background: linear-gradient(135deg, rgba(255,101,132,.1), rgba(255,101,132,.03));
-    border: 1px solid rgba(255,101,132,.25);
-    border-radius: var(--radius);
-    padding: 1rem 1.5rem;
-    margin-bottom: 1.5rem;
-    font-size: .92rem; line-height: 1.6;
-  }
 
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 </style>
 </head>
 <body>
 
-<!-- ══════════ COVER ══════════ -->
-<div id="cover">
-  <div class="cover-badge">Certification Exam · 2025</div>
+<!-- ══ COVER ══ -->
+<div id="cover" class="screen active">
+  <div class="cover-badge">Certification Exam · 2026</div>
   <h1 class="cover-title">Frontend <span>Development</span> Mastery</h1>
-  <p class="cover-sub">Test your skills across HTML, CSS, JavaScript, React & Tailwind CSS. 100 objective questions. One attempt.</p>
+  <p class="cover-sub">Test your skills across HTML, CSS, JavaScript, React &amp; Tailwind CSS. 100 objective questions. One attempt.</p>
   <div class="cover-meta">
     <div class="meta-pill warn"><span class="dot"></span> 30-Minute Timer</div>
     <div class="meta-pill"><span class="dot"></span> 100 Questions</div>
@@ -406,30 +251,25 @@
   <button class="btn-start" onclick="startExam()">Begin Exam →</button>
 </div>
 
-<!-- ══════════ EXAM ══════════ -->
-<div id="exam">
+<!-- ══ EXAM ══ -->
+<div id="exam" class="screen">
   <header class="exam-header">
-    <div class="header-title">Frontend Exam <span>· 2025</span></div>
-    <div class="timer-wrap">
-      <span class="timer-icon">⏱</span>
-      <span id="timer">30:00</span>
-    </div>
+    <div class="header-title">Frontend Exam <span>· 2026</span></div>
+    <div class="timer-wrap">⏱ <span id="timer">30:00</span></div>
     <div class="progress-wrap">
       <div class="progress-track"><div class="progress-bar" id="progress-bar" style="width:0%"></div></div>
       <span id="progress-label">0 / 100</span>
     </div>
   </header>
-
   <div class="exam-body" id="exam-body"></div>
-
   <div class="submit-bar">
     <div class="submit-info">Answered: <strong id="answered-count">0</strong> / 100</div>
     <button class="btn-submit" onclick="submitExam(false)">Submit Exam</button>
   </div>
 </div>
 
-<!-- ══════════ RESULTS ══════════ -->
-<div id="results">
+<!-- ══ RESULTS ══ -->
+<div id="results" class="screen">
   <div class="results-inner">
     <span class="results-badge" id="results-badge"></span>
     <h2 class="results-title" id="results-title"></h2>
@@ -438,9 +278,7 @@
       <div class="score-ring">
         <svg viewBox="0 0 180 180" width="180" height="180">
           <circle class="ring-bg" cx="90" cy="90" r="78"/>
-          <circle class="ring-fill" id="ring-fill" cx="90" cy="90" r="78"
-            stroke-dasharray="490"
-            stroke-dashoffset="490"/>
+          <circle class="ring-fill" id="ring-fill" cx="90" cy="90" r="78" stroke-dasharray="490" stroke-dashoffset="490"/>
         </svg>
         <div class="score-label">
           <div class="score-num" id="score-num">0</div>
@@ -461,149 +299,147 @@
 </div>
 
 <script>
-// ══════════ QUESTION BANK (100 questions) ══════════
 const QUESTIONS = [
-  // ── HTML (20) ──
-  {topic:"HTML", q:"What does HTML stand for?", opts:["HyperText Markup Language","HighText Machine Language","HyperText and links Markup Language","None of the above"], ans:0},
-  {topic:"HTML", q:"Which HTML element defines the title of a document shown in the browser tab?", opts:["<meta>","<head>","<title>","<header>"], ans:2},
-  {topic:"HTML", q:"Which attribute makes an input field mandatory before form submission?", opts:["validate","mandatory","required","must"], ans:2},
-  {topic:"HTML", q:"The <code>&lt;DOCTYPE html&gt;</code> declaration tells the browser to render the page in:", opts:["Quirks mode","Standards (HTML5) mode","XML mode","CSS mode"], ans:1},
-  {topic:"HTML", q:"Which tag is used to embed an external CSS file into an HTML document?", opts:["<style>","<css>","<link>","<script>"], ans:2},
-  {topic:"HTML", q:"What is the correct HTML for creating a hyperlink?", opts:['<a href="url">text</a>','<a url="url">text</a>','<link href="url">text</link>','<href>text</href>'], ans:0},
-  {topic:"HTML", q:"Which HTML element is a block-level container with no semantic meaning?", opts:["<span>","<section>","<div>","<article>"], ans:2},
-  {topic:"HTML", q:"The <code>alt</code> attribute on an <code>&lt;img&gt;</code> tag provides:", opts:["Image tooltip","SEO keywords only","Alternative text for accessibility","Image caption"], ans:2},
-  {topic:"HTML", q:"Which input type renders a date picker in modern browsers?", opts:['type="calendar"','type="date"','type="datetime"','type="picker"'], ans:1},
-  {topic:"HTML", q:"Semantic HTML element for the main navigation of a page:", opts:["<nav>","<menu>","<ul>","<header>"], ans:0},
-  {topic:"HTML", q:"What does the <code>defer</code> attribute on a <code>&lt;script&gt;</code> tag do?", opts:["Loads script asynchronously and executes immediately","Loads script after HTML parsing is complete","Prevents script from loading","Caches the script"], ans:1},
-  {topic:"HTML", q:"Which element represents a self-contained piece of content that can be distributed independently?", opts:["<section>","<div>","<article>","<main>"], ans:2},
-  {topic:"HTML", q:"The correct HTML element for the largest heading is:", opts:["<heading>","<h6>","<h1>","<head>"], ans:2},
-  {topic:"HTML", q:"Which HTML attribute is used to specify an inline CSS style?", opts:["class","css","styles","style"], ans:3},
-  {topic:"HTML", q:"<code>&lt;figure&gt;</code> and <code>&lt;figcaption&gt;</code> are used to:", opts:["Create data tables","Associate media with its caption","Build navigation menus","Define code snippets"], ans:1},
-  {topic:"HTML", q:"Which attribute prevents an input from being edited by the user but still submits its value?", opts:["disabled","locked","readonly","static"], ans:2},
-  {topic:"HTML", q:"The <code>viewport</code> meta tag is primarily used for:", opts:["SEO ranking","Responsive design on mobile","Setting page title","Defining charset"], ans:1},
-  {topic:"HTML", q:"Which element should wrap the primary content unique to a page (not repeated across pages)?", opts:["<section>","<main>","<body>","<content>"], ans:1},
-  {topic:"HTML", q:"ARIA attributes primarily help with:", opts:["Performance","SEO","Animation","Accessibility for assistive technologies"], ans:3},
-  {topic:"HTML", q:"To open a link in a new tab, set the target attribute to:", opts:["_blank","_new","_tab","_self"], ans:0},
+  {topic:"HTML",q:"What does HTML stand for?",opts:["HyperText Markup Language","HighText Machine Language","HyperText and links Markup Language","None of the above"],ans:0},
+  {topic:"HTML",q:"Which HTML element defines the title of a document shown in the browser tab?",opts:["&lt;meta&gt;","&lt;head&gt;","&lt;title&gt;","&lt;header&gt;"],ans:2},
+  {topic:"HTML",q:"Which attribute makes an input field mandatory before form submission?",opts:["validate","mandatory","required","must"],ans:2},
+  {topic:"HTML",q:"The &lt;!DOCTYPE html&gt; declaration tells the browser to render the page in:",opts:["Quirks mode","Standards (HTML5) mode","XML mode","CSS mode"],ans:1},
+  {topic:"HTML",q:"Which tag is used to embed an external CSS file into an HTML document?",opts:["&lt;style&gt;","&lt;css&gt;","&lt;link&gt;","&lt;script&gt;"],ans:2},
+  {topic:"HTML",q:"What is the correct HTML for creating a hyperlink?",opts:['&lt;a href="url"&gt;text&lt;/a&gt;','&lt;a url="url"&gt;text&lt;/a&gt;','&lt;link href="url"&gt;text&lt;/link&gt;','&lt;href&gt;text&lt;/href&gt;'],ans:0},
+  {topic:"HTML",q:"Which HTML element is a block-level container with no semantic meaning?",opts:["&lt;span&gt;","&lt;section&gt;","&lt;div&gt;","&lt;article&gt;"],ans:2},
+  {topic:"HTML",q:"The <code>alt</code> attribute on an &lt;img&gt; tag provides:",opts:["Image tooltip","SEO keywords only","Alternative text for accessibility","Image caption"],ans:2},
+  {topic:"HTML",q:"Which input type renders a date picker in modern browsers?",opts:['type="calendar"','type="date"','type="datetime"','type="picker"'],ans:1},
+  {topic:"HTML",q:"Semantic HTML element for the main navigation of a page:",opts:["&lt;nav&gt;","&lt;menu&gt;","&lt;ul&gt;","&lt;header&gt;"],ans:0},
+  {topic:"HTML",q:"What does the <code>defer</code> attribute on a &lt;script&gt; tag do?",opts:["Loads script asynchronously and executes immediately","Loads script after HTML parsing is complete","Prevents script from loading","Caches the script"],ans:1},
+  {topic:"HTML",q:"Which element represents a self-contained piece of content that can be distributed independently?",opts:["&lt;section&gt;","&lt;div&gt;","&lt;article&gt;","&lt;main&gt;"],ans:2},
+  {topic:"HTML",q:"The correct HTML element for the largest heading is:",opts:["&lt;heading&gt;","&lt;h6&gt;","&lt;h1&gt;","&lt;head&gt;"],ans:2},
+  {topic:"HTML",q:"Which HTML attribute is used to specify an inline CSS style?",opts:["class","css","styles","style"],ans:3},
+  {topic:"HTML",q:"&lt;figure&gt; and &lt;figcaption&gt; are used to:",opts:["Create data tables","Associate media with its caption","Build navigation menus","Define code snippets"],ans:1},
+  {topic:"HTML",q:"Which attribute prevents an input from being edited but still submits its value?",opts:["disabled","locked","readonly","static"],ans:2},
+  {topic:"HTML",q:"The <code>viewport</code> meta tag is primarily used for:",opts:["SEO ranking","Responsive design on mobile","Setting page title","Defining charset"],ans:1},
+  {topic:"HTML",q:"Which element should wrap the primary content unique to a page (not repeated across pages)?",opts:["&lt;section&gt;","&lt;main&gt;","&lt;body&gt;","&lt;content&gt;"],ans:1},
+  {topic:"HTML",q:"ARIA attributes primarily help with:",opts:["Performance","SEO","Animation","Accessibility for assistive technologies"],ans:3},
+  {topic:"HTML",q:"To open a link in a new tab, set the target attribute to:",opts:["_blank","_new","_tab","_self"],ans:0},
 
-  // ── CSS (20) ──
-  {topic:"CSS", q:"Which CSS property controls the space between the content and the border of an element?", opts:["margin","border-spacing","padding","spacing"], ans:2},
-  {topic:"CSS", q:"What does <code>box-sizing: border-box</code> do?", opts:["Adds padding outside the width","Includes padding and border in the element's total width/height","Removes all borders","Sets border to box style"], ans:1},
-  {topic:"CSS", q:"Which CSS selector has the highest specificity?", opts:["Element selector","Class selector","ID selector","Universal selector"], ans:2},
-  {topic:"CSS", q:"The CSS <code>flex</code> shorthand <code>flex: 1</code> sets:", opts:["flex-grow:1, flex-shrink:0, flex-basis:auto","flex-grow:1, flex-shrink:1, flex-basis:0%","flex-grow:0, flex-shrink:1, flex-basis:1px","flex: 100% auto"], ans:1},
-  {topic:"CSS", q:"Which property makes a Flexbox container wrap its children to the next line?", opts:["flex-direction: wrap","flex-wrap: wrap","overflow: wrap","display: wrap"], ans:1},
-  {topic:"CSS", q:"CSS Grid property to define columns:", opts:["grid-columns","column-template","grid-template-columns","define-columns"], ans:2},
-  {topic:"CSS", q:"<code>position: sticky</code> positions an element:", opts:["Relative to viewport always","Fixed at a threshold as the user scrolls","Relative to its parent only","Same as absolute"], ans:1},
-  {topic:"CSS", q:"Which pseudo-class targets the first child element of its parent?", opts:[":first","::first-child",":first-child","::first"], ans:2},
-  {topic:"CSS", q:"The CSS <code>transform</code> property does NOT support which function?", opts:["rotate()","scale()","opacity()","translate()"], ans:2},
-  {topic:"CSS", q:"Which at-rule is used for responsive breakpoints in CSS?", opts:["@breakpoint","@screen","@media","@viewport"], ans:2},
-  {topic:"CSS", q:"To vertically and horizontally center a child in a Flexbox parent:", opts:["margin: auto on child","align-items:center + justify-content:center on parent","text-align:center on parent","vertical-align:middle on child"], ans:1},
-  {topic:"CSS", q:"CSS custom properties (variables) are declared with:", opts:["$var-name","var-name:","--variable-name","@variable"], ans:2},
-  {topic:"CSS", q:"Which property controls the stacking order of elements?", opts:["stack-order","order","z-index","layer"], ans:2},
-  {topic:"CSS", q:"<code>display: none</code> vs <code>visibility: hidden</code>:", opts:["Both remove element from layout","display:none removes from layout; visibility:hidden keeps space","visibility:hidden removes from layout; display:none keeps space","No difference"], ans:1},
-  {topic:"CSS", q:"The <code>calc()</code> function in CSS:", opts:["Only works with pixel values","Performs math with mixed units","Requires JavaScript","Rounds to nearest integer"], ans:1},
-  {topic:"CSS", q:"CSS <code>:nth-child(2n+1)</code> selects:", opts:["Even children","Every 2nd child","Odd children","Children after 2nd"], ans:2},
-  {topic:"CSS", q:"Which property sets an animation's timing function?", opts:["animation-ease","animation-timing-function","transition-curve","animation-curve"], ans:1},
-  {topic:"CSS", q:"<code>object-fit: cover</code> on an image:", opts:["Stretches image to fill","Scales image to cover container, cropping if needed","Shows image at natural size","Hides overflow"], ans:1},
-  {topic:"CSS", q:"CSS specificity order from lowest to highest:", opts:["Element < Class < ID < Inline","Inline < ID < Class < Element","Class < Element < ID < Inline","ID < Inline < Element < Class"], ans:0},
-  {topic:"CSS", q:"Which CSS property makes text not wrap to the next line?", opts:["text-wrap: none","overflow: hidden","white-space: nowrap","word-break: keep-all"], ans:2},
+  {topic:"CSS",q:"Which CSS property controls the space between the content and the border of an element?",opts:["margin","border-spacing","padding","spacing"],ans:2},
+  {topic:"CSS",q:"What does <code>box-sizing: border-box</code> do?",opts:["Adds padding outside the width","Includes padding and border in the element's total width/height","Removes all borders","Sets border to box style"],ans:1},
+  {topic:"CSS",q:"Which CSS selector has the highest specificity?",opts:["Element selector","Class selector","ID selector","Universal selector"],ans:2},
+  {topic:"CSS",q:"The CSS <code>flex</code> shorthand <code>flex: 1</code> sets:",opts:["flex-grow:1, flex-shrink:0, flex-basis:auto","flex-grow:1, flex-shrink:1, flex-basis:0%","flex-grow:0, flex-shrink:1, flex-basis:1px","flex: 100% auto"],ans:1},
+  {topic:"CSS",q:"Which property makes a Flexbox container wrap its children to the next line?",opts:["flex-direction: wrap","flex-wrap: wrap","overflow: wrap","display: wrap"],ans:1},
+  {topic:"CSS",q:"CSS Grid property to define columns:",opts:["grid-columns","column-template","grid-template-columns","define-columns"],ans:2},
+  {topic:"CSS",q:"<code>position: sticky</code> positions an element:",opts:["Relative to viewport always","Fixed at a threshold as the user scrolls","Relative to its parent only","Same as absolute"],ans:1},
+  {topic:"CSS",q:"Which pseudo-class targets the first child element of its parent?",opts:[":first","::first-child",":first-child","::first"],ans:2},
+  {topic:"CSS",q:"The CSS <code>transform</code> property does NOT support which function?",opts:["rotate()","scale()","opacity()","translate()"],ans:2},
+  {topic:"CSS",q:"Which at-rule is used for responsive breakpoints in CSS?",opts:["@breakpoint","@screen","@media","@viewport"],ans:2},
+  {topic:"CSS",q:"To vertically and horizontally center a child in a Flexbox parent:",opts:["margin: auto on child","align-items:center + justify-content:center on parent","text-align:center on parent","vertical-align:middle on child"],ans:1},
+  {topic:"CSS",q:"CSS custom properties (variables) are declared with:",opts:["$var-name","var-name:","--variable-name","@variable"],ans:2},
+  {topic:"CSS",q:"Which property controls the stacking order of elements?",opts:["stack-order","order","z-index","layer"],ans:2},
+  {topic:"CSS",q:"<code>display: none</code> vs <code>visibility: hidden</code>:",opts:["Both remove element from layout","display:none removes from layout; visibility:hidden keeps space","visibility:hidden removes from layout; display:none keeps space","No difference"],ans:1},
+  {topic:"CSS",q:"The <code>calc()</code> function in CSS:",opts:["Only works with pixel values","Performs math with mixed units","Requires JavaScript","Rounds to nearest integer"],ans:1},
+  {topic:"CSS",q:"CSS <code>:nth-child(2n+1)</code> selects:",opts:["Even children","Every 2nd child","Odd children","Children after 2nd"],ans:2},
+  {topic:"CSS",q:"Which property sets an animation's timing function?",opts:["animation-ease","animation-timing-function","transition-curve","animation-curve"],ans:1},
+  {topic:"CSS",q:"<code>object-fit: cover</code> on an image:",opts:["Stretches image to fill","Scales image to cover container, cropping if needed","Shows image at natural size","Hides overflow"],ans:1},
+  {topic:"CSS",q:"CSS specificity order from lowest to highest:",opts:["Element < Class < ID < Inline","Inline < ID < Class < Element","Class < Element < ID < Inline","ID < Inline < Element < Class"],ans:0},
+  {topic:"CSS",q:"Which CSS property makes text not wrap to the next line?",opts:["text-wrap: none","overflow: hidden","white-space: nowrap","word-break: keep-all"],ans:2},
 
-  // ── JavaScript (30) ──
-  {topic:"JavaScript", q:"Which keyword declares a block-scoped variable that can be reassigned?", opts:["var","let","const","def"], ans:1},
-  {topic:"JavaScript", q:"What does <code>===</code> check compared to <code>==</code>?", opts:["Value only","Value and type","Reference equality","None"], ans:1},
-  {topic:"JavaScript", q:"<code>typeof null</code> returns:", opts:['"null"','"undefined"','"object"','"boolean"'], ans:2},
-  {topic:"JavaScript", q:"Which array method returns a new array with transformed elements?", opts:["forEach","filter","map","reduce"], ans:2},
-  {topic:"JavaScript", q:"What is a closure in JavaScript?", opts:["A function that closes the browser","A function with access to its outer scope's variables after the outer function returns","A self-invoking function","A function without parameters"], ans:1},
-  {topic:"JavaScript", q:"The event loop in JavaScript handles:", opts:["Multithreading","Asynchronous operations via a callback queue","Memory management","Garbage collection"], ans:1},
-  {topic:"JavaScript", q:"<code>Promise.all([])</code> resolves when:", opts:["Any one promise resolves","All promises resolve","First promise settles","Array is empty"], ans:1},
-  {topic:"JavaScript", q:"Arrow functions differ from regular functions in that they:", opts:["Cannot take parameters","Don't have their own <code>this</code> binding","Are always async","Cannot return values"], ans:1},
-  {topic:"JavaScript", q:"The spread operator <code>...</code> can be used to:", opts:["Only spread arrays","Copy arrays/objects and pass arguments","Define rest parameters only","Loop over values"], ans:1},
-  {topic:"JavaScript", q:"<code>Array.prototype.reduce</code> takes:", opts:["A callback and optional initial value","Only a callback","Two arrays","A number and callback"], ans:0},
-  {topic:"JavaScript", q:"What does <code>async/await</code> syntax do?", opts:["Creates multiple threads","Syntactic sugar over Promises for async code","Blocks the main thread","Converts sync code to async"], ans:1},
-  {topic:"JavaScript", q:"Which method removes the last element of an array and returns it?", opts:["shift","slice","pop","splice"], ans:2},
-  {topic:"JavaScript", q:"Prototypal inheritance means:", opts:["Classes inherit from other classes","Objects can inherit directly from other objects","Functions inherit properties","Arrays extend Objects only"], ans:1},
-  {topic:"JavaScript", q:"<code>localStorage</code> data:", opts:["Expires with session","Persists until explicitly cleared","Expires after 24 hours","Is deleted on page refresh"], ans:1},
-  {topic:"JavaScript", q:"Which operator short-circuits and returns the right side if the left is falsy?", opts:["??","&&","||","!"], ans:2},
-  {topic:"JavaScript", q:"Destructuring assignment <code>const {a, b} = obj</code>:", opts:["Creates a copy of obj","Extracts properties a and b from obj","Merges objects","Deletes a and b from obj"], ans:1},
-  {topic:"JavaScript", q:"<code>JSON.stringify</code> converts:", opts:["String to JSON","JSON to JavaScript object","JavaScript value to JSON string","XML to JSON"], ans:2},
-  {topic:"JavaScript", q:"Which event fires when the DOM is fully parsed (not images)?", opts:["window.onload","DOMContentLoaded","DOMReady","document.onload"], ans:1},
-  {topic:"JavaScript", q:"A pure function:", opts:["Uses global variables","Has no side effects and same input always produces same output","Can modify DOM","Throws errors"], ans:1},
-  {topic:"JavaScript", q:"<code>setTimeout(fn, 0)</code> executes <code>fn</code>:", opts:["Immediately synchronously","After current call stack clears","Never","After 1ms"], ans:1},
-  {topic:"JavaScript", q:"Optional chaining <code>obj?.prop</code>:", opts:["Throws if obj is null","Returns undefined if obj is null/undefined instead of throwing","Sets prop to undefined","Creates prop if missing"], ans:1},
-  {topic:"JavaScript", q:"Which method creates a new array with elements that pass a test?", opts:["map","find","filter","some"], ans:2},
-  {topic:"JavaScript", q:"<code>Object.freeze(obj)</code>:", opts:["Makes obj immutable (shallow)","Deep freezes all nested objects","Prevents obj deletion","Seals obj allowing value changes"], ans:0},
-  {topic:"JavaScript", q:"The nullish coalescing operator <code>??</code> returns the right side when the left is:", opts:["Falsy","Zero or empty string","Null or undefined only","False"], ans:2},
-  {topic:"JavaScript", q:"Which built-in method converts a string to a number?", opts:["Number()","toNumber()","parseInt() only","String.toInt()"], ans:0},
-  {topic:"JavaScript", q:"<code>Event.stopPropagation()</code>:", opts:["Prevents default browser action","Stops event from bubbling up the DOM","Removes the event listener","Cancels the event"], ans:1},
-  {topic:"JavaScript", q:"A generator function uses the keyword:", opts:["async","function*","yield function","gen"], ans:1},
-  {topic:"JavaScript", q:"WeakMap keys must be:", opts:["Strings","Numbers","Objects","Symbols"], ans:2},
-  {topic:"JavaScript", q:"<code>Array.isArray([])</code> returns:", opts:["false","null","true","undefined"], ans:2},
-  {topic:"JavaScript", q:"The <code>this</code> keyword in a regular function inside strict mode when called without context is:", opts:["window","global","undefined","null"], ans:2},
+  {topic:"JavaScript",q:"Which keyword declares a block-scoped variable that can be reassigned?",opts:["var","let","const","def"],ans:1},
+  {topic:"JavaScript",q:"What does <code>===</code> check compared to <code>==</code>?",opts:["Value only","Value and type","Reference equality","None"],ans:1},
+  {topic:"JavaScript",q:"<code>typeof null</code> returns:",opts:['"null"','"undefined"','"object"','"boolean"'],ans:2},
+  {topic:"JavaScript",q:"Which array method returns a new array with transformed elements?",opts:["forEach","filter","map","reduce"],ans:2},
+  {topic:"JavaScript",q:"What is a closure in JavaScript?",opts:["A function that closes the browser","A function with access to its outer scope's variables after the outer function returns","A self-invoking function","A function without parameters"],ans:1},
+  {topic:"JavaScript",q:"The event loop in JavaScript handles:",opts:["Multithreading","Asynchronous operations via a callback queue","Memory management","Garbage collection"],ans:1},
+  {topic:"JavaScript",q:"<code>Promise.all([])</code> resolves when:",opts:["Any one promise resolves","All promises resolve","First promise settles","Array is empty"],ans:1},
+  {topic:"JavaScript",q:"Arrow functions differ from regular functions in that they:",opts:["Cannot take parameters","Don't have their own <code>this</code> binding","Are always async","Cannot return values"],ans:1},
+  {topic:"JavaScript",q:"The spread operator <code>...</code> can be used to:",opts:["Only spread arrays","Copy arrays/objects and pass arguments","Define rest parameters only","Loop over values"],ans:1},
+  {topic:"JavaScript",q:"<code>Array.prototype.reduce</code> takes:",opts:["A callback and optional initial value","Only a callback","Two arrays","A number and callback"],ans:0},
+  {topic:"JavaScript",q:"What does <code>async/await</code> syntax do?",opts:["Creates multiple threads","Syntactic sugar over Promises for async code","Blocks the main thread","Converts sync code to async"],ans:1},
+  {topic:"JavaScript",q:"Which method removes the last element of an array and returns it?",opts:["shift","slice","pop","splice"],ans:2},
+  {topic:"JavaScript",q:"Prototypal inheritance means:",opts:["Classes inherit from other classes","Objects can inherit directly from other objects","Functions inherit properties","Arrays extend Objects only"],ans:1},
+  {topic:"JavaScript",q:"<code>localStorage</code> data:",opts:["Expires with session","Persists until explicitly cleared","Expires after 24 hours","Is deleted on page refresh"],ans:1},
+  {topic:"JavaScript",q:"Which operator short-circuits and returns the right side if the left is falsy?",opts:["??","&&","||","!"],ans:2},
+  {topic:"JavaScript",q:"Destructuring assignment <code>const {a, b} = obj</code>:",opts:["Creates a copy of obj","Extracts properties a and b from obj","Merges objects","Deletes a and b from obj"],ans:1},
+  {topic:"JavaScript",q:"<code>JSON.stringify</code> converts:",opts:["String to JSON","JSON to JavaScript object","JavaScript value to JSON string","XML to JSON"],ans:2},
+  {topic:"JavaScript",q:"Which event fires when the DOM is fully parsed (not waiting for images)?",opts:["window.onload","DOMContentLoaded","DOMReady","document.onload"],ans:1},
+  {topic:"JavaScript",q:"A pure function:",opts:["Uses global variables","Has no side effects and same input always produces same output","Can modify DOM","Throws errors"],ans:1},
+  {topic:"JavaScript",q:"<code>setTimeout(fn, 0)</code> executes <code>fn</code>:",opts:["Immediately synchronously","After current call stack clears","Never","After 1ms"],ans:1},
+  {topic:"JavaScript",q:"Optional chaining <code>obj?.prop</code>:",opts:["Throws if obj is null","Returns undefined if obj is null/undefined instead of throwing","Sets prop to undefined","Creates prop if missing"],ans:1},
+  {topic:"JavaScript",q:"Which method creates a new array with elements that pass a test?",opts:["map","find","filter","some"],ans:2},
+  {topic:"JavaScript",q:"<code>Object.freeze(obj)</code>:",opts:["Makes obj immutable (shallow)","Deep freezes all nested objects","Prevents obj deletion","Seals obj allowing value changes"],ans:0},
+  {topic:"JavaScript",q:"The nullish coalescing operator <code>??</code> returns the right side when the left is:",opts:["Falsy","Zero or empty string","Null or undefined only","False"],ans:2},
+  {topic:"JavaScript",q:"Which built-in method converts a string to a number?",opts:["Number()","toNumber()","parseInt() only","String.toInt()"],ans:0},
+  {topic:"JavaScript",q:"<code>Event.stopPropagation()</code>:",opts:["Prevents default browser action","Stops event from bubbling up the DOM","Removes the event listener","Cancels the event"],ans:1},
+  {topic:"JavaScript",q:"A generator function uses the keyword:",opts:["async","function*","yield function","gen"],ans:1},
+  {topic:"JavaScript",q:"WeakMap keys must be:",opts:["Strings","Numbers","Objects","Symbols"],ans:2},
+  {topic:"JavaScript",q:"<code>Array.isArray([])</code> returns:",opts:["false","null","true","undefined"],ans:2},
+  {topic:"JavaScript",q:"The <code>this</code> keyword in a regular function in strict mode when called without context is:",opts:["window","global","undefined","null"],ans:2},
 
-  // ── React (20) ──
-  {topic:"React", q:"JSX compiles to:", opts:["HTML","React.createElement() calls","document.createElement() calls","JSON"], ans:1},
-  {topic:"React", q:"Which hook manages local component state?", opts:["useEffect","useRef","useState","useContext"], ans:2},
-  {topic:"React", q:"<code>useEffect</code> with an empty dependency array <code>[]</code> runs:", opts:["On every render","Only on unmount","Once after initial mount","On every state change"], ans:2},
-  {topic:"React", q:"The virtual DOM in React:", opts:["Is the real DOM","Is a JavaScript representation of the DOM for efficient updates","Replaces CSS","Is stored in a database"], ans:1},
-  {topic:"React", q:"<code>key</code> prop in lists is used to:", opts:["Style list items","Pass data to children","Help React identify which items changed, added, or removed","Sort the list"], ans:2},
-  {topic:"React", q:"Props in React are:", opts:["Mutable inside the component","Read-only (immutable) from the component's perspective","Shared state","Only strings"], ans:1},
-  {topic:"React", q:"<code>useRef</code> is used to:", opts:["Trigger re-renders","Create mutable references that persist without triggering re-renders","Replace useState","Access Redux store"], ans:1},
-  {topic:"React", q:"React's <code>Context API</code> is used for:", opts:["Local state","HTTP requests","Passing data deep through the tree without prop drilling","Animation"], ans:2},
-  {topic:"React", q:"What does <code>React.memo</code> do?", opts:["Memoizes the result of a function","Prevents a component from re-rendering if props haven't changed","Caches API responses","Replaces useMemo"], ans:1},
-  {topic:"React", q:"A controlled component in React:", opts:["Manages its own state internally","Has its value controlled by React state","Cannot be changed by the user","Uses refs for value"], ans:1},
-  {topic:"React", q:"<code>useMemo</code> is used to:", opts:["Memoize functions","Memoize expensive computed values to avoid recalculation on every render","Fetch data","Replace useEffect"], ans:1},
-  {topic:"React", q:"<code>useCallback</code> is used to:", opts:["Cache a computed value","Memoize a function reference to prevent unnecessary re-creation","Manage side effects","Handle errors"], ans:1},
-  {topic:"React", q:"React fragments <code>&lt;&gt;...&lt;/&gt;</code> are used to:", opts:["Add styles","Group elements without adding extra DOM nodes","Create portals","Wrap context"], ans:2},
-  {topic:"React", q:"When does React batch state updates (React 18+)?", opts:["Never","Only inside event handlers","In all contexts including async functions (automatic batching)","Only in useEffect"], ans:2},
-  {topic:"React", q:"<code>ReactDOM.createPortal</code> renders a component:", opts:["Outside the React tree","Into a different DOM node outside the parent hierarchy","In an iframe","Server-side only"], ans:1},
-  {topic:"React", q:"Error boundaries in React:", opts:["Catch all JavaScript errors","Catch errors in child component trees and display fallback UI","Prevent API errors","Handle async errors"], ans:1},
-  {topic:"React", q:"<code>useReducer</code> is preferred over <code>useState</code> when:", opts:["State is a boolean","State logic is simple","State transitions are complex or involve multiple sub-values","You need async state"], ans:2},
-  {topic:"React", q:"The second argument to <code>useEffect</code> is:", opts:["Cleanup function","Options object","Dependency array","Context value"], ans:2},
-  {topic:"React", q:"Reconciliation in React refers to:", opts:["Merging props","The process of comparing old and new virtual DOM to minimise real DOM updates","Syncing state","Server rendering"], ans:1},
-  {topic:"React", q:"React's StrictMode:", opts:["Locks styling","Removes console logs","Highlights potential problems by running effects twice in development","Disables hooks"], ans:2},
+  {topic:"React",q:"JSX compiles to:",opts:["HTML","React.createElement() calls","document.createElement() calls","JSON"],ans:1},
+  {topic:"React",q:"Which hook manages local component state?",opts:["useEffect","useRef","useState","useContext"],ans:2},
+  {topic:"React",q:"<code>useEffect</code> with an empty dependency array <code>[]</code> runs:",opts:["On every render","Only on unmount","Once after initial mount","On every state change"],ans:2},
+  {topic:"React",q:"The virtual DOM in React:",opts:["Is the real DOM","Is a JavaScript representation of the DOM for efficient updates","Replaces CSS","Is stored in a database"],ans:1},
+  {topic:"React",q:"The <code>key</code> prop in lists is used to:",opts:["Style list items","Pass data to children","Help React identify which items changed, added, or removed","Sort the list"],ans:2},
+  {topic:"React",q:"Props in React are:",opts:["Mutable inside the component","Read-only (immutable) from the component's perspective","Shared state","Only strings"],ans:1},
+  {topic:"React",q:"<code>useRef</code> is used to:",opts:["Trigger re-renders","Create mutable references that persist without triggering re-renders","Replace useState","Access Redux store"],ans:1},
+  {topic:"React",q:"React's Context API is used for:",opts:["Local state","HTTP requests","Passing data deep through the tree without prop drilling","Animation"],ans:2},
+  {topic:"React",q:"What does <code>React.memo</code> do?",opts:["Memoizes the result of a function","Prevents a component from re-rendering if props haven't changed","Caches API responses","Replaces useMemo"],ans:1},
+  {topic:"React",q:"A controlled component in React:",opts:["Manages its own state internally","Has its value controlled by React state","Cannot be changed by the user","Uses refs instead of state"],ans:1},
+  {topic:"React",q:"<code>useMemo</code> is used to:",opts:["Memoize functions","Memoize expensive computed values to avoid recalculation on every render","Fetch data","Replace useEffect"],ans:1},
+  {topic:"React",q:"<code>useCallback</code> is used to:",opts:["Cache a computed value","Memoize a function reference to prevent unnecessary re-creation","Manage side effects","Handle errors"],ans:1},
+  {topic:"React",q:"React fragments &lt;&gt;...&lt;/&gt; are used to:",opts:["Add styles","Group elements without adding extra DOM nodes","Create portals","Wrap context"],ans:1},
+  {topic:"React",q:"When does React batch state updates (React 18+)?",opts:["Never","Only inside event handlers","In all contexts including async functions (automatic batching)","Only in useEffect"],ans:2},
+  {topic:"React",q:"<code>ReactDOM.createPortal</code> renders a component:",opts:["Outside the React tree","Into a different DOM node outside the parent hierarchy","In an iframe","Server-side only"],ans:1},
+  {topic:"React",q:"Error boundaries in React:",opts:["Catch all JavaScript errors","Catch errors in child component trees and display fallback UI","Prevent API errors","Handle async errors"],ans:1},
+  {topic:"React",q:"<code>useReducer</code> is preferred over <code>useState</code> when:",opts:["State is a boolean","State logic is simple","State transitions are complex or involve multiple sub-values","You need async state"],ans:2},
+  {topic:"React",q:"The second argument to <code>useEffect</code> is:",opts:["Cleanup function","Options object","Dependency array","Context value"],ans:2},
+  {topic:"React",q:"Reconciliation in React refers to:",opts:["Merging props","The process of comparing old and new virtual DOM to minimise real DOM updates","Syncing state","Server rendering"],ans:1},
+  {topic:"React",q:"React StrictMode:",opts:["Locks styling","Removes console logs","Highlights potential problems by running effects twice in development","Disables hooks"],ans:2},
 
-  // ── Tailwind CSS (10) ──
-  {topic:"Tailwind", q:"Tailwind CSS is best described as:", opts:["A component library","A utility-first CSS framework","A CSS preprocessor","A JavaScript framework"], ans:1},
-  {topic:"Tailwind", q:"The Tailwind class <code>p-4</code> applies padding of:", opts:["4px","4rem","1rem (16px)","4%"], ans:2},
-  {topic:"Tailwind", q:"To apply styles only on medium screens and above, prefix classes with:", opts:["sm:","md:","lg:","@md:"], ans:1},
-  {topic:"Tailwind", q:"<code>dark:</code> variant in Tailwind applies styles when:", opts:["User has dark wallpaper","System/browser is in dark mode","A .dark class is on a parent (class strategy)","Both B and C (configurable)"], ans:3},
-  {topic:"Tailwind", q:"Which Tailwind class makes an element a flex container?", opts:["flex-container","d-flex","flex","display-flex"], ans:2},
-  {topic:"Tailwind", q:"The <code>@apply</code> directive in Tailwind:", opts:["Imports a Tailwind theme","Applies Tailwind utilities inside custom CSS classes","Generates component styles","Extends the config"], ans:1},
-  {topic:"Tailwind", q:"<code>text-xl</code> in Tailwind sets font-size to:", opts:["16px","18px (1.125rem)","1.25rem (20px)","24px"], ans:2},
-  {topic:"Tailwind", q:"JIT (Just-In-Time) mode in Tailwind:", opts:["Generates all utility classes upfront","Generates styles on-demand, enabling arbitrary values","Replaces PostCSS","Disables purging"], ans:1},
-  {topic:"Tailwind", q:"<code>gap-4</code> in a Grid/Flex container sets:", opts:["Padding between items","Margin on container","Gap (gutter) between grid/flex items","Border spacing"], ans:2},
-  {topic:"Tailwind", q:"To customise Tailwind's default theme, you edit:", opts:["tailwind.css","style.config.js","tailwind.config.js","theme.json"], ans:2},
+  {topic:"Tailwind",q:"Tailwind CSS is best described as:",opts:["A component library","A utility-first CSS framework","A CSS preprocessor","A JavaScript framework"],ans:1},
+  {topic:"Tailwind",q:"The Tailwind class <code>p-4</code> applies padding of:",opts:["4px","4rem","1rem (16px)","4%"],ans:2},
+  {topic:"Tailwind",q:"To apply styles only on medium screens and above, prefix classes with:",opts:["sm:","md:","lg:","@md:"],ans:1},
+  {topic:"Tailwind",q:"The <code>dark:</code> variant in Tailwind applies styles when:",opts:["User has dark wallpaper","System/browser is in dark mode","A .dark class is on a parent (class strategy)","Both B and C (configurable)"],ans:3},
+  {topic:"Tailwind",q:"Which Tailwind class makes an element a flex container?",opts:["flex-container","d-flex","flex","display-flex"],ans:2},
+  {topic:"Tailwind",q:"The <code>@apply</code> directive in Tailwind:",opts:["Imports a Tailwind theme","Applies Tailwind utilities inside custom CSS classes","Generates component styles","Extends the config"],ans:1},
+  {topic:"Tailwind",q:"<code>text-xl</code> in Tailwind sets font-size to:",opts:["16px","18px (1.125rem)","1.25rem (20px)","24px"],ans:2},
+  {topic:"Tailwind",q:"JIT (Just-In-Time) mode in Tailwind:",opts:["Generates all utility classes upfront","Generates styles on-demand, enabling arbitrary values","Replaces PostCSS","Disables purging"],ans:1},
+  {topic:"Tailwind",q:"<code>gap-4</code> in a Grid/Flex container sets:",opts:["Padding between items","Margin on container","Gap (gutter) between grid/flex items","Border spacing"],ans:2},
+  {topic:"Tailwind",q:"To customise Tailwind's default theme, you edit:",opts:["tailwind.css","style.config.js","tailwind.config.js","theme.json"],ans:2},
 ];
 
-// ══════════ STATE ══════════
+const TOPIC_COLORS = {HTML:'#e97b43',CSS:'#4392e9',JavaScript:'#f7b731',React:'#61dafb',Tailwind:'#43e97b'};
 let answers = new Array(100).fill(null);
 let timerInterval = null;
 let secondsLeft = 30 * 60;
 let startTime = null;
 
-// ══════════ BUILD EXAM ══════════
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
 function buildExam() {
   const body = document.getElementById('exam-body');
-  const sections = {
-    HTML: [], CSS: [], JavaScript: [], React: [], Tailwind: []
-  };
-  QUESTIONS.forEach((q, i) => sections[q.topic].push({...q, idx: i}));
-
+  const sections = {};
+  QUESTIONS.forEach((q, i) => {
+    if (!sections[q.topic]) sections[q.topic] = [];
+    sections[q.topic].push({...q, idx: i});
+  });
+  const letters = ['A','B','C','D'];
   let html = '';
   Object.entries(sections).forEach(([topic, qs]) => {
-    const colors = {HTML:'#e97b43',CSS:'#4392e9',JavaScript:'#f7b731',React:'#6cf',Tailwind:'#43e97b'};
+    const c = TOPIC_COLORS[topic] || '#6c63ff';
     html += `<div class="section-header">
-      <span class="section-label" style="color:${colors[topic]};border-color:${colors[topic]}40;background:${colors[topic]}12">${topic}</span>
+      <span class="section-label" style="color:${c};border-color:${c}40;background:${c}14">${topic}</span>
       <div class="section-line"></div>
     </div>`;
     qs.forEach(q => {
-      const opts = q.opts.map((o, oi) => {
-        const letters = ['A','B','C','D'];
-        return `<label class="option" id="opt-${q.idx}-${oi}">
-          <input type="radio" name="q${q.idx}" value="${oi}" onchange="recordAnswer(${q.idx},${oi})"/>
+      const opts = q.opts.map((o, oi) =>
+        `<div class="option" id="opt-${q.idx}-${oi}" onclick="recordAnswer(${q.idx},${oi})">
           <span class="opt-letter">${letters[oi]}</span>
-          <span>${o}</span>
-        </label>`;
-      }).join('');
+          <span class="opt-text">${o}</span>
+        </div>`
+      ).join('');
       html += `<div class="q-card" id="q-${q.idx}">
         <div class="q-num">Q${q.idx+1} · ${q.topic}</div>
         <div class="q-text">${q.q}</div>
@@ -617,20 +453,20 @@ function buildExam() {
 function recordAnswer(qIdx, optIdx) {
   answers[qIdx] = optIdx;
   document.getElementById(`q-${qIdx}`).classList.add('answered');
-  // deselect sibling options visually
-  document.querySelectorAll(`[id^="opt-${qIdx}-"]`).forEach(el => el.classList.remove('selected'));
-  document.getElementById(`opt-${qIdx}-${optIdx}`).classList.add('selected');
+  for (let i = 0; i < 4; i++) {
+    const el = document.getElementById(`opt-${qIdx}-${i}`);
+    if (el) el.classList.toggle('selected', i === optIdx);
+  }
   updateProgress();
 }
 
 function updateProgress() {
   const count = answers.filter(a => a !== null).length;
   document.getElementById('answered-count').textContent = count;
-  document.getElementById('progress-label').textContent = `${count} / 100`;
-  document.getElementById('progress-bar').style.width = `${count}%`;
+  document.getElementById('progress-label').textContent = count + ' / 100';
+  document.getElementById('progress-bar').style.width = count + '%';
 }
 
-// ══════════ TIMER ══════════
 function startTimer() {
   startTime = Date.now();
   timerInterval = setInterval(() => {
@@ -638,94 +474,72 @@ function startTimer() {
     const m = Math.floor(secondsLeft / 60);
     const s = secondsLeft % 60;
     const el = document.getElementById('timer');
-    el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-    if (secondsLeft <= 300 && secondsLeft > 60) {
-      el.className = 'warn';
-    } else if (secondsLeft <= 60) {
-      el.className = 'danger';
-    }
-    if (secondsLeft <= 0) {
-      clearInterval(timerInterval);
-      submitExam(true);
-    }
+    el.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    if (secondsLeft <= 300 && secondsLeft > 60) el.className = 'warn';
+    else if (secondsLeft <= 60) el.className = 'danger';
+    if (secondsLeft <= 0) { clearInterval(timerInterval); submitExam(true); }
   }, 1000);
 }
 
-// ══════════ START ══════════
 function startExam() {
-  document.getElementById('cover').style.display = 'none';
   buildExam();
-  document.getElementById('exam').style.display = 'block';
+  show('exam');
   startTimer();
 }
 
-// ══════════ SUBMIT & SCORE ══════════
 function submitExam(auto) {
   if (!auto) {
-    const answered = answers.filter(a => a !== null).length;
-    if (answered < 100) {
-      const proceed = confirm(`You have ${100 - answered} unanswered question(s). Submit anyway?`);
-      if (!proceed) return;
-    }
+    const unanswered = answers.filter(a => a === null).length;
+    if (unanswered > 0 && !confirm(`You have ${unanswered} unanswered question(s). Submit anyway?`)) return;
   }
   clearInterval(timerInterval);
-  const elapsed = startTime ? Math.round((Date.now() - startTime) / 1000) : (30*60 - secondsLeft);
+  const elapsed = startTime ? Math.round((Date.now() - startTime) / 1000) : (1800 - secondsLeft);
   showResults(elapsed);
 }
 
-function showResults(elapsedSeconds) {
+function showResults(elapsed) {
   let correct = 0, wrong = 0, skipped = 0;
   const topicStats = {};
   QUESTIONS.forEach((q, i) => {
     if (!topicStats[q.topic]) topicStats[q.topic] = {correct:0, total:0};
     topicStats[q.topic].total++;
-    if (answers[i] === null) { skipped++; }
+    if (answers[i] === null) skipped++;
     else if (answers[i] === q.ans) { correct++; topicStats[q.topic].correct++; }
-    else { wrong++; }
+    else wrong++;
   });
 
   const pct = Math.round((correct / 100) * 100);
   const pass = pct >= 50;
 
-  // score ring
-  const circumference = 490;
-  const offset = circumference - (pct / 100) * circumference;
-  const ringFill = document.getElementById('ring-fill');
-  ringFill.style.stroke = pass ? '#43e97b' : '#ff6584';
-
+  document.getElementById('ring-fill').style.stroke = pass ? '#43e97b' : '#ff6584';
   document.getElementById('score-num').textContent = correct;
   document.getElementById('score-pct').textContent = pct + '%';
   document.getElementById('s-correct').textContent = correct;
   document.getElementById('s-wrong').textContent = wrong;
   document.getElementById('s-skip').textContent = skipped;
+  const m = Math.floor(elapsed/60), s = elapsed%60;
+  document.getElementById('s-time').textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
 
-  const m = Math.floor(elapsedSeconds / 60), s = elapsedSeconds % 60;
-  document.getElementById('s-time').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-
-  const badge = document.getElementById('results-badge');
-  const title = document.getElementById('results-title');
-  const banner = document.getElementById('results-banner');
-  badge.textContent = pass ? '✓ PASS' : '✗ FAIL';
-  badge.className = 'results-badge ' + (pass ? 'pass' : 'fail');
-  title.textContent = pass ? 'Congratulations! 🎉' : 'Better luck next time.';
-  banner.innerHTML = pass
+  document.getElementById('results-badge').textContent = pass ? '✓ PASS' : '✗ FAIL';
+  document.getElementById('results-badge').className = 'results-badge ' + (pass ? 'pass' : 'fail');
+  document.getElementById('results-title').textContent = pass ? 'Congratulations! 🎉' : 'Better luck next time.';
+  document.getElementById('results-banner').innerHTML = pass
     ? `<div class="pass-banner">You scored <strong>${correct}/100 (${pct}%)</strong> — you passed the Frontend Development exam. Well done!</div>`
     : `<div class="fail-banner">You scored <strong>${correct}/100 (${pct}%)</strong>. A score of 50% or above is required to pass. Review the topics below and try again.</div>`;
 
-  // topic breakdown
-  const topicColors = {HTML:'#e97b43',CSS:'#4392e9',JavaScript:'#f7b731',React:'#6cf',Tailwind:'#43e97b'};
   let tbHtml = '<h3>Topic Breakdown</h3>';
   Object.entries(topicStats).forEach(([topic, st]) => {
     const tpct = Math.round((st.correct / st.total) * 100);
+    const c = TOPIC_COLORS[topic] || '#6c63ff';
     tbHtml += `<div class="topic-row">
       <span class="topic-name">${topic}</span>
-      <div class="topic-track"><div class="topic-fill" style="width:0%;background:${topicColors[topic]}" data-w="${tpct}"></div></div>
+      <div class="topic-track"><div class="topic-fill" data-w="${tpct}" style="background:${c}"></div></div>
       <span class="topic-score">${st.correct}/${st.total}</span>
     </div>`;
   });
   document.getElementById('topic-breakdown').innerHTML = tbHtml;
 
-  // review section
+  const letters = ['A','B','C','D'];
   let revHtml = '<div class="review-section"><h3>Answer Review</h3>';
   QUESTIONS.forEach((q, i) => {
     const a = answers[i];
@@ -738,25 +552,22 @@ function showResults(elapsedSeconds) {
       <div class="review-answers">
         ${isSkipped
           ? '<span class="skipped-label">Not answered</span>'
-          : `<span class="your ${isCorrect?'correct':''}">Your answer: ${q.opts[a]}</span>`}
-        ${!isCorrect ? `<span class="answer-correct">Correct: ${q.opts[q.ans]}</span>` : ''}
+          : `<span class="your-ans ${isCorrect?'correct':''}">${letters[a]}. ${q.opts[a]}</span>`}
+        ${!isCorrect ? `<span class="ans-correct">✓ Correct: ${letters[q.ans]}. ${q.opts[q.ans]}</span>` : ''}
       </div>
     </div>`;
   });
   revHtml += '</div>';
   document.getElementById('review-section').innerHTML = revHtml;
 
-  document.getElementById('exam').style.display = 'none';
-  document.getElementById('results').style.display = 'block';
+  show('results');
 
-  // animate ring and bars after paint
   requestAnimationFrame(() => {
     setTimeout(() => {
-      ringFill.style.strokeDashoffset = offset;
-      document.querySelectorAll('.topic-fill').forEach(el => {
-        el.style.width = el.dataset.w + '%';
-      });
-    }, 100);
+      const offset = 490 - (pct / 100) * 490;
+      document.getElementById('ring-fill').style.strokeDashoffset = offset;
+      document.querySelectorAll('.topic-fill').forEach(el => { el.style.width = el.dataset.w + '%'; });
+    }, 120);
   });
 }
 </script>
