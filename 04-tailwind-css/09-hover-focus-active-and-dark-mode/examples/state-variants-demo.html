@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>State Variants Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' }</script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-300 p-8">
+
+  <!-- Dark mode toggle -->
+  <div class="fixed top-4 right-4 z-50">
+    <button onclick="document.documentElement.classList.toggle('dark')"
+      class="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700
+             flex items-center justify-center hover:scale-110 active:scale-95 transition-transform">
+      <span class="dark:hidden">🌙</span>
+      <span class="hidden dark:block">☀️</span>
+    </button>
+  </div>
+
+  <div class="max-w-4xl mx-auto space-y-16">
+
+    <header>
+      <h1 class="text-4xl font-bold mb-2">State Variants Demo</h1>
+      <p class="text-gray-500 dark:text-gray-400 text-lg">Interact with each element. Toggle dark mode with the button top-right.</p>
+    </header>
+
+    <!-- 1. Hover -->
+    <section>
+      <h2 class="text-xl font-bold mb-1">hover:</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Hover over each element</p>
+      <div class="flex flex-wrap gap-4 items-center">
+        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+          hover:bg-blue-700
+        </button>
+        <button class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-500 hover:shadow-md text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg font-medium transition-all">
+          hover:border-blue-500
+        </button>
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer border border-gray-100 dark:border-gray-700">
+          hover:shadow-xl hover:-translate-y-1
+        </div>
+        <span class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:underline cursor-pointer transition-colors font-medium">
+          hover:text-blue-600
+        </span>
+        <div class="w-16 h-16 bg-purple-500 rounded-xl hover:scale-110 hover:rotate-3 transition-transform cursor-pointer flex items-center justify-center text-white text-xs font-bold">
+          scale
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Focus -->
+    <section>
+      <h2 class="text-xl font-bold mb-1">focus:</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Click or tab into each input</p>
+      <div class="flex flex-col gap-4 max-w-sm">
+        <input type="text" placeholder="focus:ring-2 focus:ring-blue-500"
+          class="border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-2.5
+                 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400
+                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+        <input type="text" placeholder="focus:border-purple-500"
+          class="border-2 border-gray-300 dark:border-gray-600 rounded-xl px-4 py-2.5
+                 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400
+                 focus:outline-none focus:border-purple-500 transition-all">
+        <input type="text" placeholder="focus:bg-blue-50"
+          class="border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-2.5
+                 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400
+                 focus:outline-none focus:bg-blue-50 dark:focus:bg-blue-950 focus:border-blue-300 transition-all">
+      </div>
+    </section>
+
+    <!-- 3. Focus Visible -->
+    <section>
+      <h2 class="text-xl font-bold mb-1">focus-visible:</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Tab to these buttons — ring only shows on keyboard focus, not mouse click</p>
+      <div class="flex gap-4">
+        <button class="bg-blue-600 text-white px-5 py-2.5 rounded-xl font-semibold
+                       focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2
+                       transition-all">
+          focus-visible:ring-2
+        </button>
+        <button class="bg-green-600 text-white px-5 py-2.5 rounded-xl font-semibold
+                       focus:outline-none focus-visible:ring-4 focus-visible:ring-green-400 focus-visible:ring-offset-2
+                       transition-all">
+          focus-visible:ring-4
+        </button>
+      </div>
+    </section>
+
+    <!-- 4. Active -->
+    <section>
+      <h2 class="text-xl font-bold mb-1">active:</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Click and hold each button</p>
+      <div class="flex flex-wrap gap-4">
+        <button class="bg-blue-600 hover:bg-blue-700 active:bg-blue-900 active:scale-95
+                       text-white px-5 py-2.5 rounded-xl font-semibold transition-all">
+          active:scale-95
+        </button>
+        <button class="bg-purple-600 hover:bg-purple-700 active:bg-purple-900 active:scale-90
+                       text-white px-5 py-2.5 rounded-xl font-semibold transition-all">
+          active:scale-90
+        </button>
+        <button class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700
+                       hover:bg-gray-50 dark:hover:bg-gray-700 active:bg-gray-100 dark:active:bg-gray-600
+                       active:shadow-inner text-gray-700 dark:text-gray-300 px-5 py-2.5 rounded-xl font-semibold transition-all">
+          active:shadow-inner
+        </button>
+      </div>
+    </section>
+
+    <!-- 5. Disabled -->
+    <section>
+      <h2 class="text-xl font-bold mb-1">disabled:</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">These buttons are disabled</p>
+      <div class="flex flex-wrap gap-4">
+        <button class="bg-blue-600 text-white px-5 py-2.5 rounded-xl font-semibold
+                       disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+          disabled:opacity-50
+        </button>
+        <button class="bg-green-600 text-white px-5 py-2.5 rounded-xl font-semibold
+                       disabled:opacity-30 disabled:cursor-not-allowed disabled:grayscale" disabled>
+          disabled:grayscale
+        </button>
+      </div>
+    </section>
+
+    <!-- 6. Group Hover -->
+    <section>
+      <h2 class="text-xl font-bold mb-1">group + group-hover:</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Hover over the cards</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700
+                    hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer">
+          <div class="text-3xl mb-3 group-hover:scale-125 transition-transform duration-200 inline-block">🎨</div>
+          <h3 class="font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2">
+            Design
+          </h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm">Beautiful by default.</p>
+          <span class="block mt-3 text-blue-600 dark:text-blue-400 text-sm font-semibold
+                       opacity-0 group-hover:opacity-100 translate-x-0 group-hover:translate-x-1 transition-all duration-200">
+            Explore →
+          </span>
+        </div>
+        <div class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700
+                    hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer">
+          <div class="text-3xl mb-3 group-hover:scale-125 transition-transform duration-200 inline-block">⚡</div>
+          <h3 class="font-bold text-gray-900 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors mb-2">
+            Performance
+          </h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm">Blazing fast.</p>
+          <span class="block mt-3 text-green-600 dark:text-green-400 text-sm font-semibold
+                       opacity-0 group-hover:opacity-100 translate-x-0 group-hover:translate-x-1 transition-all duration-200">
+            Explore →
+          </span>
+        </div>
+        <div class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700
+                    hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer">
+          <div class="text-3xl mb-3 group-hover:scale-125 transition-transform duration-200 inline-block">🔒</div>
+          <h3 class="font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors mb-2">
+            Security
+          </h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm">Secure by default.</p>
+          <span class="block mt-3 text-purple-600 dark:text-purple-400 text-sm font-semibold
+                       opacity-0 group-hover:opacity-100 translate-x-0 group-hover:translate-x-1 transition-all duration-200">
+            Explore →
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Peer -->
+    <section>
+      <h2 class="text-xl font-bold mb-1">peer + peer-checked:</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Check the checkboxes</p>
+      <div class="space-y-4 max-w-sm">
+        <label class="flex items-center gap-3 cursor-pointer group">
+          <input type="checkbox" class="peer sr-only">
+          <div class="w-5 h-5 rounded border-2 border-gray-300 dark:border-gray-600
+                      peer-checked:bg-blue-600 peer-checked:border-blue-600
+                      group-hover:border-blue-400 transition-colors flex items-center justify-center shrink-0">
+            <svg class="w-3 h-3 text-white hidden peer-checked:block" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <span class="text-sm text-gray-700 dark:text-gray-300 peer-checked:text-blue-600 dark:peer-checked:text-blue-400 transition-colors font-medium">
+            Accept terms and conditions
+          </span>
+        </label>
+
+        <label class="flex items-center gap-3 cursor-pointer group">
+          <input type="checkbox" class="peer sr-only">
+          <div class="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600
+                      peer-checked:bg-green-500 peer-checked:border-green-500
+                      group-hover:border-green-400 transition-colors flex items-center justify-center shrink-0">
+            <div class="w-2 h-2 rounded-full bg-white hidden peer-checked:block"></div>
+          </div>
+          <span class="text-sm text-gray-700 dark:text-gray-300 peer-checked:text-green-600 dark:peer-checked:text-green-400 transition-colors font-medium">
+            Subscribe to newsletter
+          </span>
+        </label>
+
+        <!-- peer-invalid -->
+        <div>
+          <input type="email" placeholder="Enter email (try invalid text)"
+            class="peer w-full border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-2.5
+                   bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                   invalid:border-red-400 invalid:focus:ring-red-400 transition-all">
+          <p class="hidden peer-invalid:block text-red-500 text-xs mt-1.5 font-medium">
+            Please enter a valid email address
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Dark Mode -->
+    <section>
+      <h2 class="text-xl font-bold mb-1">dark:</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Toggle dark mode with the button in the top-right</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-6 shadow-sm">
+          <h3 class="font-bold text-gray-900 dark:text-white mb-2">bg-white dark:bg-gray-800</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">text-gray-600 dark:text-gray-400</p>
+          <div class="mt-4 flex gap-2">
+            <span class="px-2.5 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-xs font-semibold rounded-full">Tag</span>
+            <span class="px-2.5 py-1 bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 text-xs font-semibold rounded-full">Tag</span>
+          </div>
+        </div>
+        <div class="bg-gray-900 dark:bg-white rounded-2xl p-6 shadow-sm">
+          <h3 class="font-bold text-white dark:text-gray-900 mb-2">Inverted: bg-gray-900 dark:bg-white</h3>
+          <p class="text-gray-400 dark:text-gray-600 text-sm">text-gray-400 dark:text-gray-600</p>
+          <button class="mt-4 bg-white dark:bg-gray-900 text-gray-900 dark:text-white px-4 py-2 rounded-lg text-sm font-semibold">
+            Inverted button
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</body>
+</html>

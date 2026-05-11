@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Config Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50:  '#faf5ff',
+              100: '#f3e8ff',
+              200: '#e9d5ff',
+              300: '#d8b4fe',
+              400: '#c084fc',
+              500: '#a855f7',
+              600: '#9333ea',
+              700: '#7e22ce',
+              800: '#6b21a8',
+              900: '#581c87',
+              950: '#3b0764',
+            },
+            accent: {
+              300: '#fdba74',
+              400: '#fb923c',
+              500: '#f97316',
+              600: '#ea580c',
+            },
+            success: '#22c55e',
+            warning: '#f59e0b',
+            danger:  '#ef4444',
+          },
+          fontFamily: {
+            display: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          spacing: {
+            '18': '4.5rem',
+            '22': '5.5rem',
+            '88': '22rem',
+            '128': '32rem',
+          },
+          borderRadius: {
+            '4xl': '2rem',
+            '5xl': '2.5rem',
+          },
+          boxShadow: {
+            'glow':    '0 0 30px rgba(168, 85, 247, 0.4)',
+            'glow-sm': '0 0 15px rgba(168, 85, 247, 0.25)',
+            'glow-lg': '0 0 60px rgba(168, 85, 247, 0.5)',
+            'card':    '0 2px 8px rgba(0,0,0,0.06), 0 0 1px rgba(0,0,0,0.08)',
+          },
+          keyframes: {
+            'fade-up': {
+              '0%':   { opacity: '0', transform: 'translateY(16px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            'fade-in': {
+              '0%':   { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            'slide-in': {
+              '0%':   { transform: 'translateX(-20px)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
+            },
+            'bounce-in': {
+              '0%':   { transform: 'scale(0.8)', opacity: '0' },
+              '60%':  { transform: 'scale(1.05)' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+          },
+          animation: {
+            'fade-up':   'fade-up 0.4s ease-out',
+            'fade-in':   'fade-in 0.3s ease-out',
+            'slide-in':  'slide-in 0.4s ease-out',
+            'bounce-in': 'bounce-in 0.5s ease-out',
+          },
+          screens: {
+            'xs': '480px',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 font-display text-gray-900 p-8">
+
+  <div class="max-w-5xl mx-auto space-y-16">
+
+    <header class="animate-fade-up">
+      <h1 class="font-display text-4xl font-bold text-brand-900 mb-2">Custom Config Demo</h1>
+      <p class="text-brand-600 text-lg">All utilities below are defined in <code class="bg-brand-100 px-2 py-0.5 rounded text-brand-800 font-mono text-sm">tailwind.config</code></p>
+    </header>
+
+    <!-- Custom Colors -->
+    <section class="animate-fade-up">
+      <h2 class="text-xl font-bold text-brand-900 mb-1">Custom Colors — brand.*</h2>
+      <p class="text-sm text-brand-600 mb-4 font-mono">colors.brand.{50-950}</p>
+      <div class="grid grid-cols-5 md:grid-cols-10 gap-2">
+        <div class="flex flex-col items-center gap-1">
+          <div class="w-full h-12 bg-brand-50 rounded-lg border border-brand-100"></div>
+          <span class="text-xs text-gray-500 font-mono">50</span>
+        </div>
+        <div class="flex flex-col items-center gap-1">
+          <div class="w-full h-12 bg-brand-100 rounded-lg"></div>
+          <span class="text-xs text-gray-500 font-mono">100</span>
+        </div>
+        <div class="flex flex-col items-center gap-1">
+          <div class="w-full h-12 bg-brand-200 rounded-lg"></div>
+          <span class="text-xs text-gray-500 font-mono">200</span>
+        </div>
+        <div class="flex flex-col items-center gap-1">
+          <div class="w-full h-12 bg-brand-300 rounded-lg"></div>
+          <span class="text-xs text-gray-500 font-mono">300</span>
+        </div>
+        <div class="flex flex-col items-center gap-1">
+          <div class="w-full h-12 bg-brand-400 rounded-lg"></div>
+          <span class="text-xs text-gray-500 font-mono">400</span>
+        </div>
+        <div class="flex flex-col items-center gap-1">
+          <div class="w-full h-12 bg-brand-500 rounded-lg"></div>
+          <span class="text-xs text-gray-500 font-mono">500</span>
+        </div>
+        <div class="flex flex-col items-center gap-1">
+          <div class="w-full h-12 bg-brand-600 rounded-lg"></div>
+          <span class="text-xs text-gray-500 font-mono">600</span>
+        </div>
+        <div class="flex flex-col items-center gap-1">
+          <div class="w-full h-12 bg-brand-700 rounded-lg"></div>
+          <span class="text-xs text-gray-500 font-mono">700</span>
+        </div>
+        <div class="flex flex-col items-center gap-1">
+          <div class="w-full h-12 bg-brand-800 rounded-lg"></div>
+          <span class="text-xs text-gray-500 font-mono">800</span>
+        </div>
+        <div class="flex flex-col items-center gap-1">
+          <div class="w-full h-12 bg-brand-900 rounded-lg"></div>
+          <span class="text-xs text-gray-500 font-mono">900</span>
+        </div>
+      </div>
+
+      <!-- Semantic colors -->
+      <div class="flex gap-3 mt-4">
+        <div class="flex items-center gap-2 bg-success/10 text-green-700 px-4 py-2 rounded-xl text-sm font-semibold">
+          <div class="w-3 h-3 rounded-full bg-success"></div> success
+        </div>
+        <div class="flex items-center gap-2 bg-warning/10 text-yellow-700 px-4 py-2 rounded-xl text-sm font-semibold">
+          <div class="w-3 h-3 rounded-full bg-warning"></div> warning
+        </div>
+        <div class="flex items-center gap-2 bg-danger/10 text-red-700 px-4 py-2 rounded-xl text-sm font-semibold">
+          <div class="w-3 h-3 rounded-full bg-danger"></div> danger
+        </div>
+      </div>
+    </section>
+
+    <!-- Custom Font -->
+    <section class="animate-slide-in">
+      <h2 class="text-xl font-bold text-brand-900 mb-1">Custom Font — font-display</h2>
+      <p class="text-sm text-brand-600 mb-4 font-mono">fontFamily.display: ["Plus Jakarta Sans"]</p>
+      <div class="bg-white rounded-2xl p-8 border border-brand-100 shadow-card">
+        <p class="font-display text-5xl font-black text-brand-900 leading-tight mb-2">Plus Jakarta Sans</p>
+        <p class="font-display text-xl font-semibold text-brand-600 mb-4">The quick brown fox jumps over the lazy dog</p>
+        <p class="font-display text-base text-brand-700 leading-relaxed">
+          This text uses <code class="bg-brand-50 px-1.5 py-0.5 rounded text-brand-800 font-mono text-sm">font-display</code> — a custom font family defined in the Tailwind config. It maps to Plus Jakarta Sans loaded from Google Fonts.
+        </p>
+      </div>
+    </section>
+
+    <!-- Custom Spacing -->
+    <section>
+      <h2 class="text-xl font-bold text-brand-900 mb-1">Custom Spacing</h2>
+      <p class="text-sm text-brand-600 mb-4 font-mono">spacing: {'18': '4.5rem', '22': '5.5rem'}</p>
+      <div class="space-y-3">
+        <div class="flex items-center gap-4">
+          <span class="text-xs font-mono text-brand-500 w-16">p-18</span>
+          <div class="bg-brand-100 rounded-xl p-18 flex-1 text-center text-brand-700 text-sm font-medium">4.5rem padding</div>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-xs font-mono text-brand-500 w-16">p-22</span>
+          <div class="bg-brand-200 rounded-xl p-22 flex-1 text-center text-brand-800 text-sm font-medium">5.5rem padding</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Custom Border Radius -->
+    <section>
+      <h2 class="text-xl font-bold text-brand-900 mb-1">Custom Border Radius</h2>
+      <p class="text-sm text-brand-600 mb-4 font-mono">borderRadius: {'4xl': '2rem', '5xl': '2.5rem'}</p>
+      <div class="flex gap-4 items-center">
+        <div class="w-24 h-24 bg-brand-500 rounded-2xl flex items-center justify-center text-white text-xs font-bold">2xl</div>
+        <div class="w-24 h-24 bg-brand-500 rounded-3xl flex items-center justify-center text-white text-xs font-bold">3xl</div>
+        <div class="w-24 h-24 bg-brand-500 rounded-4xl flex items-center justify-center text-white text-xs font-bold">4xl ✓</div>
+        <div class="w-24 h-24 bg-brand-500 rounded-5xl flex items-center justify-center text-white text-xs font-bold">5xl ✓</div>
+        <div class="w-24 h-24 bg-brand-500 rounded-full flex items-center justify-center text-white text-xs font-bold">full</div>
+      </div>
+    </section>
+
+    <!-- Custom Shadows -->
+    <section>
+      <h2 class="text-xl font-bold text-brand-900 mb-1">Custom Shadows</h2>
+      <p class="text-sm text-brand-600 mb-4 font-mono">boxShadow: {glow, glow-sm, glow-lg, card}</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="bg-white rounded-2xl p-6 shadow-card text-center">
+          <p class="text-xs font-mono text-brand-500 mb-2">shadow-card</p>
+          <p class="text-sm font-semibold text-brand-900">Subtle card</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow-glow-sm text-center">
+          <p class="text-xs font-mono text-brand-500 mb-2">shadow-glow-sm</p>
+          <p class="text-sm font-semibold text-brand-900">Soft glow</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow-glow text-center">
+          <p class="text-xs font-mono text-brand-500 mb-2">shadow-glow</p>
+          <p class="text-sm font-semibold text-brand-900">Glow</p>
+        </div>
+        <div class="bg-brand-500 rounded-2xl p-6 shadow-glow-lg text-center">
+          <p class="text-xs font-mono text-brand-200 mb-2">shadow-glow-lg</p>
+          <p class="text-sm font-semibold text-white">Strong glow</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Custom Animations -->
+    <section>
+      <h2 class="text-xl font-bold text-brand-900 mb-1">Custom Animations</h2>
+      <p class="text-sm text-brand-600 mb-4 font-mono">animation: {fade-up, fade-in, slide-in, bounce-in}</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-brand-100 rounded-xl p-5 text-center animate-fade-up">
+          <p class="text-xs font-mono text-brand-600 mb-1">animate-fade-up</p>
+          <p class="text-sm font-bold text-brand-900">↑ Fade Up</p>
+        </div>
+        <div class="bg-brand-200 rounded-xl p-5 text-center animate-fade-in">
+          <p class="text-xs font-mono text-brand-700 mb-1">animate-fade-in</p>
+          <p class="text-sm font-bold text-brand-900">Fade In</p>
+        </div>
+        <div class="bg-brand-300 rounded-xl p-5 text-center animate-slide-in">
+          <p class="text-xs font-mono text-brand-800 mb-1">animate-slide-in</p>
+          <p class="text-sm font-bold text-brand-900">← Slide In</p>
+        </div>
+        <div class="bg-brand-500 rounded-xl p-5 text-center animate-bounce-in">
+          <p class="text-xs font-mono text-brand-200 mb-1">animate-bounce-in</p>
+          <p class="text-sm font-bold text-white">Bounce In</p>
+        </div>
+      </div>
+      <p class="text-xs text-brand-400 mt-3 font-mono">Reload the page to see animations play again</p>
+    </section>
+
+  </div>
+
+</body>
+</html>

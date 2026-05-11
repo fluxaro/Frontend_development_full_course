@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Article — Typography Solution</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900">
+
+  <!-- Navbar -->
+  <nav class="border-b border-gray-100 px-6 py-4">
+    <div class="max-w-3xl mx-auto flex items-center justify-between">
+      <a href="#" class="font-bold text-xl tracking-tight">The<span class="text-blue-600">Dev</span>Blog</a>
+      <div class="flex items-center gap-6">
+        <a href="#" class="text-sm text-gray-500 hover:text-gray-900 font-medium">Articles</a>
+        <a href="#" class="text-sm text-gray-500 hover:text-gray-900 font-medium">Topics</a>
+        <a href="#" class="text-sm bg-gray-900 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-700">Subscribe</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article -->
+  <article class="max-w-3xl mx-auto px-6 py-16">
+
+    <!-- Article header -->
+    <header class="mb-12">
+      <!-- Category label -->
+      <span class="text-xs font-bold uppercase tracking-widest text-blue-600">Frontend Development</span>
+
+      <!-- Title -->
+      <h1 class="text-5xl font-bold tracking-tight text-gray-900 leading-tight mt-4 mb-6">
+        The Complete Guide to Typography in Modern Web Design
+      </h1>
+
+      <!-- Subtitle / lead -->
+      <p class="text-xl text-gray-500 leading-relaxed mb-8">
+        Typography is the backbone of every great design. Learn how to use font scales, line heights, and letter spacing to create interfaces that are both beautiful and readable.
+      </p>
+
+      <!-- Author row -->
+      <div class="flex items-center gap-4 pb-8 border-b border-gray-100">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm shrink-0">
+          AK
+        </div>
+        <div>
+          <p class="font-semibold text-gray-900 text-sm">Alex Kim</p>
+          <p class="text-gray-400 text-sm">Senior Frontend Engineer · 8 min read · June 12, 2025</p>
+        </div>
+        <div class="ml-auto flex items-center gap-3">
+          <button class="text-sm text-gray-500 hover:text-gray-900 font-medium">Share</button>
+          <button class="text-sm text-gray-500 hover:text-gray-900 font-medium">Save</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Article body -->
+    <div class="space-y-8">
+
+      <!-- Intro paragraph -->
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Good typography is invisible. When it works, readers don't notice it — they just absorb the content effortlessly. When it fails, everything feels off: text is too small, lines are too long, or the hierarchy is unclear. In this guide, we'll break down the core principles and show you exactly how to apply them using Tailwind CSS.
+      </p>
+
+      <!-- Section heading -->
+      <h2 class="text-3xl font-bold text-gray-900 tracking-tight pt-4">Understanding the Type Scale</h2>
+
+      <p class="text-base text-gray-700 leading-relaxed">
+        A type scale is a set of font sizes that work harmoniously together. Tailwind's default scale follows a modular ratio, meaning each step is proportionally larger than the last. This creates visual consistency across your entire interface.
+      </p>
+
+      <!-- Code block -->
+      <div class="bg-gray-950 rounded-xl p-6 overflow-x-auto">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-4">Tailwind Type Scale</p>
+        <pre class="font-mono text-sm text-gray-300 leading-relaxed"><code>text-xs    →  0.75rem  (12px)
+text-sm    →  0.875rem (14px)
+text-base  →  1rem     (16px)  ← body default
+text-lg    →  1.125rem (18px)
+text-xl    →  1.25rem  (20px)
+text-2xl   →  1.5rem   (24px)
+text-3xl   →  1.875rem (30px)
+text-4xl   →  2.25rem  (36px)
+text-5xl   →  3rem     (48px)
+text-6xl   →  3.75rem  (60px)</code></pre>
+      </div>
+
+      <!-- Pull quote -->
+      <blockquote class="border-l-4 border-blue-500 pl-6 py-2 my-8">
+        <p class="text-2xl font-medium text-gray-700 italic leading-snug">
+          "Typography is the craft of endowing human language with a durable visual form."
+        </p>
+        <cite class="text-sm text-gray-400 font-medium not-italic mt-3 block">— Robert Bringhurst, The Elements of Typographic Style</cite>
+      </blockquote>
+
+      <!-- Section heading -->
+      <h2 class="text-3xl font-bold text-gray-900 tracking-tight pt-4">Line Height: The Invisible Grid</h2>
+
+      <p class="text-base text-gray-700 leading-relaxed">
+        Line height (or leading) controls the vertical space between lines of text. It's one of the most impactful — and most overlooked — typographic decisions you'll make. Too tight and text feels claustrophobic. Too loose and the eye struggles to track from line to line.
+      </p>
+
+      <!-- Comparison cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+        <div class="bg-gray-50 rounded-xl p-5 border border-gray-100">
+          <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">leading-tight</p>
+          <p class="text-sm text-gray-700 leading-tight">Use for headings and display text where you want a compact, punchy feel.</p>
+        </div>
+        <div class="bg-blue-50 rounded-xl p-5 border border-blue-100">
+          <p class="text-xs font-bold uppercase tracking-widest text-blue-400 mb-3">leading-relaxed ✓</p>
+          <p class="text-sm text-gray-700 leading-relaxed">The sweet spot for body copy. Comfortable to read, especially in longer paragraphs.</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-5 border border-gray-100">
+          <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">leading-loose</p>
+          <p class="text-sm text-gray-700 leading-loose">Very airy. Good for short captions or UI labels, not long paragraphs.</p>
+        </div>
+      </div>
+
+      <!-- Section heading -->
+      <h2 class="text-3xl font-bold text-gray-900 tracking-tight pt-4">Letter Spacing and Hierarchy</h2>
+
+      <p class="text-base text-gray-700 leading-relaxed">
+        Letter spacing (tracking) is a subtle but powerful tool. Wide tracking on small, uppercase text creates a polished label effect. Tight tracking on large display text makes headings feel more impactful and modern.
+      </p>
+
+      <!-- List with font weight variation -->
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+        <p class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4">When to use each tracking value</p>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3">
+            <span class="text-blue-500 font-bold mt-0.5">→</span>
+            <div>
+              <span class="font-black text-gray-900">tracking-tighter</span>
+              <span class="text-gray-500 text-sm ml-2">— Large display headings (text-5xl and above)</span>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-blue-500 font-bold mt-0.5">→</span>
+            <div>
+              <span class="font-bold text-gray-900">tracking-tight</span>
+              <span class="text-gray-500 text-sm ml-2">— Section headings (text-2xl to text-4xl)</span>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-blue-500 font-bold mt-0.5">→</span>
+            <div>
+              <span class="font-medium text-gray-900">tracking-normal</span>
+              <span class="text-gray-500 text-sm ml-2">— Body text and most UI elements</span>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-blue-500 font-bold mt-0.5">→</span>
+            <div>
+              <span class="font-light text-gray-900">tracking-wide</span>
+              <span class="text-gray-500 text-sm ml-2">— Subheadings and captions</span>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-blue-500 font-bold mt-0.5">→</span>
+            <div>
+              <span class="font-thin text-gray-900">tracking-widest</span>
+              <span class="text-gray-500 text-sm ml-2">— Labels, tags, and category badges (always uppercase)</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Section heading -->
+      <h2 class="text-3xl font-bold text-gray-900 tracking-tight pt-4">Truncation in Practice</h2>
+
+      <p class="text-base text-gray-700 leading-relaxed">
+        When displaying dynamic content in constrained spaces — card titles, table cells, sidebar items — you need to handle text overflow gracefully. Tailwind's <code class="font-mono text-sm bg-gray-100 px-1.5 py-0.5 rounded text-pink-600">truncate</code> class handles this in one utility.
+      </p>
+
+      <!-- Truncate demo -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-white border border-gray-200 rounded-xl p-5">
+          <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Without truncate</p>
+          <div class="bg-gray-50 rounded-lg p-4">
+            <p class="text-sm font-semibold text-gray-900">The Complete Guide to Typography in Modern Web Design and Development</p>
+            <p class="text-xs text-gray-400 mt-1">Wraps to multiple lines</p>
+          </div>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-xl p-5">
+          <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">With truncate</p>
+          <div class="bg-gray-50 rounded-lg p-4">
+            <p class="text-sm font-semibold text-gray-900 truncate">The Complete Guide to Typography in Modern Web Design and Development</p>
+            <p class="text-xs text-gray-400 mt-1">Clips with ellipsis</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conclusion -->
+      <h2 class="text-3xl font-bold text-gray-900 tracking-tight pt-4">Putting It All Together</h2>
+
+      <p class="text-base text-gray-700 leading-relaxed">
+        Great typography comes down to a few consistent decisions: a clear size hierarchy, appropriate line heights for each context, and restrained use of font weights to guide the eye. With Tailwind, every one of these decisions is a single class away.
+      </p>
+
+      <p class="text-base text-gray-700 leading-relaxed">
+        The best way to internalize these principles is to build. Take any design you admire, try to recreate its typography using only Tailwind utilities, and pay attention to which classes you reach for most often. You'll develop an intuition for it faster than you think.
+      </p>
+
+    </div>
+
+    <!-- Article footer -->
+    <footer class="mt-16 pt-8 border-t border-gray-100">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">
+            AK
+          </div>
+          <div>
+            <p class="font-semibold text-gray-900 text-sm">Alex Kim</p>
+            <p class="text-gray-400 text-xs">Senior Frontend Engineer at Vercel</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-semibold uppercase tracking-widest text-gray-400">Tags:</span>
+          <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-medium">CSS</span>
+          <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-medium">Tailwind</span>
+          <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-medium">Design</span>
+        </div>
+      </div>
+    </footer>
+
+  </article>
+
+</body>
+</html>

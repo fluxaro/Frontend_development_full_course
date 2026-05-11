@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Showcase — Backgrounds, Borders & Shadows Solution</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-slate-900 to-slate-800 text-white px-6 py-16 text-center">
+    <span class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 block">Component Library</span>
+    <h1 class="text-5xl font-black mb-4">Card Showcase</h1>
+    <p class="text-slate-300 text-lg max-w-xl mx-auto">
+      Every background, border, shadow, and visual effect utility — demonstrated through polished card variants.
+    </p>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-16 space-y-16">
+
+    <!-- ===== STANDARD CARD VARIANTS ===== -->
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">Standard Variants</h2>
+      <p class="text-gray-500 mb-8">The most common card patterns</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Default card -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Default Card</span>
+            <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full font-mono">shadow-sm</span>
+          </div>
+          <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center text-2xl">📄</div>
+          <h3 class="text-lg font-bold text-gray-900">Standard Card</h3>
+          <p class="text-gray-500 text-sm leading-relaxed flex-1">
+            White background, 1px gray border, subtle shadow. The workhorse of UI design.
+          </p>
+          <button class="w-full bg-gray-900 text-white py-2.5 rounded-xl font-semibold text-sm hover:bg-gray-700 transition-colors">
+            Learn More
+          </button>
+        </div>
+
+        <!-- Elevated card -->
+        <div class="bg-white rounded-2xl shadow-xl p-6 flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Elevated</span>
+            <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full font-mono">shadow-xl</span>
+          </div>
+          <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl">🚀</div>
+          <h3 class="text-lg font-bold text-gray-900">Elevated Card</h3>
+          <p class="text-gray-500 text-sm leading-relaxed flex-1">
+            No border, large shadow. Creates a floating effect that draws attention.
+          </p>
+          <button class="w-full bg-blue-600 text-white py-2.5 rounded-xl font-semibold text-sm hover:bg-blue-700 transition-colors">
+            Learn More
+          </button>
+        </div>
+
+        <!-- Outlined card -->
+        <div class="bg-transparent rounded-2xl border-2 border-blue-500 p-6 flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-widest text-blue-500">Outlined</span>
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded-full font-mono">border-2</span>
+          </div>
+          <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-2xl">🎯</div>
+          <h3 class="text-lg font-bold text-gray-900">Outlined Card</h3>
+          <p class="text-gray-500 text-sm leading-relaxed flex-1">
+            Transparent background with a colored border. Great for secondary actions.
+          </p>
+          <button class="w-full border-2 border-blue-500 text-blue-600 py-2.5 rounded-xl font-semibold text-sm hover:bg-blue-50 transition-colors">
+            Learn More
+          </button>
+        </div>
+
+        <!-- Dashed border card -->
+        <div class="bg-white rounded-2xl border-2 border-dashed border-gray-300 p-6 flex flex-col gap-4 items-center justify-center text-center min-h-48">
+          <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center text-2xl">➕</div>
+          <div>
+            <h3 class="text-lg font-bold text-gray-700">Add New Item</h3>
+            <p class="text-gray-400 text-sm mt-1">border-2 border-dashed</p>
+          </div>
+          <button class="text-sm text-gray-500 hover:text-gray-900 font-medium underline">
+            Click to upload
+          </button>
+        </div>
+
+        <!-- Gradient card -->
+        <div class="bg-gradient-to-br from-violet-600 to-indigo-700 rounded-2xl p-6 flex flex-col gap-4 text-white">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-widest text-violet-200">Gradient</span>
+            <span class="text-xs bg-white/10 text-white px-2 py-1 rounded-full font-mono">from-* to-*</span>
+          </div>
+          <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl">✨</div>
+          <h3 class="text-lg font-bold">Gradient Card</h3>
+          <p class="text-violet-200 text-sm leading-relaxed flex-1">
+            Diagonal gradient background. Eye-catching for featured content or CTAs.
+          </p>
+          <button class="w-full bg-white/20 hover:bg-white/30 text-white py-2.5 rounded-xl font-semibold text-sm transition-colors border border-white/20">
+            Learn More
+          </button>
+        </div>
+
+        <!-- Colored shadow card -->
+        <div class="bg-rose-600 rounded-2xl shadow-2xl shadow-rose-500/50 p-6 flex flex-col gap-4 text-white">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-widest text-rose-200">Colored Shadow</span>
+            <span class="text-xs bg-white/10 text-white px-2 py-1 rounded-full font-mono">shadow-rose/50</span>
+          </div>
+          <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl">❤️</div>
+          <h3 class="text-lg font-bold">Colored Shadow</h3>
+          <p class="text-rose-200 text-sm leading-relaxed flex-1">
+            Shadow color matches the card color. Creates a glowing, vibrant effect.
+          </p>
+          <button class="w-full bg-white/20 hover:bg-white/30 text-white py-2.5 rounded-xl font-semibold text-sm transition-colors">
+            Learn More
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== GLASSMORPHISM SECTION ===== -->
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">Glassmorphism</h2>
+      <p class="text-gray-500 mb-8">backdrop-blur + semi-transparent background</p>
+
+      <div class="relative rounded-3xl overflow-hidden">
+        <!-- Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-700 to-pink-600"></div>
+        <!-- Decorative circles -->
+        <div class="absolute top-10 left-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+        <div class="absolute bottom-10 right-10 w-60 h-60 bg-pink-400/20 rounded-full blur-3xl"></div>
+
+        <div class="relative p-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <div class="backdrop-blur-sm bg-white/5 border border-white/10 rounded-2xl p-6 text-white">
+            <p class="text-xs font-mono text-white/50 mb-3">backdrop-blur-sm</p>
+            <h3 class="font-bold text-lg mb-2">Subtle Glass</h3>
+            <p class="text-white/70 text-sm leading-relaxed">Minimal blur effect. Background is still quite visible.</p>
+            <button class="mt-4 text-sm text-white/80 hover:text-white font-medium underline">Explore →</button>
+          </div>
+
+          <div class="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-6 text-white">
+            <p class="text-xs font-mono text-white/50 mb-3">backdrop-blur-md ✓</p>
+            <h3 class="font-bold text-lg mb-2">Classic Glass</h3>
+            <p class="text-white/70 text-sm leading-relaxed">The sweet spot. Background is blurred but still recognizable.</p>
+            <button class="mt-4 text-sm text-white/80 hover:text-white font-medium underline">Explore →</button>
+          </div>
+
+          <div class="backdrop-blur-xl bg-white/15 border border-white/30 rounded-2xl p-6 text-white">
+            <p class="text-xs font-mono text-white/50 mb-3">backdrop-blur-xl</p>
+            <h3 class="font-bold text-lg mb-2">Heavy Glass</h3>
+            <p class="text-white/70 text-sm leading-relaxed">Strong blur. Background is heavily obscured for maximum contrast.</p>
+            <button class="mt-4 text-sm text-white/80 hover:text-white font-medium underline">Explore →</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== IMAGE CARD ===== -->
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">Image Cards with Overlay</h2>
+      <p class="text-gray-500 mb-8">Gradient backgrounds simulating photos with text overlays</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="relative rounded-2xl overflow-hidden group cursor-pointer">
+          <div class="h-64 bg-gradient-to-br from-emerald-400 to-teal-600 bg-cover bg-center"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-5">
+            <span class="text-xs font-bold uppercase tracking-widest text-emerald-300">Nature</span>
+            <h3 class="text-white font-bold text-lg mt-1">Forest at Dawn</h3>
+            <p class="text-white/70 text-sm mt-1">bg-black/70 overlay</p>
+          </div>
+        </div>
+
+        <div class="relative rounded-2xl overflow-hidden group cursor-pointer">
+          <div class="h-64 bg-gradient-to-br from-orange-400 to-rose-600 bg-cover bg-center"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-5">
+            <span class="text-xs font-bold uppercase tracking-widest text-orange-300">Travel</span>
+            <h3 class="text-white font-bold text-lg mt-1">Desert Sunset</h3>
+            <p class="text-white/70 text-sm mt-1">bg-black/80 overlay</p>
+          </div>
+        </div>
+
+        <div class="relative rounded-2xl overflow-hidden group cursor-pointer">
+          <div class="h-64 bg-gradient-to-br from-blue-500 to-indigo-700 bg-cover bg-center"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-5">
+            <span class="text-xs font-bold uppercase tracking-widest text-blue-300">Ocean</span>
+            <h3 class="text-white font-bold text-lg mt-1">Deep Blue Sea</h3>
+            <p class="text-white/70 text-sm mt-1">bg-black/60 overlay</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

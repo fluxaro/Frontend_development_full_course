@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Layout — Flexbox Solution</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-gray-100 text-gray-800">
+
+  <div class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-64 shrink-0 bg-gray-900 text-white flex flex-col">
+
+      <!-- Logo -->
+      <div class="h-16 flex items-center px-6 border-b border-gray-700">
+        <span class="font-bold text-xl text-white">⚡ DashApp</span>
+      </div>
+
+      <!-- Nav -->
+      <nav class="flex-1 p-4 space-y-1">
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-medium">
+          <span>📊</span> Dashboard
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white text-sm font-medium transition-colors">
+          <span>👥</span> Users
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white text-sm font-medium transition-colors">
+          <span>📦</span> Products
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white text-sm font-medium transition-colors">
+          <span>💳</span> Orders
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white text-sm font-medium transition-colors">
+          <span>📈</span> Analytics
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white text-sm font-medium transition-colors">
+          <span>⚙️</span> Settings
+        </a>
+      </nav>
+
+      <!-- User -->
+      <div class="p-4 border-t border-gray-700">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center text-sm font-bold shrink-0">AR</div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold text-white truncate">Alex Rivera</p>
+            <p class="text-xs text-gray-400 truncate">alex@example.com</p>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Main area -->
+    <div class="flex-1 flex flex-col min-w-0">
+
+      <!-- Top bar -->
+      <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 shrink-0">
+        <h1 class="text-lg font-bold text-gray-900">Dashboard</h1>
+        <div class="flex items-center gap-4">
+          <input type="text" placeholder="Search..." class="text-sm border border-gray-200 rounded-lg px-3 py-1.5 w-48 focus:outline-none focus:border-blue-400">
+          <button class="relative">
+            <span class="text-xl">🔔</span>
+            <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">3</span>
+          </button>
+          <div class="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center text-sm font-bold text-white">AR</div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <main class="flex-1 overflow-y-auto p-6">
+
+        <!-- Stats row -->
+        <div class="flex gap-4 mb-6">
+          <div class="flex-1 bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between mb-3">
+              <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide">Total Users</p>
+              <span class="text-2xl">👥</span>
+            </div>
+            <p class="text-3xl font-bold text-gray-900">12,847</p>
+            <p class="text-xs text-green-500 mt-1 font-medium">↑ 12% this month</p>
+          </div>
+          <div class="flex-1 bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between mb-3">
+              <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide">Revenue</p>
+              <span class="text-2xl">💰</span>
+            </div>
+            <p class="text-3xl font-bold text-gray-900">$48,290</p>
+            <p class="text-xs text-green-500 mt-1 font-medium">↑ 8% this month</p>
+          </div>
+          <div class="flex-1 bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between mb-3">
+              <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide">Orders</p>
+              <span class="text-2xl">📦</span>
+            </div>
+            <p class="text-3xl font-bold text-gray-900">3,421</p>
+            <p class="text-xs text-green-500 mt-1 font-medium">↑ 5% this month</p>
+          </div>
+          <div class="flex-1 bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between mb-3">
+              <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide">Conversion</p>
+              <span class="text-2xl">📈</span>
+            </div>
+            <p class="text-3xl font-bold text-gray-900">4.2%</p>
+            <p class="text-xs text-red-400 mt-1 font-medium">↓ 1% this month</p>
+          </div>
+        </div>
+
+        <!-- Recent activity -->
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm">
+          <div class="flex items-center justify-between p-5 border-b border-gray-100">
+            <h2 class="font-bold text-gray-900">Recent Activity</h2>
+            <a href="#" class="text-sm text-blue-500 hover:text-blue-600 font-medium">View all</a>
+          </div>
+          <div class="flex flex-col divide-y divide-gray-50">
+            <div class="flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors">
+              <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-sm font-bold text-blue-600 shrink-0">JD</div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-semibold text-gray-900">Jordan Davis placed an order</p>
+                <p class="text-xs text-gray-400">Order #4821 — $129.00</p>
+              </div>
+              <span class="text-xs text-gray-400 shrink-0">2 min ago</span>
+            </div>
+            <div class="flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors">
+              <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-sm font-bold text-green-600 shrink-0">SR</div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-semibold text-gray-900">Sam Rivera signed up</p>
+                <p class="text-xs text-gray-400">New user — Pro plan</p>
+              </div>
+              <span class="text-xs text-gray-400 shrink-0">15 min ago</span>
+            </div>
+            <div class="flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors">
+              <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-sm font-bold text-purple-600 shrink-0">MK</div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-semibold text-gray-900">Morgan Kim left a review</p>
+                <p class="text-xs text-gray-400">⭐⭐⭐⭐⭐ — "Excellent product!"</p>
+              </div>
+              <span class="text-xs text-gray-400 shrink-0">1 hr ago</span>
+            </div>
+            <div class="flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors">
+              <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-sm font-bold text-orange-600 shrink-0">AL</div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-semibold text-gray-900">Alex Lee requested a refund</p>
+                <p class="text-xs text-gray-400">Order #4799 — $89.00</p>
+              </div>
+              <span class="text-xs text-gray-400 shrink-0">3 hr ago</span>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+</body>
+</html>

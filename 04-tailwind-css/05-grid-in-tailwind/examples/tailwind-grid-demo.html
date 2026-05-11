@@ -3,157 +3,204 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grid in Tailwind</title>
+  <title>Tailwind Grid Demo</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 p-8 font-sans">
+<body class="bg-gray-50 text-gray-900 p-8">
 
-  <h1 class="text-3xl font-bold mb-2">Grid in Tailwind</h1>
-  <p class="text-gray-500 mb-8">grid, grid-cols-*, gap-*, col-span-*, place-items-*</p>
+  <div class="max-w-5xl mx-auto space-y-16">
 
-  <!-- Basic grid columns -->
-  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">grid-cols-* — Equal Columns</h2>
-  <div class="space-y-4 mb-6">
-    <div>
-      <p class="text-xs font-mono text-gray-400 mb-1">grid grid-cols-2 gap-3</p>
-      <div class="grid grid-cols-2 gap-3">
-        <div class="bg-blue-400 text-white text-xs font-mono p-3 rounded-lg text-center">1</div>
-        <div class="bg-blue-400 text-white text-xs font-mono p-3 rounded-lg text-center">2</div>
-        <div class="bg-blue-400 text-white text-xs font-mono p-3 rounded-lg text-center">3</div>
-        <div class="bg-blue-400 text-white text-xs font-mono p-3 rounded-lg text-center">4</div>
+    <header>
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">Tailwind Grid Utilities</h1>
+      <p class="text-gray-500 text-lg">Visual reference for all grid classes</p>
+    </header>
+
+    <!-- 1. Basic columns -->
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-1">grid-cols-*</h2>
+      <p class="text-sm text-gray-500 mb-4">Equal-width columns</p>
+      <div class="space-y-3">
+        <div class="grid grid-cols-1 gap-2">
+          <div class="bg-blue-200 text-blue-800 text-sm font-semibold rounded p-3 text-center">grid-cols-1</div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="bg-blue-200 text-blue-800 text-sm font-semibold rounded p-3 text-center">grid-cols-2</div>
+          <div class="bg-blue-200 text-blue-800 text-sm font-semibold rounded p-3 text-center">grid-cols-2</div>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <div class="bg-blue-300 text-blue-900 text-sm font-semibold rounded p-3 text-center">grid-cols-3</div>
+          <div class="bg-blue-300 text-blue-900 text-sm font-semibold rounded p-3 text-center">grid-cols-3</div>
+          <div class="bg-blue-300 text-blue-900 text-sm font-semibold rounded p-3 text-center">grid-cols-3</div>
+        </div>
+        <div class="grid grid-cols-4 gap-2">
+          <div class="bg-blue-400 text-white text-sm font-semibold rounded p-3 text-center">grid-cols-4</div>
+          <div class="bg-blue-400 text-white text-sm font-semibold rounded p-3 text-center">grid-cols-4</div>
+          <div class="bg-blue-400 text-white text-sm font-semibold rounded p-3 text-center">grid-cols-4</div>
+          <div class="bg-blue-400 text-white text-sm font-semibold rounded p-3 text-center">grid-cols-4</div>
+        </div>
+        <div class="grid grid-cols-6 gap-2">
+          <div class="bg-blue-500 text-white text-xs font-semibold rounded p-3 text-center">6</div>
+          <div class="bg-blue-500 text-white text-xs font-semibold rounded p-3 text-center">6</div>
+          <div class="bg-blue-500 text-white text-xs font-semibold rounded p-3 text-center">6</div>
+          <div class="bg-blue-500 text-white text-xs font-semibold rounded p-3 text-center">6</div>
+          <div class="bg-blue-500 text-white text-xs font-semibold rounded p-3 text-center">6</div>
+          <div class="bg-blue-500 text-white text-xs font-semibold rounded p-3 text-center">6</div>
+        </div>
       </div>
-    </div>
-    <div>
-      <p class="text-xs font-mono text-gray-400 mb-1">grid grid-cols-3 gap-3</p>
-      <div class="grid grid-cols-3 gap-3">
-        <div class="bg-purple-400 text-white text-xs font-mono p-3 rounded-lg text-center">1</div>
-        <div class="bg-purple-400 text-white text-xs font-mono p-3 rounded-lg text-center">2</div>
-        <div class="bg-purple-400 text-white text-xs font-mono p-3 rounded-lg text-center">3</div>
-        <div class="bg-purple-400 text-white text-xs font-mono p-3 rounded-lg text-center">4</div>
-        <div class="bg-purple-400 text-white text-xs font-mono p-3 rounded-lg text-center">5</div>
-        <div class="bg-purple-400 text-white text-xs font-mono p-3 rounded-lg text-center">6</div>
-      </div>
-    </div>
-    <div>
-      <p class="text-xs font-mono text-gray-400 mb-1">grid grid-cols-4 gap-3</p>
+    </section>
+
+    <!-- 2. Column span -->
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-1">col-span-*</h2>
+      <p class="text-sm text-gray-500 mb-4">Items spanning multiple columns</p>
       <div class="grid grid-cols-4 gap-3">
-        <div class="bg-green-400 text-white text-xs font-mono p-3 rounded-lg text-center">1</div>
-        <div class="bg-green-400 text-white text-xs font-mono p-3 rounded-lg text-center">2</div>
-        <div class="bg-green-400 text-white text-xs font-mono p-3 rounded-lg text-center">3</div>
-        <div class="bg-green-400 text-white text-xs font-mono p-3 rounded-lg text-center">4</div>
+        <div class="col-span-4 bg-indigo-600 text-white text-sm font-bold rounded-lg p-4 text-center">col-span-4 (full width)</div>
+        <div class="col-span-3 bg-indigo-400 text-white text-sm font-bold rounded-lg p-4 text-center">col-span-3</div>
+        <div class="col-span-1 bg-indigo-200 text-indigo-800 text-sm font-bold rounded-lg p-4 text-center">col-span-1</div>
+        <div class="col-span-2 bg-purple-400 text-white text-sm font-bold rounded-lg p-4 text-center">col-span-2</div>
+        <div class="col-span-2 bg-purple-400 text-white text-sm font-bold rounded-lg p-4 text-center">col-span-2</div>
+        <div class="col-span-1 bg-gray-200 text-gray-700 text-sm font-bold rounded-lg p-4 text-center">1</div>
+        <div class="col-span-1 bg-gray-200 text-gray-700 text-sm font-bold rounded-lg p-4 text-center">1</div>
+        <div class="col-span-1 bg-gray-200 text-gray-700 text-sm font-bold rounded-lg p-4 text-center">1</div>
+        <div class="col-span-1 bg-gray-200 text-gray-700 text-sm font-bold rounded-lg p-4 text-center">1</div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- col-span -->
-  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">col-span-* — Spanning Columns</h2>
-  <div class="grid grid-cols-3 gap-3 mb-6">
-    <div class="bg-red-400 text-white text-xs font-mono p-3 rounded-lg text-center col-span-3">col-span-3 (full width)</div>
-    <div class="bg-red-300 text-white text-xs font-mono p-3 rounded-lg text-center col-span-2">col-span-2</div>
-    <div class="bg-red-400 text-white text-xs font-mono p-3 rounded-lg text-center">1</div>
-    <div class="bg-red-400 text-white text-xs font-mono p-3 rounded-lg text-center">1</div>
-    <div class="bg-red-300 text-white text-xs font-mono p-3 rounded-lg text-center col-span-2">col-span-2</div>
-  </div>
-
-  <!-- gap -->
-  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">gap-* — Grid Gap</h2>
-  <div class="grid grid-cols-2 gap-6 mb-6">
-    <div>
-      <p class="text-xs font-mono text-gray-400 mb-1">gap-1</p>
-      <div class="grid grid-cols-3 gap-1">
-        <div class="bg-orange-400 h-8 rounded"></div>
-        <div class="bg-orange-400 h-8 rounded"></div>
-        <div class="bg-orange-400 h-8 rounded"></div>
+    <!-- 3. Row span -->
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-1">row-span-*</h2>
+      <p class="text-sm text-gray-500 mb-4">Items spanning multiple rows</p>
+      <div class="grid grid-cols-3 grid-rows-3 gap-3 h-64">
+        <div class="row-span-3 bg-green-500 text-white font-bold rounded-lg p-4 flex items-center justify-center">row-span-3</div>
+        <div class="row-span-2 bg-green-300 text-green-900 font-bold rounded-lg p-4 flex items-center justify-center">row-span-2</div>
+        <div class="bg-green-200 text-green-800 font-bold rounded-lg p-4 flex items-center justify-center">1</div>
+        <div class="bg-green-200 text-green-800 font-bold rounded-lg p-4 flex items-center justify-center">1</div>
+        <div class="col-span-2 bg-green-100 text-green-700 font-bold rounded-lg p-4 flex items-center justify-center">col-span-2</div>
       </div>
-    </div>
-    <div>
-      <p class="text-xs font-mono text-gray-400 mb-1">gap-6</p>
-      <div class="grid grid-cols-3 gap-6">
-        <div class="bg-orange-400 h-8 rounded"></div>
-        <div class="bg-orange-400 h-8 rounded"></div>
-        <div class="bg-orange-400 h-8 rounded"></div>
+    </section>
+
+    <!-- 4. Gap utilities -->
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-1">gap-*</h2>
+      <p class="text-sm text-gray-500 mb-4">Spacing between grid items</p>
+      <div class="space-y-6">
+        <div>
+          <p class="text-xs text-gray-400 mb-2 font-mono">gap-1 (4px)</p>
+          <div class="grid grid-cols-4 gap-1">
+            <div class="bg-orange-200 rounded p-3"></div>
+            <div class="bg-orange-200 rounded p-3"></div>
+            <div class="bg-orange-200 rounded p-3"></div>
+            <div class="bg-orange-200 rounded p-3"></div>
+          </div>
+        </div>
+        <div>
+          <p class="text-xs text-gray-400 mb-2 font-mono">gap-4 (16px)</p>
+          <div class="grid grid-cols-4 gap-4">
+            <div class="bg-orange-300 rounded p-3"></div>
+            <div class="bg-orange-300 rounded p-3"></div>
+            <div class="bg-orange-300 rounded p-3"></div>
+            <div class="bg-orange-300 rounded p-3"></div>
+          </div>
+        </div>
+        <div>
+          <p class="text-xs text-gray-400 mb-2 font-mono">gap-8 (32px)</p>
+          <div class="grid grid-cols-4 gap-8">
+            <div class="bg-orange-400 rounded p-3"></div>
+            <div class="bg-orange-400 rounded p-3"></div>
+            <div class="bg-orange-400 rounded p-3"></div>
+            <div class="bg-orange-400 rounded p-3"></div>
+          </div>
+        </div>
+        <div>
+          <p class="text-xs text-gray-400 mb-2 font-mono">gap-x-8 gap-y-2 (different h/v)</p>
+          <div class="grid grid-cols-4 gap-x-8 gap-y-2">
+            <div class="bg-amber-300 rounded p-3"></div>
+            <div class="bg-amber-300 rounded p-3"></div>
+            <div class="bg-amber-300 rounded p-3"></div>
+            <div class="bg-amber-300 rounded p-3"></div>
+            <div class="bg-amber-300 rounded p-3"></div>
+            <div class="bg-amber-300 rounded p-3"></div>
+            <div class="bg-amber-300 rounded p-3"></div>
+            <div class="bg-amber-300 rounded p-3"></div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- Responsive grid -->
-  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Responsive Grid — grid-cols-1 sm:grid-cols-2 lg:grid-cols-4</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-    <div class="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
-      <div class="text-2xl mb-2">🎨</div>
-      <h3 class="font-bold text-sm">Design</h3>
-      <p class="text-xs text-gray-500 mt-1">1 col → 2 col → 4 col</p>
-    </div>
-    <div class="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
-      <div class="text-2xl mb-2">⚡</div>
-      <h3 class="font-bold text-sm">Speed</h3>
-      <p class="text-xs text-gray-500 mt-1">Resize to see changes</p>
-    </div>
-    <div class="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
-      <div class="text-2xl mb-2">📱</div>
-      <h3 class="font-bold text-sm">Responsive</h3>
-      <p class="text-xs text-gray-500 mt-1">Mobile first</p>
-    </div>
-    <div class="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
-      <div class="text-2xl mb-2">🔧</div>
-      <h3 class="font-bold text-sm">Flexible</h3>
-      <p class="text-xs text-gray-500 mt-1">Any layout</p>
-    </div>
-  </div>
+    <!-- 5. place-items -->
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-1">place-items-*</h2>
+      <p class="text-sm text-gray-500 mb-4">Align items within their cells</p>
+      <div class="grid grid-cols-3 gap-4">
+        <div>
+          <p class="text-xs text-gray-400 mb-2 font-mono">place-items-start</p>
+          <div class="grid grid-cols-2 place-items-start gap-2 h-24 bg-gray-100 rounded-lg p-2">
+            <div class="bg-teal-400 text-white text-xs font-bold rounded px-2 py-1">A</div>
+            <div class="bg-teal-400 text-white text-xs font-bold rounded px-2 py-1">B</div>
+          </div>
+        </div>
+        <div>
+          <p class="text-xs text-gray-400 mb-2 font-mono">place-items-center</p>
+          <div class="grid grid-cols-2 place-items-center gap-2 h-24 bg-gray-100 rounded-lg p-2">
+            <div class="bg-teal-500 text-white text-xs font-bold rounded px-2 py-1">A</div>
+            <div class="bg-teal-500 text-white text-xs font-bold rounded px-2 py-1">B</div>
+          </div>
+        </div>
+        <div>
+          <p class="text-xs text-gray-400 mb-2 font-mono">place-items-end</p>
+          <div class="grid grid-cols-2 place-items-end gap-2 h-24 bg-gray-100 rounded-lg p-2">
+            <div class="bg-teal-600 text-white text-xs font-bold rounded px-2 py-1">A</div>
+            <div class="bg-teal-600 text-white text-xs font-bold rounded px-2 py-1">B</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- place-items -->
-  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">place-items-center — Center in Grid Cell</h2>
-  <div class="grid grid-cols-3 gap-3 mb-6">
-    <div class="bg-gray-100 rounded-lg h-24 grid place-items-start p-2">
-      <div class="bg-blue-500 text-white text-xs font-mono px-2 py-1 rounded">start</div>
-    </div>
-    <div class="bg-gray-100 rounded-lg h-24 grid place-items-center">
-      <div class="bg-blue-500 text-white text-xs font-mono px-2 py-1 rounded">center</div>
-    </div>
-    <div class="bg-gray-100 rounded-lg h-24 grid place-items-end p-2">
-      <div class="bg-blue-500 text-white text-xs font-mono px-2 py-1 rounded">end</div>
-    </div>
-  </div>
+    <!-- 6. Magazine layout -->
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-1">Magazine Layout</h2>
+      <p class="text-sm text-gray-500 mb-4">col-span + row-span combined</p>
+      <div class="grid grid-cols-3 grid-rows-2 gap-4 h-80">
+        <div class="col-span-2 row-span-2 bg-gradient-to-br from-slate-700 to-slate-900 rounded-xl p-6 text-white flex flex-col justify-end">
+          <span class="text-xs text-slate-400 uppercase tracking-widest mb-2">col-span-2 row-span-2</span>
+          <h3 class="text-xl font-bold">Featured Story</h3>
+          <p class="text-slate-300 text-sm mt-1">The big item takes up 2×2 cells</p>
+        </div>
+        <div class="bg-blue-100 rounded-xl p-4 flex flex-col justify-center">
+          <span class="text-xs text-blue-500 font-mono mb-1">1×1</span>
+          <p class="text-sm font-semibold text-blue-900">Side Story 1</p>
+        </div>
+        <div class="bg-purple-100 rounded-xl p-4 flex flex-col justify-center">
+          <span class="text-xs text-purple-500 font-mono mb-1">1×1</span>
+          <p class="text-sm font-semibold text-purple-900">Side Story 2</p>
+        </div>
+      </div>
+    </section>
 
-  <!-- Practical: Dashboard stats -->
-  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Practical: Dashboard Stats</h2>
-  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-    <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-      <p class="text-xs text-gray-400 uppercase tracking-wide font-semibold">Users</p>
-      <p class="text-3xl font-bold text-blue-600 mt-1">12,847</p>
-      <p class="text-xs text-green-500 mt-1">↑ 12% this month</p>
-    </div>
-    <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-      <p class="text-xs text-gray-400 uppercase tracking-wide font-semibold">Revenue</p>
-      <p class="text-3xl font-bold text-green-600 mt-1">$48k</p>
-      <p class="text-xs text-green-500 mt-1">↑ 8% this month</p>
-    </div>
-    <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-      <p class="text-xs text-gray-400 uppercase tracking-wide font-semibold">Orders</p>
-      <p class="text-3xl font-bold text-purple-600 mt-1">3,421</p>
-      <p class="text-xs text-green-500 mt-1">↑ 5% this month</p>
-    </div>
-    <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-      <p class="text-xs text-gray-400 uppercase tracking-wide font-semibold">Conversion</p>
-      <p class="text-3xl font-bold text-red-500 mt-1">4.2%</p>
-      <p class="text-xs text-red-400 mt-1">↓ 1% this month</p>
-    </div>
-  </div>
+    <!-- 7. Responsive grid -->
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-1">Responsive Grid</h2>
+      <p class="text-sm text-gray-500 mb-4"><code class="bg-gray-100 px-1 rounded text-xs">grid-cols-1 md:grid-cols-2 lg:grid-cols-4</code> — resize the window</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-rose-100 rounded-xl p-6 text-center">
+          <div class="text-3xl mb-2">🎨</div>
+          <p class="font-semibold text-rose-800">Design</p>
+        </div>
+        <div class="bg-blue-100 rounded-xl p-6 text-center">
+          <div class="text-3xl mb-2">💻</div>
+          <p class="font-semibold text-blue-800">Code</p>
+        </div>
+        <div class="bg-green-100 rounded-xl p-6 text-center">
+          <div class="text-3xl mb-2">🚀</div>
+          <p class="font-semibold text-green-800">Deploy</p>
+        </div>
+        <div class="bg-purple-100 rounded-xl p-6 text-center">
+          <div class="text-3xl mb-2">📊</div>
+          <p class="font-semibold text-purple-800">Analyze</p>
+        </div>
+      </div>
+    </section>
 
-  <!-- Practical: Magazine layout -->
-  <h2 class="text-lg font-semibold text-gray-500 border-b border-gray-200 pb-2 mb-4">Practical: Magazine Layout</h2>
-  <div class="grid grid-cols-3 grid-rows-2 gap-3 h-64">
-    <div class="col-span-2 row-span-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl p-5 flex flex-col justify-end text-white">
-      <span class="text-xs font-bold uppercase tracking-wide bg-white/20 px-2 py-0.5 rounded-full w-fit mb-2">Featured</span>
-      <h3 class="text-xl font-bold">col-span-2 row-span-2</h3>
-      <p class="text-sm opacity-80">Spans 2 columns and 2 rows</p>
-    </div>
-    <div class="bg-gradient-to-br from-green-400 to-teal-500 rounded-xl p-4 flex flex-col justify-end text-white">
-      <h3 class="text-sm font-bold">Story 2</h3>
-    </div>
-    <div class="bg-gradient-to-br from-orange-400 to-red-500 rounded-xl p-4 flex flex-col justify-end text-white">
-      <h3 class="text-sm font-bold">Story 3</h3>
-    </div>
   </div>
 
 </body>

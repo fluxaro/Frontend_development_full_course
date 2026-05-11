@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Branded Page — Custom Config Solution</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50:  '#faf5ff',
+              100: '#f3e8ff',
+              200: '#e9d5ff',
+              300: '#d8b4fe',
+              400: '#c084fc',
+              500: '#a855f7',
+              600: '#9333ea',
+              700: '#7e22ce',
+              800: '#6b21a8',
+              900: '#581c87',
+              950: '#3b0764',
+            },
+            accent: {
+              300: '#fdba74',
+              400: '#fb923c',
+              500: '#f97316',
+              600: '#ea580c',
+            },
+            success: '#22c55e',
+            warning: '#f59e0b',
+            danger:  '#ef4444',
+          },
+          fontFamily: {
+            display: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          spacing: {
+            '18': '4.5rem',
+            '88': '22rem',
+          },
+          borderRadius: {
+            '4xl': '2rem',
+          },
+          boxShadow: {
+            'glow':    '0 0 30px rgba(168, 85, 247, 0.4)',
+            'glow-sm': '0 0 15px rgba(168, 85, 247, 0.25)',
+            'card':    '0 2px 8px rgba(0,0,0,0.06), 0 0 1px rgba(0,0,0,0.08)',
+          },
+          keyframes: {
+            'fade-up': {
+              '0%':   { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+          animation: {
+            'fade-up': 'fade-up 0.5s ease-out both',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-white font-display text-gray-900">
+
+  <!-- Navbar -->
+  <nav class="bg-brand-950 text-white px-6 py-4 sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <a href="#" class="font-display font-black text-xl text-white">
+        Violet<span class="text-brand-400">UI</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#" class="text-brand-300 hover:text-white text-sm font-medium transition-colors">Features</a>
+        <a href="#" class="text-brand-300 hover:text-white text-sm font-medium transition-colors">Pricing</a>
+        <a href="#" class="text-brand-300 hover:text-white text-sm font-medium transition-colors">Docs</a>
+        <a href="#" class="text-brand-300 hover:text-white text-sm font-medium transition-colors">Blog</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#" class="hidden md:block text-brand-300 hover:text-white text-sm font-medium transition-colors">Log in</a>
+        <a href="#" class="bg-brand-500 hover:bg-brand-400 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-glow-sm">
+          Get Started
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-brand-950 via-brand-900 to-brand-800 text-white px-6 py-24 md:py-32 overflow-hidden relative">
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute top-20 left-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-accent-500/10 rounded-full blur-3xl"></div>
+    </div>
+    <div class="relative max-w-6xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 bg-brand-800/60 border border-brand-600/30 rounded-full px-4 py-2 mb-8 animate-fade-up">
+        <span class="w-2 h-2 bg-accent-400 rounded-full animate-pulse"></span>
+        <span class="text-brand-200 text-sm font-medium">Now in public beta — Join 10,000+ developers</span>
+      </div>
+      <h1 class="font-display text-5xl md:text-7xl font-black leading-tight mb-6 animate-fade-up" style="animation-delay: 0.1s">
+        Design systems<br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 via-brand-400 to-accent-400">
+          without limits
+        </span>
+      </h1>
+      <p class="text-brand-200 text-xl leading-relaxed max-w-2xl mx-auto mb-10 animate-fade-up" style="animation-delay: 0.2s">
+        VioletUI gives you a complete, customizable design system built on Tailwind CSS. Every color, font, and shadow is yours to own.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style="animation-delay: 0.3s">
+        <a href="#" class="bg-brand-500 hover:bg-brand-400 active:bg-brand-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-glow hover:shadow-glow transition-all">
+          Start building free
+        </a>
+        <a href="#" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all backdrop-blur-sm">
+          View components →
+        </a>
+      </div>
+      <p class="text-brand-400 text-sm mt-6 animate-fade-up" style="animation-delay: 0.4s">
+        No credit card required · Free forever plan · MIT licensed
+      </p>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="max-w-6xl mx-auto px-6 py-20">
+    <div class="text-center mb-14">
+      <span class="text-xs font-bold uppercase tracking-widest text-brand-500 mb-3 block">Why VioletUI</span>
+      <h2 class="font-display text-4xl font-black text-brand-950 mb-4">Everything you need</h2>
+      <p class="text-brand-600 text-lg max-w-xl mx-auto">A complete toolkit for building beautiful, consistent interfaces at any scale.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div class="bg-brand-50 rounded-4xl p-8 border border-brand-100">
+        <div class="w-14 h-14 bg-brand-500 rounded-2xl flex items-center justify-center text-white text-2xl mb-5 shadow-glow-sm">🎨</div>
+        <h3 class="font-display font-bold text-brand-950 text-xl mb-3">Custom Design Tokens</h3>
+        <p class="text-brand-700 leading-relaxed">
+          Define your entire color palette, typography, and spacing in one config file. Every token becomes a utility class.
+        </p>
+        <a href="#" class="inline-block mt-5 text-brand-600 font-semibold hover:text-brand-500 text-sm">Learn more →</a>
+      </div>
+
+      <div class="bg-brand-600 rounded-4xl p-8 text-white">
+        <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center text-2xl mb-5">⚡</div>
+        <h3 class="font-display font-bold text-xl mb-3">Zero Runtime</h3>
+        <p class="text-brand-200 leading-relaxed">
+          All styles are generated at build time. No JavaScript overhead, no style injection — just pure CSS.
+        </p>
+        <a href="#" class="inline-block mt-5 text-brand-200 font-semibold hover:text-white text-sm">Learn more →</a>
+      </div>
+
+      <div class="bg-white rounded-4xl p-8 border border-brand-100 shadow-card">
+        <div class="w-14 h-14 bg-accent-100 rounded-2xl flex items-center justify-center text-2xl mb-5">🔧</div>
+        <h3 class="font-display font-bold text-brand-950 text-xl mb-3">Fully Extensible</h3>
+        <p class="text-brand-700 leading-relaxed">
+          Add custom colors, fonts, shadows, animations, and breakpoints. The config is just JavaScript.
+        </p>
+        <a href="#" class="inline-block mt-5 text-brand-600 font-semibold hover:text-brand-500 text-sm">Learn more →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-gradient-to-r from-accent-500 to-accent-600 px-6 py-20 text-white">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="font-display text-4xl font-black mb-4">Ready to build something beautiful?</h2>
+      <p class="text-orange-100 text-lg mb-8 leading-relaxed">
+        Join thousands of developers who use VioletUI to ship faster and build better.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#" class="bg-white text-accent-600 hover:bg-orange-50 px-8 py-4 rounded-xl font-bold text-lg transition-colors shadow-lg">
+          Get started for free
+        </a>
+        <a href="#" class="bg-white/20 hover:bg-white/30 border border-white/30 text-white px-8 py-4 rounded-xl font-bold text-lg transition-colors">
+          Talk to sales
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-brand-950 text-white px-6 py-12">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div>
+        <a href="#" class="font-display font-black text-xl text-white">Violet<span class="text-brand-400">UI</span></a>
+        <p class="text-brand-400 text-sm mt-1">© 2025 VioletUI. All rights reserved.</p>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="#" class="text-brand-400 hover:text-white text-sm transition-colors">Privacy</a>
+        <a href="#" class="text-brand-400 hover:text-white text-sm transition-colors">Terms</a>
+        <a href="#" class="text-brand-400 hover:text-white text-sm transition-colors">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@apply Demo — Before & After</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /*
+     * ============================================================
+     * @apply DEMO — CDN VERSION
+     * ============================================================
+     *
+     * In a real project with a build step, these would use @apply:
+     *
+     * .btn {
+     *   @apply inline-flex items-center justify-center font-semibold
+     *          rounded-xl transition-all duration-150 cursor-pointer;
+     * }
+     * .btn-primary {
+     *   @apply btn bg-blue-600 hover:bg-blue-700 active:scale-95 text-white;
+     * }
+     *
+     * With the CDN, @apply is NOT supported.
+     * We write the equivalent CSS values manually below.
+     * The concept and result are identical.
+     * ============================================================
+     */
+
+    /* ---- BUTTONS ---- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      border-radius: 0.75rem;
+      transition: all 150ms ease;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn:focus-visible {
+      outline: 2px solid #3b82f6;
+      outline-offset: 2px;
+    }
+
+    .btn-sm  { padding: 0.375rem 0.875rem; font-size: 0.8125rem; }
+    .btn-md  { padding: 0.625rem 1.25rem;  font-size: 0.875rem; }
+    .btn-lg  { padding: 0.75rem 1.75rem;   font-size: 1rem; }
+
+    .btn-primary   { background: #2563eb; color: white; }
+    .btn-primary:hover  { background: #1d4ed8; }
+    .btn-primary:active { background: #1e40af; transform: scale(0.96); }
+
+    .btn-secondary { background: #f3f4f6; color: #111827; }
+    .btn-secondary:hover  { background: #e5e7eb; }
+    .btn-secondary:active { background: #d1d5db; transform: scale(0.96); }
+
+    .btn-danger    { background: #dc2626; color: white; }
+    .btn-danger:hover  { background: #b91c1c; }
+    .btn-danger:active { transform: scale(0.96); }
+
+    .btn-success   { background: #16a34a; color: white; }
+    .btn-success:hover  { background: #15803d; }
+
+    .btn-outline {
+      background: transparent;
+      color: #2563eb;
+      border: 2px solid #2563eb;
+    }
+    .btn-outline:hover { background: #eff6ff; }
+
+    .btn-ghost {
+      background: transparent;
+      color: #374151;
+    }
+    .btn-ghost:hover { background: #f9fafb; }
+
+    /* ---- CARDS ---- */
+    .card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      border: 1px solid #f3f4f6;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 0 1px rgba(0,0,0,0.06);
+    }
+    .card-hover {
+      transition: all 200ms ease;
+      cursor: pointer;
+    }
+    .card-hover:hover {
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+    }
+    .card-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+    .card-body {
+      font-size: 0.875rem;
+      color: #6b7280;
+      line-height: 1.625;
+    }
+    .card-footer {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* ---- INPUTS ---- */
+    .input {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 0.75rem;
+      padding: 0.625rem 1rem;
+      font-size: 0.875rem;
+      color: #111827;
+      background: white;
+      outline: none;
+      transition: all 150ms;
+      font-family: inherit;
+    }
+    .input::placeholder { color: #9ca3af; }
+    .input:focus {
+      border-color: transparent;
+      box-shadow: 0 0 0 2px #3b82f6;
+    }
+    .input-error {
+      border-color: #ef4444;
+    }
+    .input-error:focus {
+      box-shadow: 0 0 0 2px #ef4444;
+    }
+
+    /* ---- BADGES ---- */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+    .badge-blue   { background: #dbeafe; color: #1d4ed8; }
+    .badge-green  { background: #dcfce7; color: #15803d; }
+    .badge-red    { background: #fee2e2; color: #b91c1c; }
+    .badge-yellow { background: #fef9c3; color: #a16207; }
+    .badge-purple { background: #f3e8ff; color: #7e22ce; }
+    .badge-gray   { background: #f3f4f6; color: #374151; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 p-8">
+
+  <div class="max-w-5xl mx-auto space-y-16">
+
+    <header>
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">@apply Demo</h1>
+      <p class="text-gray-500 text-lg">Before vs After — extracting repeated utilities into CSS classes</p>
+    </header>
+
+    <!-- CDN Notice -->
+    <div class="bg-amber-50 border border-amber-200 rounded-xl p-5 flex gap-4">
+      <span class="text-2xl shrink-0">⚠️</span>
+      <div>
+        <p class="font-bold text-amber-800 mb-1">CDN Limitation</p>
+        <p class="text-amber-700 text-sm leading-relaxed">
+          <code class="bg-amber-100 px-1.5 py-0.5 rounded font-mono text-xs">@apply</code> requires a PostCSS/Vite build step and does NOT work with the Tailwind CDN.
+          This demo shows the concept using a <code class="bg-amber-100 px-1.5 py-0.5 rounded font-mono text-xs">&lt;style&gt;</code> block with manual CSS values.
+          In a real project, you would write <code class="bg-amber-100 px-1.5 py-0.5 rounded font-mono text-xs">.btn { @apply bg-blue-600 text-white ...; }</code>
+        </p>
+      </div>
+    </div>
+
+    <!-- COMPARISON: Buttons -->
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">Buttons: Before vs After</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Before -->
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="w-3 h-3 rounded-full bg-red-400"></span>
+            <h3 class="font-bold text-gray-700">Before — Utility strings in HTML</h3>
+          </div>
+          <div class="flex flex-wrap gap-3 mb-4">
+            <button class="inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-150 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 text-sm">
+              Save
+            </button>
+            <button class="inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-150 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 text-sm">
+              Submit
+            </button>
+            <button class="inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-150 bg-gray-100 hover:bg-gray-200 text-gray-900 px-5 py-2.5 text-sm">
+              Cancel
+            </button>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-3 text-xs font-mono text-gray-500 leading-relaxed">
+            class="inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-150 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 text-sm"
+          </div>
+        </div>
+
+        <!-- After -->
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="w-3 h-3 rounded-full bg-green-400"></span>
+            <h3 class="font-bold text-gray-700">After — Extracted CSS classes</h3>
+          </div>
+          <div class="flex flex-wrap gap-3 mb-4">
+            <button class="btn btn-primary btn-md">Save</button>
+            <button class="btn btn-primary btn-md">Submit</button>
+            <button class="btn btn-secondary btn-md">Cancel</button>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-3 text-xs font-mono text-gray-500">
+            class="btn btn-primary btn-md"
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- All Button Variants -->
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">All Button Variants</h2>
+      <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm space-y-6">
+
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Variants</p>
+          <div class="flex flex-wrap gap-3">
+            <button class="btn btn-primary btn-md">Primary</button>
+            <button class="btn btn-secondary btn-md">Secondary</button>
+            <button class="btn btn-danger btn-md">Danger</button>
+            <button class="btn btn-success btn-md">Success</button>
+            <button class="btn btn-outline btn-md">Outline</button>
+            <button class="btn btn-ghost btn-md">Ghost</button>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Sizes</p>
+          <div class="flex flex-wrap items-center gap-3">
+            <button class="btn btn-primary btn-sm">Small</button>
+            <button class="btn btn-primary btn-md">Medium</button>
+            <button class="btn btn-primary btn-lg">Large</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Cards -->
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Card Component</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="card card-hover">
+          <h3 class="card-title">Standard Card</h3>
+          <p class="card-body">Uses .card and .card-hover classes. Hover to see the lift effect.</p>
+          <div class="card-footer">
+            <span class="badge badge-blue">Design</span>
+            <button class="btn btn-ghost btn-sm">Read →</button>
+          </div>
+        </div>
+        <div class="card card-hover">
+          <h3 class="card-title">Another Card</h3>
+          <p class="card-body">All three cards use identical class names. The CSS is defined once.</p>
+          <div class="card-footer">
+            <span class="badge badge-green">Published</span>
+            <button class="btn btn-ghost btn-sm">Read →</button>
+          </div>
+        </div>
+        <div class="card card-hover">
+          <h3 class="card-title">Third Card</h3>
+          <p class="card-body">Changing the card style means updating one CSS rule, not every card.</p>
+          <div class="card-footer">
+            <span class="badge badge-purple">Featured</span>
+            <button class="btn btn-ghost btn-sm">Read →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inputs and Badges -->
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Inputs & Badges</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+          <h3 class="font-bold text-gray-700 mb-4">Inputs</h3>
+          <div class="space-y-3">
+            <input type="text" placeholder="Normal input (.input)" class="input">
+            <input type="email" placeholder="Email input (.input)" class="input">
+            <input type="text" placeholder="Error state (.input .input-error)" class="input input-error">
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+          <h3 class="font-bold text-gray-700 mb-4">Badges</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="badge badge-blue">Design</span>
+            <span class="badge badge-green">Published</span>
+            <span class="badge badge-red">Urgent</span>
+            <span class="badge badge-yellow">Pending</span>
+            <span class="badge badge-purple">Featured</span>
+            <span class="badge badge-gray">Draft</span>
+          </div>
+          <p class="text-xs text-gray-400 mt-4 font-mono">class="badge badge-blue"</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- What @apply would look like -->
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">What @apply Looks Like (Build Step)</h2>
+      <div class="bg-gray-950 rounded-2xl p-6 text-sm font-mono">
+        <p class="text-gray-500 mb-4">/* In your CSS file with PostCSS/Vite: */</p>
+        <p class="text-green-400">.btn <span class="text-gray-300">{</span></p>
+        <p class="text-blue-300 ml-4">@apply inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-150;</p>
+        <p class="text-gray-300">}</p>
+        <br>
+        <p class="text-green-400">.btn-primary <span class="text-gray-300">{</span></p>
+        <p class="text-blue-300 ml-4">@apply btn bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-5 py-2.5;</p>
+        <p class="text-gray-300">}</p>
+        <br>
+        <p class="text-green-400">.card <span class="text-gray-300">{</span></p>
+        <p class="text-blue-300 ml-4">@apply bg-white rounded-2xl p-6 border border-gray-100 shadow-sm;</p>
+        <p class="text-gray-300">}</p>
+      </div>
+    </section>
+
+  </div>
+
+</body>
+</html>
