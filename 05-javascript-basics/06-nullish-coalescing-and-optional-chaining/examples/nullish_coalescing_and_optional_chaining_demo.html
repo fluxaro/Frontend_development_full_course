@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nullish Coalescing & Optional Chaining Demo</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #f8f9fa; color: #333; padding: 2rem; }
+    h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.1rem; color: #555; margin: 2rem 0 1rem; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+    .card { background: white; border: 1px solid #dee2e6; border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th, td { padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid #dee2e6; font-family: monospace; }
+    th { background: #f0f0f0; }
+    .green { color: #27ae60; font-weight: bold; }
+    .red { color: #e74c3c; font-weight: bold; }
+    .blue { color: #3498db; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Nullish Coalescing (??) and Optional Chaining (?.)</h1>
+
+  <h2>?? vs || Comparison</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>Value</th><th>value || 'default'</th><th>value ?? 'default'</th></tr></thead>
+      <tbody id="comparison-table"></tbody>
+    </table>
+  </div>
+
+  <h2>Optional Chaining — Safe Property Access</h2>
+  <div class="card" id="users-output"></div>
+
+  <script>
+    const vals = [
+      { label: 'null', v: null },
+      { label: 'undefined', v: undefined },
+      { label: '0', v: 0 },
+      { label: "''", v: '' },
+      { label: 'false', v: false },
+      { label: '1', v: 1 },
+      { label: "'hello'", v: 'hello' },
+    ];
+
+    document.getElementById('comparison-table').innerHTML = vals.map(({label, v}) => {
+      const orResult = v || 'default';
+      const qqResult = v ?? 'default';
+      const diff = orResult !== qqResult;
+      return `<tr>
+        <td>${label}</td>
+        <td class="${diff ? 'red' : 'green'}">${JSON.stringify(orResult)}</td>
+        <td class="${diff ? 'blue' : 'green'}">${JSON.stringify(qqResult)}</td>
+      </tr>`;
+    }).join('');
+
+    const users = [
+      { name: 'Alex', address: { city: 'Lagos' }, scores: [95, 87, 92] },
+      { name: 'Sam', address: null, scores: [] },
+      null,
+    ];
+
+    document.getElementById('users-output').innerHTML = users.map((user, i) => {
+      const name = user?.name ?? 'Anonymous';
+      const city = user?.address?.city ?? 'Unknown';
+      const topScore = user?.scores?.[0] ?? 0;
+      return `<div style="margin-bottom:0.5rem;font-family:monospace;font-size:0.88rem">
+        User ${i}: <span class="green">${name}</span> | City: <span class="blue">${city}</span> | Top score: <span class="blue">${topScore}</span>
+      </div>`;
+    }).join('');
+  </script>
+</body>
+</html>

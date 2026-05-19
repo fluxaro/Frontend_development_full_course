@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Types Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #f8f9fa; color: #333; padding: 2rem; }
+    h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    .subtitle { color: #666; margin-bottom: 2rem; }
+    h2 { font-size: 1.1rem; color: #555; margin: 2rem 0 1rem; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+    .card { background: white; border: 1px solid #dee2e6; border-radius: 8px; padding: 1.25rem; }
+    .card h3 { font-size: 0.85rem; font-family: monospace; color: #3498db; margin-bottom: 0.75rem; }
+    .result { font-family: monospace; font-size: 0.85rem; line-height: 1.8; }
+    .expr { color: #555; }
+    .val { color: #27ae60; font-weight: bold; }
+    .warn { color: #e74c3c; }
+    .truthy-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .pill { padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.8rem; font-family: monospace; font-weight: bold; }
+    .pill.truthy { background: #d4edda; color: #155724; }
+    .pill.falsy { background: #f8d7da; color: #721c24; }
+    .checker { background: white; border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; max-width: 400px; }
+    .checker input { width: 100%; padding: 0.5rem 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; font-size: 0.9rem; margin-bottom: 0.75rem; outline: none; }
+    .checker input:focus { border-color: #3498db; }
+    .checker button { background: #3498db; color: white; border: none; padding: 0.5rem 1.25rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
+    .checker-result { margin-top: 0.75rem; padding: 0.75rem; border-radius: 6px; font-weight: bold; font-size: 0.9rem; display: none; }
+    .checker-result.truthy { background: #d4edda; color: #155724; }
+    .checker-result.falsy { background: #f8d7da; color: #721c24; }
+  </style>
+</head>
+<body>
+
+  <h1>Data Types: String, Number, Boolean</h1>
+  <p class="subtitle">The three most common primitive types in JavaScript</p>
+
+  <h2>String Methods</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>str.length / case</h3>
+      <div class="result" id="str1"></div>
+    </div>
+    <div class="card">
+      <h3>str.includes / slice / trim</h3>
+      <div class="result" id="str2"></div>
+    </div>
+    <div class="card">
+      <h3>Template Literals</h3>
+      <div class="result" id="str3"></div>
+    </div>
+    <div class="card">
+      <h3>split / replace</h3>
+      <div class="result" id="str4"></div>
+    </div>
+  </div>
+
+  <h2>Number & Math</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Special Values</h3>
+      <div class="result" id="num1"></div>
+    </div>
+    <div class="card">
+      <h3>Math Methods</h3>
+      <div class="result" id="num2"></div>
+    </div>
+    <div class="card">
+      <h3>Floating Point</h3>
+      <div class="result" id="num3"></div>
+    </div>
+  </div>
+
+  <h2>Truthy & Falsy</h2>
+  <div class="truthy-grid" id="truthy-grid"></div>
+
+  <h2>Truthy/Falsy Checker</h2>
+  <div class="checker">
+    <input type="text" id="checker-input" placeholder='Type a value: 0, "", null, "hello", []...'>
+    <button onclick="checkTruthy()">Check</button>
+    <div class="checker-result" id="checker-result"></div>
+  </div>
+
+  <script>
+    function row(expr, val, warn) {
+      return `<div><span class="expr">${expr}</span> → <span class="${warn?'warn':'val'}">${val}</span></div>`;
+    }
+
+    // Strings
+    const s = 'Hello, World!';
+    document.getElementById('str1').innerHTML =
+      row(`'${s}'.length`, s.length) +
+      row(`'${s}'.toUpperCase()`, s.toUpperCase()) +
+      row(`'${s}'.toLowerCase()`, s.toLowerCase());
+
+    document.getElementById('str2').innerHTML =
+      row(`'${s}'.includes('World')`, s.includes('World')) +
+      row(`'${s}'.slice(0,5)`, `'${s.slice(0,5)}'`) +
+      row(`'  hi  '.trim()`, `'${'  hi  '.trim()}'`);
+
+    const name = 'Alex', age = 25;
+    document.getElementById('str3').innerHTML =
+      row('`Hello, ${name}!`', `'Hello, ${name}!'`) +
+      row('`Age: ${age + 1}`', `'Age: ${age + 1}'`) +
+      row('`2+2=${2+2}`', `'2+2=4'`);
+
+    document.getElementById('str4').innerHTML =
+      row("'a,b,c'.split(',')", "['a','b','c']") +
+      row("'hello'.replace('l','r')", "'herlo'") +
+      row("'hello'.repeat(2)", "'hellohello'");
+
+    // Numbers
+    document.getElementById('num1').innerHTML =
+      row('1/0', Infinity) +
+      row('-1/0', -Infinity) +
+      row('0/0', NaN, true) +
+      row('Number.isNaN(NaN)', Number.isNaN(NaN)) +
+      row("typeof NaN", `'${typeof NaN}'`);
+
+    document.getElementById('num2').innerHTML =
+      row('Math.round(4.6)', Math.round(4.6)) +
+      row('Math.floor(4.9)', Math.floor(4.9)) +
+      row('Math.ceil(4.1)', Math.ceil(4.1)) +
+      row('Math.max(1,5,3)', Math.max(1,5,3)) +
+      row('Math.abs(-42)', Math.abs(-42));
+
+    document.getElementById('num3').innerHTML =
+      row('0.1 + 0.2', 0.1 + 0.2, true) +
+      row('0.1 + 0.2 === 0.3', 0.1 + 0.2 === 0.3, true) +
+      row('(0.1+0.2).toFixed(2)', `'${(0.1+0.2).toFixed(2)}'`) +
+      row('Fix: Math.round((0.1+0.2)*100)/100', Math.round((0.1+0.2)*100)/100);
+
+    // Truthy/Falsy
+    const values = [
+      { v: false, label: 'false' },
+      { v: 0, label: '0' },
+      { v: '', label: "''" },
+      { v: null, label: 'null' },
+      { v: undefined, label: 'undefined' },
+      { v: NaN, label: 'NaN' },
+      { v: true, label: 'true' },
+      { v: 1, label: '1' },
+      { v: 'hello', label: "'hello'" },
+      { v: '0', label: "'0'" },
+      { v: [], label: '[]' },
+      { v: {}, label: '{}' },
+      { v: -1, label: '-1' },
+      { v: Infinity, label: 'Infinity' },
+    ];
+    document.getElementById('truthy-grid').innerHTML =
+      values.map(({v, label}) =>
+        `<span class="pill ${v ? 'truthy' : 'falsy'}">${label} → ${v ? 'truthy' : 'falsy'}</span>`
+      ).join('');
+
+    function checkTruthy() {
+      const raw = document.getElementById('checker-input').value;
+      let val;
+      try { val = eval(raw); } catch(e) { val = raw; }
+      const isTruthy = Boolean(val);
+      const el = document.getElementById('checker-result');
+      el.style.display = 'block';
+      el.className = `checker-result ${isTruthy ? 'truthy' : 'falsy'}`;
+      el.textContent = `"${raw}" is ${isTruthy ? '✅ TRUTHY' : '❌ FALSY'} (Boolean: ${isTruthy})`;
+    }
+  </script>
+
+</body>
+</html>

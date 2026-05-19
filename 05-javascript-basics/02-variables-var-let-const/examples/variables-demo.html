@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Variables Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #0f172a; color: #e2e8f0; padding: 2rem; }
+    h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    .subtitle { color: #64748b; margin-bottom: 2rem; }
+    h2 { font-size: 1rem; color: #94a3b8; margin: 2rem 0 0.75rem; border-bottom: 1px solid #1e293b; padding-bottom: 0.5rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+    .card { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 1.25rem; }
+    .card h3 { font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .card.var-card { border-color: #ef4444; }
+    .card.let-card { border-color: #3b82f6; }
+    .card.const-card { border-color: #22c55e; }
+    .card h3.var { color: #ef4444; }
+    .card h3.let { color: #3b82f6; }
+    .card h3.const { color: #22c55e; }
+    pre { background: #020617; border-radius: 6px; padding: 0.75rem; font-size: 0.8rem; overflow-x: auto; line-height: 1.6; }
+    .good { color: #34d399; }
+    .bad { color: #f87171; }
+    .warn { color: #fbbf24; }
+    .muted { color: #475569; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th, td { padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid #1e293b; }
+    th { background: #1e293b; color: #94a3b8; }
+    .btn { background: #3b82f6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.75rem; }
+    .output { background: #020617; border-radius: 6px; padding: 0.75rem; font-family: monospace; font-size: 0.8rem; margin-top: 0.5rem; min-height: 40px; line-height: 1.8; }
+  </style>
+</head>
+<body>
+
+  <h1>Variables: var, let, const</h1>
+  <p class="subtitle">Understanding scope, reassignment, and hoisting</p>
+
+  <h2>Comparison Table</h2>
+  <table>
+    <thead><tr><th></th><th>var</th><th>let</th><th>const</th></tr></thead>
+    <tbody>
+      <tr><td>Scope</td><td class="warn">Function</td><td class="good">Block</td><td class="good">Block</td></tr>
+      <tr><td>Reassign</td><td class="warn">✅</td><td class="good">✅</td><td class="bad">❌</td></tr>
+      <tr><td>Redeclare</td><td class="warn">✅</td><td class="bad">❌</td><td class="bad">❌</td></tr>
+      <tr><td>Hoisted</td><td class="warn">✅ (undefined)</td><td class="bad">❌ (TDZ)</td><td class="bad">❌ (TDZ)</td></tr>
+      <tr><td>Use today</td><td class="bad">❌ Never</td><td class="good">✅ When reassigning</td><td class="good">✅ Default</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Scope Comparison</h2>
+  <div class="grid">
+    <div class="card var-card">
+      <h3 class="var">var — Function Scoped (leaks)</h3>
+      <pre><span class="muted">if (true) {</span>
+  <span class="warn">var</span> x = 'I leak out';
+<span class="muted">}</span>
+console.log(x); <span class="good">// works — leaks!</span></pre>
+      <button class="btn" onclick="demoVar()">Run</button>
+      <div class="output" id="var-out"></div>
+    </div>
+    <div class="card let-card">
+      <h3 class="let">let — Block Scoped (contained)</h3>
+      <pre><span class="muted">if (true) {</span>
+  <span class="good">let</span> y = 'I stay inside';
+  console.log(y); <span class="good">// works</span>
+<span class="muted">}</span>
+console.log(y); <span class="bad">// ReferenceError</span></pre>
+      <button class="btn" onclick="demoLet()">Run</button>
+      <div class="output" id="let-out"></div>
+    </div>
+    <div class="card const-card">
+      <h3 class="const">const — Cannot Reassign</h3>
+      <pre><span class="good">const</span> MAX = 100;
+MAX = 200; <span class="bad">// TypeError</span>
+
+<span class="muted">// But mutation is OK:</span>
+<span class="good">const</span> user = { age: 25 };
+user.age = 26; <span class="good">// ✅ works</span></pre>
+      <button class="btn" onclick="demoConst()">Run</button>
+      <div class="output" id="const-out"></div>
+    </div>
+  </div>
+
+  <h2>Naming Conventions</h2>
+  <div class="card">
+    <pre><span class="muted">// camelCase for variables</span>
+<span class="good">const</span> firstName = 'Alex';
+<span class="good">let</span> totalScore = 0;
+
+<span class="muted">// SCREAMING_SNAKE_CASE for true constants</span>
+<span class="good">const</span> MAX_RETRIES = 3;
+<span class="good">const</span> API_BASE_URL = 'https://api.example.com';
+
+<span class="muted">// PascalCase for classes</span>
+<span class="good">class</span> UserProfile {}
+
+<span class="bad">// ❌ Avoid vague names</span>
+<span class="bad">let</span> x = 42;
+<span class="bad">let</span> data = {};
+<span class="bad">let</span> temp = 'hello';</pre>
+  </div>
+
+  <script>
+    function demoVar() {
+      let out = '';
+      if (true) {
+        var leaked = 'I leaked out of the block!';
+        out += `<span class="good">Inside block: "${leaked}"</span>\n`;
+      }
+      out += `<span class="warn">Outside block: "${leaked}" ← var leaks!</span>`;
+      document.getElementById('var-out').innerHTML = out;
+    }
+
+    function demoLet() {
+      let out = '';
+      if (true) {
+        let contained = 'I stay inside the block';
+        out += `<span class="good">Inside block: "${contained}"</span>\n`;
+      }
+      try {
+        console.log(contained);
+      } catch(e) {
+        out += `<span class="bad">Outside block: ${e.message}</span>`;
+      }
+      document.getElementById('let-out').innerHTML = out;
+    }
+
+    function demoConst() {
+      let out = '';
+      const MAX = 100;
+      out += `<span class="good">const MAX = ${MAX}</span>\n`;
+      try {
+        eval('MAX = 200');
+      } catch(e) {
+        out += `<span class="bad">MAX = 200 → ${e.message}</span>\n`;
+      }
+      const user = { age: 25 };
+      out += `<span class="good">const user = { age: ${user.age} }</span>\n`;
+      user.age = 26;
+      out += `<span class="good">user.age = 26 → { age: ${user.age} } ✅ mutation OK</span>`;
+      document.getElementById('const-out').innerHTML = out;
+    }
+  </script>
+
+</body>
+</html>

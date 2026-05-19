@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Console Explorer — Solution</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #f8f9fa; color: #333; padding: 2rem; }
+    h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    p { color: #666; margin-bottom: 1rem; line-height: 1.6; }
+    .info-box { background: #e8f4fd; border-left: 4px solid #3498db; padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .info-box strong { color: #1a4a6e; }
+  </style>
+</head>
+<body>
+
+  <h1>Console Explorer</h1>
+  <p>This page runs JavaScript that outputs to the browser console. Open DevTools to see all the output.</p>
+
+  <div class="info-box">
+    <strong>How to open the console:</strong><br>
+    Mac: <kbd>Cmd + Option + J</kbd> &nbsp;|&nbsp; Windows: <kbd>Ctrl + Shift + J</kbd><br>
+    Or: Right-click anywhere → Inspect → Console tab
+  </div>
+
+  <p>Check the console — you should see organised output with groups, a table, a timer, math results, and comparisons.</p>
+
+  <script>
+    // ── 1. Basic console.log ──
+    console.log('=== Console Explorer ===');
+    console.log('Name: Alex Rivera');
+    console.log('Age:', 25);
+    console.log('Favourite language: JavaScript');
+
+    // ── 2. Error and warning ──
+    console.error('Fake error: database connection failed');
+    console.warn('Fake warning: API rate limit approaching');
+
+    // ── 3. console.table ──
+    const courses = [
+      { name: 'HTML Basics',   duration: '2 weeks', completed: true  },
+      { name: 'CSS Basics',    duration: '3 weeks', completed: true  },
+      { name: 'JavaScript',    duration: '6 weeks', completed: false },
+      { name: 'React',         duration: '4 weeks', completed: false },
+    ];
+    console.log('--- Courses ---');
+    console.table(courses);
+
+    // ── 4. console.group ──
+    console.group('Personal Info');
+    console.log('Name: Alex Rivera');
+    console.log('Role: Frontend Developer');
+    console.log('Location: Lagos, Nigeria');
+    console.groupEnd();
+
+    console.group('Skills');
+    console.log('HTML: ✅ Completed');
+    console.log('CSS: ✅ Completed');
+    console.log('JavaScript: 🔄 In Progress');
+    console.groupEnd();
+
+    // ── 5. console.time ──
+    console.time('loop performance');
+    let sum = 0;
+    for (let i = 0; i < 1000000; i++) {
+      sum += i;
+    }
+    console.timeEnd('loop performance');
+    console.log('Loop sum result:', sum);
+
+    // ── 6. Arithmetic ──
+    console.log('--- Arithmetic ---');
+    console.log('100 + 250 =', 100 + 250);
+    console.log('1000 - 375 =', 1000 - 375);
+    console.log('12 * 8 =', 12 * 8);
+    console.log('144 / 12 =', 144 / 12);
+    console.log('17 % 5 =', 17 % 5, '(remainder)');
+    console.log('2 ** 8 =', 2 ** 8, '(power)');
+
+    // ── 7. Comparisons ──
+    console.log('--- Comparisons ---');
+    console.log('100 > 50:', 100 > 50);
+    console.log('100 < 50:', 100 < 50);
+    console.log("100 === '100':", 100 === '100', '← strict: false (different types)');
+    console.log("100 == '100':", 100 == '100', '← loose: true (avoid this)');
+    console.log('null === undefined:', null === undefined);
+    console.log('null == undefined:', null == undefined);
+
+    // ── 8. String concatenation ──
+    console.log('--- Strings ---');
+    console.log('Hello, ' + 'World!');
+    console.log('2 + 2 = ' + (2 + 2));
+    console.log('I am ' + 25 + ' years old');
+
+    console.log('=== Done! ===');
+  </script>
+
+</body>
+</html>

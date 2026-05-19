@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Type Playground — Solution</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #f8f9fa; color: #333; padding: 2rem; }
+    h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    .subtitle { color: #666; margin-bottom: 2rem; }
+    h2 { font-size: 1.1rem; color: #555; margin: 2rem 0 1rem; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+    .section { background: white; border: 1px solid #dee2e6; border-radius: 10px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .code-row { display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.88rem; }
+    .code-row:last-child { border-bottom: none; }
+    .expr { font-family: monospace; color: #555; }
+    .result { font-family: monospace; font-weight: bold; color: #27ae60; }
+    .result.warn { color: #e74c3c; }
+    .pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .pill { padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.8rem; font-family: monospace; font-weight: bold; }
+    .pill.truthy { background: #d4edda; color: #155724; }
+    .pill.falsy { background: #f8d7da; color: #721c24; }
+    .checker { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
+    .checker input { flex: 1; min-width: 200px; padding: 0.5rem 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; font-size: 0.9rem; outline: none; }
+    .checker input:focus { border-color: #3498db; }
+    .checker button { background: #3498db; color: white; border: none; padding: 0.5rem 1.25rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem; white-space: nowrap; }
+    .checker-result { padding: 0.75rem 1rem; border-radius: 6px; font-weight: bold; font-size: 0.9rem; }
+    .checker-result.truthy { background: #d4edda; color: #155724; }
+    .checker-result.falsy { background: #f8d7da; color: #721c24; }
+  </style>
+</head>
+<body>
+
+  <h1>Data Type Playground</h1>
+  <p class="subtitle">Exploring String, Number, and Boolean in JavaScript</p>
+
+  <h2>String Methods</h2>
+  <div class="section" id="string-section"></div>
+
+  <h2>Number & Math</h2>
+  <div class="section" id="number-section"></div>
+
+  <h2>Falsy Values (all 6)</h2>
+  <div class="section">
+    <div class="pills" id="falsy-pills"></div>
+  </div>
+
+  <h2>Truthy Surprises</h2>
+  <div class="section">
+    <div class="pills" id="truthy-pills"></div>
+  </div>
+
+  <h2>Truthy/Falsy Checker</h2>
+  <div class="section">
+    <div class="checker">
+      <input type="text" id="checker-input" placeholder='Try: 0, "", null, "0", [], {}, false, NaN'>
+      <button onclick="checkValue()">Check Truthiness</button>
+    </div>
+    <div id="checker-result"></div>
+  </div>
+
+  <script>
+    function row(expr, result, isWarn) {
+      return `<div class="code-row">
+        <span class="expr">${expr}</span>
+        <span class="result ${isWarn ? 'warn' : ''}">${result}</span>
+      </div>`;
+    }
+
+    // String section
+    const str = 'Hello, JavaScript!';
+    document.getElementById('string-section').innerHTML =
+      row(`'${str}'.length`, str.length) +
+      row(`'${str}'.toUpperCase()`, `'${str.toUpperCase()}'`) +
+      row(`'${str}'.toLowerCase()`, `'${str.toLowerCase()}'`) +
+      row(`'${str}'.includes('Java')`, str.includes('Java')) +
+      row(`'${str}'.slice(7, 17)`, `'${str.slice(7, 17)}'`) +
+      row(`'  hello  '.trim()`, `'${'  hello  '.trim()}'`) +
+      row(`'a,b,c'.split(',')`, JSON.stringify('a,b,c'.split(','))) +
+      row(`'hello'.replace('l','r')`, `'${'hello'.replace('l','r')}'`) +
+      row('Template: `${2+2} items`', `'${2+2} items'`) +
+      row("Concat: 'Hi ' + 'Alex'", "'Hi Alex'");
+
+    // Number section
+    document.getElementById('number-section').innerHTML =
+      row('1 / 0', Infinity) +
+      row('-1 / 0', -Infinity) +
+      row('0 / 0', NaN, true) +
+      row('Number.isNaN(NaN)', Number.isNaN(NaN)) +
+      row('Math.round(4.6)', Math.round(4.6)) +
+      row('Math.floor(4.9)', Math.floor(4.9)) +
+      row('Math.ceil(4.1)', Math.ceil(4.1)) +
+      row('Math.max(1, 5, 3, 9)', Math.max(1, 5, 3, 9)) +
+      row('Math.abs(-42)', Math.abs(-42)) +
+      row('Math.sqrt(144)', Math.sqrt(144)) +
+      row('0.1 + 0.2', 0.1 + 0.2, true) +
+      row('0.1 + 0.2 === 0.3', 0.1 + 0.2 === 0.3, true) +
+      row('(0.1 + 0.2).toFixed(2)', `'${(0.1 + 0.2).toFixed(2)}'`);
+
+    // Falsy values
+    const falsyVals = [
+      { label: 'false', v: false },
+      { label: '0', v: 0 },
+      { label: "''", v: '' },
+      { label: 'null', v: null },
+      { label: 'undefined', v: undefined },
+      { label: 'NaN', v: NaN },
+    ];
+    document.getElementById('falsy-pills').innerHTML =
+      falsyVals.map(({label}) => `<span class="pill falsy">${label} → false</span>`).join('');
+
+    // Truthy surprises
+    const truthyVals = [
+      { label: "'0'" }, { label: "'false'" }, { label: '[]' },
+      { label: '{}' }, { label: '-1' }, { label: 'Infinity' },
+    ];
+    document.getElementById('truthy-pills').innerHTML =
+      truthyVals.map(({label}) => `<span class="pill truthy">${label} → true</span>`).join('');
+
+    function checkValue() {
+      const raw = document.getElementById('checker-input').value.trim();
+      if (!raw) return;
+      let val;
+      try { val = eval(raw); } catch(e) { val = raw; }
+      const isTruthy = Boolean(val);
+      const el = document.getElementById('checker-result');
+      el.className = `checker-result ${isTruthy ? 'truthy' : 'falsy'}`;
+      el.innerHTML = `<code>${raw}</code> → Boolean: <strong>${isTruthy}</strong> → ${isTruthy ? '✅ TRUTHY' : '❌ FALSY'}`;
+    }
+
+    document.getElementById('checker-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') checkValue();
+    });
+  </script>
+
+</body>
+</html>

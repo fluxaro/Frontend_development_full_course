@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Typography Plugin Solution</title>
+  <script src="https://cdn.tailwindcss.com?plugins=typography,forms"></script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+      <a href="#" class="font-bold text-lg text-gray-900">DevBlog</a>
+      <div class="flex items-center gap-6 text-sm text-gray-500">
+        <a href="#" class="hover:text-gray-900 transition-colors">Articles</a>
+        <a href="#" class="hover:text-gray-900 transition-colors">Tutorials</a>
+        <a href="#" class="hover:text-gray-900 transition-colors">About</a>
+        <a href="#" class="bg-blue-500 text-white px-4 py-1.5 rounded-lg hover:bg-blue-600 transition-colors">Subscribe</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="bg-white border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-4 py-12">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="bg-blue-50 text-blue-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">JavaScript</span>
+          <span class="text-gray-400 text-sm">·</span>
+          <span class="text-gray-400 text-sm">8 min read</span>
+        </div>
+        <h1 class="text-4xl font-extrabold text-gray-900 leading-tight mb-4">Understanding JavaScript Closures: A Complete Guide</h1>
+        <p class="text-gray-500 text-lg leading-relaxed mb-6">Closures are one of the most powerful and often misunderstood concepts in JavaScript. Master them and you'll write better, more expressive code.</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">AR</div>
+          <div>
+            <p class="text-sm font-semibold text-gray-800">Alex Rivera</p>
+            <p class="text-xs text-gray-400">May 11, 2026</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+      <!-- Article -->
+      <main class="lg:col-span-2">
+        <article class="prose prose-lg max-w-none">
+          <h2>What is a Closure?</h2>
+          <p>A closure is a function that has access to variables from its outer (enclosing) scope, even after the outer function has finished executing. This is possible because JavaScript functions form a closure over the variables in their surrounding scope at the time they are created.</p>
+          <p>When you create a function inside another function, the inner function "closes over" the outer function's variables. Those variables remain accessible to the inner function even after the outer function returns.</p>
+
+          <h2>A Simple Example</h2>
+          <p>The classic counter example demonstrates closures clearly:</p>
+          <pre><code>function makeCounter() {
+  let count = 0; // this variable is "closed over"
+
+  return function() {
+    count++;
+    return count;
+  };
+}
+
+const counter = makeCounter();
+console.log(counter()); // 1
+console.log(counter()); // 2
+console.log(counter()); // 3</code></pre>
+          <p>The inner function remembers <code>count</code> even though <code>makeCounter</code> has already returned. Each call to <code>counter()</code> increments the same <code>count</code> variable.</p>
+
+          <blockquote>Closures are not a special syntax — they are a natural consequence of how JavaScript handles scope and function creation.</blockquote>
+
+          <h2>Practical Uses of Closures</h2>
+          <p>Closures are used everywhere in JavaScript. Here are the most common patterns:</p>
+
+          <h3>1. Data Privacy and Encapsulation</h3>
+          <p>Closures let you create private variables that can't be accessed from outside:</p>
+          <pre><code>function createBankAccount(initialBalance) {
+  let balance = initialBalance; // private
+
+  return {
+    deposit(amount) { balance += amount; },
+    withdraw(amount) { balance -= amount; },
+    getBalance() { return balance; }
+  };
+}
+
+const account = createBankAccount(100);
+account.deposit(50);
+console.log(account.getBalance()); // 150
+// balance is not directly accessible</code></pre>
+
+          <h3>2. Factory Functions</h3>
+          <p>Create multiple instances with their own private state:</p>
+          <pre><code>function createMultiplier(factor) {
+  return (number) => number * factor;
+}
+
+const double = createMultiplier(2);
+const triple = createMultiplier(3);
+
+console.log(double(5));  // 10
+console.log(triple(5));  // 15</code></pre>
+
+          <h2>Common Pitfalls</h2>
+          <p>The most common closure mistake involves loops:</p>
+          <pre><code>// Bug: all buttons alert "3"
+for (var i = 0; i < 3; i++) {
+  buttons[i].onclick = function() { alert(i); };
+}
+
+// Fix: use let (block-scoped)
+for (let i = 0; i < 3; i++) {
+  buttons[i].onclick = function() { alert(i); };
+}</code></pre>
+
+          <h2>Key Takeaways</h2>
+          <ul>
+            <li>A closure is created every time a function is created inside another function</li>
+            <li>The inner function retains access to the outer function's variables</li>
+            <li>Closures enable data privacy, factory functions, and stateful callbacks</li>
+            <li>Use <code>let</code> instead of <code>var</code> in loops to avoid closure bugs</li>
+          </ul>
+
+          <ol>
+            <li>Understand lexical scope first</li>
+            <li>Practice with the counter pattern</li>
+            <li>Build a module with private state</li>
+            <li>Refactor event handlers to use closures</li>
+          </ol>
+        </article>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="space-y-6">
+
+        <!-- Related posts -->
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+          <h3 class="font-bold text-gray-800 mb-4">Related Articles</h3>
+          <div class="space-y-4">
+            <a href="#" class="block group">
+              <p class="text-sm font-semibold text-gray-800 group-hover:text-blue-500 transition-colors leading-snug">JavaScript Scope: var, let, and const Explained</p>
+              <p class="text-xs text-gray-400 mt-1">5 min read</p>
+            </a>
+            <a href="#" class="block group">
+              <p class="text-sm font-semibold text-gray-800 group-hover:text-blue-500 transition-colors leading-snug">Higher-Order Functions and Functional Programming</p>
+              <p class="text-xs text-gray-400 mt-1">7 min read</p>
+            </a>
+            <a href="#" class="block group">
+              <p class="text-sm font-semibold text-gray-800 group-hover:text-blue-500 transition-colors leading-snug">The Module Pattern in JavaScript</p>
+              <p class="text-xs text-gray-400 mt-1">6 min read</p>
+            </a>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+          <h3 class="font-bold text-gray-800 mb-4">Tags</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-gray-100 text-gray-600 text-xs font-medium px-3 py-1 rounded-full">JavaScript</span>
+            <span class="bg-gray-100 text-gray-600 text-xs font-medium px-3 py-1 rounded-full">Closures</span>
+            <span class="bg-gray-100 text-gray-600 text-xs font-medium px-3 py-1 rounded-full">Scope</span>
+            <span class="bg-gray-100 text-gray-600 text-xs font-medium px-3 py-1 rounded-full">Functions</span>
+            <span class="bg-gray-100 text-gray-600 text-xs font-medium px-3 py-1 rounded-full">ES6</span>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="bg-blue-600 rounded-xl p-5 text-white">
+          <h3 class="font-bold mb-2">Weekly Newsletter</h3>
+          <p class="text-blue-100 text-sm mb-4">Get the best JavaScript articles delivered to your inbox every week.</p>
+          <input type="email" placeholder="your@email.com" class="w-full rounded-lg px-3 py-2 text-sm text-gray-800 mb-2 outline-none">
+          <button class="w-full bg-white text-blue-600 font-bold text-sm py-2 rounded-lg hover:bg-blue-50 transition-colors">Subscribe Free</button>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-8 mt-12">
+    <div class="max-w-6xl mx-auto px-4 text-center text-sm">
+      <p>© 2026 DevBlog. Built with Tailwind CSS Typography Plugin.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

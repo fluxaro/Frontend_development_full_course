@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Variable Scope Explorer — Solution</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #f8f9fa; color: #333; padding: 2rem; }
+    h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    p { color: #666; margin-bottom: 1rem; }
+    .info-box { background: #e8f4fd; border-left: 4px solid #3498db; padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <h1>Variable Scope Explorer</h1>
+  <p>Open the browser console to see all output.</p>
+  <div class="info-box">
+    <strong>Open console:</strong> Mac: Cmd+Option+J | Windows: Ctrl+Shift+J
+  </div>
+
+  <script>
+    // ══════════ PART 1: SCOPE DEMONSTRATION ══════════
+
+    console.group('Part 1 — Scope');
+
+    // var leaks out of blocks
+    console.log('--- var scope ---');
+    if (true) {
+      var leakyVar = 'I leaked from the if block';
+      console.log('Inside block:', leakyVar);
+    }
+    console.log('Outside block:', leakyVar); // still accessible — var leaks!
+
+    // let is block-scoped
+    console.log('--- let scope ---');
+    if (true) {
+      let blockLet = 'I am contained in the block';
+      console.log('Inside block:', blockLet);
+    }
+    try {
+      console.log(blockLet); // ReferenceError
+    } catch (e) {
+      console.log('Outside block error:', e.message);
+    }
+
+    // const cannot be reassigned
+    console.log('--- const reassignment ---');
+    const MAX_SCORE = 100;
+    console.log('MAX_SCORE:', MAX_SCORE);
+    try {
+      eval('MAX_SCORE = 200');
+    } catch (e) {
+      console.log('Reassignment error:', e.message);
+    }
+
+    console.groupEnd();
+
+    // ══════════ PART 2: HOISTING ══════════
+
+    console.group('Part 2 — Hoisting');
+
+    // var hoisting
+    console.log('var before declaration:', hoistedVar); // undefined
+    var hoistedVar = 'now I have a value';
+    console.log('var after declaration:', hoistedVar);
+
+    // let TDZ
+    try {
+      console.log(notHoisted);
+      let notHoisted = 'never reached';
+    } catch (e) {
+      console.log('let TDZ error:', e.message);
+    }
+
+    console.groupEnd();
+
+    // ══════════ PART 3: USER PROFILE ══════════
+
+    console.group('Part 3 — User Profile');
+
+    const userProfile = {
+      name: 'Alex Rivera',
+      age: 25,
+      skills: ['HTML', 'CSS', 'JavaScript'],
+      isEmployed: false,
+    };
+
+    console.log('Full profile:', userProfile);
+    console.table([userProfile]);
+
+    // Mutate age
+    userProfile.age = 26;
+    console.log('After birthday — age:', userProfile.age);
+
+    // Push new skill
+    userProfile.skills.push('React');
+    console.log('After learning React — skills:', userProfile.skills);
+
+    console.groupEnd();
+
+    // ══════════ PART 4: NAMING PRACTICE ══════════
+
+    console.group('Part 4 — Naming');
+
+    // let — values that change
+    let currentPage = 1;        // changes as user navigates
+    let searchQuery = '';       // changes as user types
+    let isLoading = false;      // changes during fetch
+
+    // const — values that never change
+    const MAX_ITEMS_PER_PAGE = 20;  // fixed pagination limit
+    const BASE_API_URL = 'https://api.example.com/v1'; // fixed endpoint
+
+    console.log('currentPage:', currentPage);
+    console.log('MAX_ITEMS_PER_PAGE:', MAX_ITEMS_PER_PAGE);
+    console.log('BASE_API_URL:', BASE_API_URL);
+
+    console.groupEnd();
+
+    console.log('=== All done! ===');
+  </script>
+</body>
+</html>

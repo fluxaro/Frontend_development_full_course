@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safe Data Access — Solution</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #f8f9fa; color: #333; padding: 2rem; }
+    h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.1rem; color: #555; margin: 2rem 0 1rem; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; }
+    .user-card { background: white; border: 1px solid #dee2e6; border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; }
+    .user-card h3 { margin-bottom: 0.75rem; }
+    .field { font-size: 0.88rem; margin-bottom: 0.3rem; font-family: monospace; }
+    .label { color: #888; }
+    .value { color: #27ae60; font-weight: bold; }
+    .fallback { color: #e74c3c; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; background: white; border-radius: 8px; overflow: hidden; }
+    th, td { padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid #dee2e6; font-family: monospace; }
+    th { background: #2c3e50; color: white; }
+  </style>
+</head>
+<body>
+  <h1>Safe Data Access — Solution</h1>
+
+  <h2>User Profiles (with safe access)</h2>
+  <div id="profiles"></div>
+
+  <h2>?? vs || Comparison Table</h2>
+  <table>
+    <thead><tr><th>Value</th><th>value || 'fallback'</th><th>value ?? 'fallback'</th><th>Difference?</th></tr></thead>
+    <tbody id="table-body"></tbody>
+  </table>
+
+  <script>
+    const fullUser = {
+      name: 'Alex Rivera',
+      profile: { bio: 'Frontend developer from Lagos' },
+      address: { city: 'Lagos', country: 'Nigeria' },
+      scores: [95, 87, 92],
+      getGreeting() { return `Hi, I'm ${this.name}!`; },
+    };
+
+    const partialUser = {
+      name: 'Sam',
+      profile: null,
+      address: { city: 'Abuja' },
+      scores: [],
+    };
+
+    const emptyUser = null;
+
+    function displayUser(user, label) {
+      const name = user?.name ?? 'Anonymous';
+      const bio = user?.profile?.bio ?? 'No bio provided';
+      const city = user?.address?.city ?? 'Location unknown';
+      const topScore = user?.scores?.[0] ?? 0;
+      const greeting = user?.getGreeting?.() ?? 'Hello!';
+
+      return `<div class="user-card">
+        <h3>${label}</h3>
+        <div class="field"><span class="label">name: </span><span class="value">"${name}"</span></div>
+        <div class="field"><span class="label">bio: </span><span class="value">"${bio}"</span></div>
+        <div class="field"><span class="label">city: </span><span class="value">"${city}"</span></div>
+        <div class="field"><span class="label">topScore: </span><span class="value">${topScore}</span></div>
+        <div class="field"><span class="label">greeting: </span><span class="value">"${greeting}"</span></div>
+      </div>`;
+    }
+
+    document.getElementById('profiles').innerHTML =
+      displayUser(fullUser, 'Full User') +
+      displayUser(partialUser, 'Partial User') +
+      displayUser(emptyUser, 'Null User');
+
+    const testVals = [
+      { label: 'null', v: null },
+      { label: 'undefined', v: undefined },
+      { label: '0', v: 0 },
+      { label: "''", v: '' },
+      { label: 'false', v: false },
+    ];
+
+    document.getElementById('table-body').innerHTML = testVals.map(({label, v}) => {
+      const orR = v || 'fallback';
+      const qqR = v ?? 'fallback';
+      const diff = JSON.stringify(orR) !== JSON.stringify(qqR);
+      return `<tr>
+        <td>${label}</td>
+        <td style="color:${diff?'#e74c3c':'#27ae60'}">${JSON.stringify(orR)}</td>
+        <td style="color:${diff?'#3498db':'#27ae60'}">${JSON.stringify(qqR)}</td>
+        <td>${diff ? '⚠️ Different' : '✅ Same'}</td>
+      </tr>`;
+    }).join('');
+  </script>
+</body>
+</html>

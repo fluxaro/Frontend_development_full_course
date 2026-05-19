@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Console Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #0f172a; color: #e2e8f0; padding: 2rem; }
+    h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    .subtitle { color: #64748b; margin-bottom: 2rem; }
+    h2 { font-size: 1rem; color: #94a3b8; margin: 2rem 0 0.75rem; border-bottom: 1px solid #1e293b; padding-bottom: 0.5rem; }
+    .terminal { background: #020617; border: 1px solid #1e293b; border-radius: 10px; overflow: hidden; margin-bottom: 1rem; }
+    .terminal-header { background: #1e293b; padding: 0.5rem 1rem; font-size: 0.8rem; color: #64748b; font-family: monospace; }
+    .terminal-body { padding: 1.25rem; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8; }
+    .log { color: #e2e8f0; }
+    .error { color: #f87171; }
+    .warn { color: #fbbf24; }
+    .info { color: #60a5fa; }
+    .result { color: #34d399; }
+    .comment { color: #475569; }
+    .btn { background: #3b82f6; color: white; border: none; padding: 0.5rem 1.25rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem; margin-right: 0.5rem; margin-bottom: 0.5rem; }
+    .btn:hover { background: #2563eb; }
+    .output-area { background: #020617; border: 1px solid #1e293b; border-radius: 8px; padding: 1rem; min-height: 60px; font-family: monospace; font-size: 0.85rem; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+
+  <h1>JavaScript & the Console</h1>
+  <p class="subtitle">Open DevTools Console (Cmd+Option+J) to see live output from the buttons below</p>
+
+  <h2>Console Methods</h2>
+  <div class="terminal">
+    <div class="terminal-header">console methods — click buttons to run</div>
+    <div class="terminal-body">
+      <div class="comment">// Click each button and check your DevTools console</div>
+    </div>
+  </div>
+  <div>
+    <button class="btn" onclick="console.log('Hello from console.log!')">console.log</button>
+    <button class="btn" onclick="console.error('This is an error!')">console.error</button>
+    <button class="btn" onclick="console.warn('This is a warning!')">console.warn</button>
+    <button class="btn" onclick="console.table([{name:'HTML',weeks:2},{name:'CSS',weeks:3},{name:'JS',weeks:6}])">console.table</button>
+    <button class="btn" onclick="runGroup()">console.group</button>
+    <button class="btn" onclick="runTimer()">console.time</button>
+  </div>
+
+  <h2>Math Expressions</h2>
+  <div class="terminal">
+    <div class="terminal-header">arithmetic.js</div>
+    <div class="terminal-body">
+      <div class="comment">// Basic arithmetic</div>
+      <div class="log">console.log(10 + 5);   <span class="result">// 15</span></div>
+      <div class="log">console.log(10 - 3);   <span class="result">// 7</span></div>
+      <div class="log">console.log(4 * 6);    <span class="result">// 24</span></div>
+      <div class="log">console.log(15 / 4);   <span class="result">// 3.75</span></div>
+      <div class="log">console.log(15 % 4);   <span class="result">// 3 (remainder)</span></div>
+      <div class="log">console.log(2 ** 10);  <span class="result">// 1024 (power)</span></div>
+    </div>
+  </div>
+  <button class="btn" onclick="runMath()">Run Math Examples</button>
+  <div class="output-area" id="math-output"></div>
+
+  <h2>Comparisons</h2>
+  <div class="terminal">
+    <div class="terminal-header">comparisons.js</div>
+    <div class="terminal-body">
+      <div class="log">console.log(10 > 5);      <span class="result">// true</span></div>
+      <div class="log">console.log(10 < 5);      <span class="result">// false</span></div>
+      <div class="log">console.log(10 === 10);   <span class="result">// true</span></div>
+      <div class="log">console.log(10 === '10'); <span class="warn">// false — different types!</span></div>
+      <div class="log">console.log(10 == '10');  <span class="warn">// true — loose (avoid!)</span></div>
+    </div>
+  </div>
+  <button class="btn" onclick="runComparisons()">Run Comparisons</button>
+  <div class="output-area" id="comp-output"></div>
+
+  <h2>Where to Add JavaScript</h2>
+  <div class="terminal">
+    <div class="terminal-header">index.html</div>
+    <div class="terminal-body">
+      <div class="comment">&lt;!-- 1. Inline (avoid) --&gt;</div>
+      <div class="log">&lt;button onclick="alert('hi')"&gt;Click&lt;/button&gt;</div>
+      <br>
+      <div class="comment">&lt;!-- 2. Internal script --&gt;</div>
+      <div class="log">&lt;script&gt;</div>
+      <div class="log">  console.log('internal');</div>
+      <div class="log">&lt;/script&gt;</div>
+      <br>
+      <div class="comment">&lt;!-- 3. External file (recommended) --&gt;</div>
+      <div class="log">&lt;script src="app.js" <span class="info">defer</span>&gt;&lt;/script&gt;</div>
+    </div>
+  </div>
+
+  <script>
+    function runGroup() {
+      console.group('Personal Info');
+      console.log('Name: Alex Rivera');
+      console.log('Role: Frontend Developer');
+      console.log('Learning: JavaScript');
+      console.groupEnd();
+    }
+
+    function runTimer() {
+      console.time('loop');
+      let sum = 0;
+      for (let i = 0; i < 1000000; i++) sum += i;
+      console.timeEnd('loop');
+      console.log('Sum:', sum);
+    }
+
+    function runMath() {
+      const results = [
+        `10 + 5 = ${10 + 5}`,
+        `10 - 3 = ${10 - 3}`,
+        `4 × 6 = ${4 * 6}`,
+        `15 / 4 = ${15 / 4}`,
+        `15 % 4 = ${15 % 4} (remainder)`,
+        `2 ** 10 = ${2 ** 10} (power)`,
+      ];
+      document.getElementById('math-output').innerHTML =
+        results.map(r => `<div style="color:#34d399">${r}</div>`).join('');
+      results.forEach(r => console.log(r));
+    }
+
+    function runComparisons() {
+      const results = [
+        { expr: '10 > 5', val: 10 > 5 },
+        { expr: '10 < 5', val: 10 < 5 },
+        { expr: '10 === 10', val: 10 === 10 },
+        { expr: "10 === '10'", val: 10 === '10' },
+        { expr: "10 == '10'", val: 10 == '10' },
+      ];
+      document.getElementById('comp-output').innerHTML =
+        results.map(r => `<div style="color:${r.val ? '#34d399' : '#f87171'}">${r.expr} → ${r.val}</div>`).join('');
+      results.forEach(r => console.log(r.expr, '→', r.val));
+    }
+  </script>
+
+</body>
+</html>
